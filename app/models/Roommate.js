@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
 	toRoommate: function (listing) {
 		var values = {
