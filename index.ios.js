@@ -1,38 +1,66 @@
 'use strict';
 
 var React = require('react-native'),
-	Router = require('react-native-router'),
-	Colors = require('./app/core/Colors'),
-	MenuButton = require('./app/views/MenuButton'),
-	ProductList = require('./app/views/ProductList');
+  Router = require('react-native-router'),
+  SideMenu = require('react-native-side-menu'),
+  Colors = require('./app/core/Colors'),
+  MenuButton = require('./app/views/MenuButton'),
+  ProductList = require('./app/views/ProductList');
 
 var {
-	AppRegistry,
-	View,
-	StyleSheet,
+  AppRegistry,
+  View,
+  Text,
+  StyleSheet,
 } = React;
 
 var styles = StyleSheet.create({
-	navbar: {
-		backgroundColor: Colors.brandPrimary,
-	},
+  navbar: {
+    backgroundColor: Colors.brandPrimary,
+  },
 });
 
 var firstRoute = {
-	name: 'Cirtru',
-	component: ProductList,
-	leftCorner: MenuButton,
+  name: 'Cirtru',
+  component: ProductList,
+  leftCorner: MenuButton,
 };
 
-var App = React.createClass({
-	render() {
+var Menu = React.createClass({
+  render() {
+    return (
+      <View />
+    );
+  }
+})
+
+var Content = React.createClass({
+	render: function() {
 		return (
 			<Router
-				headerStyle={styles.navbar}
-				firstRoute={firstRoute}
-			/>		
+	          customAction={this.press}
+	          headerStyle={styles.navbar}
+	          firstRoute={firstRoute}
+	        />
 		);
+	}, 
+	press: function(message) {
+		this.props.menuActions.toggle();
 	}
+});
+
+var App = React.createClass({
+
+  render: function() {
+  	var menu = <Menu navigator={navigator}/>;
+    return (
+      <SideMenu
+          menu={menu}
+          touchToClose={true}>
+        <Content />
+      </SideMenu> 
+    );
+  },
 });
 
 AppRegistry.registerComponent('Trios', () => App);

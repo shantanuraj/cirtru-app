@@ -20,17 +20,17 @@ var styles = StyleSheet.create({
 
 var MenuButton = React.createClass({
 
-    goToAddPage: function() {
-        console.log('Touched Menu!');
+    action: function() {
+        this.props.customAction("toggleMenu");
     },
 
     render: function() {
         return (
-            <TouchableHighlight underlayColor="transparent" onPress={this.goToAddPage}>
+            <TouchableHighlight underlayColor="transparent" onPress={this.action}>
                 <Image source={require('image!ic_menu')} style={styles.icon} />
             </TouchableHighlight>
         );
-    }
+    },
 });
 
 module.exports = MenuButton;
