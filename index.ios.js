@@ -5,6 +5,7 @@ var React = require('react-native'),
   SideMenu = require('react-native-side-menu'),
   Colors = require('./app/core/Colors'),
   MenuButton = require('./app/views/MenuButton'),
+  Fab = require('./app/views/Fab'),
   ProductList = require('./app/views/ProductList');
 
 var {
@@ -17,6 +18,12 @@ var {
 var styles = StyleSheet.create({
   navbar: {
     backgroundColor: Colors.brandPrimary,
+  },
+  fabContainer: {
+  	position: 'absolute',
+  	bottom: 16,
+  	right: 16,
+  	borderRadius: 24,
   },
 });
 
@@ -58,6 +65,9 @@ var App = React.createClass({
           menu={menu}
           touchToClose={true}>
         <Content />
+        <View style={styles.fabContainer}>
+			<Fab />
+		</View>
       </SideMenu> 
     );
   },
