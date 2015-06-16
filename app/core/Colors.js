@@ -8,4 +8,5 @@ module.exports = {
 	backgroundGrey: '#EEEEEE',
 	grey: '#333333',
 	white: '#FFFFFF',
+	black: '#000000',
 };
