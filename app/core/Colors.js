@@ -6,4 +6,5 @@ module.exports = {
 	brandSecondaryDark: '#E80C31',
 	background: '#FFFFFF',
 	backgroundGrey: '#EEEEEE',
+	grey: '#333333',
 };

@@ -1,18 +1,19 @@
 'use strict';
 
 var React = require('react-native'),
-  Router = require('react-native-router'),
-  SideMenu = require('react-native-side-menu'),
-  Colors = require('./app/core/Colors'),
-  MenuButton = require('./app/views/MenuButton'),
-  Fab = require('./app/views/Fab'),
-  ProductList = require('./app/views/ProductList');
+	Router = require('react-native-router'),
+	SideMenu = require('react-native-side-menu'),
+	Colors = require('./app/core/Colors'),
+	MenuButton = require('./app/views/MenuButton'),
+	Menu = require('./app/views/Menu'),
+	Fab = require('./app/views/Fab'),
+	ProductList = require('./app/views/ProductList');
 
 var {
-  AppRegistry,
-  View,
-  Text,
-  StyleSheet,
+	AppRegistry,
+	View,
+	Text,
+	StyleSheet,
 } = React;
 
 var styles = StyleSheet.create({
@@ -32,14 +33,6 @@ var firstRoute = {
   component: ProductList,
   leftCorner: MenuButton,
 };
-
-var Menu = React.createClass({
-  render() {
-    return (
-      <View />
-    );
-  }
-})
 
 var Content = React.createClass({
 	render: function() {
