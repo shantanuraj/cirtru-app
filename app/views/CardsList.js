@@ -14,6 +14,7 @@ var {
 var styles = StyleSheet.create({
 	list: {
 		backgroundColor: Colors.black,
+		top: -20,
 	},
 
 	container: {

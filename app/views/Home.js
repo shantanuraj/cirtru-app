@@ -12,17 +12,12 @@ var {
 	StyleSheet,
 	Text,
 	View,
-	ScrollView,
 } = React;
 
 var styles = StyleSheet.create({
 	tabBar : {
 		flex: 1,
-	},
-
-	list: {
-		backgroundColor: Colors.black,
-	},
+	}
 });
 
 var Home = React.createClass({
@@ -56,6 +51,7 @@ var Home = React.createClass({
 			name={name}
 			iconName={icon}
 			iconSize={32}
+			title={''}
 			selected={this.state.activeTab === name}
 			onPress={
 				() => {
@@ -64,10 +60,10 @@ var Home = React.createClass({
 					});
 				}
 			}>
-				{view}
+			  {view}
 			</SMXTabBarItemIOS>
 		);
-	}
+	},
 });
 
 module.exports = Home;
