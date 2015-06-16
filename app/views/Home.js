@@ -1,40 +1,71 @@
+'use strict';
+
 var React = require('react-native'),
-	Api = require('../core/Api'),
+	Icon = require('FAKIconImage'),
+	SMXTabBarIOS = require('SMXTabBarIOS'),
+	BrandColors = require('SMXBrandColors'),
+	SMXTabBarItemIOS = SMXTabBarIOS.Item,
 	Colors = require('../core/Colors'),
-	Card = require('./Card'),
-	Icon = require('FAKIconImage');
+	CardsList = require('./CardsList');
 
 var {
 	StyleSheet,
+	Text,
 	View,
 	ScrollView,
 } = React;
 
 var styles = StyleSheet.create({
-	list: {
-		backgroundColor: "black",
+	tabBar : {
+		flex: 1,
 	},
 
-	container: {
-	    flex: 1,
-	    justifyContent: 'center',
-	    alignItems: 'center',
-	    backgroundColor: Colors.black,
+	list: {
+		backgroundColor: Colors.black,
 	},
 });
 
-
 var Home = React.createClass({
-	render() {
-		var categories = Api.categories;
-		var Cards = categories.map(category => <Card type={category} />);
+	getInitialState: function() {
+		return {
+			activeTab: 'home',
+		};
+	},
+
+	render: function() {
+		var tabs = [
+			this.renderTab('user', 'ion|chatboxes', <CardsList />),
+			this.renderTab('home', 'ion|ios-home-outline', <CardsList />),
+			this.renderTab('settings', 'ion|ios-gear', <CardsList />),
+		];
 
 		return (
-			<ScrollView style={styles.list}>
-			  <View style={styles.container}>			  	
-			  	{Cards}
-			  </View>
-			</ScrollView>
+			<SMXTabBarIOS
+			activeTab={this.state.activeTab}
+			tintColor={Colors.brandSecondary}
+			barTintColor="transparent"
+			>
+				{tabs}
+			</SMXTabBarIOS>
+		);
+	},
+
+	renderTab: function(name, icon, view) {
+		return (
+			<SMXTabBarItemIOS
+			name={name}
+			iconName={icon}
+			iconSize={32}
+			selected={this.state.activeTab === name}
+			onPress={
+				() => {
+					this.setState({
+						activeTab: name
+					});
+				}
+			}>
+				{view}
+			</SMXTabBarItemIOS>
 		);
 	}
 });
