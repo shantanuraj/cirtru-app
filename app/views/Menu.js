@@ -1,8 +1,8 @@
 'use strict';
 
 var React = require('react-native'),
-	Colors = require('../core/Colors')
-	window = require('Dimensions').get('window');;
+	Colors = require('../core/Colors'),
+	window = require('Dimensions').get('window');
 
 var {
 	View,

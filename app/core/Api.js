@@ -7,14 +7,12 @@ module.exports = {
 		return this.base + 'api/v1/sfbayarea/roommates';
 	},
 
-	home: function() {
-		return ['Roommates', 'Rentals', 'Sublets', 'Furniture', 'For Sale'];
-	},
+	categories: ['Roommates', 'Sublets', 'Cars', 'Furniture', 'Others'],
 
-	cardImage: function(item) {
+	cardImage: function(type) {
 		var s3   = 'https://s3-us-west-2.amazonaws.com/cirtru/images/listings';
 		
-		switch(item) {
+		switch(type) {
 			case 'Roommates' : return this.base + 'modules/core/img/others/homePageBackground.jpg';
 			case 'Furniture' : return s3 + '/others/7f6cf1ad3144f8d178e52b5596eaa29b-pic.jpg';
 			case 'Sublets'   : return s3 + '/housing/sublets/6d2b9f14225c373394208b05e87061a2-pic.jpg';
