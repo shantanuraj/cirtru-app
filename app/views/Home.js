@@ -1,11 +1,10 @@
 'use strict';
 
 var React = require('react-native'),
-	Icon = require('FAKIconImage'),
 	SMXTabBarIOS = require('SMXTabBarIOS'),
-	BrandColors = require('SMXBrandColors'),
 	SMXTabBarItemIOS = SMXTabBarIOS.Item,
 	Colors = require('../core/Colors'),
+	Listings = require('./Listings'),
 	CardsList = require('./CardsList');
 
 var {
@@ -29,9 +28,9 @@ var Home = React.createClass({
 
 	render: function() {
 		var tabs = [
-			this.renderTab('user', 'ion|chatboxes', <CardsList />),
 			this.renderTab('home', 'ion|ios-home-outline', <CardsList />),
-			this.renderTab('settings', 'ion|ios-gear', <CardsList />),
+			this.renderTab('new', 'ion|plus', <Listings />),
+			this.renderTab('user', 'ion|person', <CardsList />),
 		];
 
 		return (

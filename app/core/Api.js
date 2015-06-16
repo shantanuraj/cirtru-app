@@ -2,9 +2,35 @@
 
 module.exports = {
 	base: 'https://cirtru.com/',
+
+	listings: function(type) {
+		switch(type) {
+			case 'Roommates' : return this.roommates();
+			case 'Furniture' : return this.furniture();
+			case 'Sublets'   : return this.sublets();
+			case 'Others'	 : return this.others();
+			case 'Cars'      : return this.cars();
+		}
+	},
 	
 	roommates: function() {
 		return this.base + 'api/v1/sfbayarea/roommates';
+	},
+
+	others: function() {
+		return this.base + 'api/v1/sfbayarea/others';
+	},
+
+	cars: function() {
+		return this.base + 'api/v1/sfbayarea/cars';
+	},
+
+	sublets: function() {
+		return this.base + 'api/v1/sfbayarea/rentals';
+	},
+
+	furniture: function() {
+		return this.others();
 	},
 
 	categories: ['Roommates', 'Sublets', 'Cars', 'Furniture', 'Others'],

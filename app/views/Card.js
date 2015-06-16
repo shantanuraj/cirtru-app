@@ -51,12 +51,16 @@ var styles = StyleSheet.create({
 });
 
 var Card = React.createClass({
+	openListings: function() {
+		var category = this.props.type;
+	},
+
 	render: function() {
 		var type = this.props.type;
 		var image = Api.cardImage(type);
 		console.log(type, image);
 		return (
-			<TouchableHighlight underlayColor="transparent">
+			<TouchableHighlight underlayColor="transparent" onPress={this.openListings}>
 				<View style={styles.card}>
 					<Image
 					  style={styles.poster}
