@@ -149,7 +149,7 @@ var styles = StyleSheet.create({
   },
   
   emailButton: {
-    backgroundColor: Colors.brandPrimary,
+    backgroundColor: Colors.brandSecondary,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
