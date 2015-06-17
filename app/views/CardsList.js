@@ -26,9 +26,9 @@ var styles = StyleSheet.create({
 
 
 var CardsList = React.createClass({
-	render() {
+	render: function() {
 		var categories = Api.categories;
-		var Cards = categories.map((category, i) => <Card key={i} type={category} />);
+		var Cards = categories.map((category, i) => <Card {...this.props} key={i} type={category} />);
 
 		return (
 			<ScrollView style={styles.list}>
@@ -37,7 +37,7 @@ var CardsList = React.createClass({
 			  </View>
 			</ScrollView>
 		);
-	}
+	},
 });
 
 module.exports = CardsList;

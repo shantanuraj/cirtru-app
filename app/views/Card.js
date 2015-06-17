@@ -3,6 +3,7 @@
 var React = require('react-native'),
 	Api = require('../core/Api'),
 	Colors = require('../core/Colors'),
+	ProductList = require('./ProductList'),
 	window = require('Dimensions').get('window');
 
 var {
@@ -53,6 +54,13 @@ var styles = StyleSheet.create({
 var Card = React.createClass({
 	openListings: function() {
 		var category = this.props.type;
+		this.props.navigator.push({
+			title: category,
+			component: ProductList,
+			passProps: {
+				type: category,
+			}
+		});
 	},
 
 	render: function() {

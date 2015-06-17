@@ -7,31 +7,37 @@ var React = require('react-native'),
     Product = require('./Product');
 
 var {
-  ListView,
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  ActivityIndicatorIOS,
+    ListView,
+    StyleSheet,
+    Text,
+    View,
+    ScrollView,
+    ActivityIndicatorIOS,
 } = React;
 
 var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.backgroundGrey,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.backgroundGrey,
-  },
-  loading: {
-    margin: 8,
-  },
+    container: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colors.backgroundGrey,
+    },
+
+    list: {
+        flex: 1,
+    },
+
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colors.backgroundGrey,
+    },
+
+    loading: {
+        margin: 8,
+    },
 });
 
 var ProductList = React.createClass({
@@ -49,7 +55,7 @@ var ProductList = React.createClass({
   },
 
   fetchData: function() {
-    fetch(Api.roommates())
+    fetch(Api.listings(this.props.type))
       .then(response => response.json())
       .then(response => response.filter(listing => listing.images.pics.length > 0))
       .then(response => response.map(raw => Roommate.toRoommate(raw)))
@@ -69,6 +75,7 @@ var ProductList = React.createClass({
 
     return (
       <ListView
+        style={styles.list}
         dataSource={this.state.dataSource}
         renderRow={listing => <Product data={listing} />}
       />
