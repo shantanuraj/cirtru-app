@@ -41,63 +41,61 @@ var styles = StyleSheet.create({
 });
 
 var ProductList = React.createClass({
-  getInitialState: function() {
-    return {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
-      loaded: false,
-    };
-  },
+    getInitialState: function() {
+        return {
+            dataSource: new ListView.DataSource({
+                rowHasChanged: (row1, row2) => row1 !== row2,
+            }),
+            loaded: false,
+        };
+    },
 
-  componentDidMount: function() {
-    this.fetchData();
-  },
+    componentDidMount: function() {
+        this.fetchData();
+    },
 
-  fetchData: function() {
-    var type = this.props.type;
-    fetch(Api.listings(type))
-      .then(response => response.json())
-      .then(response => response.filter(listing => listing.images.pics.length > 0))
-      .then(response => response.map(raw => Api.adaptListing(type, raw)))
-      .then(response => {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(response),
-          loaded: true,
-        });
-      })
-      .done();
-  },
+    fetchData: function() {
+        var type = this.props.type;
+        fetch(Api.listings(type))
+        .then(response => response.json())
+        .then(response => response.filter(listing => listing.images.pics.length > 0))
+        .then(response => response.map(raw => Api.adaptListing(type, raw)))
+        .then(response => {
+            this.setState({
+              dataSource: this.state.dataSource.cloneWithRows(response),
+              loaded: true,
+            });
+        })
+        .done();
+    },
 
-  render: function() {
-    if (!this.state.loaded) {
-      return this.renderLoadingView();
-    }
+    render: function() {
+        if (!this.state.loaded) {
+            return this.renderLoadingView();
+        }
 
-    return (
-      <ListView
-        style={styles.list}
-        dataSource={this.state.dataSource}
-        renderRow={listing => <Product data={listing} />}
-      />
-    );
-  },
+        return (
+            <ListView
+            style={styles.list}
+            dataSource={this.state.dataSource}
+            renderRow={listing => <Product data={listing} />}/>
+        );
+    },
 
-  renderLoadingView: function() {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicatorIOS
-          style={styles.loading}
-          animating={true}
-          color={'#808080'}
-          size={'large'} />
-        
-        <Text>
-          Hold on a sec...
-        </Text>
-      </View>
-    );
-  },
+    renderLoadingView: function() {
+        return (
+            <View style={styles.loadingContainer}>
+                <ActivityIndicatorIOS
+                style={styles.loading}
+                animating={true}
+                color={'#808080'}
+                size={'large'} />
+                <Text>
+                    Hold on a sec...
+                </Text>
+            </View>
+        );
+    },
 });
 
 module.exports = ProductList;
