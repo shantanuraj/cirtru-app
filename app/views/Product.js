@@ -44,7 +44,7 @@ var Product = React.createClass({
 
     render: function() {
         var data = this.props.data,
-            cost = '$ ' + data.cost,
+            cost = '$' + data.cost,
             image = 'https:' + data.images.thumbs[0];
 
         return (
