@@ -20,31 +20,16 @@ var Icon = require('FAKIconImage'),
 var Example = React.createClass({
 	getInitialState: function() {
 		return {
-			prompt: 'Sign in'
+			prompt: 'Sign in',
+			greet: 'No account? Click here',
     	};
   	},
 
   	togglePrompt: function() {
   		this.setState({
-  			prompt: 'Sign up'
+  			prompt: 'Sign up',
+  			greet: 'Join our circle of trust',
   		});
-  	},
-
-  	renderToggler: function() {
-  		if (this.state.prompt === 'Sign up') {
-  			return (
-  				<View />
-  			);
-  		}
-  		return (
-  			<TouchableHighlight
-  			onPress={this.togglePrompt}
-  			underlayColor={Colors.white}>
-  				<Text style={styles.signUpText}>
-  					No account? Click here
-  				</Text>
-  			</TouchableHighlight>
-  		);
   	},
   
 	render: function () {
@@ -95,7 +80,13 @@ var Example = React.createClass({
 					</View>
 				</TouchableHighlight>
 			
-				{this.renderToggler()}
+				<TouchableHighlight
+				onPress={this.togglePrompt}
+				underlayColor={Colors.white}>
+					<Text style={styles.signUpText}>
+						{this.state.greet}
+					</Text>
+				</TouchableHighlight>
 			</ScrollView>
 		);
 	},
