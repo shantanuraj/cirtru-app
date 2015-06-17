@@ -55,13 +55,14 @@ var ProductList = React.createClass({
   },
 
   fetchData: function() {
-    fetch(Api.listings(this.props.type))
+    var type = this.props.type;
+    fetch(Api.listings(type))
       .then(response => response.json())
       .then(response => response.filter(listing => listing.images.pics.length > 0))
-      .then(response => response.map(raw => Roommate.toRoommate(raw)))
-      .then((roommates) => {
+      .then(response => response.map(raw => Api.adaptListing(type, raw)))
+      .then(response => {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(roommates),
+          dataSource: this.state.dataSource.cloneWithRows(response),
           loaded: true,
         });
       })

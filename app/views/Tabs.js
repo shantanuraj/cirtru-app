@@ -51,6 +51,7 @@ var Tabs = React.createClass({
 			iconName={icon}
 			iconSize={32}
 			title={''}
+			key={name}
 			selected={this.state.activeTab === name}
 			onPress={
 				() => {

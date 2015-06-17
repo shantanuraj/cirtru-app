@@ -18,7 +18,6 @@ var styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: Colors.background,
-        marginBottom: 4,
     },
     info: {
         flex: 1,

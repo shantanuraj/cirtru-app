@@ -66,7 +66,6 @@ var Card = React.createClass({
 	render: function() {
 		var type = this.props.type;
 		var image = Api.cardImage(type);
-		console.log(type, image);
 		return (
 			<TouchableHighlight underlayColor="transparent" onPress={this.openListings}>
 				<View style={styles.card}>
