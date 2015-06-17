@@ -4,7 +4,8 @@ var React = require('react-native'),
 	SMXTabBarIOS = require('SMXTabBarIOS'),
 	SMXTabBarItemIOS = SMXTabBarIOS.Item,
 	Colors = require('../core/Colors'),
-	CardsList = require('./CardsList');
+	CardsList = require('./CardsList'),
+	User = require('./User');
 
 var {
 	StyleSheet,
@@ -30,15 +31,16 @@ var Tabs = React.createClass({
 		var tabs = [
 			this.renderTab('home', 'ion|ios-home-outline', <CardsList {...this.props} />),
 			this.renderTab('new', 'ion|plus', <CardsList {...this.props} />),
-			this.renderTab('user', 'ion|person', <CardsList {...this.props} />),
+			this.renderTab('user', 'ion|person', <User {...this.props} />),
 		];
 
 		return (
 			<SMXTabBarIOS
 			activeTab={this.state.activeTab}
 			tintColor={Colors.brandSecondary}
-			barTintColor="transparent"
-			>
+			translucent={true}
+			barTintColor="transparent">
+			
 				{tabs}
 			</SMXTabBarIOS>
 		);

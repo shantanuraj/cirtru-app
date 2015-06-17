@@ -28,10 +28,6 @@ var Home = React.createClass({
 			initialRoute={{
 				title: 'Cirtru',
 				component: Tabs,
-				passProps: {
-					toggleNav: this.toggleNav,
-					getNavStatus: this.getNavStatus,
-				},
 			}} />
 		);
 	},
