@@ -3,15 +3,18 @@
 module.exports = {
 	toRoommate: function (listing) {
 		var values = {
+			images: listing.images,
+			title: listing.type,
+			location: listing.primaryLocation,
+			cost: 0,
+			circle: listing.circle,
+			id: listing._id,
+			
 			rent: [],
 			gender: [],
 			smoking: [],
 			diet: [],
-			from: [],
-			location: listing.primaryLocation,
-			type: listing.type,
-			images: listing.images,
-			circle: listing.circle,
+			from: [],			
 		};
 
 		listing.rooms.forEach(function (room, index) {
@@ -27,7 +30,7 @@ module.exports = {
 		    });
 
 		    if (index === listing.rooms.length - 1) {
-		        values.rent = Math.min.apply(Math,values.rent);
+		        values.cost = Math.min.apply(Math, values.rent);
 		        values.smoking = values.smoking[0];
 		        values.diet = values.diet[0];
 		        values.from = values.from[0];
