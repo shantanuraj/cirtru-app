@@ -14,11 +14,11 @@ var {
 var styles = StyleSheet.create({
 	list: {
 		backgroundColor: Colors.black,
-		top: -20,
 	},
 
 	container: {
 	    flex: 1,
+	    marginTop:40,
 	    justifyContent: 'center',
 	    alignItems: 'center',
 	},
