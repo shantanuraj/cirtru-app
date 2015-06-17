@@ -37,7 +37,7 @@ var styles = StyleSheet.create({
 	},
 
 	backdrop: {
-		backgroundColor: 'rgba(0,0,0,0.3)',
+		backgroundColor: 'rgba(0,0,0,0.1)',
 		flex: 1,
 		width: window.width,
 		alignItems: 'center',

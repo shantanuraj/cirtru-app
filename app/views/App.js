@@ -21,7 +21,7 @@ var App = React.createClass({
 	render: function() {
 		return (
 			<NavigatorIOS
-			barTintColor="#222"
+			barTintColor={Colors.brandSecondaryLight}
 			tintColor={Colors.white}
 			titleTextColor={Colors.white}
 			style={styles.container}
