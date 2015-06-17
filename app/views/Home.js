@@ -1,37 +1,43 @@
 'use strict';
 
 var React = require('react-native'),
+	Api = require('../core/Api'),
 	Colors = require('../core/Colors'),
-	Tabs = require('./Tabs');
-	
+	Card = require('./Card');
+
 var {
 	StyleSheet,
-	Text,
 	View,
-	NavigatorIOS,
+	ScrollView,
 } = React;
 
 var styles = StyleSheet.create({
+	list: {
+		backgroundColor: Colors.black,
+	},
+
 	container: {
-		flex: 1,
+	    flex: 1,
+	    marginTop:40,
+	    justifyContent: 'center',
+	    alignItems: 'center',
 	},
 });
 
+
 var Home = React.createClass({
 	render: function() {
+		var categories = Api.categories;
+		var Cards = categories.map((category, i) => <Card {...this.props} key={i} type={category} />);
+
 		return (
-			<NavigatorIOS
-			barTintColor="#222"
-			tintColor={Colors.white}
-			titleTextColor={Colors.white}
-			style={styles.container}
-			initialRoute={{
-				title: 'Cirtru',
-				component: Tabs,
-			}} />
+			<ScrollView style={styles.list}>
+			  <View style={styles.container}>
+			  	{Cards}
+			  </View>
+			</ScrollView>
 		);
 	},
-
 });
 
 module.exports = Home;

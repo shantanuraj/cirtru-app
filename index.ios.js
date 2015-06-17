@@ -1,10 +1,10 @@
 'use strict';
 
 var React = require('react-native'),
-	Home = require('./app/views/Home');
+	App = require('./app/views/App');
 
 var {
 	AppRegistry,
 } = React;
 
-AppRegistry.registerComponent('Trios', () => Home);
+AppRegistry.registerComponent('Trios', () => App);
