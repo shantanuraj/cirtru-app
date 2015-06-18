@@ -2,7 +2,9 @@
 
 var React = require('react-native'),
 	Icon = require('FAKIconImage'),
-	Colors = require('../core/Colors');
+	Colors = require('../core/Colors'),
+	UserActions = require('../actions/UserActions'),
+	UserStore = require('../store/UserStore');
 
 var FacebookLoginManager = require('NativeModules').FacebookLoginManager;
 
@@ -28,6 +30,19 @@ class User extends React.Component {
     	};
   	}
 
+	componentDidMount() {
+		this.unsubscribe = UserStore.listen(this.onStatusChange.bind(this));
+		UserActions.signIn();
+	}
+
+	componentWillUnmount() {
+		this.unsubscribe();
+	}
+
+	onStatusChange(state) {
+    	this.setState(state);
+  	}
+
   	togglePrompt() {
 		if (this.state.prompt === 'Sign in') {
 			this.setState({
@@ -46,20 +61,20 @@ class User extends React.Component {
 
 	loginFB() {
 		FacebookLoginManager.newSession((error, info) => {
-	      if (error) {
-	        this.setState({
-				prompt: this.state.prompt,
-				greet: this.state.greet,
-				result: error,
-			});
-	      } else {
-	        this.setState({
-				prompt: this.state.prompt,
-				greet: 'You are now logged in.',
-				result: info,
-			});
-	      }
-	    });
+			if (error) {
+				this.setState({
+					prompt: this.state.prompt,
+					greet: this.state.greet,
+					result: error,
+				});
+			} else {
+				this.setState({
+					prompt: this.state.prompt,
+					greet: 'You are now logged in.',
+					result: info,
+				});
+			}
+		});
 	}
 
 	render() {
