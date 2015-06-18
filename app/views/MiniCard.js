@@ -16,7 +16,7 @@ var {
 var styles = StyleSheet.create({
 	card: {
 		width: window.width,
-		height: 120,	
+		height: 120,
 		backgroundColor: Colors.white,
 		shadowColor: "black",
 		shadowOpacity: 0.3,
@@ -57,7 +57,7 @@ var MiniCard = React.createClass({
 
 	render: function() {
 		var type = this.props.type;
-		var image = Api.cardImage(type);
+		var image = Api.miniCardImage(type);
 		return (
 			<TouchableHighlight underlayColor="transparent" onPress={this.openCreatePage}>
 				<View style={styles.card}>
