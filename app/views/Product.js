@@ -11,36 +11,6 @@ var {
     TouchableHighlight,
 } = React;
 
-var styles = StyleSheet.create({
-    row: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: Colors.background,
-    },
-
-    info: {
-        flex: 1,
-    },
-
-    title: {
-        fontSize: 20,
-        marginBottom: 8,
-        textAlign: 'center',
-    },
-
-    subtitle: {
-        textAlign: 'center',
-        marginBottom: 4,
-    },
-
-    thumbnail: {
-        width: 120,
-        height: 120,
-    },
-});
-
 class Product extends React.Component {
     clicked() {
         console.log('Wooo!');
@@ -70,5 +40,35 @@ class Product extends React.Component {
         );
     }
 }
+
+var styles = StyleSheet.create({
+    row: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colors.background,
+    },
+
+    info: {
+        flex: 1,
+    },
+
+    title: {
+        fontSize: 20,
+        marginBottom: 8,
+        textAlign: 'center',
+    },
+
+    subtitle: {
+        textAlign: 'center',
+        marginBottom: 4,
+    },
+
+    thumbnail: {
+        width: 120,
+        height: 120,
+    },
+});
 
 module.exports = Product;

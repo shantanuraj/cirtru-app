@@ -11,12 +11,6 @@ var {
 	NavigatorIOS,
 } = React;
 
-var styles = StyleSheet.create({
-	container: {
-		flex: 1,
-	},
-});
-
 class App extends React.Component {
 	render() {
 		return (
@@ -32,5 +26,11 @@ class App extends React.Component {
 		);
 	}
 }
+
+var styles = StyleSheet.create({
+	container: {
+		flex: 1,
+	},
+});
 
 module.exports = App;

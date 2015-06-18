@@ -11,19 +11,6 @@ var {
 	ScrollView,
 } = React;
 
-var styles = StyleSheet.create({
-	list: {
-		backgroundColor: Colors.black,
-	},
-
-	container: {
-	    flex: 1,
-	    justifyContent: 'center',
-	    alignItems: 'center',
-	},
-});
-
-
 class Home extends React.Component {
 	render() {
 		var categories = Api.categories;
@@ -38,5 +25,17 @@ class Home extends React.Component {
 		);
 	}
 }
+
+var styles = StyleSheet.create({
+	list: {
+		backgroundColor: Colors.black,
+	},
+
+	container: {
+	    flex: 1,
+	    justifyContent: 'center',
+	    alignItems: 'center',
+	},
+});
 
 module.exports = Home;

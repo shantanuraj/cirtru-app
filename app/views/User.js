@@ -14,55 +14,6 @@ var {
 	TouchableHighlight,
 } = React;
 
-var styles = StyleSheet.create({
-	container: {
-	    flex: 1,
-	    alignItems: 'center',
-	    justifyContent: 'center',
-	},
-
-	brandIcon: {
-	    width: 28,
-	    height: 28,
-	    marginLeft: 5,
-	},
-
-	signInText: {
-	    color: 'white',
-	    marginLeft: 5,
-	    fontFamily: 'HelveticaNeue-Medium',
-	    fontSize: 15,
-	},
-
-	signUpText: {
-	  	marginTop: 32,
-	  	color: Colors.brandSecondary,
-	  	fontFamily: 'HelveticaNeue-Medium',
-	},
-
-	button: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'flex-start',
-		width: 210,
-		padding: 5,
-		borderRadius: 3,
-		marginBottom: 10,
-	},
-
-	googleButton: {
-	    backgroundColor: Colors.Google,
-	},
-
-	facebookButton: {
-	    backgroundColor: Colors.Facebook,
-	},
-
-	emailButton: {
-	    backgroundColor: Colors.brandSecondary,
-	},
-});
-
 class User extends React.Component {
 	constructor(props) {
 		super(props);
@@ -171,5 +122,54 @@ class User extends React.Component {
 		);
 	}
 }
+
+var styles = StyleSheet.create({
+	container: {
+	    flex: 1,
+	    alignItems: 'center',
+	    justifyContent: 'center',
+	},
+
+	brandIcon: {
+	    width: 28,
+	    height: 28,
+	    marginLeft: 5,
+	},
+
+	signInText: {
+	    color: 'white',
+	    marginLeft: 5,
+	    fontFamily: 'HelveticaNeue-Medium',
+	    fontSize: 15,
+	},
+
+	signUpText: {
+	  	marginTop: 32,
+	  	color: Colors.brandSecondary,
+	  	fontFamily: 'HelveticaNeue-Medium',
+	},
+
+	button: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'flex-start',
+		width: 210,
+		padding: 5,
+		borderRadius: 3,
+		marginBottom: 10,
+	},
+
+	googleButton: {
+	    backgroundColor: Colors.Google,
+	},
+
+	facebookButton: {
+	    backgroundColor: Colors.Facebook,
+	},
+
+	emailButton: {
+	    backgroundColor: Colors.brandSecondary,
+	},
+});
 
 module.exports = User;

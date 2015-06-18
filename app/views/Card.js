@@ -14,43 +14,6 @@ var {
 	TouchableHighlight,
 } = React;
 
-var styles = StyleSheet.create({
-	card: {
-		width: window.width,
-		height: 300,
-		backgroundColor: '#fff',
-		shadowColor: "black",
-		shadowOpacity: 0.3,
-		shadowRadius: 3,
-		shadowOffset: {
-			height: 0,
-			width: 0
-		},
-	},
-
-	poster: {
-		height: 300,
-		width: window.width,
-		tintColor: '#FFF',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-
-	backdrop: {
-		backgroundColor: 'rgba(0,0,0,0.1)',
-		flex: 1,
-		width: window.width,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-
-	leadText: {
-		color: Colors.white,
-		fontSize: 32,
-		fontWeight: '500',
-	},
-});
-
 class Card extends React.Component {
 	constructor(props) {
 		super(props);
@@ -88,5 +51,42 @@ class Card extends React.Component {
 		);
 	}
 }
+
+var styles = StyleSheet.create({
+	card: {
+		width: window.width,
+		height: 300,
+		backgroundColor: '#fff',
+		shadowColor: "black",
+		shadowOpacity: 0.3,
+		shadowRadius: 3,
+		shadowOffset: {
+			height: 0,
+			width: 0
+		},
+	},
+
+	poster: {
+		height: 300,
+		width: window.width,
+		tintColor: '#FFF',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+
+	backdrop: {
+		backgroundColor: 'rgba(0,0,0,0.1)',
+		flex: 1,
+		width: window.width,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+
+	leadText: {
+		color: Colors.white,
+		fontSize: 32,
+		fontWeight: '500',
+	},
+});
 
 module.exports = Card;

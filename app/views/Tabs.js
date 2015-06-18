@@ -15,12 +15,6 @@ var {
 	NavigatorIOS,
 } = React;
 
-var styles = StyleSheet.create({
-	tabBar : {
-		flex: 1,
-	}
-});
-
 class Tabs extends React.Component {
 	constructor(props) {
 		super(props);
@@ -68,5 +62,11 @@ class Tabs extends React.Component {
 		);
 	}
 }
+
+var styles = StyleSheet.create({
+	tabBar : {
+		flex: 1,
+	}
+});
 
 module.exports = Tabs;

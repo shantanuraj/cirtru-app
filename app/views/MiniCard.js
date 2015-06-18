@@ -13,6 +13,37 @@ var {
 	TouchableHighlight,
 } = React;
 
+class MiniCard extends React.Component {
+	constructor(props) {
+		super(props);
+		this.openCreatePage = this.openCreatePage.bind(this);
+	}
+
+	openCreatePage() {
+		var category = this.props.type;
+	}
+
+	render() {
+		var type = this.props.type;
+		var image = Api.miniCardImage(type);
+		return (
+			<TouchableHighlight underlayColor="transparent" onPress={this.openCreatePage}>
+				<View style={styles.card}>
+					<Image
+					  style={styles.poster}
+					  source={{uri: image}}>
+					  	<View style={styles.backdrop}>
+					  		<Text style={styles.leadText}>
+					  			{type}
+					  		</Text>
+					  	</View>
+					</Image>
+				</View>
+			</TouchableHighlight>
+		);
+	}
+}
+
 var styles = StyleSheet.create({
 	card: {
 		width: window.width,
@@ -49,36 +80,5 @@ var styles = StyleSheet.create({
 		fontWeight: '500',
 	},
 });
-
-class MiniCard extends React.Component {
-	constructor(props) {
-		super(props);
-		this.openCreatePage = this.openCreatePage.bind(this);
-	}
-
-	openCreatePage() {
-		var category = this.props.type;
-	}
-
-	render() {
-		var type = this.props.type;
-		var image = Api.miniCardImage(type);
-		return (
-			<TouchableHighlight underlayColor="transparent" onPress={this.openCreatePage}>
-				<View style={styles.card}>
-					<Image
-					  style={styles.poster}
-					  source={{uri: image}}>
-					  	<View style={styles.backdrop}>
-					  		<Text style={styles.leadText}>
-					  			{type}
-					  		</Text>
-					  	</View>
-					</Image>
-				</View>
-			</TouchableHighlight>
-		);
-	}
-}
 
 module.exports = MiniCard;

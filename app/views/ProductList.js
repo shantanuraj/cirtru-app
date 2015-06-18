@@ -15,31 +15,6 @@ var {
     ActivityIndicatorIOS,
 } = React;
 
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: Colors.backgroundGrey,
-    },
-
-    list: {
-        flex: 1,
-    },
-
-    loadingContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: Colors.backgroundGrey,
-    },
-
-    loading: {
-        margin: 8,
-    },
-});
-
 class ProductList extends React.Component {
     constructor(props) {
         super(props);
@@ -98,5 +73,30 @@ class ProductList extends React.Component {
         );
     }
 }
+
+var styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colors.backgroundGrey,
+    },
+
+    list: {
+        flex: 1,
+    },
+
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colors.backgroundGrey,
+    },
+
+    loading: {
+        margin: 8,
+    },
+});
 
 module.exports = ProductList;
