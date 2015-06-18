@@ -41,10 +41,10 @@ var styles = StyleSheet.create({
     },
 });
 
-var Product = React.createClass({
+class Product extends React.Component {
     clicked() {
         console.log('Wooo!');
-    },
+    }
 
     render() {
         var data = this.props.data,
@@ -68,7 +68,7 @@ var Product = React.createClass({
             </View>
         </TouchableHighlight>
         );
-    },
-});
+    }
+}
 
 module.exports = Product;

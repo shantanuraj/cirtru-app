@@ -21,12 +21,13 @@ var styles = StyleSheet.create({
 	}
 });
 
-var Tabs = React.createClass({
-	getInitialState() {
-		return {
+class Tabs extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
 			activeTab: 'home',
 		};
-	},
+	}
 
 	render() {
 		var tabs = [
@@ -44,7 +45,7 @@ var Tabs = React.createClass({
 				{tabs}
 			</SMXTabBarIOS>
 		);
-	},
+	}
 
 	renderTab(name, icon, view) {
 		return (
@@ -65,7 +66,7 @@ var Tabs = React.createClass({
 			  {view}
 			</SMXTabBarItemIOS>
 		);
-	},
-});
+	}
+}
 
 module.exports = Tabs;

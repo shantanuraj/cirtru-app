@@ -50,10 +50,15 @@ var styles = StyleSheet.create({
 	},
 });
 
-var MiniCard = React.createClass({
+class MiniCard extends React.Component {
+	constructor(props) {
+		super(props);
+		this.openCreatePage = this.openCreatePage.bind(this);
+	}
+
 	openCreatePage() {
 		var category = this.props.type;
-	},
+	}
 
 	render() {
 		var type = this.props.type;
@@ -74,6 +79,6 @@ var MiniCard = React.createClass({
 			</TouchableHighlight>
 		);
 	}
-});
+}
 
 module.exports = MiniCard;

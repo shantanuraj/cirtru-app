@@ -33,10 +33,15 @@ var styles = StyleSheet.create({
     },
 });
 
-var Fab = React.createClass({
+class Fab extends React.Component {
+    constructor(props) {
+        super(props);
+        this.goToAddPage = this.goToAddPage.bind(this);
+    }
+
     goToAddPage() {
         console.log('Touched Fab!');
-    },
+    }
 
     render() {
         return (
@@ -47,6 +52,6 @@ var Fab = React.createClass({
             </TouchableHighlight>
         );
     }
-});
+}
 
 module.exports = Fab;

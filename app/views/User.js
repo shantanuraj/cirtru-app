@@ -63,14 +63,19 @@ var styles = StyleSheet.create({
 	},
 });
 
-var User = React.createClass({
-	getInitialState() {
-		return {
+class User extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.togglePrompt = this.togglePrompt.bind(this);
+		this.loginFB = this.loginFB.bind(this);
+
+		this.state =  {
 			prompt: 'Sign in',
 			greet: 'No account? Click here',
 			result: 'Login',
     	};
-  	},
+  	}
 
   	togglePrompt() {
 		if (this.state.prompt === 'Sign in') {
@@ -86,7 +91,7 @@ var User = React.createClass({
 				result: this.state.result,
   			});
 		}
-  	},
+  	}
 
 	loginFB() {
 		FacebookLoginManager.newSession((error, info) => {
@@ -99,12 +104,12 @@ var User = React.createClass({
 	      } else {
 	        this.setState({
 				prompt: this.state.prompt,
-				greet: '',
+				greet: 'You are now logged in.',
 				result: info,
 			});
 	      }
 	    });
-	},
+	}
 
 	render() {
 		return (
@@ -164,7 +169,7 @@ var User = React.createClass({
 				</TouchableHighlight>
 			</ScrollView>
 		);
-	},
-});
+	}
+}
 
 module.exports = User;

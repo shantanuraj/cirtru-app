@@ -40,19 +40,20 @@ var styles = StyleSheet.create({
     },
 });
 
-var ProductList = React.createClass({
-    getInitialState() {
-        return {
+class ProductList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
             loaded: false,
         };
-    },
+    }
 
     componentDidMount() {
         this.fetchData();
-    },
+    }
 
     fetchData() {
         var type = this.props.type;
@@ -67,7 +68,7 @@ var ProductList = React.createClass({
             });
         })
         .done();
-    },
+    }
 
     render() {
         if (!this.state.loaded) {
@@ -80,7 +81,7 @@ var ProductList = React.createClass({
             dataSource={this.state.dataSource}
             renderRow={listing => <Product data={listing} />}/>
         );
-    },
+    }
 
     renderLoadingView() {
         return (
@@ -95,7 +96,7 @@ var ProductList = React.createClass({
                 </Text>
             </View>
         );
-    },
-});
+    }
+}
 
 module.exports = ProductList;

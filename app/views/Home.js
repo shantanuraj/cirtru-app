@@ -25,7 +25,7 @@ var styles = StyleSheet.create({
 });
 
 
-var Home = React.createClass({
+class Home extends React.Component {
 	render() {
 		var categories = Api.categories;
 		var Cards = categories.map((category, i) => <Card {...this.props} key={i} type={category} />);
@@ -37,7 +37,7 @@ var Home = React.createClass({
 			  </View>
 			</ScrollView>
 		);
-	},
-});
+	}
+}
 
 module.exports = Home;

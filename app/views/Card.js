@@ -51,7 +51,12 @@ var styles = StyleSheet.create({
 	},
 });
 
-var Card = React.createClass({
+class Card extends React.Component {
+	constructor(props) {
+		super(props);
+		this.openListings = this.openListings.bind(this);
+	}
+
 	openListings() {
 		var category = this.props.type;
 		this.props.navigator.push({
@@ -61,7 +66,7 @@ var Card = React.createClass({
 				type: category,
 			}
 		});
-	},
+	}
 
 	render() {
 		var type = this.props.type;
@@ -82,6 +87,6 @@ var Card = React.createClass({
 			</TouchableHighlight>
 		);
 	}
-});
+}
 
 module.exports = Card;

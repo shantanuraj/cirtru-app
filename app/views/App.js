@@ -17,7 +17,7 @@ var styles = StyleSheet.create({
 	},
 });
 
-var App = React.createClass({
+class App extends React.Component {
 	render() {
 		return (
 			<NavigatorIOS
@@ -30,8 +30,7 @@ var App = React.createClass({
 				component: Tabs,
 			}} />
 		);
-	},
-
-});
+	}
+}
 
 module.exports = App;
