@@ -1,8 +1,7 @@
 'use strict';
 
 module.exports = {
-	toSublet: function(listing) {
-		console.log('Converting to sublet');
+	toSublet(listing) {
 		var values = {
 			images: listing.images,
 			title: listing.title,
@@ -11,7 +10,6 @@ module.exports = {
 			circle: listing.circle,
 			id: listing._id,
 		}
-
 		return values;
 	}
 }

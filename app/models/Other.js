@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	toOther: function(listing) {
+	toOther(listing) {
 		var values = {
 			images: listing.images,
 			title: listing.title,
@@ -10,7 +10,6 @@ module.exports = {
 			circle: listing.circle,
 			id: listing._id,
 		}
-
 		return values;
 	}
 }

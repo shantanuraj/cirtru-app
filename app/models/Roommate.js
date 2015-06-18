@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	toRoommate: function (listing) {
+	toRoommate(listing) {
 		var values = {
 			images: listing.images,
 			title: listing.type,
@@ -9,16 +9,16 @@ module.exports = {
 			cost: 0,
 			circle: listing.circle,
 			id: listing._id,
-			
+
 			rent: [],
 			gender: [],
 			smoking: [],
 			diet: [],
-			from: [],			
+			from: [],
 		};
 
 		listing.rooms.forEach(function (room, index) {
-		    
+
 		    room.roomOccupancy.forEach(function (occupant) {
 		        if (occupant.roommateStatus === 'Looking') {
 		            values.rent.push(occupant.rent);
@@ -34,7 +34,7 @@ module.exports = {
 		        values.smoking = values.smoking[0];
 		        values.diet = values.diet[0];
 		        values.from = values.from[0];
-		        
+
 		        if ((values.gender.indexOf('Any') !== -1)
 		        || (values.gender.indexOf('Male') !== -1 && values.gender.indexOf('Female') !== -1)) {
 		         	values.gender = 'Any'
@@ -44,7 +44,6 @@ module.exports = {
 		    }
 
 		});
-
 		return values;
 	}
 };

@@ -3,7 +3,7 @@
 var React = require('react-native'),
 	Colors = require('../core/Colors'),
 	Tabs = require('./Tabs');
-	
+
 var {
 	StyleSheet,
 	Text,
@@ -18,7 +18,7 @@ var styles = StyleSheet.create({
 });
 
 var App = React.createClass({
-	render: function() {
+	render() {
 		return (
 			<NavigatorIOS
 			barTintColor={Colors.brandSecondaryLight}

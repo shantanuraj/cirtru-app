@@ -9,7 +9,9 @@ var Furniture = require('../models/Furniture'),
 module.exports = {
 	base: 'https://cirtru.com/',
 
-	listings: function(type) {
+	categories: ['Roommates', 'Sublets', 'Cars', 'Furniture', 'Others'],
+
+	listings(type) {
 		switch(type) {
 			case 'Furniture' : return this.furniture();
 			case 'Roommates' : return this.roommates();
@@ -19,29 +21,27 @@ module.exports = {
 		}
 	},
 
-	roommates: function() {
+	roommates() {
 		return this.base + 'api/v1/sfbayarea/roommates';
 	},
 
-	others: function() {
+	others() {
 		return this.base + 'api/v1/sfbayarea/others?category=others';
 	},
 
-	cars: function() {
+	cars() {
 		return this.base + 'api/v1/sfbayarea/cars';
 	},
 
-	sublets: function() {
+	sublets() {
 		return this.base + 'api/v1/sfbayarea/rentals';
 	},
 
-	furniture: function() {
+	furniture() {
 		return this.base + 'api/v1/sfbayarea/others?category=furniture';
 	},
 
-	categories: ['Roommates', 'Sublets', 'Cars', 'Furniture', 'Others'],
-
-	cardImage: function(type) {
+	cardImage(type) {
 		var s3   = 'https://s3-us-west-2.amazonaws.com/cirtru/images/listings';
 
 		switch(type) {
@@ -53,7 +53,7 @@ module.exports = {
 		}
 	},
 
-	miniCardImage: function(type) {
+	miniCardImage(type) {
 		var s3   = 'https://s3-us-west-2.amazonaws.com/cirtru/images/listings';
 
 		switch(type) {
@@ -65,7 +65,7 @@ module.exports = {
 		}
 	},
 
-	adaptListing: function(type, raw) {
+	adaptListing(type, raw) {
 		switch(type) {
 			case 'Furniture' : return Furniture.toFurniture(raw);
 			case 'Roommates' : return Roommate.toRoommate(raw);

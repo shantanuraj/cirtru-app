@@ -15,6 +15,7 @@ var styles = StyleSheet.create({
         width: 32,
         height: 32,
     },
+
     fab: {
         backgroundColor: Colors.brandSecondary,
         width: 48,
@@ -33,12 +34,11 @@ var styles = StyleSheet.create({
 });
 
 var Fab = React.createClass({
-
-    goToAddPage: function() {
+    goToAddPage() {
         console.log('Touched Fab!');
     },
 
-    render: function() {
+    render() {
         return (
             <TouchableHighlight
             style={styles.fab}

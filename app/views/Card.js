@@ -17,7 +17,7 @@ var {
 var styles = StyleSheet.create({
 	card: {
 		width: window.width,
-		height: 300,	
+		height: 300,
 		backgroundColor: '#fff',
 		shadowColor: "black",
 		shadowOpacity: 0.3,
@@ -52,7 +52,7 @@ var styles = StyleSheet.create({
 });
 
 var Card = React.createClass({
-	openListings: function() {
+	openListings() {
 		var category = this.props.type;
 		this.props.navigator.push({
 			title: category,
@@ -63,7 +63,7 @@ var Card = React.createClass({
 		});
 	},
 
-	render: function() {
+	render() {
 		var type = this.props.type;
 		var image = Api.cardImage(type);
 		return (

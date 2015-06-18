@@ -22,13 +22,13 @@ var styles = StyleSheet.create({
 });
 
 var Tabs = React.createClass({
-	getInitialState: function() {
+	getInitialState() {
 		return {
 			activeTab: 'home',
 		};
 	},
 
-	render: function() {
+	render() {
 		var tabs = [
 			this.renderTab('home', 'ion|ios-home-outline', <Home {...this.props} />),
 			this.renderTab('new', 'ion|plus', <New {...this.props} />),
@@ -41,13 +41,12 @@ var Tabs = React.createClass({
 			tintColor={Colors.brandSecondary}
 			translucent={true}
 			barTintColor="transparent">
-			
 				{tabs}
 			</SMXTabBarIOS>
 		);
 	},
 
-	renderTab: function(name, icon, view) {
+	renderTab(name, icon, view) {
 		return (
 			<SMXTabBarItemIOS
 			name={name}

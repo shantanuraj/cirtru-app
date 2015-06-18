@@ -41,7 +41,7 @@ var styles = StyleSheet.create({
 });
 
 var ProductList = React.createClass({
-    getInitialState: function() {
+    getInitialState() {
         return {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
@@ -50,11 +50,11 @@ var ProductList = React.createClass({
         };
     },
 
-    componentDidMount: function() {
+    componentDidMount() {
         this.fetchData();
     },
 
-    fetchData: function() {
+    fetchData() {
         var type = this.props.type;
         fetch(Api.listings(type))
         .then(response => response.json())
@@ -69,7 +69,7 @@ var ProductList = React.createClass({
         .done();
     },
 
-    render: function() {
+    render() {
         if (!this.state.loaded) {
             return this.renderLoadingView();
         }
@@ -82,7 +82,7 @@ var ProductList = React.createClass({
         );
     },
 
-    renderLoadingView: function() {
+    renderLoadingView() {
         return (
             <View style={styles.loadingContainer}>
                 <ActivityIndicatorIOS

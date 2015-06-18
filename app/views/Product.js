@@ -19,18 +19,22 @@ var styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: Colors.background,
     },
+
     info: {
         flex: 1,
     },
+
     title: {
         fontSize: 20,
         marginBottom: 8,
         textAlign: 'center',
     },
+
     subtitle: {
         textAlign: 'center',
         marginBottom: 4,
     },
+
     thumbnail: {
         width: 120,
         height: 120,
@@ -38,11 +42,11 @@ var styles = StyleSheet.create({
 });
 
 var Product = React.createClass({
-    clicked: function() {
+    clicked() {
         console.log('Wooo!');
     },
 
-    render: function() {
+    render() {
         var data = this.props.data,
             cost = '$' + data.cost,
             image = 'https:' + data.images.thumbs[0];

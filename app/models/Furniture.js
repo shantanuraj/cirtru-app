@@ -3,7 +3,7 @@
 var Other = require('./Other');
 
 module.exports = {
-	toFurniture: function(listing) {
+	toFurniture(listing) {
 		return Other.toOther(listing);
 	}
 }

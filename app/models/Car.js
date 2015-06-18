@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports =  {
-	toCar: function(listing) {
+	toCar(listing) {
 		var values = {
 			images: listing.images,
 			title: listing.make + ' ' + listing.model,
@@ -10,7 +10,6 @@ module.exports =  {
 			circle: listing.circle,
 			id: listing._id,
 		}
-
 		return values;
 	}
 }

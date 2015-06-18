@@ -64,7 +64,7 @@ var styles = StyleSheet.create({
 });
 
 var User = React.createClass({
-	getInitialState: function() {
+	getInitialState() {
 		return {
 			prompt: 'Sign in',
 			greet: 'No account? Click here',
@@ -72,7 +72,7 @@ var User = React.createClass({
     	};
   	},
 
-  	togglePrompt: function() {
+  	togglePrompt() {
 		if (this.state.prompt === 'Sign in') {
 			this.setState({
 				prompt: 'Sign up',
@@ -88,7 +88,7 @@ var User = React.createClass({
 		}
   	},
 
-	loginFB: function() {
+	loginFB() {
 		FacebookLoginManager.newSession((error, info) => {
 	      if (error) {
 	        this.setState({
@@ -106,7 +106,7 @@ var User = React.createClass({
 	    });
 	},
 
-	render: function () {
+	render() {
 		return (
 			<ScrollView contentContainerStyle={styles.container}>
 				<TouchableHighlight

@@ -51,11 +51,11 @@ var styles = StyleSheet.create({
 });
 
 var MiniCard = React.createClass({
-	openCreatePage: function() {
+	openCreatePage() {
 		var category = this.props.type;
 	},
 
-	render: function() {
+	render() {
 		var type = this.props.type;
 		var image = Api.miniCardImage(type);
 		return (

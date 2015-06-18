@@ -26,7 +26,7 @@ var styles = StyleSheet.create({
 
 
 var Home = React.createClass({
-	render: function() {
+	render() {
 		var categories = Api.categories;
 		var Cards = categories.map((category, i) => <Card {...this.props} key={i} type={category} />);
 
