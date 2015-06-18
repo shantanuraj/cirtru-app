@@ -18,13 +18,13 @@ var styles = StyleSheet.create({
 	    alignItems: 'center',
 	    justifyContent: 'center',
 	},
-  
+
 	brandIcon: {
 	    width: 28,
 	    height: 28,
 	    marginLeft: 5,
 	},
-  
+
 	signInText: {
 	    color: 'white',
 	    marginLeft: 5,
@@ -47,15 +47,15 @@ var styles = StyleSheet.create({
 		borderRadius: 3,
 		marginBottom: 10,
 	},
-  
+
 	googleButton: {
 	    backgroundColor: Colors.Google,
 	},
-  
+
 	facebookButton: {
 	    backgroundColor: Colors.Facebook,
 	},
-  
+
 	emailButton: {
 	    backgroundColor: Colors.brandSecondary,
 	},
@@ -70,12 +70,19 @@ var User = React.createClass({
   	},
 
   	togglePrompt: function() {
-  		this.setState({
-  			prompt: 'Sign up',
-  			greet: 'Join our circle of trust',
+		if (this.state.prompt === 'Sign in') {
+			this.setState({
+				prompt: 'Sign up',
+				greet: 'Already have an account? Click here',
+			})
+		} else {
+			this.setState({
+  			prompt: 'Sign in',
+  			greet: 'No account? Click here',
   		});
+		}
   	},
-  
+
 	render: function () {
 		return (
 			<ScrollView contentContainerStyle={styles.container}>
@@ -123,7 +130,7 @@ var User = React.createClass({
 						</Text>
 					</View>
 				</TouchableHighlight>
-			
+
 				<TouchableHighlight
 				onPress={this.togglePrompt}
 				underlayColor={Colors.white}>
