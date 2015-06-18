@@ -4,6 +4,8 @@ var React = require('react-native'),
 	Icon = require('FAKIconImage'),
 	Colors = require('../core/Colors');
 
+var FacebookLoginManager = require('NativeModules').FacebookLoginManager;
+
 var {
 	StyleSheet,
 	Text,
@@ -66,6 +68,7 @@ var User = React.createClass({
 		return {
 			prompt: 'Sign in',
 			greet: 'No account? Click here',
+			result: 'Login',
     	};
   	},
 
@@ -74,14 +77,34 @@ var User = React.createClass({
 			this.setState({
 				prompt: 'Sign up',
 				greet: 'Already have an account? Click here',
+				result: this.state.result,
 			})
 		} else {
 			this.setState({
-  			prompt: 'Sign in',
-  			greet: 'No account? Click here',
-  		});
+  				prompt: 'Sign in',
+  				greet: 'No account? Click here',
+				result: this.state.result,
+  			});
 		}
   	},
+
+	loginFB: function() {
+		FacebookLoginManager.newSession((error, info) => {
+	      if (error) {
+	        this.setState({
+				prompt: this.state.prompt,
+				greet: this.state.greet,
+				result: error,
+			});
+	      } else {
+	        this.setState({
+				prompt: this.state.prompt,
+				greet: '',
+				result: info,
+			});
+	      }
+	    });
+	},
 
 	render: function () {
 		return (
@@ -102,6 +125,7 @@ var User = React.createClass({
 				</TouchableHighlight>
 
 				<TouchableHighlight
+				onPress={this.loginFB}
 				underlayColor={Colors.white}>
 					<View
 					style={[styles.button, styles.facebookButton]}>
