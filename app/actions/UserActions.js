@@ -2,7 +2,8 @@ var Reflux = require('reflux');
 
 var userActions = [
     'signIn',
-    'signOut',
+    'togglePrompt',
+    'newFacebookSession',
 ];
 
 var actions = Reflux.createActions(userActions);

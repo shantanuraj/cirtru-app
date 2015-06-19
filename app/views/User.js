@@ -3,10 +3,9 @@
 var React = require('react-native'),
 	Icon = require('FAKIconImage'),
 	Colors = require('../core/Colors'),
+	Reflux = require('reflux'),
 	UserActions = require('../actions/UserActions'),
 	UserStore = require('../store/UserStore');
-
-var FacebookLoginManager = require('NativeModules').FacebookLoginManager;
 
 var {
 	StyleSheet,
@@ -16,66 +15,16 @@ var {
 	TouchableHighlight,
 } = React;
 
-class User extends React.Component {
-	constructor(props) {
-		super(props);
+var User = React.createClass({
+	mixins: [Reflux.connect(UserStore, 'store')],
 
-		this.togglePrompt = this.togglePrompt.bind(this);
-		this.loginFB = this.loginFB.bind(this);
-
-		this.state =  {
-			prompt: 'Sign in',
-			greet: 'No account? Click here',
-			result: 'Login',
-    	};
-  	}
-
-	componentDidMount() {
-		this.unsubscribe = UserStore.listen(this.onStatusChange.bind(this));
-		UserActions.signIn();
-	}
-
-	componentWillUnmount() {
-		this.unsubscribe();
-	}
-
-	onStatusChange(state) {
-    	this.setState(state);
-  	}
-
-  	togglePrompt() {
-		if (this.state.prompt === 'Sign in') {
-			this.setState({
-				prompt: 'Sign up',
-				greet: 'Already have an account? Click here',
-				result: this.state.result,
-			})
-		} else {
-			this.setState({
-  				prompt: 'Sign in',
-  				greet: 'No account? Click here',
-				result: this.state.result,
-  			});
-		}
-  	}
+	togglePrompt() {
+		UserActions.togglePrompt();
+	},
 
 	loginFB() {
-		FacebookLoginManager.newSession((error, info) => {
-			if (error) {
-				this.setState({
-					prompt: this.state.prompt,
-					greet: this.state.greet,
-					result: error,
-				});
-			} else {
-				this.setState({
-					prompt: this.state.prompt,
-					greet: 'You are now logged in.',
-					result: info,
-				});
-			}
-		});
-	}
+		UserActions.newFacebookSession();
+	},
 
 	render() {
 		return (
@@ -90,7 +39,7 @@ class User extends React.Component {
 						color={Colors.white}
 						style={styles.brandIcon}/>
 						<Text style={styles.signInText}>
-							{this.state.prompt} with Google
+							{this.state.store.prompt} with Google
 						</Text>
 					</View>
 				</TouchableHighlight>
@@ -106,7 +55,7 @@ class User extends React.Component {
 						color={Colors.white}
 						style={styles.brandIcon}/>
 						<Text style={styles.signInText}>
-							{this.state.prompt} with Facebook
+							{this.state.store.prompt} with Facebook
 						</Text>
 					</View>
 				</TouchableHighlight>
@@ -121,7 +70,7 @@ class User extends React.Component {
 						color={Colors.white}
 						style={styles.brandIcon}/>
 						<Text style={styles.signInText}>
-							{this.state.prompt} with Email
+							{this.state.store.prompt} with Email
 						</Text>
 					</View>
 				</TouchableHighlight>
@@ -130,13 +79,13 @@ class User extends React.Component {
 				onPress={this.togglePrompt}
 				underlayColor={Colors.white}>
 					<Text style={styles.signUpText}>
-						{this.state.greet}
+						{this.state.store.greet}
 					</Text>
 				</TouchableHighlight>
 			</ScrollView>
 		);
-	}
-}
+	},
+});
 
 var styles = StyleSheet.create({
 	container: {
