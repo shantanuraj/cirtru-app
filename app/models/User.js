@@ -2,7 +2,19 @@
 
 var LocalStorage = require('../store/LocalStorage');
 
-module.exports = {
+module.exports = {,
+    defaultUser: {
+        uid: '',
+        name: '',
+        medium: '',
+        circle: '',
+        email: '',
+        workEmail: '',
+        workVerified: false,
+        isLoggedIn: false,
+        extra: {'fbid' : ''},
+    },
+
     toUser(raw) {
         switch (raw.medium) {
             case 'fb' : this.facebookUser(raw); break;
@@ -18,13 +30,15 @@ module.exports = {
 
         var normalize = function(user) {
             return {
+                uid : '',
                 name : user.name,
                 email : user.email,
                 medium : 'facebook',
-                extras : {fbid: user.id},
-                workEmail: '',
                 circle: '',
+                workEmail: '',
+                workVerified: false,
                 isLoggedIn: true,
+                extras : {fbid: user.id},
             };
         };
 

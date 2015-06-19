@@ -7,22 +7,12 @@ var Reflux = require('reflux'),
     LocalStorage = require('./LocalStorage'),
     AlertIOS = require('react-native').AlertIOS;
 
-var defaultUser = {
-    uid: '',
-    email: '',
-    workEmail: '',
-    circle: '',
-    medium: '',
-    isLoggedIn: false,
-    extra: {'fbid' : ''}
-};
-
 var UserStore = Reflux.createStore({
     listenables: [UserActions],
 
     init() {
         LocalStorage.getUser();
-        this.state = defaultUser;
+        this.state = User.defaultUser;
     },
 
     getInitialState() {
