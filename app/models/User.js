@@ -5,8 +5,8 @@ var LocalStorage = require('../store/LocalStorage');
 module.exports = {
     toUser(raw) {
         switch (raw.medium) {
-            case 'fb' : return this.facebookUser(raw);
-            case 'ci' : return this.cirtruUser(raw);
+            case 'fb' : this.facebookUser(raw); break;
+            case 'ci' : this.cirtruUser(raw); break;
             // case 'go' : return this.GoogleUser(raw);
         }
     },

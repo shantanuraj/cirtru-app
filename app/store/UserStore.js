@@ -20,12 +20,7 @@ var UserStore = Reflux.createStore({
     listenables: [UserActions],
 
     init() {
-        this.state = {
-            prompt: 'Sign in',
-			greet: 'No account? Click here',
-			result: '',
-            user: defaultUser,
-        };
+        this.state = defaultUser;
     },
 
     getInitialState() {
@@ -33,10 +28,7 @@ var UserStore = Reflux.createStore({
     },
 
     onLogin(user) {
-        this.state.user = user;
-        this.state.prompt = '';
-        this.state.greet = 'Hello ' +  user.name;
-        this.trigger(this.state);
+        this.trigger(user);
     },
 
     onNewFacebookSession() {
