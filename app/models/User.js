@@ -2,7 +2,7 @@
 
 var LocalStorage = require('../store/LocalStorage');
 
-module.exports = {,
+module.exports = {
     defaultUser: {
         uid: '',
         name: '',
