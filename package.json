@@ -9,6 +9,9 @@
     "react": "^0.13.3",
     "react-native": "^0.5.0",
     "react-native-icons": "0.0.9",
-    "reflux": "^0.2.8"
+    "reflux": "^0.2.8",
+    "tcomb": "^1.0.3",
+    "tcomb-form-native": "^0.2.0",
+    "tcomb-validation": "^1.0.4"
   }
 }
