@@ -4,6 +4,7 @@ var Reflux = require('reflux'),
     UserActions = require('../actions/UserActions'),
     FacebookLoginManager = require('NativeModules').FacebookLoginManager,
     User = require('../models/User'),
+    LocalStorage = require('./LocalStorage'),
     AlertIOS = require('react-native').AlertIOS;
 
 var defaultUser = {
@@ -20,6 +21,7 @@ var UserStore = Reflux.createStore({
     listenables: [UserActions],
 
     init() {
+        LocalStorage.getUser();
         this.state = defaultUser;
     },
 
@@ -28,6 +30,7 @@ var UserStore = Reflux.createStore({
     },
 
     onLogin(user) {
+        this.state = user;
         this.trigger(user);
     },
 

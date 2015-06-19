@@ -6,7 +6,6 @@ var React = require('react-native'),
 	Colors = require('../core/Colors'),
 	UserActions = require('../actions/UserActions'),
 	UserStore = require('../store/UserStore'),
-	LocalStorage = require('../store/LocalStorage'),
 	Login = require('./Login');
 
 var {
@@ -19,10 +18,6 @@ var {
 
 var Profile = React.createClass({
 	mixins: [Reflux.connect(UserStore, 'user')],
-
-	componentWillMount() {
-		LocalStorage.getUser();
-	},
 
 	render() {
 		if (!this.state.user.isLoggedIn) {
