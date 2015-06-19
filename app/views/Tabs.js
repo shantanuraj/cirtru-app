@@ -6,7 +6,7 @@ var React = require('react-native'),
 	Colors = require('../core/Colors'),
 	Home = require('./Home'),
 	New = require('./New'),
-	User = require('./User');
+	Profile = require('./Profile');
 
 var {
 	StyleSheet,
@@ -26,7 +26,7 @@ var Tabs = React.createClass({
 		var tabs = [
 			this.renderTab('home', 'ion|ios-home-outline', <Home {...this.props} />),
 			this.renderTab('new', 'ion|plus', <New {...this.props} />),
-			this.renderTab('user', 'ion|person', <User {...this.props} />),
+			this.renderTab('profile', 'ion|person', <Profile {...this.props} />),
 		];
 
 		return (

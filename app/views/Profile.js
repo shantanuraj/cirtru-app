@@ -15,7 +15,7 @@ var {
 	TouchableHighlight,
 } = React;
 
-var User = React.createClass({
+var Profile = React.createClass({
 	mixins: [Reflux.connect(UserStore, 'store')],
 
 	togglePrompt() {
@@ -35,6 +35,12 @@ var User = React.createClass({
 	},
 
 	render() {
+		if (!this.state.store.user.loggedIn) {
+			return this.loginScreen();
+		}
+	},
+
+	loginScreen() {
 		return (
 			<ScrollView contentContainerStyle={styles.container}>
 				<TouchableHighlight
@@ -92,7 +98,7 @@ var User = React.createClass({
 				</TouchableHighlight>
 			</ScrollView>
 		);
-	},
+	}
 });
 
 var styles = StyleSheet.create({
@@ -144,4 +150,4 @@ var styles = StyleSheet.create({
 	},
 });
 
-module.exports = User;
+module.exports = Profile;
