@@ -1,3 +1,5 @@
+'use strict';
+
 var Reflux = require('reflux'),
     UserActions = require('../actions/UserActions'),
     FacebookLoginManager = require('NativeModules').FacebookLoginManager;

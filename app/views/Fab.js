@@ -9,15 +9,10 @@ var {
     Image
 } = React;
 
-class Fab extends React.Component {
-    constructor(props) {
-        super(props);
-        this.goToAddPage = this.goToAddPage.bind(this);
-    }
-
+var Fab = React.createClass({
     goToAddPage() {
         console.log('Touched Fab!');
-    }
+    },
 
     render() {
         return (
@@ -27,8 +22,8 @@ class Fab extends React.Component {
                 <Image source={require('image!ic_add')} style={styles.icon} />
             </TouchableHighlight>
         );
-    }
-}
+    },
+};
 
 var styles = StyleSheet.create({
     icon: {

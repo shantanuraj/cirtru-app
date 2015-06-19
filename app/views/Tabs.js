@@ -15,13 +15,12 @@ var {
 	NavigatorIOS,
 } = React;
 
-class Tabs extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
+var Tabs = React.createClass({
+	getInitialState() {
+		return {
 			activeTab: 'home',
 		};
-	}
+	},
 
 	render() {
 		var tabs = [
@@ -39,7 +38,7 @@ class Tabs extends React.Component {
 				{tabs}
 			</SMXTabBarIOS>
 		);
-	}
+	},
 
 	renderTab(name, icon, view) {
 		return (
@@ -60,8 +59,8 @@ class Tabs extends React.Component {
 			  {view}
 			</SMXTabBarItemIOS>
 		);
-	}
-}
+	},
+});
 
 var styles = StyleSheet.create({
 	tabBar : {

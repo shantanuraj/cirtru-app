@@ -11,7 +11,7 @@ var {
 	ScrollView,
 } = React;
 
-class Home extends React.Component {
+var Home = React.createClass({
 	render() {
 		var categories = Api.categories;
 		var Cards = categories.map((category, i) => <Card {...this.props} key={i} type={category} />);
@@ -24,7 +24,7 @@ class Home extends React.Component {
 			</ScrollView>
 		);
 	}
-}
+});
 
 var styles = StyleSheet.create({
 	list: {

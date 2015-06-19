@@ -11,10 +11,10 @@ var {
     TouchableHighlight,
 } = React;
 
-class Product extends React.Component {
+var Product = React.createClass({
     clicked() {
         console.log('Wooo!');
-    }
+    },
 
     render() {
         var data = this.props.data,
@@ -38,8 +38,8 @@ class Product extends React.Component {
             </View>
         </TouchableHighlight>
         );
-    }
-}
+    },
+});
 
 var styles = StyleSheet.create({
     row: {

@@ -15,20 +15,19 @@ var {
     ActivityIndicatorIOS,
 } = React;
 
-class ProductList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+var ProductList = React.createClass({
+    getInitialState() {
+        return {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
             loaded: false,
         };
-    }
+    },
 
     componentDidMount() {
         this.fetchData();
-    }
+    },
 
     fetchData() {
         var type = this.props.type;
@@ -43,7 +42,7 @@ class ProductList extends React.Component {
             });
         })
         .done();
-    }
+    },
 
     render() {
         if (!this.state.loaded) {
@@ -56,7 +55,7 @@ class ProductList extends React.Component {
             dataSource={this.state.dataSource}
             renderRow={listing => <Product data={listing} />}/>
         );
-    }
+    },
 
     renderLoadingView() {
         return (
@@ -71,8 +70,8 @@ class ProductList extends React.Component {
                 </Text>
             </View>
         );
-    }
-}
+    },
+});
 
 var styles = StyleSheet.create({
     container: {

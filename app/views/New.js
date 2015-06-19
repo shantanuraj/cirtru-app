@@ -11,7 +11,7 @@ var {
 	ScrollView,
 } = React;
 
-class New extends React.Component {
+var New = React.createClass({
 	render() {
 		var categories = Api.categories;
 		var Cards = categories.map((category, i) => <MiniCard {...this.props} key={i} type={category} />);
@@ -23,8 +23,8 @@ class New extends React.Component {
 			  </View>
 			</ScrollView>
 		);
-	}
-}
+	},
+});
 
 var styles = StyleSheet.create({
 	list: {
