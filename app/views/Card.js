@@ -45,7 +45,7 @@ var Card = React.createClass({
 			</TouchableHighlight>
 		);
 	},
-}
+});
 
 var styles = StyleSheet.create({
 	card: {

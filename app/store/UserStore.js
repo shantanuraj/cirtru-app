@@ -2,7 +2,8 @@
 
 var Reflux = require('reflux'),
     UserActions = require('../actions/UserActions'),
-    FacebookLoginManager = require('NativeModules').FacebookLoginManager;
+    FacebookLoginManager = require('NativeModules').FacebookLoginManager,
+    AlertIOS = require('react-native').AlertIOS;
 
 var defaultUser = {
     uid: '',
@@ -33,7 +34,7 @@ var UserStore = Reflux.createStore({
     onNewFacebookSession() {
         FacebookLoginManager.newSession((error, info) => {
 			if (error) {
-                this.state.result = error;
+                AlertIOS.alert('Could not sign in');
 			} else {
 				this.state.greet = 'You are now logged in.';
 				this.state.result = info;
