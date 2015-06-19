@@ -3,7 +3,7 @@
 var Reflux = require('reflux');
 
 var userActions = [
-    'signIn',
+    'login',
     'newFacebookSession',
 ];
 

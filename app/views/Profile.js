@@ -35,9 +35,17 @@ var Profile = React.createClass({
 	},
 
 	render() {
-		if (!this.state.store.user.loggedIn) {
+		if (!this.state.store.user.isLoggedIn) {
 			return this.loginScreen();
+		} else {
+			return this.profilePage();
 		}
+	},
+
+	profilePage() {
+		return (
+			<View><Text>Hello</Text></View>
+		);
 	},
 
 	loginScreen() {
