@@ -1,9 +1,9 @@
 'use strict';
 
 var React = require('react-native'),
+	Reflux = require('reflux'),
 	Icon = require('FAKIconImage'),
 	Colors = require('../core/Colors'),
-	Reflux = require('reflux'),
 	UserActions = require('../actions/UserActions'),
 	UserStore = require('../store/UserStore');
 
