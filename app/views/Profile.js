@@ -21,7 +21,7 @@ var Profile = React.createClass({
 
 	render() {
 		if (!this.state.user.isLoggedIn) {
-			return <Login />;
+			return <Login {...this.props} />;
 		} else {
 			return this.profilePage();
 		}

@@ -3,6 +3,7 @@
 var React = require('react-native'),
 	Icon = require('FAKIconImage'),
 	Colors = require('../core/Colors'),
+	EmailLogin = require('./EmailLogin'),
 	UserActions = require('../actions/UserActions');
 
 var {
@@ -23,6 +24,16 @@ var Login = React.createClass({
 
     loginFB() {
 		UserActions.newFacebookSession();
+	},
+
+	startEmailLogin() {
+		this.props.navigator.push({
+			title: this.state.prompt,
+			component: EmailLogin,
+			passProps: {
+				action: this.state.prompt,
+			},
+		});
 	},
 
     togglePrompt() {
@@ -72,6 +83,7 @@ var Login = React.createClass({
 				</TouchableHighlight>
 
 				<TouchableHighlight
+				onPress={this.startEmailLogin}
 				underlayColor={Colors.white}>
 					<View
 					style={[styles.button, styles.emailButton]}>
