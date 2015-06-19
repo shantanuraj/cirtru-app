@@ -2,7 +2,6 @@ var Reflux = require('reflux');
 
 var userActions = [
     'signIn',
-    'togglePrompt',
     'newFacebookSession',
 ];
 

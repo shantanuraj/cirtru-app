@@ -28,22 +28,6 @@ var UserStore = Reflux.createStore({
         return this.state;
     },
 
-    onSignIn(user) {
-        console.log('Emmited sign in!', user);
-        this.trigger({user: defaultUser});
-    },
-
-    onTogglePrompt() {
-        if (this.state.prompt === 'Sign in') {
-            this.state.prompt = 'Sign up';
-            this.state.greet =  'Already have an account? Click here';
-		} else {
-  			this.state.prompt = 'Sign in';
-  			this.state.greet = 'No account? Click here';
-		}
-        this.trigger(this.state);
-    },
-
     onNewFacebookSession() {
         FacebookLoginManager.newSession((error, info) => {
 			if (error) {

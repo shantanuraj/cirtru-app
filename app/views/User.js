@@ -19,7 +19,15 @@ var User = React.createClass({
 	mixins: [Reflux.connect(UserStore, 'store')],
 
 	togglePrompt() {
-		UserActions.togglePrompt();
+		var store = this.state.store;
+		if (store.prompt === 'Sign in') {
+            store.prompt = 'Sign up';
+            store.greet =  'Already have an account? Click here';
+		} else {
+  			store.prompt = 'Sign in';
+  			store.greet = 'No account? Click here';
+		}
+        this.setState({store});
 	},
 
 	loginFB() {
