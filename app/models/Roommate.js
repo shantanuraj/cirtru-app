@@ -41,8 +41,8 @@ module.exports = {
 			}
 		};
 
-		listing.propertyAmenities.forEach(amenitiy => {
-			values.data.amenities[amenitiy] = true;
+		listing.propertyAmenities.forEach(amenity => {
+			values.data.amenities[amenity] = true;
 		});
 
 		listing.rooms.forEach(function (room, index) {
