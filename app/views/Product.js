@@ -13,13 +13,13 @@ var {
 
 var Product = React.createClass({
     clicked() {
-        console.log('Wooo!');
+        console.log(this.props.data);
     },
 
     render() {
-        var data = this.props.data,
-            cost = '$' + data.cost,
-            image = 'https:' + data.images.thumbs[0];
+        var product = this.props.data,
+            cost = '$' + product.cost,
+            image = 'https:' + product.images.thumbs[0];
 
         return (
         <TouchableHighlight
@@ -30,9 +30,9 @@ var Product = React.createClass({
                 style={styles.thumbnail} />
 
                 <View style={styles.info}>
-                    <Text style={styles.title}>{data.title}</Text>
-                    <Text style={styles.subtitle}>{data.location}</Text>
-                    <Text style={styles.subtitle}>{data.circle}</Text>
+                    <Text style={styles.title}>{product.title}</Text>
+                    <Text style={styles.subtitle}>{product.location}</Text>
+                    <Text style={styles.subtitle}>{product.circle}</Text>
                     <Text style={styles.subtitle}>{cost}</Text>
                 </View>
             </View>

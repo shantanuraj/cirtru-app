@@ -9,6 +9,14 @@ module.exports = {
 			cost: listing.sellingPrice,
 			circle: listing.circle,
 			id: listing._id,
+
+			address: listing.location,
+			coordinates: {
+				long: listing.gmaps.loc[0],
+				lat: listing.gmaps.loc[1],
+			},
+			description: listing.description,
+			owner: listing.user,
 		}
 		return values;
 	}

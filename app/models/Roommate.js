@@ -10,36 +10,64 @@ module.exports = {
 			circle: listing.circle,
 			id: listing._id,
 
-			rent: [],
-			gender: [],
-			smoking: [],
-			diet: [],
-			from: [],
+			address: listing.location,
+			coordinates: {
+				long: listing.gmaps.loc[0],
+				lat: listing.gmaps.loc[1],
+			},
+			description: listing.description,
+			owner: listing.user,
+
+			data: {
+				amenities: {
+					pool: false,
+					parking: false,
+					laundry: false,
+					gym: false,
+					ac: false,
+					tv: false,
+					security: false,
+					heating: false,
+					elevator: false,
+					internet: false,
+				},
+				beds: listing.beds,
+				bath: listing.bath,
+				rent: [],
+				gender: [],
+				smoking: [],
+				diet: [],
+				from: [],
+			}
 		};
+
+		listing.propertyAmenities.forEach(amenitiy => {
+			values.data.amenities[amenitiy] = true;
+		});
 
 		listing.rooms.forEach(function (room, index) {
 
 		    room.roomOccupancy.forEach(function (occupant) {
 		        if (occupant.roommateStatus === 'Looking') {
-		            values.rent.push(occupant.rent);
-		            values.gender.push(occupant.gender);
-		            values.smoking.push(occupant.smoking);
-		            values.diet.push(occupant.diet);
-		            values.from.push(occupant.from);
+		            values.data.rent.push(occupant.rent);
+		            values.data.gender.push(occupant.gender);
+		            values.data.smoking.push(occupant.smoking);
+		            values.data.diet.push(occupant.diet);
+		            values.data.from.push(occupant.from);
 		        }
 		    });
 
 		    if (index === listing.rooms.length - 1) {
-		        values.cost = Math.min.apply(Math, values.rent);
-		        values.smoking = values.smoking[0];
-		        values.diet = values.diet[0];
-		        values.from = values.from[0];
+		        values.cost = Math.min.apply(Math, values.data.rent);
+		        values.data.smoking = values.data.smoking[0];
+		        values.data.diet = values.data.diet[0];
+		        values.data.from = values.data.from[0];
 
-		        if ((values.gender.indexOf('Any') !== -1)
-		        || (values.gender.indexOf('Male') !== -1 && values.gender.indexOf('Female') !== -1)) {
-		         	values.gender = 'Any'
+		        if ((values.data.gender.indexOf('Any') !== -1)
+		        || (values.data.gender.indexOf('Male') !== -1 && values.data.gender.indexOf('Female') !== -1)) {
+		         	values.data.gender = 'Any'
 		        } else {
-		         	values.gender = values.gender[0];
+		         	values.data.gender = values.data.gender[0];
 		        }
 		    }
 

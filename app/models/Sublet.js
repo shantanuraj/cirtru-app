@@ -9,6 +9,28 @@ module.exports = {
 			cost: listing.sellingPrice,
 			circle: listing.circle,
 			id: listing._id,
+
+			address: listing.location,
+			coordinates: {
+				long: listing.gmaps.loc[0],
+				lat: listing.gmaps.loc[1],
+			},
+			description: listing.description,
+			owner: listing.user,
+
+			data: {
+				amenities: {
+					laundry : listing.laundry === "yes" ? true : false,
+					pool : listing.swimmingPool === "yes" ? true : false,
+					gym : listing.gym === "yes" ? true : false,
+					security : listing.security === "gated" ? true : false,
+					smoking : listing.smoking === "OK" ? true : false,
+				},
+				pets: listing.pets === 'OK' ? true : false,
+				start: listing.startDate,
+				end: listing.endDate,
+				owner: listing.user,
+			}
 		}
 		return values;
 	}
