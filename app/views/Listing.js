@@ -1,11 +1,11 @@
 'use strict';
 
 var React = require('react-native'),
-    Colors = require('../../core/Colors'),
-    Images = require('../util/Images'),
-    Price = require('../util/Price'),
-    Info = require('../util/Info'),
-    ContactButton = require('../util/ContactButton'),
+    Colors = require('../core/Colors'),
+    Images = require('./util/Images'),
+    Price = require('./util/Price'),
+    Info = require('./util/Info'),
+    ContactButton = require('./util/ContactButton'),
     window = require('Dimensions').get('window');
 
 var {
@@ -15,7 +15,7 @@ var {
     ScrollView,
 } = React;
 
-var Roommate = React.createClass({
+var Listing = React.createClass({
     render() {
         var listing = this.props.listing,
             images  = listing.images.pics,
@@ -59,4 +59,4 @@ var styles = StyleSheet.create({
   	},
 });
 
-module.exports = Roommate;
+module.exports = Listing;
