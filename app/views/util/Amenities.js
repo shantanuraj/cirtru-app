@@ -10,7 +10,7 @@ var {
     Text,
 } = React;
 
-var Icons = {
+var icons = {
     pool: requrire('image!swim'),
     parking: requrire('image!parking'),
     laundry: requrire('image!tshirt'),
@@ -21,7 +21,7 @@ var Icons = {
     heating: requrire('image!thermometer'),
     // elevator: requrire('image!'),
     internet: requrire('image!wifi'),
-}
+};
 
 var Amenities = React.createClass({
     render() {
