@@ -9,7 +9,7 @@ module.exports = {
 			cost: listing.sellingPrice,
 			circle: listing.circle,
 			id: listing._id,
-
+			category: 'sublets',
 			address: listing.location,
 			coordinates: {
 				long: listing.gmaps.loc[0],

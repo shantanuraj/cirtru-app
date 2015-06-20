@@ -9,7 +9,7 @@ module.exports = {
 			cost: 0,
 			circle: listing.circle,
 			id: listing._id,
-
+			category: 'roommates',
 			address: listing.location,
 			coordinates: {
 				long: listing.gmaps.loc[0],
