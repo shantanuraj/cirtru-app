@@ -35,21 +35,21 @@ var Product = React.createClass({
             image = 'https:' + product.images.thumbs[0];
 
         return (
-        <TouchableHighlight
-        underlayColor="transparent" onPress={this.clicked}>
-            <View style={styles.row}>
-                <Image
-                source={{uri: image}}
-                style={styles.thumbnail} />
+            <TouchableHighlight
+            underlayColor="transparent" onPress={this.clicked}>
+                <View style={styles.row}>
+                    <Image
+                    source={{uri: image}}
+                    style={styles.thumbnail} />
 
-                <View style={styles.info}>
-                    <Text style={styles.title}>{product.title}</Text>
-                    <Text style={styles.subtitle}>{product.location}</Text>
-                    <Text style={styles.subtitle}>{product.circle}</Text>
-                    <Text style={styles.subtitle}>{cost}</Text>
+                    <View style={styles.info}>
+                        <Text style={styles.title}>{product.title}</Text>
+                        <Text style={styles.subtitle}>{product.location}</Text>
+                        <Text style={styles.subtitle}>{product.circle}</Text>
+                        <Text style={styles.subtitle}>{cost}</Text>
+                    </View>
                 </View>
-            </View>
-        </TouchableHighlight>
+            </TouchableHighlight>
         );
     },
 });
