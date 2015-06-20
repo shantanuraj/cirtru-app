@@ -5,6 +5,7 @@ var React = require('react-native'),
     Images = require('../util/Images'),
     Price = require('../util/Price'),
     Info = require('../util/Info'),
+    ContactButton = require('../util/ContactButton'),
     window = require('Dimensions').get('window');
 
 var {
@@ -23,9 +24,12 @@ var Roommate = React.createClass({
 
         return (
             <ScrollView style={styles.container}>
-                <Images images={images} style={styles.images} />
-                <Price price={price} />
-                <Info description={info}/>
+                <View>
+                    <Images images={images} style={styles.images} />
+                    <Price price={price} />
+                    <Info description={info}/>
+                </View>
+                <ContactButton />
             </ScrollView>
         );
     }
