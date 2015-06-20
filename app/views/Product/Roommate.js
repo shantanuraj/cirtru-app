@@ -23,26 +23,40 @@ var Roommate = React.createClass({
             info    = listing.description;
 
         return (
-            <ScrollView style={styles.container}>
-                <View>
+            <View style={styles.container}>
+                <ScrollView style={styles.scroll}>
                     <Images images={images} style={styles.images} />
                     <Price price={price} />
                     <Info description={info}/>
-                </View>
-                <ContactButton />
-            </ScrollView>
+                </ScrollView>
+				<View style={styles.fabContainer}>
+					<ContactButton />
+				</View>
+			</View>
         );
     }
 });
 
 var styles = StyleSheet.create({
     container: {
+		flex: 1,
+    	justifyContent: 'center',
+    	alignItems: 'center',
+    	backgroundColor: Colors.background,
+  	},
+    scroll: {
         backgroundColor: Colors.grey,
     },
     images: {
         height: 300,
         width: window.width,
     },
+    fabContainer: {
+  		position: 'absolute',
+  		bottom: 16,
+  		right: 16,
+  		borderRadius: 24,
+  	},
 });
 
 module.exports = Roommate;

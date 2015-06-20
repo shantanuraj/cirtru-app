@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native'),
+    Icon = require('FAKIconImage'),
     Colors = require('../../core/Colors');
 
 var {
@@ -12,30 +13,40 @@ var {
 var ContactButton = React.createClass({
     render() {
         return (
-            <TouchableHighlight style={styles.button}>
-                <Text style={styles.text}>
-                    Contact
-                </Text>
+            <TouchableHighlight
+            style={styles.fab}
+            underlayColor={Colors.brandSecondary}>
+                <Icon
+                name='ion|email'
+                size={32}
+                color={Colors.white}
+                style={styles.icon} />
             </TouchableHighlight>
         );
     }
 });
 
 var styles = StyleSheet.create({
-    button: {
-        width: window.width - 20,
-        padding: 8,
-        height: 36,
-        backgroundColor: Colors.white,
-        borderRadius: 2,
-        alignItems: 'center',
-        justifyContent: 'center',
+    icon: {
+        width: 32,
+        height: 32,
     },
-    text: {
-        color: Colors.brandSecondaryDark,
-        fontWeight: '300',
-        fontSize: 28,
-    }
+
+    fab: {
+        backgroundColor: Colors.brandSecondaryDark,
+        width: 48,
+        height: 48,
+        borderRadius: 24,
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: "black",
+        shadowOpacity: 0.5,
+        shadowRadius: 6,
+        shadowOffset: {
+            height: 0,
+            width: 0
+        },
+    },
 });
 
 module.exports = ContactButton;
