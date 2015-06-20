@@ -53,7 +53,7 @@ var ProductList = React.createClass({
             <ListView
             style={styles.list}
             dataSource={this.state.dataSource}
-            renderRow={listing => <Product data={listing} />}/>
+            renderRow={listing => <Product {...this.props} data={listing} />}/>
         );
     },
 

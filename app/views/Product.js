@@ -13,7 +13,20 @@ var {
 
 var Product = React.createClass({
     clicked() {
-        console.log(this.props.data);
+        var page;
+        switch (this.props.data.category) {
+            case 'roommates': page = require('./Product/Roommate'); break;
+            // case 'sublets'  : page = require('./Product/Sublet'); break;
+            // case 'cars'     : page = require('./Product/Car'); break;
+            // default: page = require('./Product/Other');
+        }
+        this.props.navigator.push({
+            title: this.props.data.title,
+            component: page,
+            passProps: {
+                listing: this.props.data,
+            }
+        });
     },
 
     render() {
