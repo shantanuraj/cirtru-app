@@ -47,7 +47,7 @@ var Amenities = React.createClass({
             horizontal={true}
             contentInset={{top: -65}}>
                 <View style={styles.leadText}>
-                    <Text>Amenities: </Text>
+                    <Text style={styles.text}>Amenities: </Text>
                 </View>
                 {this.state.icons.map((icon, i) => <Image key={i} style={styles.icon} source={icon} />)}
             </ScrollView>
@@ -57,7 +57,7 @@ var Amenities = React.createClass({
 
 var styles = StyleSheet.create({
     scroll: {
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.backgroundGrey,
         width: window.width,
         padding: 2,
     },
@@ -66,6 +66,9 @@ var styles = StyleSheet.create({
     },
     leadText: {
         padding: 12,
+    },
+    text: {
+        fontSize: 18,
     },
     icon: {
         width: 36,

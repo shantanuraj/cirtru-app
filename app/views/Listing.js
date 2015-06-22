@@ -49,7 +49,10 @@ var Listing = React.createClass({
         var extras = this.props.listing.data;
         switch (this.props.listing.category) {
             case 'roommates': return (
-                <Rooms rooms={extras.rooms} />
+                <View>
+                    <Amenities amenities={extras.amenities} />
+                    <Rooms rooms={extras.rooms} />
+                </View>
             );
         }
     }
