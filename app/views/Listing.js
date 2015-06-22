@@ -7,6 +7,7 @@ var React = require('react-native'),
     Price = require('./util/Price'),
     Info = require('./util/Info'),
     Amenities = require('./util/Amenities'),
+    LocationBox = require('./util/LocationBox'),
     ContactButton = require('./util/ContactButton'),
     window = require('Dimensions').get('window');
 
@@ -23,7 +24,8 @@ var Listing = React.createClass({
             images  = listing.images.pics,
             price   = listing.cost,
             info    = listing.description,
-            circle  = listing.circle;
+            circle  = listing.circle,
+            address = listing.address;
 
         return (
             <View style={styles.container}>
@@ -31,6 +33,7 @@ var Listing = React.createClass({
                     <Images images={images} style={styles.images} />
                     <Circle circle={circle} />
                     <Price price={price} />
+                    <LocationBox location={address} />
                     {this.optionalContent()}
                     <Info description={info}/>
                 </ScrollView>

@@ -7,6 +7,7 @@ module.exports = {
 	brandSecondaryLight: '#FF4081',
 	background: this.white,
 	backgroundGrey: '#EEEEEE',
+	textSecondary: '#333333',
 	grey: '#333333',
 	white: '#FFFFFF',
 	black: '#000000',

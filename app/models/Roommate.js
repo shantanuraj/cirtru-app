@@ -19,6 +19,7 @@ module.exports = {
 			owner: listing.user,
 
 			data: {
+				type: listing.type,
 				amenities: {
 					pool: false,
 					parking: false,

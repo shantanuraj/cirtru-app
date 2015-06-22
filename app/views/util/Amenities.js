@@ -59,17 +59,17 @@ var styles = StyleSheet.create({
     scroll: {
         backgroundColor: Colors.white,
         width: window.width,
+        padding: 2,
     },
     container: {
         justifyContent: 'space-between',
     },
     leadText: {
-        marginTop: 12,
-        marginLeft: 8,
+        padding: 12,
     },
     icon: {
-        width: 42,
-        height: 42,
+        width: 36,
+        height: 36,
     }
 });
 
