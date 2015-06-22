@@ -3,6 +3,7 @@
 var React = require('react-native'),
     Colors = require('../core/Colors'),
     Images = require('./util/Images'),
+    Circle = require('./util/Circle'),
     Price = require('./util/Price'),
     Info = require('./util/Info'),
     Amenities = require('./util/Amenities'),
@@ -21,12 +22,14 @@ var Listing = React.createClass({
         var listing = this.props.listing,
             images  = listing.images.pics,
             price   = listing.cost,
-            info    = listing.description;
+            info    = listing.description,
+            circle  = listing.circle;
 
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.scroll}>
                     <Images images={images} style={styles.images} />
+                    <Circle circle={circle} />
                     <Price price={price} />
                     {this.optionalContent()}
                     <Info description={info}/>
