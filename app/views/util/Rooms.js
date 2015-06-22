@@ -16,7 +16,7 @@ var Rooms = React.createClass({
         var rooms = this.props.rooms.filter(room => room.roomOccupancy.length != 0);
         return (
             <View style={styles.wrapper}>
-                {rooms.map((room, i) => <RoomInfo key={i} room={room} style={styles.container}/>)}
+                {rooms.map((room, i) => <RoomInfo {...this.props} key={i} room={room} style={styles.container}/>)}
             </View>
         );
     }

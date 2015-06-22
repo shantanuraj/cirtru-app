@@ -51,7 +51,7 @@ var Listing = React.createClass({
             case 'roommates': return (
                 <View>
                     <Amenities amenities={extras.amenities} />
-                    <Rooms rooms={extras.rooms} />
+                    <Rooms rooms={extras.rooms} beds={extras.beds} baths={extras.baths}/>
                 </View>
             );
             case 'sublets': return (

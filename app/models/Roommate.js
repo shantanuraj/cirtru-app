@@ -33,7 +33,7 @@ module.exports = {
 					internet: false,
 				},
 				beds: listing.beds,
-				bath: listing.bath,
+				baths: listing.bath,
 				rent: [],
 				rooms: listing.rooms,
 			}

@@ -19,6 +19,7 @@ var RoomInfo = React.createClass({
         return (
             <View style={styles.container}>
                 <Text style={styles.leadText}>{type}</Text>
+                <Text style={styles.subText}>{this.bedsAndBaths()}</Text>
                 {this.renderRow('Occupant', occupancy.occupant)}
                 {this.renderRow('Occupation', occupancy.occupation)}
                 {this.renderRow('Gender', occupancy.gender)}
@@ -41,6 +42,22 @@ var RoomInfo = React.createClass({
                 <Text style={styles.value}>{value}</Text>
             </View>
         );
+    },
+
+    bedsAndBaths() {
+        var beds  = this.props.beds,
+            baths = this.props.baths,
+            bedMessage = 'bed',
+            bathMessage = 'bath';
+
+        if (beds > 1) {
+            bedMessage += 's';
+        }
+        if (baths > 1) {
+            bathMessage += 's';
+        }
+
+        return beds + " " + bedMessage + " & " + baths + " " + bathMessage;
     }
 });
 
@@ -57,7 +74,13 @@ var styles = StyleSheet.create({
         color: Colors.black,
         alignSelf: 'center',
         fontSize: 24,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+    },
+    subText: {
+        color: Colors.grey,
+        alignSelf: 'center',
+        fontSize: 20,
+        fontWeight: 'bold',
     },
     title: {
         color: Colors.black,

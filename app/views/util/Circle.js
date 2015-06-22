@@ -25,7 +25,7 @@ var styles = StyleSheet.create({
     container: {
         position: 'absolute',
         backgroundColor: "transparent",
-        top: 8,
+        top: 270,
         right: 8,
     },
     circle: {
