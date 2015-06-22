@@ -1,44 +1,79 @@
 'use strict';
 
 var React = require('react-native'),
-    Colors = require('../../core/Colors');
+    Colors = require('../../core/Colors'),
+    window = require('Dimensions').get('window'),
+    _ = require('immutable');
 
 var {
     StyleSheet,
     ScrollView,
     View,
     Text,
+    Image,
 } = React;
 
 var icons = {
-    pool: requrire('image!swim'),
-    parking: requrire('image!parking'),
-    laundry: requrire('image!tshirt'),
-    // gym: requrire('image!'),
-    ac: requrire('image!fan'),
-    tv: requrire('image!television'),
-    security: requrire('image!security'),
-    heating: requrire('image!thermometer'),
-    // elevator: requrire('image!'),
-    internet: requrire('image!wifi'),
+    pool: require('image!pool'),
+    parking: require('image!parking'),
+    laundry: require('image!laundry'),
+    gym: require('image!gym'),
+    ac: require('image!ac'),
+    tv: require('image!tv'),
+    security: require('image!security'),
+    heating: require('image!heating'),
+    elevator: require('image!elevator'),
+    internet: require('image!internet'),
 };
 
 var Amenities = React.createClass({
+    getInitialState() {
+        var list = _.Map(icons).filter((v, k) => this.props.amenities[k] === true);
+        return {
+            icons: list.toArray()
+        };
+    },
+
     render() {
         return (
-            <View style={styles.container}>
-                <Text>
-                    Amenities box
-                </Text>
-            </View>
+            <ScrollView
+            style={styles.scroll}
+            contentContainerStyle={styles.container}
+            horizontal={true}
+            contentInset={{top: -65}}>
+                {this.optionalText()}
+                {this.state.icons.map((icon, i) => <Image key={i} style={styles.icon} source={icon} />)}
+            </ScrollView>
         );
+    },
+
+    optionalText() {
+        if (this.state.icons.length > 0) {
+            return (
+                <View style={styles.leadText}>
+                    <Text>Amenities: </Text>
+                </View>
+            );
+        }
     },
 });
 
 var styles = StyleSheet.create({
-    container: {
+    scroll: {
         backgroundColor: Colors.white,
+        width: window.width,
     },
+    container: {
+        justifyContent: 'space-between',
+    },
+    leadText: {
+        marginTop: 12,
+        marginLeft: 8,
+    },
+    icon: {
+        width: 42,
+        height: 42,
+    }
 });
 
 module.exports = Amenities;

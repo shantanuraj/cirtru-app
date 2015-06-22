@@ -5,6 +5,7 @@ var React = require('react-native'),
     Images = require('./util/Images'),
     Price = require('./util/Price'),
     Info = require('./util/Info'),
+    Amenities = require('./util/Amenities'),
     ContactButton = require('./util/ContactButton'),
     window = require('Dimensions').get('window');
 
@@ -27,6 +28,7 @@ var Listing = React.createClass({
                 <ScrollView style={styles.scroll}>
                     <Images images={images} style={styles.images} />
                     <Price price={price} />
+                    {this.optionalContent()}
                     <Info description={info}/>
                 </ScrollView>
 				<View style={styles.fabContainer}>
@@ -34,6 +36,14 @@ var Listing = React.createClass({
 				</View>
 			</View>
         );
+    },
+
+    optionalContent() {
+        var extras = this.props.listing.data;
+        switch (this.props.listing.category) {
+            case 'roommates':
+            case 'sublets'  : return <Amenities amenities={extras.amenities} />;
+        }
     }
 });
 
