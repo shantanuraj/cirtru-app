@@ -12,19 +12,67 @@ var {
 
 var RoomInfo = React.createClass({
     render() {
+        var room = this.props.room,
+            type = room.roomType,
+            occupancy = room.roomOccupancy[0];
+
         return (
             <View style={styles.container}>
-                
+                <Text style={styles.leadText}>{type}</Text>
+                {this.renderRow('Occupant', occupancy.occupant)}
+                {this.renderRow('Occupation', occupancy.occupation)}
+                {this.renderRow('Gender', occupancy.gender)}
+                {this.renderRow('Age', occupancy.age)}
+                {this.renderRow('Deposit', '$' + occupancy.deposit)}
+                {this.renderRow('Diet', occupancy.diet)}
+                {this.renderRow('Smoking', occupancy.smoking)}
+                {this.renderRow('Drinking', occupancy.drinking)}
+                {this.renderRow('Pets', occupancy.pets)}
+                {this.renderRow('Start', occupancy.from)}
+                {this.renderRow('Minimum stay', occupancy.minStay)}
             </View>
         );
     },
+
+    renderRow(title, value) {
+        return (
+            <View style={styles.row}>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.value}>{value}</Text>
+            </View>
+        );
+    }
 });
 
 var styles = StyleSheet.create({
     container: {
-        backgroundColor: Colors.backgroundGrey,
+        flex: 1,
         width: window.width,
+        height: 400,
+        justifyContent: 'center',
+        backgroundColor: Colors.backgroundGrey,
+        padding: 12,
     },
+    leadText: {
+        color: Colors.black,
+        alignSelf: 'center',
+        fontSize: 24,
+        fontWeight: 'bold'
+    },
+    title: {
+        color: Colors.black,
+        fontSize: 20,
+    },
+    value: {
+        color: Colors.grey,
+        fontSize: 20,
+    },
+    row: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 2,
+    }
 });
 
 module.exports = RoomInfo;

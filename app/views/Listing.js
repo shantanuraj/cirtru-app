@@ -9,6 +9,7 @@ var React = require('react-native'),
     Amenities = require('./util/Amenities'),
     LocationBox = require('./util/LocationBox'),
     ContactButton = require('./util/ContactButton'),
+    Rooms = require('./util/Rooms'),
     window = require('Dimensions').get('window');
 
 var {
@@ -47,8 +48,9 @@ var Listing = React.createClass({
     optionalContent() {
         var extras = this.props.listing.data;
         switch (this.props.listing.category) {
-            case 'roommates':
-            case 'sublets'  : return <Amenities amenities={extras.amenities} />;
+            case 'roommates': return (
+                <Rooms rooms={extras.rooms} />
+            );
         }
     }
 });
