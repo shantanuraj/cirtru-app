@@ -35,26 +35,23 @@ var Amenities = React.createClass({
     },
 
     render() {
+        if (this.state.icons.length === 0) {
+            return (
+                <View />
+            );
+        }
         return (
             <ScrollView
             style={styles.scroll}
             contentContainerStyle={styles.container}
             horizontal={true}
             contentInset={{top: -65}}>
-                {this.optionalText()}
-                {this.state.icons.map((icon, i) => <Image key={i} style={styles.icon} source={icon} />)}
-            </ScrollView>
-        );
-    },
-
-    optionalText() {
-        if (this.state.icons.length > 0) {
-            return (
                 <View style={styles.leadText}>
                     <Text>Amenities: </Text>
                 </View>
-            );
-        }
+                {this.state.icons.map((icon, i) => <Image key={i} style={styles.icon} source={icon} />)}
+            </ScrollView>
+        );
     },
 });
 
