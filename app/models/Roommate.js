@@ -4,7 +4,7 @@ module.exports = {
 	toRoommate(listing) {
 		var values = {
 			images: listing.images,
-			title: listing.type,
+			title: listing.title,
 			location: listing.primaryLocation,
 			cost: 0,
 			circle: listing.circle,
