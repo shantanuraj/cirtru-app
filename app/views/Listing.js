@@ -10,6 +10,7 @@ var React = require('react-native'),
     LocationBox = require('./util/LocationBox'),
     ContactButton = require('./util/ContactButton'),
     Rooms = require('./util/Rooms'),
+    SubletInfo = require('./util/SubletInfo'),
     window = require('Dimensions').get('window');
 
 var {
@@ -55,7 +56,10 @@ var Listing = React.createClass({
                 </View>
             );
             case 'sublets': return (
+                <View>
                     <Amenities amenities={extras.amenities} />
+                    <SubletInfo sublet={extras} />
+                </View>
             );
         }
     }
