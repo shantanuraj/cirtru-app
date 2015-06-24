@@ -27,10 +27,12 @@ var SubletInfo = React.createClass({
             deposit = '$' + deposit;
         }
 
+        console.log(sublet);
+
         return (
             <View style={styles.container}>
                 <Text style={styles.leadText}>{type}</Text>
-                <Text style={styles.subText}>{this.bedsAndBaths()}</Text>
+                <Text style={styles.subText}>{this.bedsAndBaths(sublet.beds, sublet.baths)}</Text>
                 {this.renderRow('Deposit', deposit)}
                 {this.renderRow('Diet', sublet.diet)}
                 {this.renderRow('Pets', sublet.pets)}
@@ -52,10 +54,8 @@ var SubletInfo = React.createClass({
         );
     },
 
-    bedsAndBaths() {
-        var beds  = this.props.beds,
-            baths = this.props.baths,
-            bedMessage = 'bed',
+    bedsAndBaths(beds, baths) {
+        var bedMessage = 'bed',
             bathMessage = 'bath',
             sep = ' & ';
 
@@ -81,7 +81,6 @@ var styles = StyleSheet.create({
     container: {
         flex: 1,
         width: window.width,
-        height: 400,
         justifyContent: 'center',
         backgroundColor: Colors.backgroundGrey,
         padding: 12,

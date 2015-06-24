@@ -26,6 +26,7 @@ module.exports = {
 					security : listing.security === "gated" ? true : false,
 					smoking : listing.smoking === "OK" ? true : false,
 				},
+				type: listing.type,
 				deposit: listing.deposit,
 				diet: listing.eatPreference,
 				beds: listing.bedroom,
