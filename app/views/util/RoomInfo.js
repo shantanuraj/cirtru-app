@@ -65,7 +65,6 @@ var styles = StyleSheet.create({
     container: {
         flex: 1,
         width: window.width,
-        height: 400,
         justifyContent: 'center',
         backgroundColor: Colors.backgroundGrey,
         padding: 12,

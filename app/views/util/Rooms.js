@@ -7,7 +7,7 @@ var React = require('react-native'),
 
 var {
     StyleSheet,
-    View,
+    ScrollView,
     Text,
 } = React;
 
@@ -15,9 +15,9 @@ var Rooms = React.createClass({
     render() {
         var rooms = this.props.rooms.filter(room => room.roomOccupancy.length != 0);
         return (
-            <View style={styles.wrapper}>
+            <ScrollView style={styles.wrapper} contentInset={{top: -65}} horizontal={true}>
                 {rooms.map((room, i) => <RoomInfo {...this.props} key={i} room={room} style={styles.container}/>)}
-            </View>
+            </ScrollView>
         );
     }
 });
