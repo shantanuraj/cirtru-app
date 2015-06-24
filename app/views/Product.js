@@ -26,7 +26,7 @@ var Product = React.createClass({
     render() {
         var product = this.props.data,
             cost = '$' + product.cost,
-            image = 'https:' + product.images.thumbs[0];
+            image = 'https:' + product.images.pics[0];
         return (
             <TouchableHighlight underlayColor="transparent" onPress={this.clicked}>
                 <View style={styles.card}>
