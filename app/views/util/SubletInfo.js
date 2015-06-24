@@ -41,6 +41,9 @@ var SubletInfo = React.createClass({
     },
 
     renderRow(title, value) {
+        if (!value) {
+            return;
+        }
         return (
             <View style={styles.row}>
                 <Text style={styles.title}>{title}</Text>

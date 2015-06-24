@@ -22,10 +22,13 @@ module.exports =  {
 				make: listing.make,
 				model: listing.model,
 				subModel: listing.subModel,
+				year: listing.year,
 				color: listing.color,
+				fuel: listing.fuel,
 				mileage: listing.mileage,
 				transmission: listing.transmission,
 				vin: listing.vin,
+				titleStatus: listing.titleStatus,
 			},
 		}
 		return values;
