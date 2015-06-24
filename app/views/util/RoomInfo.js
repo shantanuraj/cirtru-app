@@ -71,7 +71,7 @@ var styles = StyleSheet.create({
         padding: 12,
     },
     leadText: {
-        color: Colors.black,
+        color: Colors.grey,
         alignSelf: 'center',
         fontSize: 24,
         fontWeight: 'bold',

@@ -27,16 +27,10 @@ var Product = React.createClass({
         var product = this.props.data,
             cost = '$' + product.cost,
             image = 'https:' + product.images.thumbs[0];
-
-        console.log('Width of the window', window.width);
-
         return (
             <TouchableHighlight underlayColor="transparent" onPress={this.clicked}>
                 <View style={styles.card}>
-					<Image
-					  style={styles.poster}
-					  source={{uri: image}}>
-					</Image>
+					<Image style={styles.poster} source={{uri: image}} />
                     <View style={styles.infoContainer}>
                         <View style={styles.row}>
                             <View>
@@ -107,7 +101,7 @@ var styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-    }
+    },
 });
 
 module.exports = Product;
