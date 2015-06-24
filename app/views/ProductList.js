@@ -79,11 +79,11 @@ var styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: Colors.backgroundGrey,
     },
 
     list: {
         flex: 1,
+        backgroundColor: Colors.grey,
     },
 
     loadingContainer: {
