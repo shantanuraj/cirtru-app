@@ -27,8 +27,6 @@ var SubletInfo = React.createClass({
             deposit = '$' + deposit;
         }
 
-        console.log(sublet);
-
         return (
             <View style={styles.container}>
                 <Text style={styles.leadText}>{type}</Text>
@@ -82,7 +80,7 @@ var styles = StyleSheet.create({
         flex: 1,
         width: window.width,
         justifyContent: 'center',
-        backgroundColor: Colors.backgroundGrey,
+        backgroundColor: Colors.backgroundLight,
         padding: 12,
     },
     leadText: {

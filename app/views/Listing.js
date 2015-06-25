@@ -43,7 +43,7 @@ var Listing = React.createClass({
                     <Info description={info}/>
                 </ScrollView>
 				<View style={styles.fabContainer}>
-					<ContactButton />
+					<ContactButton action={this.contactOwner}/>
 				</View>
 			</View>
         );
@@ -68,7 +68,23 @@ var Listing = React.createClass({
                 <CarInfo car={extras} />
             );
         }
-    }
+    },
+
+    contactOwner() {
+        this.props.navigator.push({
+            title: 'Contact',
+            component: require('./Contact'),
+            passProps: {
+                owner: this.props.listing.owner,
+                action: this.contacted,
+            },
+        });
+    },
+
+    contacted() {
+        this.props.navigator.pop();
+        console.log('Message Sent!');
+    },
 });
 
 var styles = StyleSheet.create({

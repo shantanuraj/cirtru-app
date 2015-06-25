@@ -59,7 +59,7 @@ var styles = StyleSheet.create({
         width: window.width,
         height: 400,
         justifyContent: 'center',
-        backgroundColor: Colors.backgroundGrey,
+        backgroundColor: Colors.backgroundLight,
         padding: 12,
     },
     title: {

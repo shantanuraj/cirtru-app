@@ -57,7 +57,7 @@ var Amenities = React.createClass({
 
 var styles = StyleSheet.create({
     scroll: {
-        backgroundColor: Colors.backgroundGrey,
+        backgroundColor: Colors.backgroundLight,
         width: window.width,
         padding: 2,
     },

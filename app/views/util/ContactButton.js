@@ -14,6 +14,7 @@ var ContactButton = React.createClass({
     render() {
         return (
             <TouchableHighlight
+            onPress={this.props.action}
             style={styles.fab}
             underlayColor={Colors.brandSecondary}>
                 <Icon

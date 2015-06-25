@@ -66,7 +66,7 @@ var styles = StyleSheet.create({
         flex: 1,
         width: window.width,
         justifyContent: 'center',
-        backgroundColor: Colors.backgroundGrey,
+        backgroundColor: Colors.backgroundLight,
         padding: 12,
     },
     leadText: {
