@@ -23,6 +23,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		FF133EBA1B3C09D800928DD0 /* libRNOverlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF133EB91B3C09B000928DD0 /* libRNOverlay.a */; };
 		FFB446C01B327D190066D361 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFB446BD1B327D190066D361 /* FBSDKCoreKit.framework */; };
 		FFB446C11B327D190066D361 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFB446BE1B327D190066D361 /* FBSDKLoginKit.framework */; };
 		FFB446C21B327D190066D361 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFB446BF1B327D190066D361 /* FBSDKShareKit.framework */; };
@@ -111,6 +112,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		FF133EB81B3C09B000928DD0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF133EA91B3C09AF00928DD0 /* RNOverlay.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNOverlay;
+		};
 		FFC89DC21B3056ED00872445 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FFC89DB41B3056EC00872445 /* ReactNativeIcons.xcodeproj */;
@@ -142,6 +150,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		FF133EA91B3C09AF00928DD0 /* RNOverlay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNOverlay.xcodeproj; path = "node_modules/react-native-overlay/RNOverlay.xcodeproj"; sourceTree = "<group>"; };
 		FFB446BD1B327D190066D361 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		FFB446BE1B327D190066D361 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		FFB446BF1B327D190066D361 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -165,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF133EBA1B3C09D800928DD0 /* libRNOverlay.a in Frameworks */,
 				FFB446CF1B327ED40066D361 /* Bolts.framework in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				FFB446C01B327D190066D361 /* FBSDKCoreKit.framework in Frameworks */,
@@ -294,6 +304,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				FF133EA91B3C09AF00928DD0 /* RNOverlay.xcodeproj */,
 				FFC89DB41B3056EC00872445 /* ReactNativeIcons.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -340,6 +351,14 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* Trios.app */,
 				00E356EE1AD99517003FC87E /* TriosTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FF133EAA1B3C09AF00928DD0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FF133EB91B3C09B000928DD0 /* libRNOverlay.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -461,6 +480,10 @@
 					ProductGroup = FFC89DB51B3056EC00872445 /* Products */;
 					ProjectRef = FFC89DB41B3056EC00872445 /* ReactNativeIcons.xcodeproj */;
 				},
+				{
+					ProductGroup = FF133EAA1B3C09AF00928DD0 /* Products */;
+					ProjectRef = FF133EA91B3C09AF00928DD0 /* RNOverlay.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -539,6 +562,13 @@
 			fileType = archive.ar;
 			path = libRCTText.a;
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FF133EB91B3C09B000928DD0 /* libRNOverlay.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNOverlay.a;
+			remoteRef = FF133EB81B3C09B000928DD0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		FFC89DC31B3056ED00872445 /* libReactNativeIcons.a */ = {

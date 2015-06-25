@@ -2,6 +2,7 @@
 
 var React = require('react-native'),
     Colors = require('../core/Colors'),
+    Overlay = require('react-native-overlay'),
     window = require('Dimensions').get('window');
 
 var {
