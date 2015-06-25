@@ -5,14 +5,12 @@ var React = require('react-native'),
     Colors = require('../../core/Colors');
 
 var {
-  View,
-  StyleSheet,
+    View,
+    StyleSheet,
 } = React;
 
 var Toast = React.createClass({
     render() {
-        var positionStyle;
-
         return (
             <Overlay isVisible={this.props.isVisible}>
                 <View style={styles.bottom}>
@@ -26,19 +24,19 @@ var Toast = React.createClass({
 });
 
 var styles = StyleSheet.create({
-  bottom: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: Colors.brandPrimary,
-  },
+    bottom: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: Colors.brandPrimary,
+    },
 
-  content: {
-    flex: 9,
-  },
-})
+    content: {
+        flex: 9,
+    },
+});
 
 module.exports = Toast;
