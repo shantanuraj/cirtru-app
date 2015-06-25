@@ -13,6 +13,7 @@ var React = require('react-native'),
     CarInfo = require('./util/CarInfo'),
     Toast = require('./util/Toast'),
     UserStore = require('../store/UserStore'),
+    TimerMixin = require('react-timer-mixin'),
     window = require('Dimensions').get('window');
 
 var {
@@ -24,7 +25,7 @@ var {
 } = React;
 
 var Listing = React.createClass({
-    mixins: [Reflux.connect(UserStore, 'user')],
+    mixins: [Reflux.connect(UserStore, 'user'), TimerMixin],
 
     getInitialState() {
         return {
@@ -43,6 +44,13 @@ var Listing = React.createClass({
                 </TouchableOpacity>
             </Toast>
         );
+    },
+
+    showToast(visibility) {
+        var state = this.state;
+        state[visibility] = true;
+        this.setState(state);
+        this.setTimeout(this.hideToast, 1500);
     },
 
     hideToast() {
@@ -106,9 +114,7 @@ var Listing = React.createClass({
 
     contactOwner() {
         if (!this.state.user.isLoggedIn) {
-            var state = this.state;
-            state.userToast = true;
-			this.setState(state);
+            this.showToast('userToast');
 		} else {
             this.props.navigator.push({
                 title: 'Contact',
@@ -123,9 +129,7 @@ var Listing = React.createClass({
 
     contacted() {
         this.props.navigator.pop();
-        var state = this.state;
-        state.messageToast = true;
-        this.setState(state);
+        this.showToast('messageToast');
     },
 });
 

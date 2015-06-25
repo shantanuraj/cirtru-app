@@ -11,6 +11,7 @@
     "react-native": "^0.5.0",
     "react-native-icons": "0.0.9",
     "react-native-overlay": "^0.2.6",
+    "react-timer-mixin": "^0.13.1",
     "reflux": "^0.2.8",
     "tcomb": "^1.0.3",
     "tcomb-form-native": "^0.2.0",
