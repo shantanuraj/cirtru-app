@@ -13,8 +13,6 @@ var {
 	TouchableHighlight,
 } = React;
 
-var cardWidth = window.width / 2;
-
 var MiniCard = React.createClass({
 	openCreatePage() {
 		var category = this.props.type;
