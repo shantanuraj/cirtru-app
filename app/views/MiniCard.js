@@ -15,7 +15,17 @@ var {
 
 var MiniCard = React.createClass({
 	openCreatePage() {
-		var category = this.props.type;
+		var page;
+		switch(this.props.type) {
+			// case 'Roommates': page = require('./create/CreateRoommate'); break;
+			// case 'Sublets' : page = require('./create/CreateSublet'); break;
+			// case 'Cars': page = require('./create/CreateCar'); break;
+			default: page = require('./create/CreateOther'); break;
+		}
+		this.props.navigator.push({
+			title: 'New ' + this.props.type.toLowerCase() + ' listing', 
+			component: page,
+		});
 	},
 
 	render() {
@@ -23,7 +33,7 @@ var MiniCard = React.createClass({
 			image = Api.miniCardImage(type);
 		var derivedStyle = {
 			width: this.props.dimen,
-			height: this.props.dimen,
+			height: (this.props.dimen < 200) ? this.props.dimen : this.props.dimen / 2,
 		};
 		return (
 			<TouchableHighlight underlayColor="transparent" onPress={this.openCreatePage}>

@@ -28,7 +28,7 @@ var Home = React.createClass({
 
 var styles = StyleSheet.create({
 	list: {
-		backgroundColor: Colors.black,
+		backgroundColor: Colors.grey,
 	},
 
 	container: {
