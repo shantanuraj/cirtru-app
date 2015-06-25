@@ -13,21 +13,27 @@ var {
 	TouchableHighlight,
 } = React;
 
+var cardWidth = window.width / 2;
+
 var MiniCard = React.createClass({
 	openCreatePage() {
 		var category = this.props.type;
 	},
 
 	render() {
-		var type = this.props.type;
-		var image = Api.miniCardImage(type);
+		var type = this.props.type,
+			image = Api.miniCardImage(type);
+		var derivedStyle = {
+			width: this.props.width,
+			height: this.props.height,
+		};
 		return (
 			<TouchableHighlight underlayColor="transparent" onPress={this.openCreatePage}>
-				<View style={styles.card}>
+				<View style={[styles.card, derivedStyle]}>
 					<Image
-					  style={styles.poster}
+					  style={[styles.poster, derivedStyle]}
 					  source={{uri: image}}>
-					  	<View style={styles.backdrop}>
+					  	<View style={[styles.backdrop, derivedStyle]}>
 					  		<Text style={styles.leadText}>
 					  			{type}
 					  		</Text>
@@ -41,8 +47,6 @@ var MiniCard = React.createClass({
 
 var styles = StyleSheet.create({
 	card: {
-		width: window.width,
-		height: 120,
 		backgroundColor: Colors.white,
 		shadowColor: "black",
 		shadowOpacity: 0.3,
@@ -54,8 +58,6 @@ var styles = StyleSheet.create({
 	},
 
 	poster: {
-		height: 120,
-		width: window.width,
 		tintColor: Colors.white,
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -64,14 +66,13 @@ var styles = StyleSheet.create({
 	backdrop: {
 		backgroundColor: 'rgba(0,0,0,0.3)',
 		flex: 1,
-		width: window.width,
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
 
 	leadText: {
 		color: Colors.white,
-		fontSize: 32,
+		fontSize: 24,
 		fontWeight: '500',
 	},
 });
