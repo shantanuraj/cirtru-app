@@ -10,6 +10,7 @@ var React = require('react-native'),
     Rooms = require('./util/Rooms'),
     SubletInfo = require('./util/SubletInfo'),
     CarInfo = require('./util/CarInfo'),
+    Toast = require('./util/Toast'),
     window = require('Dimensions').get('window');
 
 var {
@@ -17,9 +18,18 @@ var {
     View,
     StyleSheet,
     ScrollView,
+    TouchableOpacity,
 } = React;
 
 var Listing = React.createClass({
+    getInitialState() {
+        return {isToastVisisble: false};
+    },
+
+    hideToast() {
+        this.setState({isToastVisisble: false});
+    },
+
     render() {
         var listing = this.props.listing,
             images  = listing.images.pics,
@@ -45,6 +55,13 @@ var Listing = React.createClass({
 				<View style={styles.fabContainer}>
 					<ContactButton action={this.contactOwner}/>
 				</View>
+                <Toast isVisible={this.state.isToastVisisble}>
+                    <TouchableOpacity onPress={this.hideToast}>
+                        <Text style={styles.toastText}>
+                            Message Sent!
+                        </Text>
+                    </TouchableOpacity>
+                </Toast>
 			</View>
         );
     },
@@ -83,7 +100,7 @@ var Listing = React.createClass({
 
     contacted() {
         this.props.navigator.pop();
-        console.log('Message Sent!');
+        this.setState({isToastVisisble: true});
     },
 });
 
@@ -139,6 +156,13 @@ var styles = StyleSheet.create({
   		right: 16,
   		borderRadius: 24,
   	},
+
+    toastText: {
+      color: '#ffffff',
+      padding: 15,
+      backgroundColor: 'transparent',
+      fontSize: 14,
+    },
 });
 
 module.exports = Listing;
