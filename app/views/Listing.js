@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native'),
+    Reflux = require('reflux'),
     Colors = require('../core/Colors'),
     Images = require('./util/Images'),
     Info = require('./util/Info'),
@@ -11,6 +12,7 @@ var React = require('react-native'),
     SubletInfo = require('./util/SubletInfo'),
     CarInfo = require('./util/CarInfo'),
     Toast = require('./util/Toast'),
+    UserStore = require('../store/UserStore'),
     window = require('Dimensions').get('window');
 
 var {
@@ -22,12 +24,32 @@ var {
 } = React;
 
 var Listing = React.createClass({
+    mixins: [Reflux.connect(UserStore, 'user')],
+
     getInitialState() {
-        return {isToastVisisble: false};
+        return {
+            messageToast: false,
+            userToast: false,
+        };
+    },
+
+    makeToast(content, visibility) {
+        return (
+            <Toast isVisible={this.state[visibility]}>
+                <TouchableOpacity onPress={this.hideToast}>
+                    <Text style={styles.toastText}>
+                        {content}
+                    </Text>
+                </TouchableOpacity>
+            </Toast>
+        );
     },
 
     hideToast() {
-        this.setState({isToastVisisble: false});
+        this.setState({
+            messageToast: false,
+            userToast: false,
+        });
     },
 
     render() {
@@ -55,13 +77,8 @@ var Listing = React.createClass({
 				<View style={styles.fabContainer}>
 					<ContactButton action={this.contactOwner}/>
 				</View>
-                <Toast isVisible={this.state.isToastVisisble}>
-                    <TouchableOpacity onPress={this.hideToast}>
-                        <Text style={styles.toastText}>
-                            Message Sent!
-                        </Text>
-                    </TouchableOpacity>
-                </Toast>
+                {this.makeToast('Message Sent', 'messageToast')}
+                {this.makeToast('You need to login first', 'userToast')}
 			</View>
         );
     },
@@ -88,19 +105,27 @@ var Listing = React.createClass({
     },
 
     contactOwner() {
-        this.props.navigator.push({
-            title: 'Contact',
-            component: require('./Contact'),
-            passProps: {
-                owner: this.props.listing.owner,
-                action: this.contacted,
-            },
-        });
+        if (!this.state.user.isLoggedIn) {
+            var state = this.state;
+            state.userToast = true;
+			this.setState(state);
+		} else {
+            this.props.navigator.push({
+                title: 'Contact',
+                component: require('./Contact'),
+                passProps: {
+                    owner: this.props.listing.owner,
+                    action: this.contacted,
+                },
+            });
+        }
     },
 
     contacted() {
         this.props.navigator.pop();
-        this.setState({isToastVisisble: true});
+        var state = this.state;
+        state.messageToast = true;
+        this.setState(state);
     },
 });
 
