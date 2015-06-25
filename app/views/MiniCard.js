@@ -24,8 +24,8 @@ var MiniCard = React.createClass({
 		var type = this.props.type,
 			image = Api.miniCardImage(type);
 		var derivedStyle = {
-			width: this.props.width,
-			height: this.props.height,
+			width: this.props.dimen,
+			height: this.props.dimen,
 		};
 		return (
 			<TouchableHighlight underlayColor="transparent" onPress={this.openCreatePage}>
