@@ -82,7 +82,7 @@ var CreateOther = React.createClass({
 
     addImages() {
         //Stub
-    }
+    },
 
     onPress() {
         var value = this.refs.form.getValue();
