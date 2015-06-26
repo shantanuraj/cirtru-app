@@ -1,8 +1,7 @@
 'use strict';
 
 var React = require('react-native'),
-    t = require('tcomb-form-native'),
-    validate = t.validate;
+    t = require('tcomb-form-native');
 
 var {
     View,
