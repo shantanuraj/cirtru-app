@@ -1,7 +1,8 @@
 'use strict';
 
 var React = require('react-native'),
-    t = require('tcomb-form-native');
+    t = require('tcomb-form-native'),
+    Colors = require('../core/Colors');
 
 var {
     View,
@@ -51,9 +52,37 @@ var options = {
 var EmailLogin = React.createClass({
     onPress() {
         var value = this.refs.form.getValue();
-        if (value) {
-            console.log(value);
+        if (!value) {
+            return;
         }
+        var user = {
+            email: value.email,
+            firstName: value.firstName,
+            password: value.password,
+        };
+
+        switch (this.props.action) {
+            case 'Sign in': this.doLogin(user); break;
+            default: this.doSignUp(user); break;
+        }
+    },
+
+    doSignUp(user) {
+        var BASE = 'http://localhost:3000'
+        fetch(BASE + '/auth/signup', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        }).then(response => response.json())
+          .then(response => console.log(response))
+          .done();
+    },
+
+    doLogin(user) {
+        // fetch(BASE)
     },
 
     render() {
@@ -64,7 +93,7 @@ var EmailLogin = React.createClass({
                   type={this.props.action === 'Sign in' ? LoginPerson : RegisterPerson}
                   options={options}
                 />
-                <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
+                <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor={Colors.brandSecondaryDark}>
                     <Text style={styles.buttonText}>Submit</Text>
                 </TouchableHighlight>
             </View>
@@ -76,7 +105,7 @@ var styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         padding: 20,
-        backgroundColor: '#ffffff',
+        backgroundColor: Colors.white,
         flex: 1,
     },
     title: {
@@ -91,8 +120,8 @@ var styles = StyleSheet.create({
     },
     button: {
         height: 36,
-        backgroundColor: '#48BBEC',
-        borderColor: '#48BBEC',
+        backgroundColor: Colors.brandSecondary,
+        borderColor: Colors.brandSecondary,
         borderWidth: 1,
         borderRadius: 4,
         marginBottom: 10,
