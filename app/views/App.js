@@ -9,9 +9,14 @@ var {
 	Text,
 	View,
 	NavigatorIOS,
+	PushNotificationIOS,
 } = React;
 
 var App = React.createClass({
+	componentWillMount() {
+		PushNotificationIOS.addEventListener('notification', this._onNotification);
+	},
+
 	render() {
 		return (
 			<NavigatorIOS
@@ -23,6 +28,17 @@ var App = React.createClass({
 				title: 'Cirtru',
 				component: Tabs,
 			}} />
+		);
+	},
+
+	_onNotification(notification) {
+		AlertIOS.alert(
+			'Notification Received',
+			notification.getMessage(),
+			[{
+				text: 'Dismiss',
+				onPress: null,
+			}]
 		);
 	},
 });

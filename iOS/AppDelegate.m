@@ -9,6 +9,7 @@
 
 #import "AppDelegate.h"
 
+#import <Parse/Parse.h>
 #import "RCTRootView.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
@@ -33,7 +34,7 @@
    */
 
   // jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle"];
-  jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.110:8081/index.ios.bundle"];
+  jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.102:8081/index.ios.bundle"];
 
   /**
    * OPTION 2
@@ -64,7 +65,9 @@
                                                                            categories:nil];
   [application registerUserNotificationSettings:settings];
   [application registerForRemoteNotifications];
-  NSLog(@"Did register");
+  
+  [Parse setApplicationId:@"3tX7e1QiJmTiBQe354EtWLJgCw1W6FcH03kTi8qF"
+                clientKey:@"uvHVxGjn3zJ8Y5FyAPXC3ZUEapwBeAWvVyHAbGIK"];
 
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];
@@ -86,10 +89,17 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
   NSLog(@"Push Token is: %@", deviceToken);
+  PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+  [currentInstallation setDeviceTokenFromData:deviceToken];
+  [currentInstallation saveInBackground];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {
   NSLog(@"Failed to get token, error: %@", error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+  [PFPush handlePush:userInfo];
 }
 
 @end
