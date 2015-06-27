@@ -33,8 +33,8 @@
    * on the same Wi-Fi network.
    */
 
-  // jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle"];
-  jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.102:8081/index.ios.bundle"];
+  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle"];
+  // jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.102:8081/index.ios.bundle"];
 
   /**
    * OPTION 2
@@ -65,7 +65,7 @@
                                                                            categories:nil];
   [application registerUserNotificationSettings:settings];
   [application registerForRemoteNotifications];
-  
+
   [Parse setApplicationId:@"3tX7e1QiJmTiBQe354EtWLJgCw1W6FcH03kTi8qF"
                 clientKey:@"uvHVxGjn3zJ8Y5FyAPXC3ZUEapwBeAWvVyHAbGIK"];
 

@@ -26,7 +26,11 @@ var Product = React.createClass({
     render() {
         var product = this.props.data,
             cost = '$' + product.cost,
-            image = 'https:' + product.images.pics[0];
+            image = 'https:' + product.images.pics[0],
+            title = product.title.length < 22 ?
+                product.title :
+                product.title.slice(0, 22).trim() + '...';
+
         return (
             <TouchableHighlight underlayColor="transparent" onPress={this.clicked}>
                 <View style={styles.card}>
@@ -35,7 +39,7 @@ var Product = React.createClass({
                         <View style={styles.row}>
                             <View>
                                 <Text style={styles.circle}>{product.circle}</Text>
-                                <Text style={styles.location}>{product.location}</Text>
+                                <Text style={styles.title}>{title}</Text>
                             </View>
                             <Text style={styles.cost}>{cost}</Text>
                         </View>
@@ -84,7 +88,7 @@ var styles = StyleSheet.create({
         color: Colors.white,
     },
 
-    location: {
+    title: {
 		color: Colors.white,
 		fontSize: 20,
 		fontWeight: '500',
