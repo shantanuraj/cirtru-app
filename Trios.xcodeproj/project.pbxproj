@@ -370,23 +370,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				FF8E1D291B3E81E0001CF0A1 /* Social.framework */,
-				FF8E1D271B3E81DA001CF0A1 /* Accounts.framework */,
-				FF8E1D251B3E81C9001CF0A1 /* libsqlite3.dylib */,
-				FF8E1D231B3E81BD001CF0A1 /* libz.dylib */,
-				FF8E1D211B3E81B1001CF0A1 /* SystemConfiguration.framework */,
-				FF8E1D1F1B3E81A9001CF0A1 /* StoreKit.framework */,
-				FF8E1D1D1B3E819F001CF0A1 /* Security.framework */,
-				FF8E1D1B1B3E8193001CF0A1 /* QuartzCore.framework */,
-				FF8E1D191B3E818B001CF0A1 /* MobileCoreServices.framework */,
-				FF8E1D171B3E817F001CF0A1 /* CoreGraphics.framework */,
-				FF8E1D151B3E8173001CF0A1 /* CFNetwork.framework */,
-				FF8E1D131B3E8166001CF0A1 /* AudioToolbox.framework */,
-				FF70FFAA1B3E7ED000629CA9 /* Parse.framework */,
-				FFB446CE1B327ED40066D361 /* Bolts.framework */,
-				FFB446BD1B327D190066D361 /* FBSDKCoreKit.framework */,
-				FFB446BE1B327D190066D361 /* FBSDKLoginKit.framework */,
-				FFB446BF1B327D190066D361 /* FBSDKShareKit.framework */,
+				FF8E1D431B3E98CF001CF0A1 /* Frameworks */,
 				FFC89DC91B305F0300872445 /* FontAwesome.otf */,
 				FFC89DC61B305D6700872445 /* ionicons.ttf */,
 				13B07FAE1A68108700A75B9A /* Trios */,
@@ -413,6 +397,30 @@
 				FF133EB91B3C09B000928DD0 /* libRNOverlay.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FF8E1D431B3E98CF001CF0A1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FF8E1D291B3E81E0001CF0A1 /* Social.framework */,
+				FF8E1D271B3E81DA001CF0A1 /* Accounts.framework */,
+				FF8E1D251B3E81C9001CF0A1 /* libsqlite3.dylib */,
+				FF8E1D231B3E81BD001CF0A1 /* libz.dylib */,
+				FF8E1D211B3E81B1001CF0A1 /* SystemConfiguration.framework */,
+				FF8E1D1F1B3E81A9001CF0A1 /* StoreKit.framework */,
+				FF8E1D1D1B3E819F001CF0A1 /* Security.framework */,
+				FF8E1D1B1B3E8193001CF0A1 /* QuartzCore.framework */,
+				FF8E1D191B3E818B001CF0A1 /* MobileCoreServices.framework */,
+				FF8E1D171B3E817F001CF0A1 /* CoreGraphics.framework */,
+				FF8E1D151B3E8173001CF0A1 /* CFNetwork.framework */,
+				FF8E1D131B3E8166001CF0A1 /* AudioToolbox.framework */,
+				FF70FFAA1B3E7ED000629CA9 /* Parse.framework */,
+				FFB446CE1B327ED40066D361 /* Bolts.framework */,
+				FFB446BD1B327D190066D361 /* FBSDKCoreKit.framework */,
+				FFB446BE1B327D190066D361 /* FBSDKLoginKit.framework */,
+				FFB446BF1B327D190066D361 /* FBSDKShareKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		FFC89DB51B3056EC00872445 /* Products */ = {
