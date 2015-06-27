@@ -6,13 +6,13 @@ var React = require('react-native'),
 	Colors = require('../core/Colors'),
 	UserActions = require('../actions/UserActions'),
 	UserStore = require('../store/UserStore'),
-	Login = require('./Login');
+	Login = require('./Login'),
+window = require('Dimensions').get('window');
 
 var {
 	StyleSheet,
 	Text,
 	View,
-	ScrollView,
 	TouchableHighlight,
 } = React;
 
@@ -30,11 +30,23 @@ var Profile = React.createClass({
 	profilePage() {
 		return (
 			<View style={styles.container}>
-				<Text>
-					Welcome {this.state.user.name}
+				<Text style={styles.name}>
+					{this.state.user.name}
+					{this.state.email}
 				</Text>
+				<TouchableHighlight
+				onPress={this.logout}
+				style={styles.logout}>
+					<Text style={styles.logoutText}>
+						Logout
+					</Text>
+				</TouchableHighlight>
 			</View>
 		);
+	},
+
+	logout() {
+		UserActions.logout();
 	},
 });
 
@@ -45,21 +57,29 @@ var styles = StyleSheet.create({
 	    justifyContent: 'center',
 	},
 
-	signInText: {
+	logoutText: {
 	    color: 'white',
-	    marginLeft: 5,
 	    fontFamily: 'HelveticaNeue-Medium',
-	    fontSize: 15,
+	    fontSize: 18,
 	},
 
-	button: {
-		flexDirection: 'row',
+	logout: {
+		position: 'absolute',
+		backgroundColor: Colors.danger,
+		bottom: 60,
+		left: 0,
 		alignItems: 'center',
-		justifyContent: 'flex-start',
-		width: 210,
-		padding: 5,
+		justifyContent: 'center',
+		width: window.width - 24,
+		margin: 12,
+		padding: 8,
 		borderRadius: 3,
-		marginBottom: 10,
+		// marginBottom: 60,
+	},
+
+	name: {
+		fontSize: 32,
+		fontWeight: '300',
 	},
 });
 

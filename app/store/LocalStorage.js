@@ -24,7 +24,11 @@ var LocalStorage = {
                 console.log('No user present');
             }
         })
-    }
+    },
+
+    deleteUser() {
+        AsyncStorage.removeItem(USER);
+    },
 }
 
 module.exports = LocalStorage;

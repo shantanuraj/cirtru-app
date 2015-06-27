@@ -55,6 +55,12 @@ var UserStore = Reflux.createStore({
 			}
 		});
     },
+
+    onLogout() {
+        LocalStorage.deleteUser();
+        this.state = User.defaultUser;
+        this.trigger(this.state);
+    },
 });
 
 module.exports = UserStore;

@@ -51,7 +51,7 @@ var Login = React.createClass({
     render() {
 		return (
 			<ScrollView contentContainerStyle={styles.container}>
-				<TouchableHighlight
+				{/*<TouchableHighlight
 				underlayColor={Colors.white}>
 					<View
 					style={[styles.button, styles.googleButton]}>
@@ -64,7 +64,7 @@ var Login = React.createClass({
 							{this.state.prompt} with Google
 						</Text>
 					</View>
-				</TouchableHighlight>
+				</TouchableHighlight>*/}
 
 				<TouchableHighlight
 				onPress={this.loginFB}

@@ -11,6 +11,7 @@ module.exports = {
         email: '',
         workEmail: '',
         workVerified: false,
+        emailVerified: false,
         isLoggedIn: false,
         extra: {'fbid' : ''},
     },
@@ -37,6 +38,7 @@ module.exports = {
                 circle: '',
                 workEmail: '',
                 workVerified: false,
+                emailVerified: false,
                 isLoggedIn: true,
                 extras : {fbid: user.id},
             };
@@ -58,6 +60,7 @@ module.exports = {
             circle: '',
             workEmail: '',
             workVerified: false,
+            emailVerified: false,
             isLoggedIn: true,
             extras : {roles: raw.roles},
         };

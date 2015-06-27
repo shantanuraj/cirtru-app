@@ -8,6 +8,7 @@ module.exports = {
 	background: this.white,
 	backgroundLight: '#EEEEEE',
 	textSecondary: '#333333',
+	danger: '#D32F2F',
 	transparent: 'transparent',
 	grey: '#333333',
 	white: '#FFFFFF',
