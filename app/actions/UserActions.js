@@ -4,6 +4,8 @@ var Reflux = require('reflux');
 
 var userActions = [
     'login',
+    'signup',
+    'authenticate',
     'newFacebookSession',
 ];
 

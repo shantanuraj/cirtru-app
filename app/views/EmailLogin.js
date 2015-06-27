@@ -2,7 +2,8 @@
 
 var React = require('react-native'),
     t = require('tcomb-form-native'),
-    Colors = require('../core/Colors');
+    Colors = require('../core/Colors'),
+    UserActions = require('../actions/UserActions');
 
 var {
     View,
@@ -68,21 +69,13 @@ var EmailLogin = React.createClass({
     },
 
     doSignUp(user) {
-        var BASE = 'http://localhost:3000'
-        fetch(BASE + '/auth/signup', {
-            method: 'post',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        }).then(response => response.json())
-          .then(response => console.log(response))
-          .done();
+        UserActions.signup(user);
+        this.props.navigator.pop();
     },
 
     doLogin(user) {
-        // fetch(BASE)
+        UserActions.authenticate(user);
+        this.props.navigator.pop();
     },
 
     render() {

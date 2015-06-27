@@ -24,13 +24,34 @@ var UserStore = Reflux.createStore({
         this.trigger(user);
     },
 
+    onSignup(user) {
+        var BASE = 'http://localhost:3000'
+        fetch(BASE + '/auth/signup', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        }).then(response => response.json())
+          .then(user => {
+              if (!user._id) {
+                  AlertIOS.alert('Could not sign up');
+              } else {
+                  user.medium = 'ci';
+                  User.toUser(user);
+              }
+          })
+          .done();
+    },
+
     onNewFacebookSession() {
-        FacebookLoginManager.newSession((error, info) => {
+        FacebookLoginManager.newSession((error, user) => {
 			if (error) {
                 AlertIOS.alert('Could not sign in');
 			} else {
-                info.medium = 'fb';
-                User.toUser(info);
+                user.medium = 'fb';
+                User.toUser(user);
 			}
 		});
     },

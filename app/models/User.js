@@ -47,5 +47,21 @@ module.exports = {
         .then(response => normalize(response))
         .then(user => LocalStorage.saveUser(user))
         .done();
-    }
+    },
+
+    cirtruUser(raw) {
+        var user = {
+            uid : raw._id,
+            name : raw.firstName + ' ' + raw.lastName,
+            email : raw.email,
+            medium : 'cirtru',
+            circle: '',
+            workEmail: '',
+            workVerified: false,
+            isLoggedIn: true,
+            extras : {roles: raw.roles},
+        };
+
+        LocalStorage.saveUser(user);
+    },
 };
