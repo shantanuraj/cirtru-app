@@ -14,18 +14,8 @@ var {
 } = React;
 
 var MiniCard = React.createClass({
-	openCreatePage() {
-		var page;
-		switch(this.props.type) {
-			// case 'Roommates': page = require('./create/CreateRoommate'); break;
-			// case 'Sublets' : page = require('./create/CreateSublet'); break;
-			// case 'Cars': page = require('./create/CreateCar'); break;
-			default: page = require('./create/CreateOther'); break;
-		}
-		this.props.navigator.push({
-			title: 'New ' + this.props.type.toLowerCase() + ' listing', 
-			component: page,
-		});
+	action() {
+		this.props.action();
 	},
 
 	render() {
@@ -36,7 +26,7 @@ var MiniCard = React.createClass({
 			height: (this.props.dimen < 200) ? this.props.dimen : this.props.dimen / 2,
 		};
 		return (
-			<TouchableHighlight underlayColor="transparent" onPress={this.openCreatePage}>
+			<TouchableHighlight underlayColor="transparent" onPress={this.action}>
 				<View style={[styles.card, derivedStyle]}>
 					<Image
 					  style={[styles.poster, derivedStyle]}

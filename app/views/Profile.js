@@ -142,6 +142,16 @@ var Profile = React.createClass({
 	logout() {
 		UserActions.logout();
 	},
+
+	showListings() {
+		if (!this.state.user.emailVerified) {
+			return;
+		}
+		this.props.navigator.push({
+			title: 'My listings',
+			component: UserListings,
+		});
+	},
 });
 
 var styles = StyleSheet.create({

@@ -17,11 +17,11 @@ var New = React.createClass({
 		var categories = Api.categories,
 			category = categories[0],
 			categories = categories.slice([1]),
-			Cards = categories.map((category, i) => <MiniCard {...this.props} key={i} type={category} dimen={window.width / 2}/>);
+			Cards = categories.map((category, i) => <MiniCard {...this.props} key={i} type={category} dimen={window.width / 2} action={this.openCreatePage(category)} />);
 
 		return (
 			<View style={styles.container}>
-				<MiniCard {...this.props} key={192} type={category} dimen={window.width} />
+				<MiniCard {...this.props} key={192} type={category} dimen={window.width} action={this.openCreatePage(category)} />
 				{this.renderGroup(Cards[0], Cards[1])}
 				{this.renderGroup(Cards[2], Cards[3])}
 			</View>
@@ -35,7 +35,25 @@ var New = React.createClass({
 				{card2}
 			</View>
 		);
-	}
+	},
+
+	openCreatePage(category) {
+		var self = this;
+		return function () {
+			var page;
+			switch(category) {
+				// case 'Roommates': page = require('./create/CreateRoommate'); break;
+				// case 'Sublets' : page = require('./create/CreateSublet'); break;
+				// case 'Cars': page = require('./create/CreateCar'); break;
+				default: page = require('./create/CreateOther'); break;
+			}
+			console.log(category);
+			self.props.navigator.push({
+				title: 'New listing', 
+				component: page,
+			});
+		};
+	},
 });
 
 var styles = StyleSheet.create({
