@@ -14,8 +14,12 @@ var {
 
 var App = React.createClass({
 	componentWillMount() {
-		PushNotificationIOS.addEventListener('notification', this._onNotification);
+		PushNotificationIOS.addEventListener('notification', this.onNotification);
 	},
+
+	componentWillUnmount() {
+		PushNotificationIOS.removeEventListener('notification', this.onNotification);
+	}
 
 	render() {
 		return (
@@ -31,15 +35,19 @@ var App = React.createClass({
 		);
 	},
 
-	_onNotification(notification) {
+	onNotification(notification) {
 		AlertIOS.alert(
 			'Notification Received',
 			notification.getMessage(),
 			[{
 				text: 'Dismiss',
-				onPress: null,
+				onPress: this.clearBadge,
 			}]
 		);
+	},
+
+	clearBadge() {
+		PushNotificationIOS.setApplicationBadgeNumber(0);
 	},
 });
 
