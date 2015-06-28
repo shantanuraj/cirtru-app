@@ -36,7 +36,7 @@ var Listing = React.createClass({
 
     makeToast(content, visibility) {
         return (
-            <Toast isVisible={this.state[visibility]}>
+            <Toast isVisible={this.state[visibility]} mode={'success'}>
                 <TouchableOpacity onPress={this.hideToast}>
                     <Text style={styles.toastText}>
                         {content}
@@ -187,9 +187,9 @@ var styles = StyleSheet.create({
   	},
 
     toastText: {
-        color: '#ffffff',
+        color: Colors.white,
         padding: 15,
-        backgroundColor: 'transparent',
+        backgroundColor: Colors.transparent,
         fontSize: 16,
         fontWeight: 'bold',
         alignSelf: 'center',

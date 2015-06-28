@@ -9,6 +9,8 @@ module.exports = {
 	backgroundLight: '#EEEEEE',
 	textSecondary: '#333333',
 	danger: '#D32F2F',
+	warn: '#FFA726',
+	success: '#00E676',
 	transparent: 'transparent',
 	grey: '#333333',
 	white: '#FFFFFF',

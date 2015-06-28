@@ -11,9 +11,12 @@ var {
 
 var Toast = React.createClass({
     render() {
+        var inferedStyle = {
+            backgroundColor: Colors[this.props.mode]
+        }
         return (
             <Overlay isVisible={this.props.isVisible}>
-                <View style={styles.top}>
+                <View style={[styles.top, inferedStyle]}>
                     <View style={styles.content}>
                         {this.props.children}
                     </View>
@@ -29,7 +32,6 @@ var styles = StyleSheet.create({
         paddingTop: 15,
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: Colors.brandPrimary,
     },
 
     content: {
