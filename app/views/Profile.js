@@ -74,7 +74,7 @@ var styles = StyleSheet.create({
 		margin: 12,
 		padding: 8,
 		borderRadius: 3,
-		// marginBottom: 60,
+		marginBottom: 60,
 	},
 
 	name: {
