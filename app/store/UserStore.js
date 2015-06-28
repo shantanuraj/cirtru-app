@@ -78,6 +78,10 @@ var UserStore = Reflux.createStore({
 		});
     },
 
+    onUpdatePassword() {
+        //foo
+    },
+
     onLogout() {
         LocalStorage.deleteUser();
         this.state = User.defaultUser;

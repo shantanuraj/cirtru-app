@@ -101,16 +101,7 @@ var styles = StyleSheet.create({
         backgroundColor: Colors.white,
         flex: 1,
     },
-    title: {
-        fontSize: 30,
-        alignSelf: 'center',
-        marginBottom: 30
-    },
-    buttonText: {
-        fontSize: 18,
-        color: 'white',
-        alignSelf: 'center'
-    },
+    
     button: {
         height: 36,
         backgroundColor: Colors.brandSecondary,
@@ -120,7 +111,13 @@ var styles = StyleSheet.create({
         marginBottom: 10,
         alignSelf: 'stretch',
         justifyContent: 'center'
-    }
+    },
+    
+    buttonText: {
+        fontSize: 18,
+        color: 'white',
+        alignSelf: 'center'
+    },
 });
 
 

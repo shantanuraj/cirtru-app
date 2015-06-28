@@ -34,9 +34,9 @@ var Listing = React.createClass({
         };
     },
 
-    makeToast(content, visibility) {
+    makeToast(content, visibility, mode) {
         return (
-            <Toast isVisible={this.state[visibility]} mode={'success'}>
+            <Toast isVisible={this.state[visibility]} mode={mode}>
                 <TouchableOpacity onPress={this.hideToast}>
                     <Text style={styles.toastText}>
                         {content}
@@ -85,8 +85,8 @@ var Listing = React.createClass({
 				<View style={styles.fabContainer}>
 					<ContactButton action={this.contactOwner}/>
 				</View>
-                {this.makeToast('Message Sent', 'messageToast')}
-                {this.makeToast('You need to login first', 'userToast')}
+                {this.makeToast('Message Sent', 'messageToast', 'success')}
+                {this.makeToast('You need to login first', 'userToast', 'warn')}
 			</View>
         );
     },

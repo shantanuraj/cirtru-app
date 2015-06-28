@@ -7,7 +7,9 @@ var React = require('react-native'),
 	UserActions = require('../actions/UserActions'),
 	UserStore = require('../store/UserStore'),
 	Login = require('./Login'),
+	ChangePassword = require('./ChangePassword'),
 	Toast = require('./util/Toast'),
+	TimerMixin = require('react-timer-mixin'),
 	window = require('Dimensions').get('window');
 
 var {
@@ -19,7 +21,11 @@ var {
 } = React;
 
 var Profile = React.createClass({
-	mixins: [Reflux.connect(UserStore, 'user')],
+	mixins: [Reflux.connect(UserStore, 'user'), TimerMixin],
+
+	getInitialState() {
+		return { success: false };
+	},
 
 	render() {
 		if (!this.state.user.isLoggedIn) {
@@ -56,6 +62,7 @@ var Profile = React.createClass({
 				
 				<TouchableHighlight
 				underlayColor={Colors.brandPrimary}
+				onPress={this.changePassword}
 				style={styles.button}>
 					<Text style={styles.buttonText}>
 						Change Password
@@ -70,8 +77,9 @@ var Profile = React.createClass({
 					</Text>
 				</TouchableHighlight>
 				
-				{this.makeToast('You need to verify your work email', !this.state.user.workVerified)}
-				{this.makeToast('You need to verify your email', !this.state.user.emailVerified)}
+				{this.makeToast('You need to verify your work email', !this.state.user.workVerified, 'warn')}
+				{this.makeToast('You need to verify your email', !this.state.user.emailVerified, 'warn')}
+				{this.makeToast('Password updated', this.state.success, 'success')}
 			</View>
 		);
 	},
@@ -96,9 +104,9 @@ var Profile = React.createClass({
 		}
 	},
 
-	makeToast(content, visibility) {
+	makeToast(content, visibility, mode) {
 		return (
-			<Toast isVisible={visibility} mode={'warn'}>
+			<Toast isVisible={visibility} mode={mode}>
                 <TouchableOpacity>
                     <Text style={styles.toastText}>
                         {content}
@@ -106,6 +114,29 @@ var Profile = React.createClass({
                 </TouchableOpacity>
             </Toast>
 		);
+	},
+
+	changePassword() {
+		if (!this.state.user.emailVerified) {
+			return;
+		}
+		this.props.navigator.push({
+			title: 'Change Password',
+			component: ChangePassword,
+			passProps: {
+				action: this.showSuccess,
+			},
+		});
+	},
+
+	showSuccess() {
+		this.props.navigator.pop();
+		this.setState({ success: true });
+		this.setTimeout(this.hideToast, 1500);
+	},
+
+	hideToast() {
+		this.setState({ success: false });
 	},
 
 	logout() {

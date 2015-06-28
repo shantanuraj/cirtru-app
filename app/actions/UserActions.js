@@ -7,6 +7,7 @@ var userActions = [
     'signup',
     'authenticate',
     'newFacebookSession',
+    'updatePassword',
     'logout',
 ];
 

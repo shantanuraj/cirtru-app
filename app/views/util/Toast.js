@@ -2,7 +2,8 @@
 
 var React = require('react-native'),
     Overlay = require('react-native-overlay'),
-    Colors = require('../../core/Colors');
+    Colors = require('../../core/Colors'),
+    window = require('Dimensions').get('window');
 
 var {
     View,
@@ -31,6 +32,7 @@ var styles = StyleSheet.create({
     top: {
         paddingTop: 15,
         flexDirection: 'row',
+        width: window.width,
         alignItems: 'center',
     },
 
