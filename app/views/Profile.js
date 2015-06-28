@@ -7,7 +7,7 @@ var React = require('react-native'),
 	UserActions = require('../actions/UserActions'),
 	UserStore = require('../store/UserStore'),
 	Login = require('./Login'),
-window = require('Dimensions').get('window');
+	window = require('Dimensions').get('window');
 
 var {
 	StyleSheet,

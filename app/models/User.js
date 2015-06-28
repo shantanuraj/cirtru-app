@@ -64,9 +64,7 @@ module.exports = {
             isLoggedIn: true,
             extras : {roles: raw.roles},
         };
-
-        console.log(user);
-
+        
         LocalStorage.saveUser(user);
     },
 };
