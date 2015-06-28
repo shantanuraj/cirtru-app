@@ -187,10 +187,12 @@ var styles = StyleSheet.create({
   	},
 
     toastText: {
-      color: '#ffffff',
-      padding: 15,
-      backgroundColor: 'transparent',
-      fontSize: 14,
+        color: '#ffffff',
+        padding: 15,
+        backgroundColor: 'transparent',
+        fontSize: 16,
+        fontWeight: 'bold',
+        alignSelf: 'center',
     },
 });
 

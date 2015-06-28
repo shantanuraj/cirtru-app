@@ -13,7 +13,7 @@ var Toast = React.createClass({
     render() {
         return (
             <Overlay isVisible={this.props.isVisible}>
-                <View style={styles.bottom}>
+                <View style={styles.top}>
                     <View style={styles.content}>
                         {this.props.children}
                     </View>
@@ -23,12 +23,10 @@ var Toast = React.createClass({
     },
 });
 
+//Styles from https://github.com/brentvatne/react-native-overlay/blob/master/Examples/Toast/Toast.ios.js
 var styles = StyleSheet.create({
-    bottom: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
+    top: {
+        paddingTop: 15,
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: Colors.brandPrimary,

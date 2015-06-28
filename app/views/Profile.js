@@ -7,12 +7,14 @@ var React = require('react-native'),
 	UserActions = require('../actions/UserActions'),
 	UserStore = require('../store/UserStore'),
 	Login = require('./Login'),
+	Toast = require('./util/Toast'),
 	window = require('Dimensions').get('window');
 
 var {
 	StyleSheet,
 	Text,
 	View,
+	TouchableOpacity,
 	TouchableHighlight,
 } = React;
 
@@ -41,7 +43,21 @@ var Profile = React.createClass({
 						Logout
 					</Text>
 				</TouchableHighlight>
+				{this.makeToast('You need to verify your work email', !this.state.user.workVerified)}
+				{this.makeToast('You need to verify your email', !this.state.user.emailVerified)}
 			</View>
+		);
+	},
+
+	makeToast(content, visibility) {
+		return (
+			<Toast isVisible={visibility}>
+                <TouchableOpacity>
+                    <Text style={styles.toastText}>
+                        {content}
+                    </Text>
+                </TouchableOpacity>
+            </Toast>
 		);
 	},
 
@@ -81,6 +97,15 @@ var styles = StyleSheet.create({
 		fontSize: 32,
 		fontWeight: '300',
 	},
+
+	toastText: {
+		color: '#ffffff',
+		padding: 15,
+		backgroundColor: 'transparent',
+		fontSize: 16,
+		fontWeight: 'bold',
+		alignSelf: 'center',
+    },
 });
 
 module.exports = Profile;
