@@ -9,6 +9,8 @@ var Furniture = require('../models/Furniture'),
 module.exports = {
 	base: 'https://cirtru.com/',
 
+	devBase: 'http://localhost:3000/',
+
 	categories: ['Roommates', 'Sublets', 'Cars', 'Furniture', 'Others'],
 
 	listings(type) {
@@ -73,5 +75,13 @@ module.exports = {
 			case 'Others'	 : return Other.toOther(raw);
 			case 'Cars'      : return Car.toCar(raw);
 		}
+	},
+
+	login() {
+		return this.devBase + 'auth/signin';
+	},
+
+	signup() {
+		return this.devBase + 'auth/signup';
 	},
 };

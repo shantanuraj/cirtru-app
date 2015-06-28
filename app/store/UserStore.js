@@ -2,6 +2,7 @@
 
 var Reflux = require('reflux'),
     UserActions = require('../actions/UserActions'),
+    Api = require('../core/Api'),
     FacebookLoginManager = require('NativeModules').FacebookLoginManager,
     User = require('../models/User'),
     LocalStorage = require('./LocalStorage'),
@@ -24,25 +25,44 @@ var UserStore = Reflux.createStore({
         this.trigger(user);
     },
 
-    onSignup(user) {
-        var BASE = 'http://localhost:3000'
-        fetch(BASE + '/auth/signup', {
+    onAuthenticate(user) {
+        fetch(Api.login(), {
             method: 'post',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(user)
-        }).then(response => response.json())
-          .then(user => {
-              if (!user._id) {
-                  AlertIOS.alert('Could not sign up');
-              } else {
-                  user.medium = 'ci';
-                  User.toUser(user);
-              }
-          })
-          .done();
+        })
+        .then(response => response.json())
+        .then(user => {
+            if (!user._id) {
+                AlertIOS.alert('Could not sign in');
+            } else {
+                user.medium = 'ci';
+                User.toUser(user);
+            }
+        }).done();
+    },
+
+    onSignup(user) {
+        fetch(Api.signup(), {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(response => response.json())
+        .then(user => {
+            if (!user._id) {
+                AlertIOS.alert('Could not sign up');
+            } else {
+                user.medium = 'ci';
+                User.toUser(user);
+            }
+        }).done();
     },
 
     onNewFacebookSession() {

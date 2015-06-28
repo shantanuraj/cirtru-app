@@ -54,16 +54,18 @@ module.exports = {
     cirtruUser(raw) {
         var user = {
             uid : raw._id,
-            name : raw.firstName + ' ' + raw.lastName,
+            name : (raw.firstName + ' ' + raw.lastName).trim(),
             email : raw.email,
             medium : 'cirtru',
-            circle: '',
-            workEmail: '',
-            workVerified: false,
-            emailVerified: false,
+            circle: raw.circle ? raw.circle : '',
+            workEmail: raw.workEmail ? raw.workEmail : '',
+            workVerified: raw.roles.indexOf('workEmailVerified') != -1,
+            emailVerified: raw.roles.indexOf('emailVerified') != -1,
             isLoggedIn: true,
             extras : {roles: raw.roles},
         };
+
+        console.log(user);
 
         LocalStorage.saveUser(user);
     },
