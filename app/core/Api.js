@@ -9,7 +9,7 @@ var Furniture = require('../models/Furniture'),
 module.exports = {
 	base: 'https://cirtru.com/',
 
-	devBase: 'http://localhost:3000/',
+	devBase: 'http://192.168.1.102:3000/',
 
 	categories: ['Roommates', 'Sublets', 'Cars', 'Furniture', 'Others'],
 

@@ -4,6 +4,7 @@ var Reflux = require('reflux'),
     UserActions = require('../actions/UserActions'),
     Api = require('../core/Api'),
     FacebookLoginManager = require('NativeModules').FacebookLoginManager,
+    InstallationManager = require('NativeModules').InstallationManager,
     User = require('../models/User'),
     LocalStorage = require('./LocalStorage'),
     AlertIOS = require('react-native').AlertIOS;
@@ -23,6 +24,7 @@ var UserStore = Reflux.createStore({
     onLogin(user) {
         this.state = user;
         this.trigger(user);
+        InstallationManager.subscribeUserToChannel('user-' + user.uid);
     },
 
     onAuthenticate(user) {

@@ -19,7 +19,7 @@ var App = React.createClass({
 
 	componentWillUnmount() {
 		PushNotificationIOS.removeEventListener('notification', this.onNotification);
-	}
+	},
 
 	render() {
 		return (
