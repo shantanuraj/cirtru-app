@@ -78,7 +78,7 @@ module.exports = {
 
 	adaptUserListings(raw) {
 		var adapted = {};
-		
+
         var key = '';
         _.Map(raw).forEach((list, type) => {
 			switch(type) {
@@ -89,7 +89,7 @@ module.exports = {
 			}
             adapted[key] = list.map(item => this.adaptListing(key, item));
 		});
-		
+
 		return adapted;
 	},
 
@@ -101,7 +101,11 @@ module.exports = {
 		return this.base + 'auth/signup';
 	},
 
+	changePassword() {
+		return this.base + 'users/password';
+	},
+
 	userListings() {
 		return this.base + 'users/ownlistings';
-	}
+	},
 };

@@ -2,6 +2,7 @@
 
 var Reflux = require('reflux'),
     UserActions = require('../actions/UserActions'),
+    ProfileActions = require('../actions/ProfileActions'),
     Api = require('../core/Api'),
     FacebookLoginManager = require('NativeModules').FacebookLoginManager,
     InstallationManager = require('NativeModules').InstallationManager,
@@ -78,8 +79,23 @@ var UserStore = Reflux.createStore({
 		});
     },
 
-    onUpdatePassword() {
-        //foo
+    onUpdatePassword(passwords) {
+        fetch(Api.changePassword(), {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(passwords)
+        })
+        .then(response => {
+            if (response.status === 200) {
+                ProfileActions.resetSuccess();
+            } else {
+                ProfileActions.resetFail();
+            }
+        })
+        .done();
     },
 
     onLogout() {

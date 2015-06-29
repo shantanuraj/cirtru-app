@@ -63,6 +63,12 @@ var ChangePassword = React.createClass({
 	                <Text style={styles.buttonText}>Submit</Text>
 	            </TouchableHighlight>
 
+				<TouchableOpacity>
+					<Text style={styles.forgotPassword}>
+						Forgot password? Click here
+					</Text>
+				</TouchableOpacity>
+
     			<Toast isVisible={this.state.error} mode={'warn'}>
                     <TouchableOpacity>
                         <Text style={styles.toastText}>
@@ -80,13 +86,18 @@ var ChangePassword = React.createClass({
             this.setState({ error: true });
             return;
         }
-        
-        UserActions.updatePassword(values);
-        
+
+		var passwords = {
+			currentPassword : values.currentPassword,
+			verifyPassword  : values.newPassword,
+			newPassword     : values.newPassword,
+		};
+		UserActions.updatePassword(passwords);
+
         if (this.state.error) {
         	this.setState({error: false})
         }
-        this.props.action();
+        this.props.navigator.pop();
 	},
 });
 
@@ -97,7 +108,7 @@ var styles = StyleSheet.create({
         backgroundColor: Colors.white,
         flex: 1,
     },
-    
+
     button: {
         height: 36,
         backgroundColor: Colors.brandSecondary,
@@ -123,6 +134,10 @@ var styles = StyleSheet.create({
 		fontWeight: 'bold',
 		alignSelf: 'center',
     },
+
+	forgotPassword: {
+		color :Colors.brandSecondary,
+	},
 });
 
 module.exports = ChangePassword;

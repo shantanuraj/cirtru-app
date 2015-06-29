@@ -6,6 +6,7 @@ var React = require('react-native'),
 	Colors = require('../core/Colors'),
 	UserActions = require('../actions/UserActions'),
 	UserStore = require('../store/UserStore'),
+	ProfileStore = require('../store/ProfileStore'),
 	Login = require('./Login'),
 	ChangePassword = require('./ChangePassword'),
 	UserListings = require('./UserListings'),
@@ -22,13 +23,12 @@ var {
 } = React;
 
 var Profile = React.createClass({
-	mixins: [Reflux.connect(UserStore, 'user'), TimerMixin],
-
-	getInitialState() {
-		return { success: false };
-	},
+	mixins: [Reflux.connect(UserStore, 'user'), Reflux.connect(ProfileStore, 'status'), TimerMixin],
 
 	render() {
+		if (this.state.status !== 'none') {
+			this.setTimeout(this.hideToast, 1500);
+		}
 		if (!this.state.user.isLoggedIn) {
 			return <Login {...this.props} />;
 		} else {
@@ -61,7 +61,7 @@ var Profile = React.createClass({
 						My Listings
 					</Text>
 				</TouchableHighlight>
-				
+
 				<TouchableHighlight
 				underlayColor={Colors.brandPrimary}
 				onPress={this.changePassword}
@@ -70,7 +70,7 @@ var Profile = React.createClass({
 						Change Password
 					</Text>
 				</TouchableHighlight>
-				
+
 				<TouchableHighlight
 				onPress={this.logout}
 				style={styles.logout}>
@@ -78,10 +78,11 @@ var Profile = React.createClass({
 						Logout
 					</Text>
 				</TouchableHighlight>
-				
+
 				{this.makeToast('You need to verify your work email', !this.state.user.workVerified, 'warn')}
 				{this.makeToast('You need to verify your email', !this.state.user.emailVerified, 'warn')}
-				{this.makeToast('Password updated', this.state.success, 'success')}
+				{this.makeToast('Password Updated', this.state.status === 'success', 'success')}
+				{this.makeToast('Wrong password entered', this.state.status === 'error', 'warn')}
 			</View>
 		);
 	},
@@ -125,20 +126,11 @@ var Profile = React.createClass({
 		this.props.navigator.push({
 			title: 'Change Password',
 			component: ChangePassword,
-			passProps: {
-				action: this.showSuccess,
-			},
 		});
 	},
 
-	showSuccess() {
-		this.props.navigator.pop();
-		this.setState({ success: true });
-		this.setTimeout(this.hideToast, 1500);
-	},
-
 	hideToast() {
-		this.setState({ success: false });
+		this.setState({ status: 'none' });
 	},
 
 	logout() {
