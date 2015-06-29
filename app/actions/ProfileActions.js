@@ -5,6 +5,7 @@ var Reflux = require('reflux');
 var profileActions = [
     'resetSuccess',
     'resetFail',
+    'resetPassword',
 ];
 
 var actions = Reflux.createActions(profileActions);

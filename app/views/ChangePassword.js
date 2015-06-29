@@ -4,7 +4,8 @@ var React = require('react-native'),
 	t = require('tcomb-form-native'),
     Colors = require('../core/Colors'),
     Toast = require('./util/Toast'),
-    UserActions = require('../actions/UserActions');
+    UserActions = require('../actions/UserActions'),
+	ProfileActions = require('../actions/ProfileActions');
 
 var {
 	TouchableHighlight,
@@ -63,7 +64,7 @@ var ChangePassword = React.createClass({
 	                <Text style={styles.buttonText}>Submit</Text>
 	            </TouchableHighlight>
 
-				<TouchableOpacity>
+				<TouchableOpacity onPress={this.resetPassword}>
 					<Text style={styles.forgotPassword}>
 						Forgot password? Click here
 					</Text>
@@ -98,6 +99,11 @@ var ChangePassword = React.createClass({
         	this.setState({error: false})
         }
         this.props.navigator.pop();
+	},
+
+	resetPassword() {
+		ProfileActions.resetPassword();
+		this.props.navigator.pop();
 	},
 });
 

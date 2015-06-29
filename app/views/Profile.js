@@ -81,8 +81,8 @@ var Profile = React.createClass({
 
 				{this.makeToast('You need to verify your work email', !this.state.user.workVerified, 'warn')}
 				{this.makeToast('You need to verify your email', !this.state.user.emailVerified, 'warn')}
-				{this.makeToast('Password Updated', this.state.status === 'success', 'success')}
-				{this.makeToast('Wrong password entered', this.state.status === 'error', 'warn')}
+				{this.makeToast('Success', this.state.status === 'success', 'success')}
+				{this.makeToast('Could not complete request', this.state.status === 'error', 'warn')}
 			</View>
 		);
 	},

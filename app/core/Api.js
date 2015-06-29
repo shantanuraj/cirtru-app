@@ -105,6 +105,10 @@ module.exports = {
 		return this.base + 'users/password';
 	},
 
+	resetPassword() {
+		return this.base + 'auth/forgot';
+	},
+
 	userListings() {
 		return this.base + 'users/ownlistings';
 	},
