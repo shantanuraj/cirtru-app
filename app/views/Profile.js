@@ -8,6 +8,7 @@ var React = require('react-native'),
 	UserStore = require('../store/UserStore'),
 	Login = require('./Login'),
 	ChangePassword = require('./ChangePassword'),
+	UserListings = require('./UserListings'),
 	Toast = require('./util/Toast'),
 	TimerMixin = require('react-timer-mixin'),
 	window = require('Dimensions').get('window');
@@ -54,6 +55,7 @@ var Profile = React.createClass({
 
 				<TouchableHighlight
 				underlayColor={Colors.brandPrimary}
+				onPress={this.showListings}
 				style={styles.button}>
 					<Text style={styles.buttonText}>
 						My Listings

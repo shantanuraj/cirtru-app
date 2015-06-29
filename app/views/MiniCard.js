@@ -15,7 +15,9 @@ var {
 
 var MiniCard = React.createClass({
 	action() {
-		this.props.action();
+		if (this.props.action) {
+			this.props.action();
+		}
 	},
 
 	render() {

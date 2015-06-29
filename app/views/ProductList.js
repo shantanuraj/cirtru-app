@@ -26,7 +26,15 @@ var ProductList = React.createClass({
     },
 
     componentDidMount() {
-        this.fetchData();
+        if (this.props.list) {
+            this.setState({
+                dataSource: this.state.dataSource.cloneWithRows(this.props.list),
+                loaded: true,
+            });
+        } else {
+            console.log('else');
+            this.fetchData();
+        }
     },
 
     fetchData() {
@@ -37,8 +45,8 @@ var ProductList = React.createClass({
         .then(response => response.map(raw => Api.adaptListing(type, raw)))
         .then(response => {
             this.setState({
-              dataSource: this.state.dataSource.cloneWithRows(response),
-              loaded: true,
+                dataSource: this.state.dataSource.cloneWithRows(response),
+                loaded: true,
             });
         })
         .done();

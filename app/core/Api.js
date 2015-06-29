@@ -4,12 +4,11 @@ var Furniture = require('../models/Furniture'),
 	Roommate = require('../models/Roommate'),
 	Sublet = require('../models/Sublet'),
 	Other = require('../models/Other'),
-	Car = require('../models/Car');
+	Car = require('../models/Car'),
+	_ = require('immutable');
 
 module.exports = {
-	base: 'https://cirtru.com/',
-
-	devBase: 'http://192.168.1.102:3000/',
+	base: 'http://192.168.1.102:3000/',
 
 	categories: ['Roommates', 'Sublets', 'Cars', 'Furniture', 'Others'],
 
@@ -77,11 +76,32 @@ module.exports = {
 		}
 	},
 
+	adaptUserListings(raw) {
+		var adapted = {};
+		
+        var key = '';
+        _.Map(raw).forEach((list, type) => {
+			switch(type) {
+				case 'roommates' : key = 'Roommates'; break;
+				case 'rentals'   : key = 'Sublets'; break;
+				case 'others'    : key = 'Others'; break;
+				case 'cars'		 : key = 'Cars'; break;
+			}
+            adapted[key] = list.map(item => this.adaptListing(key, item));
+		});
+		
+		return adapted;
+	},
+
 	login() {
-		return this.devBase + 'auth/signin';
+		return this.base + 'auth/signin';
 	},
 
 	signup() {
-		return this.devBase + 'auth/signup';
+		return this.base + 'auth/signup';
 	},
+
+	userListings() {
+		return this.base + 'users/ownlistings';
+	}
 };
