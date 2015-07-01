@@ -17,7 +17,7 @@ module.exports = {
 			},
 			description: listing.description,
 			owner: listing.user,
-		}
+		};
 		return values;
-	}
-}
+	},
+};
