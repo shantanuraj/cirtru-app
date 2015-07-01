@@ -8,7 +8,7 @@ var Furniture = require('../models/Furniture'),
 	_ = require('immutable');
 
 module.exports = {
-	base: 'http://192.168.1.102:3000/',
+	base: 'http://localhost:3000/',
 
 	categories: ['Roommates', 'Sublets', 'Cars', 'Furniture', 'Others'],
 
@@ -78,7 +78,6 @@ module.exports = {
 
 	adaptUserListings(raw) {
 		var adapted = {};
-
         var key = '';
         _.Map(raw).forEach((list, type) => {
 			switch(type) {
@@ -93,13 +92,35 @@ module.exports = {
 		return adapted;
 	},
 
-	getRawListing(type, id) {
+	getListingUrl(type) {
 		switch (type) {
-			case 'roommates' : return this.base + 'api/v1/sfbayarea/roommates/' + id;
-			case 'sublets'   : return this.base + 'api/v1/sfbayarea/rentals/' + id;
-			case 'cars'      : return this.base + 'api/v1/sfbayarea/cars/' + id;
-			default			 : return this.base + 'api/v1/sfbayarea/others/' + id;
+			case 'roommates' : return  this.base + 'api/v1/sfbayarea/roommates/';
+			case 'sublets'   : return  this.base + 'api/v1/sfbayarea/rentals/';
+			case 'cars'      : return  this.base + 'api/v1/sfbayarea/cars/';
+			default			 : return  this.base + 'api/v1/sfbayarea/others/';
 		}
+	},
+
+	getContactUrl(type, id) {
+		switch (type) {
+			case 'roommates' : return  this.base + 'roommates/contact/' + id;
+			case 'sublets'   : return  this.base + 'rentals/contact/'   + id;
+			case 'cars'      : return  this.base + 'cars/contact/'      + id;
+			default			 : return  this.base + 'others/contact/'    + id;
+		}
+	},
+
+	getContactPayload(type, listing, message) {
+		var payload = {
+			message: message
+		};
+		switch (type) {
+			case 'roommates' : payload['roommate'] = listing;
+			case 'sublets'   : payload['rental'] = listing;
+			case 'cars'      : payload['car'] = listing;
+			default			 : payload['other'] = listing;
+		}
+		return payload;
 	},
 
 	login() {

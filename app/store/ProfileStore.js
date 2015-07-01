@@ -21,10 +21,24 @@ var ProfileStore = Reflux.createStore({
         this.user = userDetails;
     },
 
-    onMessageSend(adapted, message) {
-        fetch(Api.getRawListing(adapted.category, adapted.id))
+    onSendMessage(adapted, message) {
+        var baseUrl = Api.getListingUrl(adapted.category);
+
+        fetch(baseUrl + adapted.id)
         .then(response => response.json())
-        .then(listing => console.log(listing))
+        .then(listing => {
+            console.log(Api.getContactUrl(adapted.category, adapted.id));
+            fetch(Api.getContactUrl(adapted.category, adapted.id), {
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(Api.getContactPayload(adapted.id, listing, message))
+            })
+            .then(response => console.log(response))
+            .done();
+        })
         .done();
     },
 

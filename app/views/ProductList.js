@@ -32,7 +32,6 @@ var ProductList = React.createClass({
                 loaded: true,
             });
         } else {
-            console.log('else');
             this.fetchData();
         }
     },
