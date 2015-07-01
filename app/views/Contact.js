@@ -44,8 +44,7 @@ var Contact = React.createClass({
     },
 
     clicked() {
-        console.log('Send to <', this.props.owner, '> Message:', this.state.message);
-        this.props.action();
+        this.props.action(this.state.message);
     },
 });
 

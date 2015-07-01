@@ -3,6 +3,7 @@
 var Reflux = require('reflux');
 
 var profileActions = [
+    'sendMessage',
     'resetSuccess',
     'resetFail',
     'resetPassword',

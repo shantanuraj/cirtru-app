@@ -21,6 +21,13 @@ var ProfileStore = Reflux.createStore({
         this.user = userDetails;
     },
 
+    onMessageSend(adapted, message) {
+        fetch(Api.getRawListing(adapted.category, adapted.id))
+        .then(response => response.json())
+        .then(listing => console.log(listing))
+        .done();
+    },
+
     onResetSuccess() {
         this.state = 'success';
         this.trigger(this.state);

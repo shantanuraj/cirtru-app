@@ -93,6 +93,15 @@ module.exports = {
 		return adapted;
 	},
 
+	getRawListing(type, id) {
+		switch (type) {
+			case 'roommates' : return this.base + 'api/v1/sfbayarea/roommates/' + id;
+			case 'sublets'   : return this.base + 'api/v1/sfbayarea/rentals/' + id;
+			case 'cars'      : return this.base + 'api/v1/sfbayarea/cars/' + id;
+			default			 : return this.base + 'api/v1/sfbayarea/others/' + id;
+		}
+	},
+
 	login() {
 		return this.base + 'auth/signin';
 	},

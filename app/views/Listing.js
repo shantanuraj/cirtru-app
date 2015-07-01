@@ -14,6 +14,7 @@ var React = require('react-native'),
     Toast = require('./util/Toast'),
     UserStore = require('../store/UserStore'),
     TimerMixin = require('react-timer-mixin'),
+    ProfileActions = require('../actions/ProfileActions'),
     window = require('Dimensions').get('window');
 
 var {
@@ -83,7 +84,7 @@ var Listing = React.createClass({
                     <Info description={info}/>
                 </ScrollView>
 				<View style={styles.fabContainer}>
-					<ContactButton action={this.contactOwner}/>
+                    <ContactButton action={this.contactOwner} />
 				</View>
                 {this.makeToast('Message Sent', 'messageToast', 'success')}
                 {this.makeToast('You need to login first', 'userToast', 'warn')}
@@ -121,15 +122,15 @@ var Listing = React.createClass({
                 component: require('./Contact'),
                 passProps: {
                     owner: this.props.listing.owner,
-                    action: this.contacted,
+                    action: this.sendMessage,
                 },
             });
         }
     },
 
-    contacted() {
+    sendMessage(message) {
         this.props.navigator.pop();
-        this.showToast('messageToast');
+        ProfileActions.sendMessage(this.props.listing, message);
     },
 });
 
