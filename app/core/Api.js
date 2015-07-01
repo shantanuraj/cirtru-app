@@ -14,11 +14,11 @@ module.exports = {
 
 	listings(type) {
 		switch(type) {
-			case 'Furniture' : return this.furniture();
-			case 'Roommates' : return this.roommates();
-			case 'Sublets'   : return this.sublets();
-			case 'Others'	 : return this.others();
-			case 'Cars'      : return this.cars();
+			case 'Furniture': return this.furniture();
+			case 'Roommates': return this.roommates();
+			case 'Sublets': return this.sublets();
+			case 'Others': return this.others();
+			case 'Cars': return this.cars();
 		}
 	},
 
@@ -43,36 +43,36 @@ module.exports = {
 	},
 
 	cardImage(type) {
-		var s3   = 'https://s3-us-west-2.amazonaws.com/cirtru/images/listings';
+		var s3 = 'https://s3-us-west-2.amazonaws.com/cirtru/images/listings';
 
 		switch(type) {
-			case 'Furniture' : return s3 + '/others/7f6cf1ad3144f8d178e52b5596eaa29b-pic.jpg';
-			case 'Roommates' : return this.base + 'modules/core/img/others/homePageBackground.jpg';
-			case 'Sublets'   : return s3 + '/housing/sublets/6d2b9f14225c373394208b05e87061a2-pic.jpg';
-			case 'Others'	 : return s3 + '/others/7284ab245e23eaa243f4775644e7bca6-pic.jpg';
-			case 'Cars'      : return s3 + '/cars/a4c97ae559c6c25e294ce33913de3287-pic.jpg';
+			case 'Furniture': return s3 + '/others/7f6cf1ad3144f8d178e52b5596eaa29b-pic.jpg';
+			case 'Roommates': return this.base + 'modules/core/img/others/homePageBackground.jpg';
+			case 'Sublets': return s3 + '/housing/sublets/6d2b9f14225c373394208b05e87061a2-pic.jpg';
+			case 'Others': return s3 + '/others/7284ab245e23eaa243f4775644e7bca6-pic.jpg';
+			case 'Cars': return s3 + '/cars/a4c97ae559c6c25e294ce33913de3287-pic.jpg';
 		}
 	},
 
 	miniCardImage(type) {
-		var s3   = 'https://s3-us-west-2.amazonaws.com/cirtru/images/listings';
+		var s3 = 'https://s3-us-west-2.amazonaws.com/cirtru/images/listings';
 
 		switch(type) {
-			case 'Furniture' : return s3 + '/others/2baa548639818db0412a752655dedf63-pic.jpg';
-			case 'Roommates' : return s3 + '/roommates/680c6b1380c1b679ea1cd7579753ed2e-pic.jpg'
-			case 'Sublets'   : return s3 + '/housing/sublets/d48d12c9a567de7b1591b53a95997f0b-pic.jpg';
-			case 'Others'	 : return s3 + '/others/01492cc1384a4df05a32bb42806c7384-pic.jpg';
-			case 'Cars'      : return s3 + '/cars/0b2db656963706ca23860f34b8db1784-pic.jpg';
+			case 'Furniture': return s3 + '/others/2baa548639818db0412a752655dedf63-pic.jpg';
+			case 'Roommates': return s3 + '/roommates/680c6b1380c1b679ea1cd7579753ed2e-pic.jpg';
+			case 'Sublets': return s3 + '/housing/sublets/d48d12c9a567de7b1591b53a95997f0b-pic.jpg';
+			case 'Others': return s3 + '/others/01492cc1384a4df05a32bb42806c7384-pic.jpg';
+			case 'Cars': return s3 + '/cars/0b2db656963706ca23860f34b8db1784-pic.jpg';
 		}
 	},
 
 	adaptListing(type, raw) {
 		switch(type) {
-			case 'Furniture' : return Furniture.toFurniture(raw);
-			case 'Roommates' : return Roommate.toRoommate(raw);
-			case 'Sublets'   : return Sublet.toSublet(raw);
-			case 'Others'	 : return Other.toOther(raw);
-			case 'Cars'      : return Car.toCar(raw);
+			case 'Furniture': return Furniture.toFurniture(raw);
+			case 'Roommates': return Roommate.toRoommate(raw);
+			case 'Sublets': return Sublet.toSublet(raw);
+			case 'Others': return Other.toOther(raw);
+			case 'Cars': return Car.toCar(raw);
 		}
 	},
 
@@ -81,10 +81,10 @@ module.exports = {
         var key = '';
         _.Map(raw).forEach((list, type) => {
 			switch(type) {
-				case 'roommates' : key = 'Roommates'; break;
-				case 'rentals'   : key = 'Sublets'; break;
-				case 'others'    : key = 'Others'; break;
-				case 'cars'		 : key = 'Cars'; break;
+				case 'roommates': key = 'Roommates'; break;
+				case 'rentals': key = 'Sublets'; break;
+				case 'others': key = 'Others'; break;
+				case 'cars': key = 'Cars'; break;
 			}
             adapted[key] = list.map(item => this.adaptListing(key, item));
 		});
@@ -94,31 +94,31 @@ module.exports = {
 
 	getListingUrl(type) {
 		switch (type) {
-			case 'roommates' : return  this.base + 'api/v1/sfbayarea/roommates/';
-			case 'sublets'   : return  this.base + 'api/v1/sfbayarea/rentals/';
-			case 'cars'      : return  this.base + 'api/v1/sfbayarea/cars/';
-			default			 : return  this.base + 'api/v1/sfbayarea/others/';
+			case 'roommates': return this.base + 'api/v1/sfbayarea/roommates/';
+			case 'sublets': return this.base + 'api/v1/sfbayarea/rentals/';
+			case 'cars': return this.base + 'api/v1/sfbayarea/cars/';
+			default: return this.base + 'api/v1/sfbayarea/others/';
 		}
 	},
 
 	getContactUrl(type, id) {
 		switch (type) {
-			case 'roommates' : return  this.base + 'roommates/contact/' + id;
-			case 'sublets'   : return  this.base + 'rentals/contact/'   + id;
-			case 'cars'      : return  this.base + 'cars/contact/'      + id;
-			default			 : return  this.base + 'others/contact/'    + id;
+			case 'roommates': return this.base + 'roommates/contact/' + id;
+			case 'sublets': return this.base + 'rentals/contact/' + id;
+			case 'cars': return this.base + 'cars/contact/' + id;
+			default: return this.base + 'others/contact/' + id;
 		}
 	},
 
 	getContactPayload(type, listing, message) {
 		var payload = {
-			message: message
+			message: message,
 		};
 		switch (type) {
-			case 'roommates' : payload['roommate'] = listing;
-			case 'sublets'   : payload['rental'] = listing;
-			case 'cars'      : payload['car'] = listing;
-			default			 : payload['other'] = listing;
+			case 'roommates': payload['roommate'] = listing; break;
+			case 'sublets': payload['rental'] = listing; break;
+			case 'cars': payload['car'] = listing; break;
+			default: payload['other'] = listing;
 		}
 		return payload;
 	},

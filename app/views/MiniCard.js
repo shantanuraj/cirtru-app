@@ -2,8 +2,7 @@
 
 var React = require('react-native'),
 	Api = require('../core/Api'),
-	Colors = require('../core/Colors'),
-	window = require('Dimensions').get('window');
+	Colors = require('../core/Colors');
 
 var {
 	StyleSheet,
@@ -13,47 +12,15 @@ var {
 	TouchableHighlight,
 } = React;
 
-var MiniCard = React.createClass({
-	action() {
-		if (this.props.action) {
-			this.props.action();
-		}
-	},
-
-	render() {
-		var type = this.props.type,
-			image = Api.miniCardImage(type);
-		var derivedStyle = {
-			width: this.props.dimen,
-			height: (this.props.dimen < 200) ? this.props.dimen : this.props.dimen / 2,
-		};
-		return (
-			<TouchableHighlight underlayColor="transparent" onPress={this.action}>
-				<View style={[styles.card, derivedStyle]}>
-					<Image
-					  style={[styles.poster, derivedStyle]}
-					  source={{uri: image}}>
-					  	<View style={[styles.backdrop, derivedStyle]}>
-					  		<Text style={styles.leadText}>
-					  			{type}
-					  		</Text>
-					  	</View>
-					</Image>
-				</View>
-			</TouchableHighlight>
-		);
-	},
-});
-
 var styles = StyleSheet.create({
 	card: {
 		backgroundColor: Colors.white,
-		shadowColor: "black",
+		shadowColor: Colors.black,
 		shadowOpacity: 0.3,
 		shadowRadius: 3,
 		shadowOffset: {
 			height: 0,
-			width: 0
+			width: 0,
 		},
 	},
 
@@ -74,6 +41,42 @@ var styles = StyleSheet.create({
 		color: Colors.white,
 		fontSize: 24,
 		fontWeight: '500',
+	},
+});
+
+var MiniCard = React.createClass({
+	propTypes: {
+		action: React.propTypes.func.isRequired,
+		dimen: React.propTypes.number.isRequired,
+		type: React.propTypes.string.isRequired,
+	},
+
+	action() {
+		if (this.props.action) {
+			this.props.action();
+		}
+	},
+
+	render() {
+		var type = this.props.type,
+			image = Api.miniCardImage(type);
+		var derivedStyle = {
+			width: this.props.dimen,
+			height: (this.props.dimen < 200) ? this.props.dimen : this.props.dimen / 2,
+		};
+		return (
+			<TouchableHighlight onPress={this.action} underlayColor={Colors.transparent}>
+				<View style={[styles.card, derivedStyle]}>
+					<Image source={{uri: image}} style={[styles.poster, derivedStyle]} >
+						<View style={[styles.backdrop, derivedStyle]}>
+							<Text style={styles.leadText}>
+								{type}
+							</Text>
+						</View>
+					</Image>
+				</View>
+			</TouchableHighlight>
+		);
 	},
 });
 
