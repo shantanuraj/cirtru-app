@@ -1,8 +1,9 @@
 'use strict';
 
 var React = require('react-native'),
-    Colors = require('../core/Colors'),
-    window = require('Dimensions').get('window');
+    Colors = require('../core/Colors');
+
+var window = require('Dimensions').get('window');
 
 var {
     StyleSheet,
@@ -15,38 +16,6 @@ var {
 var {
     CONTACT_MESSAGE
 } = require('../core/Constants');
-
-var Contact = React.createClass({
-    getInitialState() {
-        return {
-            message: CONTACT_MESSAGE,
-        };
-    },
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <TextInput
-                style={styles.message}
-                multiline={true}
-                value={CONTACT_MESSAGE}
-                onChangeText={message => this.setState({message: message})} />
-                <TouchableHighlight
-                style={styles.button}
-                onPress={this.clicked}
-                underlayColor={Colors.brandSecondaryDark}>
-                    <Text style={styles.buttonText}>
-                        Send
-                    </Text>
-                </TouchableHighlight>
-            </View>
-        );
-    },
-
-    clicked() {
-        this.props.action(this.state.message);
-    },
-});
 
 var styles = StyleSheet.create({
     container: {
@@ -82,6 +51,43 @@ var styles = StyleSheet.create({
     buttonText: {
         color: Colors.white,
         fontSize: 20,
+    },
+});
+
+var Contact = React.createClass({
+    propTypes: {
+        action: React.propTypes.func.isRequired,
+    },
+
+    getInitialState() {
+        return {
+            message: CONTACT_MESSAGE,
+        };
+    },
+
+    clicked() {
+        this.props.action(this.state.message);
+    },
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <TextInput
+                multiline={true}
+                onChangeText={message => this.setState({message: message})}
+                style={styles.message}
+                value={CONTACT_MESSAGE} />
+
+                <TouchableHighlight
+                onPress={this.clicked}
+                style={styles.button}
+                underlayColor={Colors.brandSecondaryDark}>
+                    <Text style={styles.buttonText}>
+                        Send
+                    </Text>
+                </TouchableHighlight>
+            </View>
+        );
     },
 });
 
