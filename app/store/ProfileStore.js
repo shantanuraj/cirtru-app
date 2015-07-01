@@ -36,18 +36,24 @@ var ProfileStore = Reflux.createStore({
                 },
                 body: JSON.stringify(Api.getContactPayload(adapted.id, listing, message))
             })
-            .then(response => console.log(response))
+            .then(response => {
+                if (response.status === 200) {
+                    this.onSuccess();
+                } else {
+                    this.onFailure();
+                }
+            })
             .done();
         })
         .done();
     },
 
-    onResetSuccess() {
+    onSuccess() {
         this.state = 'success';
         this.trigger(this.state);
     },
 
-    onResetFail() {
+    onFailure() {
         this.state = 'error';
         this.trigger(this.state);
     },
@@ -63,9 +69,9 @@ var ProfileStore = Reflux.createStore({
         })
         .then(response => {
             if (response.status === 200) {
-                this.onResetSuccess();
+                this.onSuccess();
             } else {
-                this.onResetFail();
+                this.onFailure();
             }
         })
     },

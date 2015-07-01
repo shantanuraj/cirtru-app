@@ -32,6 +32,7 @@ var Listing = React.createClass({
         return {
             messageToast: false,
             userToast: false,
+            errorToast: false,
         };
     },
 
@@ -48,6 +49,16 @@ var Listing = React.createClass({
     },
 
     showToast(visibility) {
+        if (this.state.status === 'error') {
+            if (!this.state.user.isLoggedIn) {
+                visibility = 'userToast';
+            } else {
+                visibility = 'errorToast';
+            }
+        } else {
+            visibility = 'messageToast';
+        }
+
         var state = this.state;
         state[visibility] = true;
         this.setState(state);
@@ -58,6 +69,7 @@ var Listing = React.createClass({
         this.setState({
             messageToast: false,
             userToast: false,
+            errorToast: false,
         });
     },
 
@@ -88,6 +100,7 @@ var Listing = React.createClass({
 				</View>
                 {this.makeToast('Message Sent', 'messageToast', 'success')}
                 {this.makeToast('You need to login first', 'userToast', 'warn')}
+                {this.makeToast('Could not send message', 'errorToast', 'danger')}
 			</View>
         );
     },
