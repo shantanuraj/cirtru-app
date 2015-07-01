@@ -29,7 +29,7 @@
 	    "react/sort-comp": 1,
 	    "react/wrap-multilines": 1,
 	    "quotes": [2, "single", "avoid-escape"],
-	    "comma-dangle": [2, "always"],
+	    "comma-dangle": [2, "always-multiline"],
 	    "no-underscore-dangle": 0,
 	    "dot-notation": 1,
 	    "global-strict": [2, "always"],

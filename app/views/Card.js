@@ -3,8 +3,9 @@
 var React = require('react-native'),
 	Api = require('../core/Api'),
 	Colors = require('../core/Colors'),
-	ProductList = require('./ProductList'),
-	window = require('Dimensions').get('window');
+	ProductList = require('./ProductList');
+
+var	window = require('Dimensions').get('window');
 
 var {
 	StyleSheet,
@@ -14,50 +15,17 @@ var {
 	TouchableHighlight,
 } = React;
 
-var Card = React.createClass({
-	openListings() {
-		var category = this.props.type;
-		this.props.navigator.push({
-			title: category,
-			component: ProductList,
-			passProps: {
-				type: category,
-			}
-		});
-	},
-
-	render() {
-		var type = this.props.type;
-		var image = Api.cardImage(type);
-		return (
-			<TouchableHighlight underlayColor="transparent" onPress={this.openListings}>
-				<View style={styles.card}>
-					<Image
-					  style={styles.poster}
-					  source={{uri: image}}>
-					  	<View style={styles.backdrop}>
-					  		<Text style={styles.leadText}>
-					  			{type}
-					  		</Text>
-					  	</View>
-					</Image>
-				</View>
-			</TouchableHighlight>
-		);
-	},
-});
-
 var styles = StyleSheet.create({
 	card: {
 		width: window.width,
 		height: 300,
-		backgroundColor: '#fff',
-		shadowColor: "black",
+		backgroundColor: Colors.white,
+		shadowColor: Colors.black,
 		shadowOpacity: 0.3,
 		shadowRadius: 3,
 		shadowOffset: {
 			height: 0,
-			width: 0
+			width: 0,
 		},
 	},
 
@@ -81,6 +49,41 @@ var styles = StyleSheet.create({
 		color: Colors.white,
 		fontSize: 32,
 		fontWeight: '500',
+	},
+});
+
+var Card = React.createClass({
+	propTypes: {
+		type: React.propTypes.string.isRequired,
+	},
+
+	openListings() {
+		var category = this.props.type;
+		this.props.navigator.push({
+			title: category,
+			component: ProductList,
+			passProps: {
+				type: category,
+			},
+		});
+	},
+
+	render() {
+		var type = this.props.type;
+		var image = Api.cardImage(type);
+		return (
+			<TouchableHighlight onPress={this.openListings} underlayColor={Colors.transparent}>
+				<View style={styles.card}>
+					<Image source={{uri: image}} style={styles.poster}>
+						<View style={styles.backdrop}>
+							<Text style={styles.leadText}>
+								{type}
+							</Text>
+						</View>
+					</Image>
+				</View>
+			</TouchableHighlight>
+		);
 	},
 });
 

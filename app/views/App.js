@@ -8,9 +8,16 @@ var {
 	StyleSheet,
 	Text,
 	View,
+	AlertIOS,
 	NavigatorIOS,
 	PushNotificationIOS,
 } = React;
+
+var styles = StyleSheet.create({
+	container: {
+		flex: 1,
+	},
+});
 
 var App = React.createClass({
 	componentWillMount() {
@@ -21,39 +28,35 @@ var App = React.createClass({
 		PushNotificationIOS.removeEventListener('notification', this.onNotification);
 	},
 
-	render() {
-		return (
-			<NavigatorIOS
-			barTintColor={Colors.brandSecondaryLight}
-			tintColor={Colors.white}
-			titleTextColor={Colors.white}
-			style={styles.container}
-			initialRoute={{
-				title: 'Cirtru',
-				component: Tabs,
-			}} />
-		);
-	},
-
 	onNotification(notification) {
 		AlertIOS.alert(
 			'Notification Received',
 			notification.getMessage(),
-			[{
-				text: 'Dismiss',
-				onPress: this.clearBadge,
-			}]
+			[
+				{
+					text: 'Dismiss',
+					onPress: this.clearBadge,
+				},
+			],
 		);
 	},
 
 	clearBadge() {
 		PushNotificationIOS.setApplicationBadgeNumber(0);
 	},
-});
 
-var styles = StyleSheet.create({
-	container: {
-		flex: 1,
+	render() {
+		return (
+			<NavigatorIOS
+			barTintColor={Colors.brandSecondaryLight}
+			initialRoute={{
+				title: 'Cirtru',
+				component: Tabs,
+			}}
+			style={styles.container}
+			tintColor={Colors.white}
+			titleTextColor={Colors.white} />
+		);
 	},
 });
 
