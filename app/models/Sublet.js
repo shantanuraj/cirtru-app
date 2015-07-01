@@ -20,11 +20,11 @@ module.exports = {
 
 			data: {
 				amenities: {
-					laundry : listing.laundry === "yes" ? true : false,
-					pool : listing.swimmingPool === "yes" ? true : false,
-					gym : listing.gym === "yes" ? true : false,
-					security : listing.security === "gated" ? true : false,
-					smoking : listing.smoking === "OK" ? true : false,
+					laundry: listing.laundry === 'yes' ? true : false,
+					pool: listing.swimmingPool === 'yes' ? true : false,
+					gym: listing.gym === 'yes' ? true : false,
+					security: listing.security === 'gated' ? true : false,
+					smoking: listing.smoking === 'OK' ? true : false,
 				},
 				type: listing.type,
 				deposit: listing.deposit,

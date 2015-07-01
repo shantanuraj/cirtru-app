@@ -45,15 +45,15 @@ module.exports = {
 
 		listing.rooms.forEach(function (room, index) {
 
-		    room.roomOccupancy.forEach(function (occupant) {
-		        if (occupant.roommateStatus === 'Looking') {
-		            values.data.rent.push(occupant.rent);
-		        }
-		    });
+			room.roomOccupancy.forEach(function (occupant) {
+				if (occupant.roommateStatus === 'Looking') {
+					values.data.rent.push(occupant.rent);
+				}
+			});
 
-		    if (index === listing.rooms.length - 1) {
-		        values.cost = Math.min.apply(Math, values.data.rent);
-		    }
+			if (index === listing.rooms.length - 1) {
+				values.cost = Math.min.apply(Math, values.data.rent);
+			}
 
 		});
 		return values;
