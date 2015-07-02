@@ -41,8 +41,9 @@ var styles = StyleSheet.create({
 
 var ProductList = React.createClass({
     propTypes: {
-        list: React.propTypes.array,
-        type: React.propTypes.string.isRequired,
+        isOwner: React.PropTypes.bool,
+        list: React.PropTypes.array,
+        type: React.PropTypes.string.isRequired,
     },
 
     getInitialState() {
@@ -103,7 +104,7 @@ var ProductList = React.createClass({
         return (
             <ListView
             dataSource={this.state.dataSource}
-            renderRow={listing => <Product {...this.props} data={listing} style={styles.list} />} />
+            renderRow={listing => <Product {...this.props} data={listing} isOwner={this.props.isOwner} style={styles.list} />} />
         );
     },
 });

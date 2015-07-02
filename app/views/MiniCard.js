@@ -46,9 +46,9 @@ var styles = StyleSheet.create({
 
 var MiniCard = React.createClass({
 	propTypes: {
-		action: React.propTypes.func.isRequired,
-		dimen: React.propTypes.number.isRequired,
-		type: React.propTypes.string.isRequired,
+		action: React.PropTypes.func.isRequired,
+		dimen: React.PropTypes.number.isRequired,
+		type: React.PropTypes.string.isRequired,
 	},
 
 	action() {

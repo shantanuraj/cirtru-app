@@ -73,7 +73,8 @@ var styles = StyleSheet.create({
 
 var Product = React.createClass({
     propTypes: {
-        data: React.propTypes.object.isRequired,
+        data: React.PropTypes.object.isRequired,
+        isOwner: React.PropTypes.bool,
     },
 
     clicked() {
@@ -82,6 +83,7 @@ var Product = React.createClass({
             component: require('./Listing'),
             passProps: {
                 listing: this.props.data,
+                isOwner: this.props.isOwner,
             },
         });
     },

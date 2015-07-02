@@ -54,7 +54,7 @@ var styles = StyleSheet.create({
 
 var Card = React.createClass({
 	propTypes: {
-		type: React.propTypes.string.isRequired,
+		type: React.PropTypes.string.isRequired,
 	},
 
 	openListings() {

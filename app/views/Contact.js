@@ -56,7 +56,7 @@ var styles = StyleSheet.create({
 
 var Contact = React.createClass({
     propTypes: {
-        action: React.propTypes.func.isRequired,
+        action: React.PropTypes.func.isRequired,
     },
 
     getInitialState() {

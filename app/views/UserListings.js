@@ -78,6 +78,7 @@ var UserListings = React.createClass({
 					component : ProductList,
 					passProps : {
 						list : self.state.listings[category],
+						isOwner: true,
 					},
 				});
 			}

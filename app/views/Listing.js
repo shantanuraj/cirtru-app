@@ -92,7 +92,8 @@ var styles = StyleSheet.create({
 
 var Listing = React.createClass({
     propTypes: {
-        listing: React.propTypes.object.isRequired,
+        isOwner: React.PropTypes.bool,
+        listing: React.PropTypes.object.isRequired,
     },
 
     mixins: [Reflux.connect(UserStore, 'user'), TimerMixin],
@@ -162,6 +163,16 @@ var Listing = React.createClass({
         ProfileActions.sendMessage(this.props.listing, message);
     },
 
+    fab() {
+        if (!this.props.isOwner) {
+            return (
+                <View style={styles.fabContainer}>
+                    <ContactButton action={this.contactOwner} />
+                </View>
+            );
+        }
+    },
+
     optionalContent() {
         var extras = this.props.listing.data;
         switch (this.props.listing.category) {
@@ -205,9 +216,7 @@ var Listing = React.createClass({
                     {this.optionalContent()}
                     <Info description={info}/>
                 </ScrollView>
-                <View style={styles.fabContainer}>
-                    <ContactButton action={this.contactOwner} />
-                </View>
+                {this.fab()}
                 {this.makeToast('Message Sent', 'messageToast', 'success')}
                 {this.makeToast('You need to login first', 'userToast', 'warn')}
                 {this.makeToast('Could not send message', 'errorToast', 'danger')}
