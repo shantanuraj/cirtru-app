@@ -16,7 +16,6 @@ var {
 var styles = StyleSheet.create({
     card: {
         width: window.width,
-        height: 250,
         backgroundColor: Colors.white,
         shadowColor: Colors.black,
         shadowOpacity: 0.3,
@@ -69,6 +68,19 @@ var styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
+
+    noimageContainer: {
+        height: 150,
+        alignItems: 'center',
+    },
+
+    noimage: {
+        color: Colors.black,
+        fontSize: 18,
+        fontWeight: 'bold',
+        padding: 8,
+        marginTop: 32,
+    },
 });
 
 var Product = React.createClass({
@@ -88,18 +100,38 @@ var Product = React.createClass({
         });
     },
 
+    renderImage(images) {
+        if (images.pics.length > 0) {
+            var image = 'https:' + images.pics[0];
+            return (
+                <Image source={{uri: image}} style={styles.poster}/>
+            );
+        } else {
+            return (
+                <View style={styles.noimageContainer}>
+                    <Text style={styles.noimage}>
+                        No image
+                    </Text>
+                </View>
+            );
+        }
+    },
+
     render() {
         var product = this.props.data,
+            images = product.images,
             cost = '$' + product.cost,
-            image = 'https:' + product.images.pics[0],
             title = product.title.length < 22 ?
                 product.title :
-                product.title.slice(0, 22).trim() + '...';
+                product.title.slice(0, 22).trim() + '...',
+            computedHeight = {
+                height: images.pics.length > 0 ? 250 : 150,
+            };
 
         return (
             <TouchableHighlight onPress={this.clicked} underlayColor={Colors.transparent}>
-                <View style={styles.card}>
-					<Image source={{uri: image}} style={styles.poster}/>
+                <View style={[styles.card, computedHeight]}>
+					{ this.renderImage(images) }
                     <View style={styles.infoContainer}>
                         <View style={styles.row}>
                             <View>

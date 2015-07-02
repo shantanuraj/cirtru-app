@@ -53,6 +53,10 @@ var ProductList = React.createClass({
     },
 
     componentDidMount() {
+        this.checkAndRender();
+    },
+
+    checkAndRender() {
         if (this.props.list) {
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(this.props.list),
@@ -67,7 +71,6 @@ var ProductList = React.createClass({
         var type = this.props.type;
         fetch(Api.listings(type))
         .then(response => response.json())
-        .then(response => response.filter(listing => listing.images.pics.length > 0))
         .then(response => response.map(raw => Api.adaptListing(type, raw)))
         .then(response => {
             this.setState({

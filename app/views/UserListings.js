@@ -6,8 +6,9 @@ var React = require('react-native'),
 	MiniCard = require('./MiniCard'),
 	ProductList = require('./ProductList'),
 	Toast = require('./util/Toast'),
-	TimerMixin = require('react-timer-mixin'),
-	window = require('Dimensions').get('window');
+	TimerMixin = require('react-timer-mixin');
+
+var	window = require('Dimensions').get('window');
 
 var {
 	TouchableOpacity,
