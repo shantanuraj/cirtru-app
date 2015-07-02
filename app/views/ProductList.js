@@ -16,10 +16,7 @@ var {
 
 var styles = StyleSheet.create({
     container: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
+        backgroundColor: Colors.grey,
     },
 
     list: {
@@ -103,6 +100,7 @@ var ProductList = React.createClass({
 
         return (
             <ListView
+            contentContainerStyle={styles.container}
             dataSource={this.state.dataSource}
             renderRow={listing => <Product {...this.props} data={listing} isOwner={this.props.isOwner} style={styles.list} />} />
         );

@@ -30,7 +30,7 @@ var styles = StyleSheet.create({
     poster: {
         height: 250,
         width: window.width,
-        tintColor: '#FFF',
+        tintColor: Colors.white,
         alignItems: 'center',
         justifyContent: 'center',
     },
