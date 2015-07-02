@@ -43,7 +43,7 @@ var ProductList = React.createClass({
     propTypes: {
         isOwner: React.PropTypes.bool,
         list: React.PropTypes.array,
-        type: React.PropTypes.string.isRequired,
+        type: React.PropTypes.string,
     },
 
     getInitialState() {
