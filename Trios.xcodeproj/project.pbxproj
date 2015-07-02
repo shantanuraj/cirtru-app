@@ -25,6 +25,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		FF0288971B40981A00315FD4 /* InstallationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0288961B40981A00315FD4 /* InstallationManager.m */; };
 		FF133EBA1B3C09D800928DD0 /* libRNOverlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF133EB91B3C09B000928DD0 /* libRNOverlay.a */; };
+		FF726C471B44C21F00206A89 /* RNCookieManagerIOS.m in Sources */ = {isa = PBXBuildFile; fileRef = FF726C461B44C21F00206A89 /* RNCookieManagerIOS.m */; };
 		FF8E1D141B3E8166001CF0A1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8E1D131B3E8166001CF0A1 /* AudioToolbox.framework */; };
 		FF8E1D161B3E8173001CF0A1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8E1D151B3E8173001CF0A1 /* CFNetwork.framework */; };
 		FF8E1D181B3E817F001CF0A1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8E1D171B3E817F001CF0A1 /* CoreGraphics.framework */; };
@@ -167,6 +168,8 @@
 		FF0288891B4097DC00315FD4 /* InstallationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstallationManager.h; sourceTree = "<group>"; };
 		FF0288961B40981A00315FD4 /* InstallationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstallationManager.m; sourceTree = "<group>"; };
 		FF133EA91B3C09AF00928DD0 /* RNOverlay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNOverlay.xcodeproj; path = "node_modules/react-native-overlay/RNOverlay.xcodeproj"; sourceTree = "<group>"; };
+		FF726C451B44C21F00206A89 /* RNCookieManagerIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNCookieManagerIOS.h; sourceTree = "<group>"; };
+		FF726C461B44C21F00206A89 /* RNCookieManagerIOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCookieManagerIOS.m; sourceTree = "<group>"; };
 		FF847B8F1B44047600A72FA1 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../../../../Documents/ParseSDK/Parse.framework; sourceTree = "<group>"; };
 		FF8E1D131B3E8166001CF0A1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		FF8E1D151B3E8173001CF0A1 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -314,6 +317,8 @@
 		13B07FAE1A68108700A75B9A /* Trios */ = {
 			isa = PBXGroup;
 			children = (
+				FF726C451B44C21F00206A89 /* RNCookieManagerIOS.h */,
+				FF726C461B44C21F00206A89 /* RNCookieManagerIOS.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -683,6 +688,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF726C471B44C21F00206A89 /* RNCookieManagerIOS.m in Sources */,
 				FF0288971B40981A00315FD4 /* InstallationManager.m in Sources */,
 				FFB446D61B3281E60066D361 /* FacebookLoginManager.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
