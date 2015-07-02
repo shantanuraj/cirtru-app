@@ -64,6 +64,9 @@ var MiniCard = React.createClass({
 			width: this.props.dimen,
 			height: (this.props.dimen < 200) ? this.props.dimen : this.props.dimen / 2,
 		};
+		if (type === 'Others') {
+			type = 'Furniture & Others';
+		}
 		return (
 			<TouchableHighlight onPress={this.action} underlayColor={Colors.transparent}>
 				<View style={[styles.card, derivedStyle]}>

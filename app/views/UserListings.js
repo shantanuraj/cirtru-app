@@ -16,6 +16,38 @@ var {
 	Text,
 } = React;
 
+var styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: Colors.grey,
+	},
+
+	leadText: {
+		fontSize: 32,
+		fontWeight: 'bold',
+		color: Colors.white,
+		padding: 16,
+	},
+
+	grid: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+
+	toastText: {
+		color: Colors.white,
+		padding: 15,
+		backgroundColor: Colors.transparent,
+		fontSize: 16,
+		fontWeight: 'bold',
+		alignSelf: 'center',
+    },
+});
+
+
 var UserListings = React.createClass({
 	mixins: [TimerMixin],
 
@@ -25,22 +57,6 @@ var UserListings = React.createClass({
 			listings: null,
 			showToast: false,
 		};
-	},
-
-	render() {
-		var categories = Api.categories,
-			category = categories[0],
-			categories = categories.slice([1]),
-			Cards = categories.map((category, i) => <MiniCard {...this.props} key={i} type={category} dimen={window.width / 2} action={this.action(category)} />);
-
-		return (
-			<View style={styles.container}>
-				<MiniCard {...this.props} key={192} type={category} dimen={window.width} action={this.action(category)}/>
-				{this.renderGroup(Cards[0], Cards[1])}
-				{this.renderGroup(Cards[2], Cards[3])}
-				{this.makeToast('No listings in this section', this.state.showToast, 'brandPrimary')}
-			</View>
-		);
 	},
 
 	componentDidMount() {
@@ -71,13 +87,13 @@ var UserListings = React.createClass({
 		return function() {
 			if (self.state.listings[category].length === 0) {
 				self.setState({ showToast: true });
-				self.setTimeout(() => self.setState({ showToast : false }), 1500);
+				self.setTimeout(() => self.setState({ showToast: false }), 1500);
 			} else {
 				self.props.navigator.push({
-					title     : category,
-					component : ProductList,
-					passProps : {
-						list : self.state.listings[category],
+					title: category,
+					component: ProductList,
+					passProps: {
+						list: self.state.listings[category],
 						isOwner: true,
 					},
 				});
@@ -96,37 +112,22 @@ var UserListings = React.createClass({
             </Toast>
 		);
 	},
-});
 
-var styles = StyleSheet.create({
-	container: {
-	    flex: 1,
-	    justifyContent: 'center',
-	    alignItems: 'center',
-		backgroundColor: Colors.grey,
+	render() {
+		var categories = Api.categories,
+			category = categories[0],
+			categories = categories.slice([1]),
+			Cards = categories.map((category, i) => <MiniCard {...this.props} key={i} type={category} dimen={window.width / 2} action={this.action(category)} />);
+
+		return (
+			<View style={styles.container}>
+				<MiniCard {...this.props} action={this.action(category)} dimen={window.width} key={192} type={category} />
+				{this.renderGroup(Cards[0], Cards[1])}
+				<MiniCard {...this.props} action={this.action('Others')} dimen={window.width} key={193} type={'Others'} />
+				{this.makeToast('No listings in this section', this.state.showToast, 'brandPrimary')}
+			</View>
+		);
 	},
-
-	leadText: {
-		fontSize: 32,
-		fontWeight: 'bold',
-		color: Colors.white,
-		padding: 16,
-	},
-
-	grid: {
-		flexDirection: 'row',
-    	alignItems: 'center',
-    	justifyContent: 'center',
-	},
-
-	toastText: {
-		color: Colors.white,
-		padding: 15,
-		backgroundColor: Colors.transparent,
-		fontSize: 16,
-		fontWeight: 'bold',
-		alignSelf: 'center',
-    },
 });
 
 module.exports = UserListings;

@@ -83,8 +83,8 @@ module.exports = {
 			switch(type) {
 				case 'roommates': key = 'Roommates'; break;
 				case 'rentals': key = 'Sublets'; break;
-				case 'others': key = 'Others'; break;
 				case 'cars': key = 'Cars'; break;
+				default: key = 'Others';
 			}
             adapted[key] = list.map(item => this.adaptListing(key, item));
 		});
@@ -115,10 +115,10 @@ module.exports = {
 			message: message,
 		};
 		switch (type) {
-			case 'roommates': payload['roommate'] = listing; break;
-			case 'sublets': payload['rental'] = listing; break;
-			case 'cars': payload['car'] = listing; break;
-			default: payload['other'] = listing;
+			case 'roommates': payload.roommate = listing; break;
+			case 'sublets': payload.rental = listing; break;
+			case 'cars': payload.car = listing; break;
+			default: payload.other = listing;
 		}
 		return payload;
 	},
