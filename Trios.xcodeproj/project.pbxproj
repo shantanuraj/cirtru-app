@@ -816,8 +816,8 @@
 			baseConfigurationReference = 2A08924EB07B1A59AF7AC352 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shantanu Raj (DBD4H768ZS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shantanu Raj (DBD4H768ZS)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/walle/Documents/FacebookSDK,
@@ -836,7 +836,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = Trios;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ab718e37-482f-4a62-84af-64bb7709044e";
 			};
 			name = Debug;
 		};
@@ -845,8 +845,8 @@
 			baseConfigurationReference = 4028DFF385F4CA7BDFCC43C9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shantanu Raj (DBD4H768ZS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shantanu Raj (DBD4H768ZS)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/walle/Documents/FacebookSDK,
@@ -866,7 +866,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = Trios;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ab718e37-482f-4a62-84af-64bb7709044e";
 			};
 			name = Release;
 		};
@@ -887,7 +887,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Shantanu Raj (K26EG3ZCQ9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shantanu Raj (DBD4H768ZS)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -914,6 +914,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
 		};
@@ -935,7 +936,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shantanu Raj (DBD4H768ZS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shantanu Raj (DBD4H768ZS)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -953,6 +954,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
