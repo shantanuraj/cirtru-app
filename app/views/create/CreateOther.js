@@ -3,7 +3,9 @@
 var React = require('react-native'),
     Colors = require('../../core/Colors'),
     t = require('tcomb-form-native'),
-    Form = t.form.Form;
+    Icon = require('FAKIconImage');
+
+var Form = t.form.Form;
 
 var {
     SegmentedControlIOS,
@@ -13,6 +15,46 @@ var {
     View,
     StyleSheet
 } = React;
+
+var styles = StyleSheet.create({
+    container: {
+        marginTop: 65,
+        padding: 8,
+        justifyContent: 'center',
+    },
+
+    segment: {
+        marginBottom: 24,
+    },
+
+    button: {
+        backgroundColor: Colors.brandSecondaryLight,
+        borderRadius: 4,
+        padding: 8,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    buttonText: {
+        fontSize: 18,
+        color: 'white',
+        alignSelf: 'center',
+    },
+
+    promptIcon: {
+        width: 50,
+        height: 50,
+        margin: 4,
+    },
+
+    promptContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
 
 var OtherItem = t.struct({
     title: t.Str,
@@ -33,10 +75,14 @@ var options = {
         sellingPrice: {
             error: 'Please enter a valid price',
         },
-    }
+    },
 };
 
 var CreateOther = React.createClass({
+    propTypes: {
+        category: React.PropTypes.string,
+    },
+
     getInitialState() {
         return {
             value: undefined,
@@ -55,35 +101,6 @@ var CreateOther = React.createClass({
 
     types: ['Used', 'New'],
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <SegmentedControlIOS
-                style={styles.segment}
-                tintColor={Colors.brandSecondary}
-                values={this.types}
-                onValueChange={this._onValueChange} />
-                <Form
-                  ref="form"
-                  type={OtherItem}
-                  options={options}
-                />
-                <TouchableOpacity onPress={this.addImages}>
-                    <Text style={styles.galleryText}>
-                        Add images from Camera Roll
-                    </Text>
-                </TouchableOpacity>
-                <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor={Colors.brandSecondary}>
-                    <Text style={styles.buttonText}>Create</Text>
-                </TouchableHighlight>
-            </View>
-        );
-    },
-
-    addImages() {
-        //Stub
-    },
-
     onPress() {
         var value = this.refs.form.getValue();
         if (value) {
@@ -91,44 +108,57 @@ var CreateOther = React.createClass({
         }
     },
 
-    _onValueChange(value) {
+    onValueChange(value) {
         this.setState({
             value: value,
         });
     },
-});
 
-var styles = StyleSheet.create({
-    container: {
-        marginTop: 65,
-        padding: 8,
+    addImages() {
+        //Stub
     },
 
-    segment: {
-        marginBottom: 24,
+    launchCam() {
+        //Stub
     },
 
-    button: {
-        backgroundColor: Colors.brandSecondaryLight,
-        borderRadius: 4,
-        margin: 8,
-        padding: 8,
-        width: window.width - 8,
-        alignItems: 'center',
-        justifyContent: 'center',
+    render() {
+        return (
+            <View style={styles.container}>
+                <SegmentedControlIOS
+                onValueChange={this.onValueChange}
+                style={styles.segment}
+                tintColor={Colors.brandSecondary}
+                values={this.types} />
+                <Form
+                  options={options}
+                  ref="form"
+                  type={OtherItem} />
+
+                <View style={styles.promptContainer}>
+                    <TouchableOpacity onPress={this.addImages}>
+                        <Icon
+                        color={Colors.brandSecondary}
+                        name='ion|image'
+                        size={50}
+                        style={styles.promptIcon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.launchCam}>
+                        <Icon
+                        color={Colors.brandSecondary}
+                        name='ion|ios-camera-outline'
+                        size={50}
+                        style={styles.promptIcon} />
+                    </TouchableOpacity>
+                </View>
+
+                <TouchableHighlight onPress={this.onPress} style={styles.button} underlayColor={Colors.brandSecondary}>
+                    <Text style={styles.buttonText}>Create</Text>
+                </TouchableHighlight>
+            </View>
+        );
     },
 
-    buttonText: {
-        fontSize: 18,
-        color: 'white',
-        alignSelf: 'center'
-    },
-
-    galleryText: {
-        marginLeft: 8,
-        marginBottom: 16,
-        color: Colors.brandSecondary,
-    },
 });
 
 module.exports = CreateOther;

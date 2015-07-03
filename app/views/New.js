@@ -68,11 +68,11 @@ var New = React.createClass({
 			category = categories[0];
 
 		categories = categories.slice([1]);
-		var Cards = categories.map((category, i) => <MiniCard {...this.props} key={i} type={category} dimen={window.width / 2} action={this.openCreatePage(category)} />);
+		var Cards = categories.map((category, i) => <MiniCard {...this.props} action={this.openCreatePage(category)} dimen={window.width / 2} key={i} type={category} />);
 
 		return (
 			<View style={styles.container}>
-				<MiniCard {...this.props} key={192} type={category} dimen={window.width} action={this.openCreatePage(category)} />
+				<MiniCard {...this.props} action={this.openCreatePage(category)} dimen={window.width} key={192} type={category} />
 				{this.renderGroup(Cards[0], Cards[1])}
 				{this.renderGroup(Cards[2], Cards[3])}
 			</View>
