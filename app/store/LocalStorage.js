@@ -12,19 +12,15 @@ var LocalStorage = {
         CookieManager.getAll((cookies, res) => {
             if (cookies) {
                 AsyncStorage.setItem(COOKIE, JSON.stringify(cookies), error => {
-                    if (error) {
-                        console.log('Cookie not saved');
-                    } else {
-                        console.log('Cookie cached', cookies);
+                    if (!error) {
+                        console.log('Auth Success', cookies);
                     }
                 });
             }
         });
         AsyncStorage.setItem(USER, JSON.stringify(user), error => {
-            if (error) {
-                console.log('Could not save user');
-            } else {
-                console.log('Saved user');
+            if (!error) {
+                console.log('Set User');
                 UserActions.login(user);
             }
         });
@@ -59,7 +55,7 @@ var LocalStorage = {
 
         CookieManager.set(cookies, (extra, res) => {
             if (res === 'success') {
-                console.log('Picked from cache', value);
+                console.log('Cache success', value);
             }
         });
     },

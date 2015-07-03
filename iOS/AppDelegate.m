@@ -57,6 +57,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
 
   UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
                                                   UIUserNotificationTypeBadge |
@@ -68,6 +69,7 @@
 
   [Parse setApplicationId:@"3tX7e1QiJmTiBQe354EtWLJgCw1W6FcH03kTi8qF"
                 clientKey:@"uvHVxGjn3zJ8Y5FyAPXC3ZUEapwBeAWvVyHAbGIK"];
+  
 
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];
