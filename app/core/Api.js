@@ -8,7 +8,7 @@ var Furniture = require('../models/Furniture'),
 	_ = require('immutable');
 
 module.exports = {
-	base: 'http://localhost:3000/',
+	base: 'https://cirtru.com/',
 
 	categories: ['Roommates', 'Sublets', 'Cars', 'Furniture', 'Others'],
 

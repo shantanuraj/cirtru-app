@@ -32,7 +32,7 @@ var RegisterPerson = t.struct({
     email: Email,
     firstName: t.Str,
     password: FormPassword,
-})
+});
 
 var options = {
     fields: {
@@ -47,7 +47,7 @@ var options = {
         email: {
             error: 'Please enter a valid email',
         },
-    }
+    },
 };
 
 var EmailLogin = React.createClass({
@@ -101,7 +101,7 @@ var styles = StyleSheet.create({
         backgroundColor: Colors.white,
         flex: 1,
     },
-    
+
     button: {
         height: 36,
         backgroundColor: Colors.brandSecondary,
@@ -110,13 +110,13 @@ var styles = StyleSheet.create({
         borderRadius: 4,
         marginBottom: 10,
         alignSelf: 'stretch',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
-    
+
     buttonText: {
         fontSize: 18,
         color: 'white',
-        alignSelf: 'center'
+        alignSelf: 'center',
     },
 });
 

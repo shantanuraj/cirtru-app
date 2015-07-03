@@ -47,7 +47,7 @@ var Tabs = React.createClass({
 	render() {
 		var tabs = [
 			this.renderTab('home', 'ion|ios-home-outline', <Home {...this.props} />),
-			this.renderTab('new', 'ion|plus', <New {...this.props} />),
+			// this.renderTab('new', 'ion|plus', <New {...this.props} />),
 			this.renderTab('profile', 'ion|person', <Profile {...this.props} />),
 		];
 
