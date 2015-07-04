@@ -176,7 +176,7 @@ var ProductList = React.createClass({
                 <ListView
                 dataSource={list}
                 renderRow={listing => <Product {...this.props} data={listing} isOwner={this.props.isOwner} style={styles.list} />} />
-                {this.renderFilterOrNot}
+                {this.renderFilterOrNot()}
                 {this.makeToast('No matches found', this.state.filterStore.action === 'none', 'warn')}
             </View>
         );

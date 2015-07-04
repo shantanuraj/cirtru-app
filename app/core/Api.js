@@ -86,7 +86,11 @@ module.exports = {
 				case 'cars': key = 'Cars'; break;
 				default: key = 'Others';
 			}
-            adapted[key] = list.map(item => this.adaptListing(key, item));
+			if (list) {
+				adapted[key] = list.map(item => this.adaptListing(key, item));	
+			} else {
+				adapted[key] = [];
+			}
 		});
 
 		return adapted;
