@@ -18,8 +18,8 @@ var ContactButton = React.createClass({
             style={styles.fab}
             underlayColor={Colors.brandSecondary}>
                 <Icon
-                name='ion|email'
-                size={32}
+                name='fontawesome|filter'
+                size={28}
                 color={Colors.white}
                 style={styles.icon} />
             </TouchableHighlight>

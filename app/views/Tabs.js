@@ -5,7 +5,6 @@ var React = require('react-native'),
 	Colors = require('../core/Colors'),
 	Home = require('./Home'),
 	New = require('./New'),
-	Search = require('./search/Search'),
 	Profile = require('./Profile');
 
 var	SMXTabBarItemIOS = SMXTabBarIOS.Item;
@@ -47,10 +46,10 @@ var Tabs = React.createClass({
 
 	render() {
 		var tabs = [
-			this.renderTab('search', 'ion|ios-search-strong', <Search {...this.props} />),
 			this.renderTab('home', 'ion|ios-home-outline', <Home {...this.props} />),
-			// this.renderTab('new', 'ion|plus', <New {...this.props} />),
 			this.renderTab('profile', 'ion|person', <Profile {...this.props} />),
+			// this.renderTab('search', 'ion|ios-search-strong', <Search {...this.props} />),
+			// this.renderTab('new', 'ion|plus', <New {...this.props} />),
 		];
 
 		return (

@@ -1,9 +1,14 @@
 'use strict';
 
 var React = require('react-native'),
+    Reflux = require('reflux'),
     Api = require('../core/Api'),
     Colors = require('../core/Colors'),
-    Product = require('./Product');
+    Product = require('./Product'),
+    Search = require('./search/Search'),
+    FilterButton = require('./util/FilterButton'),
+    FilterActions = require('../actions/FilterActions'),
+    FilterStore = require('../store/FilterStore');
 
 var {
     ListView,
@@ -16,6 +21,9 @@ var {
 
 var styles = StyleSheet.create({
     container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: Colors.grey,
     },
 
@@ -34,9 +42,18 @@ var styles = StyleSheet.create({
     loading: {
         margin: 8,
     },
+
+    fabContainer: {
+        position: 'absolute',
+        bottom: 16,
+        right: 16,
+        borderRadius: 24,
+    },
 });
 
 var ProductList = React.createClass({
+    mixins: [Reflux.connect(FilterStore, 'filterStore')],
+
     propTypes: {
         isOwner: React.PropTypes.bool,
         list: React.PropTypes.array,
@@ -54,6 +71,10 @@ var ProductList = React.createClass({
 
     componentDidMount() {
         this.checkAndRender();
+    },
+
+    componentWillUnmount() {
+        FilterActions.clearStore();
     },
 
     checkAndRender() {
@@ -81,6 +102,19 @@ var ProductList = React.createClass({
         .done();
     },
 
+    filter() {
+        this.props.navigator.push({
+            title: 'Filter',
+            component: Search,
+            passProps: {
+                category: this.props.type,
+            },
+        });
+        this.setState({
+            loaded: false,
+        });
+    },
+
     renderLoadingView() {
         return (
             <View style={styles.loadingContainer}>
@@ -96,17 +130,30 @@ var ProductList = React.createClass({
         );
     },
 
+    renderList(list) {
+        return (
+            <View style={styles.container}>
+                <ListView
+                dataSource={list}
+                renderRow={listing => <Product {...this.props} data={listing} isOwner={this.props.isOwner} style={styles.list} />} />
+                <View style={styles.fabContainer}>
+                    <FilterButton action={this.filter} />
+                </View>
+            </View>
+        );
+    },
+
     render() {
-        if (!this.state.loaded) {
+        if (this.state.filterStore.action === 'found') {
+            return this.renderList(this.state.dataSource.cloneWithRows(this.state.filterStore.list));
+        }
+        if (!this.state.loaded && this.state.filterStore.action === 'none') {
+            return this.renderList(this.state.dataSource)
+        }
+        if (!this.state.loaded || this.state.filterStore.action === 'searching') {
             return this.renderLoadingView();
         }
-
-        return (
-            <ListView
-            contentContainerStyle={styles.container}
-            dataSource={this.state.dataSource}
-            renderRow={listing => <Product {...this.props} data={listing} isOwner={this.props.isOwner} style={styles.list} />} />
-        );
+        return this.renderList(this.state.dataSource);
     },
 });
 

@@ -112,7 +112,7 @@ var styles = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center',
     },
-
+    
     buttonText: {
         fontSize: 18,
         color: 'white',
