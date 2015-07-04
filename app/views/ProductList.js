@@ -160,15 +160,23 @@ var ProductList = React.createClass({
         );
     },
 
+    renderFilterOrNot() {
+        if (!this.props.isOwner) {
+            return (
+                <View style={styles.fabContainer}>
+                    <FilterButton action={this.filter} />
+                </View>
+            );
+        }
+    },
+
     renderList(list) {
         return (
             <View style={styles.container}>
                 <ListView
                 dataSource={list}
                 renderRow={listing => <Product {...this.props} data={listing} isOwner={this.props.isOwner} style={styles.list} />} />
-                <View style={styles.fabContainer}>
-                    <FilterButton action={this.filter} />
-                </View>
+                {this.renderFilterOrNot}
                 {this.makeToast('No matches found', this.state.filterStore.action === 'none', 'warn')}
             </View>
         );
