@@ -20,6 +20,12 @@ var FilterStore = Reflux.createStore({
 
     onClearStore() {
         this.init();
+        this.trigger(this.state);
+    },
+
+    onHideToast() {
+        this.state.action = 'not';
+        this.trigger(this.state);
     },
 
     setList(list) {

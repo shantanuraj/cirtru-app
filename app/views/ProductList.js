@@ -6,9 +6,11 @@ var React = require('react-native'),
     Colors = require('../core/Colors'),
     Product = require('./Product'),
     Search = require('./search/Search'),
+    Toast = require('./util/Toast'),
     FilterButton = require('./util/FilterButton'),
     FilterActions = require('../actions/FilterActions'),
-    FilterStore = require('../store/FilterStore');
+    FilterStore = require('../store/FilterStore'),
+    TimerMixin = require('react-timer-mixin');
 
 var {
     ListView,
@@ -16,6 +18,7 @@ var {
     Text,
     View,
     ScrollView,
+    TouchableOpacity,
     ActivityIndicatorIOS,
 } = React;
 
@@ -49,10 +52,19 @@ var styles = StyleSheet.create({
         right: 16,
         borderRadius: 24,
     },
+
+    toastText: {
+        color: Colors.white,
+        padding: 15,
+        backgroundColor: Colors.transparent,
+        fontSize: 16,
+        fontWeight: 'bold',
+        alignSelf: 'center',
+    },
 });
 
 var ProductList = React.createClass({
-    mixins: [Reflux.connect(FilterStore, 'filterStore')],
+    mixins: [Reflux.connect(FilterStore, 'filterStore'), TimerMixin],
 
     propTypes: {
         isOwner: React.PropTypes.bool,
@@ -71,6 +83,12 @@ var ProductList = React.createClass({
 
     componentDidMount() {
         this.checkAndRender();
+    },
+
+    componentDidUpdate() {
+        if (this.state.filterStore.action === 'none') {
+            this.setTimeout(FilterActions.hideToast, 1500);
+        }
     },
 
     componentWillUnmount() {
@@ -115,6 +133,18 @@ var ProductList = React.createClass({
         });
     },
 
+    makeToast(content, visibility, mode) {
+        return (
+            <Toast isVisible={visibility} mode={mode}>
+                <TouchableOpacity>
+                    <Text style={styles.toastText}>
+                        {content}
+                    </Text>
+                </TouchableOpacity>
+            </Toast>
+        );
+    },
+
     renderLoadingView() {
         return (
             <View style={styles.loadingContainer}>
@@ -139,6 +169,7 @@ var ProductList = React.createClass({
                 <View style={styles.fabContainer}>
                     <FilterButton action={this.filter} />
                 </View>
+                {this.makeToast('No matches found', this.state.filterStore.action === 'none', 'warn')}
             </View>
         );
     },
@@ -147,7 +178,7 @@ var ProductList = React.createClass({
         if (this.state.filterStore.action === 'found') {
             return this.renderList(this.state.dataSource.cloneWithRows(this.state.filterStore.list));
         }
-        if (!this.state.loaded && this.state.filterStore.action === 'none') {
+        if (this.state.filterStore.action === 'none' || (this.state.filterStore.action === 'not' && this.state.filterStore.list)) {
             return this.renderList(this.state.dataSource)
         }
         if (!this.state.loaded || this.state.filterStore.action === 'searching') {
