@@ -50,9 +50,23 @@ var styles = StyleSheet.create({
 
 var Search = React.createClass({
 	onPress() {
-		var query = 'searchBox=' + this.state.searchBox;		
+		var query = 'searchBox=' + this.state.searchBox + '&';
+		if (this.state.primaryLocation != '') {
+			query += 'primaryLocation=' +	this.state.primaryLocation + '&';
+		}
+		if (this.state.circle !== '') {
+			query += 'circle=' + this.state.circle + '&';
+		}
 		FilterActions.filterList(this.props.category, query);
 		this.props.navigator.pop();
+	},
+
+	getInitialState() {
+		return {
+			searchBox: '',
+			primaryLocation: '',
+			circle: '',
+		};
 	},
 
 	render() {
@@ -62,6 +76,16 @@ var Search = React.createClass({
 				autoFocus={true}
 				onChangeText={ searchBox => this.setState({ searchBox }) }
 				placeholder={'Enter search query'}
+				placeholderTextColor={Colors.grey}
+				style={styles.searchBar} />
+				<TextInput
+				onChangeText={ primaryLocation => this.setState({ primaryLocation }) }
+				placeholder={'Enter location'}
+				placeholderTextColor={Colors.grey}
+				style={styles.searchBar} />
+				<TextInput
+				onChangeText={ circle => this.setState({ circle }) }
+				placeholder={'Enter circle'}
 				placeholderTextColor={Colors.grey}
 				style={styles.searchBar} />
 				<TouchableHighlight
