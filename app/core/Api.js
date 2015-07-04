@@ -8,9 +8,11 @@ var Furniture = require('../models/Furniture'),
 	_ = require('immutable');
 
 module.exports = {
-	base: 'http://localhost:3000/',
+	base: 'http://192.168.1.100:3000/',
 
 	categories: ['Roommates', 'Sublets', 'Cars', 'Furniture', 'Others'],
+
+	filterQueries: ['primaryLocation', 'circle', 'make', 'color', 'year'],
 
 	listings(type) {
 		switch(type) {
@@ -97,7 +99,7 @@ module.exports = {
 	},
 
 	getListingUrl(type) {
-		switch (type) {
+		switch(type) {
 			case 'roommates': return this.base + 'api/v1/sfbayarea/roommates/';
 			case 'sublets': return this.base + 'api/v1/sfbayarea/rentals/';
 			case 'cars': return this.base + 'api/v1/sfbayarea/cars/';
@@ -106,13 +108,55 @@ module.exports = {
 	},
 
 	getFilterUrl(type, query) {
-		switch (type) {
+		switch(type) {
 			case 'Roommates': return this.base + 'api/v1/sfbayarea/roommates?' + query;
 			case 'Furniture': return this.base + 'api/v1/sfbayarea/others?category=furniture' + query;
 			case 'Sublets': return this.base + 'api/v1/sfbayarea/rentals?' + query;
 			case 'Others': return this.base + 'api/v1/sfbayarea/others?' + query;
 			case 'Cars': return this.base + 'api/v1/sfbayarea/cars?' + query;	
 		}
+	},
+
+	getQueryUrl(type, queries) {
+		var base = this.getFilterUrl(type);
+		// _.Map(queries).
+	},
+
+	getFilterOptions(type) {
+		var base = this.base + 'filterOptions/';
+		switch(type) {
+			case 'Roommates': return base + 'roommates';
+			case 'Furniture': return base + 'forsale/furniture';
+			case 'Sublets': return base + 'rentals';
+			case 'Others': return base + 'forsale/others';
+			case 'Cars': return base + 'cars';
+		}
+	},
+
+	makeFilterOptions(adapted) {
+		var raw = _.Map(adapted).mapKeys(key => {
+			switch(key) {
+				case 'make': return 'filterMakeObj';
+				case 'year': return 'filterYearObj';
+				case 'color': return 'filterColorObj';
+				case 'circle': return 'filterCircleObj';
+				case 'location': return 'filterPrimaryLocationOptionsObj';
+			}
+		});
+		return raw.toObject();
+	},
+
+	adaptOptions(raw) {
+		var adapted = _.Map(raw).mapKeys(key => {
+			switch(key) {
+				case 'filterMakeObj': return 'make';
+				case 'filterYearObj': return 'year';
+				case 'filterColorObj': return 'color';
+				case 'filterCircleObj': return 'circle';
+				case 'filterPrimaryLocationOptionsObj': return 'location';
+			}
+		});
+		return adapted.toObject();
 	},
 
 	getContactUrl(type, id) {

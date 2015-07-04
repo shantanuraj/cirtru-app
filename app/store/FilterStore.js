@@ -2,6 +2,7 @@
 
 var Reflux = require('reflux'),
     Api = require('../core/Api'),
+    _ = require('immutable'),
     FilterActions = require('../actions/FilterActions');
 
 var FilterStore = Reflux.createStore({
@@ -11,6 +12,7 @@ var FilterStore = Reflux.createStore({
         this.state = {
             action: 'not',
             list: null,
+            options: {},
         };
     },
 
@@ -39,8 +41,8 @@ var FilterStore = Reflux.createStore({
     	this.trigger(this.state);
     },
 
-    onFilterList(type, query) {
-        fetch(Api.getFilterUrl(type, query))
+    onFilterList(type, queries) {
+        fetch(Api.getFilterUrl(type, queries))
         .then(response => {
         	if (response.status !== 200) {
         		return null;
@@ -60,6 +62,23 @@ var FilterStore = Reflux.createStore({
 
         this.state.action = 'searching';
         this.trigger(this.state);
+    },
+
+    onGetOptions() {
+        Api.categories.forEach(category => {
+            fetch(Api.getFilterOptions(category))
+            .then(response => response.json())
+            .then(options => {
+                this.state.options[category] = Api.adaptOptions(options);
+            })
+            .then(() => {
+                var options = _.Map(this.state.options);
+                if (options.size === 5) {
+                    this.trigger(this.state);
+                }
+            })
+            .done();
+        })
     },
 });
 

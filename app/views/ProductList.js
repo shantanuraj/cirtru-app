@@ -126,11 +126,19 @@ var ProductList = React.createClass({
             component: Search,
             passProps: {
                 category: this.props.type,
+                action: this.searchOrNot,
             },
         });
-        this.setState({
-            loaded: false,
-        });
+    },
+
+    searchOrNot(queries) {
+        if (queries !== '') {
+            this.setState({
+                loaded: false,
+            });
+            FilterActions.filterList(this.props.type, queries);
+        }
+        this.props.navigator.pop();
     },
 
     makeToast(content, visibility, mode) {

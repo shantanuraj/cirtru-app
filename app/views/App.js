@@ -2,7 +2,8 @@
 
 var React = require('react-native'),
 	Colors = require('../core/Colors'),
-	Tabs = require('./Tabs');
+	Tabs = require('./Tabs'),
+	FilterActions = require('../actions/FilterActions');
 
 var {
 	StyleSheet,
@@ -22,6 +23,7 @@ var styles = StyleSheet.create({
 var App = React.createClass({
 	componentWillMount() {
 		PushNotificationIOS.addEventListener('notification', this.onNotification);
+		FilterActions.getOptions();
 	},
 
 	componentWillUnmount() {

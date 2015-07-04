@@ -836,7 +836,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = Trios;
-				PROVISIONING_PROFILE = "ab718e37-482f-4a62-84af-64bb7709044e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -866,7 +866,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = Trios;
-				PROVISIONING_PROFILE = "ab718e37-482f-4a62-84af-64bb7709044e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

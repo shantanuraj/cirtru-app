@@ -6,6 +6,7 @@ var profileActions = [
     'filterList',
     'clearStore',
     'hideToast',
+    'getOptions',
 ];
 
 var actions = Reflux.createActions(profileActions);

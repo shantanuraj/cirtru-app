@@ -3,15 +3,18 @@
 var React = require('react-native'),
 	Reflux = require('reflux'),
 	Colors = require('../../core/Colors'),
-	FilterActions = require('../../actions/FilterActions');
+	FilterStore = require('../../store/FilterStore');
 
 var {
 	StyleSheet,
 	View,
 	Text,
 	TextInput,
+	PickerIOS,
 	TouchableHighlight,
 } = React;
+
+var PickerItemIOS = PickerIOS.Item;
 
 var styles = StyleSheet.create({
 	container: {
@@ -49,27 +52,52 @@ var styles = StyleSheet.create({
 });
 
 var Search = React.createClass({
-	onPress() {
-		var query = 'searchBox=' + this.state.searchBox + '&';
-		if (this.state.primaryLocation != '') {
-			query += 'primaryLocation=' +	this.state.primaryLocation + '&';
-		}
-		if (this.state.circle !== '') {
-			query += 'circle=' + this.state.circle + '&';
-		}
-		FilterActions.filterList(this.props.category, query);
-		this.props.navigator.pop();
-	},
+	mixins: [Reflux.connect(FilterStore, 'filterStore')],
+
+	location: null,
 
 	getInitialState() {
 		return {
 			searchBox: '',
 			primaryLocation: '',
 			circle: '',
+			make: '',
+			color: '',
+			year: '',
+			loaded: false,
 		};
 	},
 
+	buildQueryString() {
+		var query = '';
+		if (this.state.searchBox !== '') {
+			query += 'searchBox=' + this.state.searchBox + '&';
+		}
+		if (this.state.primaryLocation != '') {
+			query += 'primaryLocation=' +	this.state.primaryLocation + '&';
+		}
+		if (this.state.circle !== '') {
+			query += 'circle=' + this.state.circle + '&';
+		}
+		if (this.state.make !== '') {
+			query += 'make=' + this.state.make + '&';
+		}
+		if (this.state.color !== '') {
+			query += 'color=' + this.state.color + '&';
+		}
+		if (this.state.year !== '') {
+			query += 'year=' + this.state.year + '&';
+		}
+		return query;
+	},
+
+	onPress() {
+		var queries = this.buildQueryString();
+		this.props.action(queries);
+	},
+
 	render() {
+		var options = this.state.filterStore.options[this.props.category];
 		return (
 			<View style={styles.container}>
 				<TextInput
@@ -78,16 +106,25 @@ var Search = React.createClass({
 				placeholder={'Enter search query'}
 				placeholderTextColor={Colors.grey}
 				style={styles.searchBar} />
-				<TextInput
-				onChangeText={ primaryLocation => this.setState({ primaryLocation }) }
-				placeholder={'Enter location'}
-				placeholderTextColor={Colors.grey}
-				style={styles.searchBar} />
+
 				<TextInput
 				onChangeText={ circle => this.setState({ circle }) }
 				placeholder={'Enter circle'}
 				placeholderTextColor={Colors.grey}
 				style={styles.searchBar} />
+
+				<Text>
+					Location
+				</Text>
+				<PickerIOS
+				onValueChange={ location => this.location = location }>
+					{options.location.map(locationObj => (
+						<PickerItemIOS
+						key={locationObj.id}
+						value={locationObj.location}
+						label={locationObj.location} />))}
+        		</PickerIOS>
+
 				<TouchableHighlight
 				onPress={this.onPress}
 				style={styles.searchButton}>
