@@ -50,7 +50,7 @@ var styles = StyleSheet.create({
 
 var Search = React.createClass({
 	onPress() {
-		var query = 'searchBox=' + this.state.searchBox;
+		var query = 'searchBox=' + this.state.searchBox;		
 		FilterActions.filterList(this.props.category, query);
 		this.props.navigator.pop();
 	},

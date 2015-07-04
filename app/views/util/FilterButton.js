@@ -10,7 +10,7 @@ var {
     Text,
 } = React;
 
-var ContactButton = React.createClass({
+var FilterButton = React.createClass({
     render() {
         return (
             <TouchableHighlight
@@ -50,4 +50,4 @@ var styles = StyleSheet.create({
     },
 });
 
-module.exports = ContactButton;
+module.exports = FilterButton;
