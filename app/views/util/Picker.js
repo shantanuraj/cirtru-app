@@ -19,6 +19,7 @@ var Picker = React.createClass({
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
+            selected: [],
         };
     },
 
