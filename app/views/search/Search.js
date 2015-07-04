@@ -3,6 +3,7 @@
 var React = require('react-native'),
 	Reflux = require('reflux'),
 	Colors = require('../../core/Colors'),
+	Picker = require('../util/Picker'),
 	FilterStore = require('../../store/FilterStore');
 
 var {
@@ -116,14 +117,6 @@ var Search = React.createClass({
 				<Text>
 					Location
 				</Text>
-				<PickerIOS
-				onValueChange={ location => this.location = location }>
-					{options.location.map(locationObj => (
-						<PickerItemIOS
-						key={locationObj.id}
-						value={locationObj.location}
-						label={locationObj.location} />))}
-        		</PickerIOS>
 
 				<TouchableHighlight
 				onPress={this.onPress}
@@ -132,6 +125,11 @@ var Search = React.createClass({
 						Search
 					</Text>
 				</TouchableHighlight>
+
+				<Picker 
+				isVisible={true}
+				label={'location'}
+				list={options.location} />
 			</View>
 		);
 	},

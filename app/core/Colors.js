@@ -2,6 +2,7 @@
 
 module.exports = {
 	brandPrimary: '#1E88E5',
+	brandPrimaryDark: '#0D47A1',
 	brandSecondary: '#E91E63',
 	brandSecondaryDark: '#C2185B',
 	brandSecondaryLight: '#FF4081',
