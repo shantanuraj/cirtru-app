@@ -122,6 +122,17 @@ module.exports = {
 		// _.Map(queries).
 	},
 
+	roommatesFilterSet: {
+		propertyTypes: ['Private Room', 'Shared Room'],
+		minPrice: [0, 500, 1000, 1500, 2000, 3000, 4000],
+		maxPrice: [500, 1000, 1500, 2000, 3000, 4000, 5000],
+		gender: ['Male', 'Female'],
+		diet: ['Vegan', 'Vegetarian (No Eggs)', 'Vegetarian (Eggs ok)'],
+		drinking: ['Doesn\'t drink', 'Drinks occasionally', 'Drinks frequently'],
+		smoking: ['Doesn\'t smoke', 'Smokes', 'Smokes outside only'],
+		pets: ['With no pets', 'With pet dog ok', 'With pet cat ok', 'With any pet ok'],
+	},
+
 	getFilterOptions(type) {
 		var base = this.base + 'filterOptions/';
 		switch(type) {

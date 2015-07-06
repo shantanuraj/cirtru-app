@@ -2,6 +2,7 @@
 
 var React = require('react-native'),
 	Reflux = require('reflux'),
+	Api = require('../../core/Api'),
 	Colors = require('../../core/Colors'),
 	Picker = require('../util/Picker'),
 	SinglePicker = require('../util/SinglePicker'),
@@ -19,7 +20,7 @@ var {
 var styles = StyleSheet.create({
 	container: {
 		backgroundColor: Colors.white,
-		marginTop: 65,
+		marginTop: 78,
 		flex: 1,
 	},
 
@@ -28,7 +29,9 @@ var styles = StyleSheet.create({
 		borderColor: 'grey',
 		borderWidth: 1,
 		borderRadius: 3,
-		margin: 16,
+		marginLeft: 16,
+		marginRight: 16,
+		marginBottom: 16,
 		padding: 8,
 	},
 
@@ -67,15 +70,28 @@ var Search = React.createClass({
 			make: '',
 			color: '',
 			year: '',
-			
-			showRoomType: false,
-			type: '',
 
 			locations: [],
 			showLocation: false,
-
 			circles: [],
 			showCircle: false,
+			
+			showRoomType: false,
+			type: '',
+			showMinPrice: false,
+			minPrice: '',
+			showMaxPrice: false,
+			maxPrice: '',
+			showGender: false,
+			gender: '',
+			showDiet: false,
+			diet: '',
+			showDrinking: false,
+			drinking: '',
+			showSmoking: false,
+			smoking: '',
+			showPets: false,
+			pets: '',
 		};
 	},
 
@@ -102,6 +118,9 @@ var Search = React.createClass({
 		}
 		if (this.state.year !== '') {
 			query += 'year=' + this.state.year + '&';
+		}
+		if (this.state.type !== '') {
+			query += 'type=' + this.state.type + '&';
 		}
 
 		query += this.dynamicQuery('primaryLocation', this.state.locations);
@@ -144,12 +163,50 @@ var Search = React.createClass({
 
 	renderRoommateOptions() {
 		return (
-			<TouchableOpacity
-			onPress={() => this.showPicker('showRoomType')}>
-				<Text style={styles.selectText}>
-					{this.renderPromptOrSelection('Property type', this.state.type)}
-				</Text>
-			</TouchableOpacity>
+			<View>
+				<TouchableOpacity
+				onPress={() => this.showPicker('showRoomType')}>
+					<Text style={styles.selectText}>
+						{this.renderPromptOrSelection('Property type', this.state.type)}
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+				onPress={() => this.showPicker('showMinPrice')}>
+					<Text style={styles.selectText}>
+						{this.renderPromptOrSelection('Minimum price', this.state.minPrice)}
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+				onPress={() => this.showPicker('showMaxPrice')}>
+					<Text style={styles.selectText}>
+						{this.renderPromptOrSelection('Maximum price', this.state.maxPrice)}
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+				onPress={() => this.showPicker('showGender')}>
+					<Text style={styles.selectText}>
+						{this.renderPromptOrSelection('Gender Preference', this.state.gender)}
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+				onPress={() => this.showPicker('showDiet')}>
+					<Text style={styles.selectText}>
+						{this.renderPromptOrSelection('Diet Preference', this.state.diet)}
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+				onPress={() => this.showPicker('showSmoking')}>
+					<Text style={styles.selectText}>
+						{this.renderPromptOrSelection('Smoking Preference', this.state.smoking)}
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+				onPress={() => this.showPicker('showPets')}>
+					<Text style={styles.selectText}>
+						{this.renderPromptOrSelection('Pets', this.state.pets)}
+					</Text>
+				</TouchableOpacity>
+			</View>
 		);
 	},
 
@@ -229,7 +286,49 @@ var Search = React.createClass({
 				action={selected => this.selectItem('type', selected, 'showRoomType')}
 				isVisible={this.state.showRoomType}
 				label={'property type'}
-				list={['Private Room', 'Shared Room']} />
+				list={Api.roommatesFilterSet.propertyTypes} />
+
+				<SinglePicker
+				action={selected => this.selectItem('minPrice', selected, 'showMinPrice')}
+				isVisible={this.state.showMinPrice}
+				label={'minimum price'}
+				list={Api.roommatesFilterSet.minPrice} />
+
+				<SinglePicker
+				action={selected => this.selectItem('maxPrice', selected, 'showMaxPrice')}
+				isVisible={this.state.showMaxPrice}
+				label={'maximum price'}
+				list={Api.roommatesFilterSet.maxPrice} />
+
+				<SinglePicker
+				action={selected => this.selectItem('gender', selected, 'showGender')}
+				isVisible={this.state.showGender}
+				label={'gender preference'}
+				list={Api.roommatesFilterSet.gender} />
+
+				<SinglePicker
+				action={selected => this.selectItem('diet', selected, 'showDiet')}
+				isVisible={this.state.showDiet}
+				label={'diet preference'}
+				list={Api.roommatesFilterSet.diet} />
+
+				<SinglePicker
+				action={selected => this.selectItem('smoking', selected, 'showSmoking')}
+				isVisible={this.state.showSmoking}
+				label={'smoking preference'}
+				list={Api.roommatesFilterSet.smoking} />
+
+				<SinglePicker
+				action={selected => this.selectItem('drinking', selected, 'showDrinking')}
+				isVisible={this.state.showDrinking}
+				label={'drinking preference'}
+				list={Api.roommatesFilterSet.drinking} />
+
+				<SinglePicker
+				action={selected => this.selectItem('pets', selected, 'showPets')}
+				isVisible={this.state.showPets}
+				label={'pets preference'}
+				list={Api.roommatesFilterSet.pets} />
 			</View>
 		);
 	},
