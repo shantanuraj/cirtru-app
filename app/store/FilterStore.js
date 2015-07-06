@@ -36,7 +36,6 @@ var FilterStore = Reflux.createStore({
         } else {
             this.state.action = 'none';
         }
-        console.log(list);
         this.state.list = list;
     	this.trigger(this.state);
     },
