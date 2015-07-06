@@ -12,6 +12,7 @@ var React = require('react-native'),
     SubletInfo = require('./util/SubletInfo'),
     CarInfo = require('./util/CarInfo'),
     Toast = require('./util/Toast'),
+    ProfileStore = require('../store/ProfileStore'),
     UserStore = require('../store/UserStore'),
     TimerMixin = require('react-timer-mixin'),
     ProfileActions = require('../actions/ProfileActions');
@@ -96,19 +97,18 @@ var Listing = React.createClass({
         listing: React.PropTypes.object.isRequired,
     },
 
-    mixins: [Reflux.connect(UserStore, 'user'), TimerMixin],
+    mixins: [Reflux.connect(UserStore, 'user'), Reflux.connect(ProfileStore, 'status'), TimerMixin],
 
     getInitialState() {
-        return {
-            messageToast: false,
-            userToast: false,
-            errorToast: false,
-        };
+        return { userToast: false };
     },
 
     makeToast(content, visibility, mode) {
+        if(visibility === true) {
+            this.setTimeout(this.hideToast, 1500);
+        }
         return (
-            <Toast isVisible={this.state[visibility]} mode={mode}>
+            <Toast isVisible={visibility} mode={mode}>
                 <TouchableOpacity onPress={this.hideToast}>
                     <Text style={styles.toastText}>
                         {content}
@@ -118,35 +118,20 @@ var Listing = React.createClass({
         );
     },
 
-    showToast(visibility) {
-        if (this.state.status === 'error') {
-            if (!this.state.user.isLoggedIn) {
-                visibility = 'userToast';
-            } else {
-                visibility = 'errorToast';
-            }
-        } else {
-            visibility = 'messageToast';
-        }
-
-        var state = this.state;
-        state[visibility] = true;
-        this.setState(state);
+    showToast() {
+        this.setState({ userToast: true });
         this.setTimeout(this.hideToast, 1500);
     },
 
     hideToast() {
         this.setState({
-            messageToast: false,
             userToast: false,
-            errorToast: false,
+            status: 'none',
         });
     },
 
     contactOwner() {
-        if (!this.state.user.isLoggedIn) {
-            this.showToast('userToast');
-		} else {
+        if (this.state.user.isLoggedIn) {
             this.props.navigator.push({
                 title: 'Contact',
                 component: require('./Contact'),
@@ -155,6 +140,8 @@ var Listing = React.createClass({
                     action: this.sendMessage,
                 },
             });
+        } else {
+            this.showToast();
         }
     },
 
@@ -202,6 +189,8 @@ var Listing = React.createClass({
             circle = listing.circle,
             address = listing.address;
 
+        console.log(this.state);
+
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.scroll}>
@@ -217,9 +206,9 @@ var Listing = React.createClass({
                     <Info description={info}/>
                 </ScrollView>
                 {this.fab()}
-                {this.makeToast('Message Sent', 'messageToast', 'success')}
-                {this.makeToast('You need to login first', 'userToast', 'warn')}
-                {this.makeToast('Could not send message', 'errorToast', 'danger')}
+                {this.makeToast('Message Sent', this.state.status === 'success', 'success')}
+                {this.makeToast('Could not send message', this.state.status === 'error', 'danger')}
+                {this.makeToast('You need to login first', this.state.userToast, 'warn')}
             </View>
         );
     },

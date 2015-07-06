@@ -216,6 +216,16 @@ var Search = React.createClass({
 		}
 	},
 
+	renderSinglePicker(key, visibility, label, list) {
+		return (
+			<SinglePicker
+			action={selected => this.selectItem(key, selected, visibility)}
+			isVisible={this.state[visibility]}
+			label={label}
+			list={list} />
+		);
+	},
+
 	renderPromptOrSelection(prompt, item) {
 		return item !== '' ? prompt + ' - ' + item : prompt;
 	},
@@ -282,53 +292,14 @@ var Search = React.createClass({
 				label={'circle'}
 				list={options.circle} />
 
-				<SinglePicker
-				action={selected => this.selectItem('type', selected, 'showRoomType')}
-				isVisible={this.state.showRoomType}
-				label={'property type'}
-				list={Api.roommatesFilterSet.propertyTypes} />
-
-				<SinglePicker
-				action={selected => this.selectItem('minPrice', selected, 'showMinPrice')}
-				isVisible={this.state.showMinPrice}
-				label={'minimum price'}
-				list={Api.roommatesFilterSet.minPrice} />
-
-				<SinglePicker
-				action={selected => this.selectItem('maxPrice', selected, 'showMaxPrice')}
-				isVisible={this.state.showMaxPrice}
-				label={'maximum price'}
-				list={Api.roommatesFilterSet.maxPrice} />
-
-				<SinglePicker
-				action={selected => this.selectItem('gender', selected, 'showGender')}
-				isVisible={this.state.showGender}
-				label={'gender preference'}
-				list={Api.roommatesFilterSet.gender} />
-
-				<SinglePicker
-				action={selected => this.selectItem('diet', selected, 'showDiet')}
-				isVisible={this.state.showDiet}
-				label={'diet preference'}
-				list={Api.roommatesFilterSet.diet} />
-
-				<SinglePicker
-				action={selected => this.selectItem('smoking', selected, 'showSmoking')}
-				isVisible={this.state.showSmoking}
-				label={'smoking preference'}
-				list={Api.roommatesFilterSet.smoking} />
-
-				<SinglePicker
-				action={selected => this.selectItem('drinking', selected, 'showDrinking')}
-				isVisible={this.state.showDrinking}
-				label={'drinking preference'}
-				list={Api.roommatesFilterSet.drinking} />
-
-				<SinglePicker
-				action={selected => this.selectItem('pets', selected, 'showPets')}
-				isVisible={this.state.showPets}
-				label={'pets preference'}
-				list={Api.roommatesFilterSet.pets} />
+				{this.renderSinglePicker('type', 'showRoomType', 'property type', Api.roommatesFilterSet.propertyTypes)}				
+				{this.renderSinglePicker('minPrice', 'showMinPrice', 'minimum price', Api.roommatesFilterSet.minPrice)}
+				{this.renderSinglePicker('maxPrice', 'showMaxPrice', 'maximum price', Api.roommatesFilterSet.maxPrice)}
+				{this.renderSinglePicker('gender', 'showGender', 'gender preference', Api.roommatesFilterSet.gender)}
+				{this.renderSinglePicker('diet', 'showDiet', 'diet preference', Api.roommatesFilterSet.diet)}
+				{this.renderSinglePicker('smoking', 'showSmoking', 'smoking preference', Api.roommatesFilterSet.smoking)}
+				{this.renderSinglePicker('drinking', 'showDrinking', 'drinking preference', Api.roommatesFilterSet.drinking)}
+				{this.renderSinglePicker('pets', 'showPets', 'pet preference', Api.roommatesFilterSet.pets)}
 			</View>
 		);
 	},

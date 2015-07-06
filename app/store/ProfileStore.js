@@ -27,14 +27,13 @@ var ProfileStore = Reflux.createStore({
         fetch(baseUrl + adapted.id)
         .then(response => response.json())
         .then(listing => {
-            console.log(Api.getContactUrl(adapted.category, adapted.id));
             fetch(Api.getContactUrl(adapted.category, adapted.id), {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(Api.getContactPayload(adapted.id, listing, message))
+                body: JSON.stringify(Api.getContactPayload(adapted.category, listing, message)),
             })
             .then(response => {
                 if (response.status === 200) {
