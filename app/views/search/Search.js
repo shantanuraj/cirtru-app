@@ -142,6 +142,23 @@ var Search = React.createClass({
 		this.setState(state);
 	},
 
+	renderRoommateOptions() {
+		return (
+			<TouchableOpacity
+			onPress={() => this.showPicker('showRoomType')}>
+				<Text style={styles.selectText}>
+					{this.renderPromptOrSelection('Property type', this.state.type)}
+				</Text>
+			</TouchableOpacity>
+		);
+	},
+
+	renderNonGenericContent() {
+		switch(this.props.category) {
+			case 'Roommates' : return this.renderRoommateOptions();
+		}
+	},
+
 	renderPromptOrSelection(prompt, item) {
 		return item !== '' ? prompt + ' - ' + item : prompt;
 	},
@@ -186,12 +203,7 @@ var Search = React.createClass({
 					</Text>
 				</TouchableOpacity>
 
-				<TouchableOpacity
-				onPress={() => this.showPicker('showRoomType')}>
-					<Text style={styles.selectText}>
-						{this.renderPromptOrSelection('Property type', this.state.type)}
-					</Text>
-				</TouchableOpacity>
+				{this.renderNonGenericContent()}
 
 				<TouchableHighlight
 				onPress={this.onPress}
