@@ -33,19 +33,16 @@ var styles = StyleSheet.create({
 
 	searchButton: {
 		height: 38,
+        margin: 12,
         backgroundColor: Colors.brandSecondary,
         borderColor: Colors.brandSecondary,
         borderWidth: 1,
         borderRadius: 3,
-        marginBottom: 10,
         justifyContent: 'center',
-        marginLeft: 16,
-        marginRight: 16,
 	},
 
 	selectText: {
 		marginLeft: 16,
-		marginBottom: 16,
 		fontSize: 18,
 		padding: 8,
 		color: Colors.brandSecondary,

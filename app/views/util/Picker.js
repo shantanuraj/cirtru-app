@@ -17,6 +17,56 @@ var {
     TouchableHighlight,
 } = React;
 
+var styles = StyleSheet.create({
+    container: {        
+        flex: 1,
+        backgroundColor: Colors.brandPrimaryDark,
+        paddingTop: 20,
+    },
+
+    top: {
+        flexDirection: 'row',
+        width: window.width,
+    },
+
+    content: {
+        alignItems: 'center',
+        flex: 9,
+    },
+
+    button: {
+        padding: 12,
+        marginBottom: 1,
+        backgroundColor: Colors.brandPrimary,
+        width: window.width,
+    },
+
+    leadContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 8,
+    },
+
+    leadText: {
+        alignSelf: 'center',
+        fontSize: 24,
+        color: Colors.white,
+    },
+
+    checkMark: {
+        width: 40,
+        height: 40,
+    },
+
+    rowText: {
+        alignSelf: 'center',
+        fontSize: 24,
+        color: Colors.white,
+    }
+});
+
 var Picker = React.createClass({
     getInitialState() {
         return {
@@ -63,7 +113,6 @@ var Picker = React.createClass({
         return (
             <Overlay isVisible={this.props.isVisible}>
                 <ScrollView
-                stickyHeaderIndices={[0]}
                 style={styles.container}>
                     <View style={styles.leadContainer}>
                         <Text style={styles.leadText}>Choose {this.props.label}</Text>
@@ -86,55 +135,6 @@ var Picker = React.createClass({
             </Overlay>
         );
     },
-});
-
-var styles = StyleSheet.create({
-    container: {        
-        flex: 1,
-        backgroundColor: Colors.brandPrimaryDark,
-    },
-
-    top: {
-        flexDirection: 'row',
-        width: window.width,
-    },
-
-    content: {
-        alignItems: 'center',
-        flex: 9,
-    },
-
-    button: {
-        padding: 12,
-        marginBottom: 1,
-        backgroundColor: Colors.brandPrimary,
-        width: window.width,
-    },
-
-    leadContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: 16,
-    },
-
-    leadText: {
-        alignSelf: 'center',
-        fontSize: 24,
-        color: Colors.white,
-    },
-
-    checkMark: {
-        width: 40,
-        height: 40,
-    },
-
-    rowText: {
-        alignSelf: 'center',
-        fontSize: 24,
-        color: Colors.white,
-    }
 });
 
 module.exports = Picker;
