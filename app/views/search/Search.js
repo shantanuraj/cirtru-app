@@ -46,6 +46,8 @@ var styles = StyleSheet.create({
 	selectText: {
 		marginLeft: 16,
 		marginBottom: 16,
+		fontSize: 18,
+		padding: 8,
 		color: Colors.brandSecondary,
 	},
 
