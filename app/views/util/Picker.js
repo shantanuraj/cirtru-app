@@ -3,7 +3,8 @@
 var React = require('react-native'),
     Overlay = require('react-native-overlay'),
     Colors = require('../../core/Colors'),
-    Icon = require('FAKIconImage');
+    Icon = require('FAKIconImage'),
+    _ = require('immutable');
 
 var window = require('Dimensions').get('window');
 
@@ -19,6 +20,7 @@ var {
 var Picker = React.createClass({
     getInitialState() {
         return {
+            list: this.props.list,
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
@@ -26,11 +28,30 @@ var Picker = React.createClass({
         };
     },
 
+    removeFromList(row) {
+        var list = _.List(this.state.list),
+            selected = this.state.selected;
+
+        list = list.delete(list.indexOf(row)).toArray();
+        selected.push(row[this.props.label]);
+
+        this.setState({
+            list,
+            selected,
+        });
+    },
+
+    selectComplete() {
+        this.props.action(this.state.selected);
+    },
+
     renderRow(row) {
         return (
             <TouchableHighlight
-            style={styles.button}
-            underlayColor={Colors.brandPrimaryDark}>
+            onPress={() => {
+                this.removeFromList(row);
+            }}
+            style={styles.button}>
                 <Text style={styles.rowText}>
                     {row[this.props.label]}
                 </Text>
@@ -39,6 +60,7 @@ var Picker = React.createClass({
     },
 
     render() {
+        console.log(this.state);
         return (
             <Overlay isVisible={this.props.isVisible}>
                 <ScrollView
@@ -48,7 +70,7 @@ var Picker = React.createClass({
                         <Text style={styles.leadText}>Choose {this.props.label}</Text>
                         <TouchableHighlight
                         underlayColor={Colors.transparent}
-                        onPress={this.props.action}>
+                        onPress={this.selectComplete}>
                             <Icon
                             color={Colors.white}
                             name='ion|ios-checkmark-empty'
@@ -58,7 +80,7 @@ var Picker = React.createClass({
                     </View>
                     <ListView
                     contentContainerStyle={styles.content}
-                    dataSource={this.state.dataSource.cloneWithRows(this.props.list)}
+                    dataSource={this.state.dataSource.cloneWithRows(this.state.list)}
                     style={styles.top}
                     renderRow={(row) => this.renderRow(row)} />
                 </ScrollView>

@@ -69,17 +69,22 @@ var Search = React.createClass({
 			make: '',
 			color: '',
 			year: '',
+			
+			locations: [],
 			showLocation: false,
 		};
+	},
+
+	locationsQuery() {
+		var query = 'primaryLocation=';
+		this.state.locations.forEach(location => query += location + ',');
+		return query += '&';
 	},
 
 	buildQueryString() {
 		var query = '';
 		if (this.state.searchBox !== '') {
 			query += 'searchBox=' + this.state.searchBox + '&';
-		}
-		if (this.state.primaryLocation != '') {
-			query += 'primaryLocation=' +	this.state.primaryLocation + '&';
 		}
 		if (this.state.circle !== '') {
 			query += 'circle=' + this.state.circle + '&';
@@ -93,11 +98,15 @@ var Search = React.createClass({
 		if (this.state.year !== '') {
 			query += 'year=' + this.state.year + '&';
 		}
+		if (this.state.locations.length > 0) {
+			query += this.locationsQuery();
+		}
 		return query;
 	},
 
 	onPress() {
 		var queries = this.buildQueryString();
+		console.log(queries);
 		this.props.action(queries);
 	},
 
@@ -105,12 +114,25 @@ var Search = React.createClass({
 		this.setState({ showLocation: true });
 	},
 
-	selectLocation() {
-		this.setState({ showLocation: false });
+	selectLocation(locations) {
+		this.setState({
+			locations,
+			showLocation: false,
+		});
+	},
+
+	renderPromptOrNumber(prompt, info, items) {
+		info = ' ' + info;
+		if (items.length === 1) {
+			info = info.substring(0, info.length - 1);
+		}
+		info += ' selected';
+		return items.length > 0 ? items.length + info: prompt;
 	},
 
 	render() {
 		var options = this.state.filterStore.options[this.props.category];
+		console.log(options.location);
 		return (
 			<View style={styles.container}>
 				<TextInput
@@ -129,7 +151,7 @@ var Search = React.createClass({
 				<TouchableOpacity
 				onPress={this.showLocationPicker}>
 					<Text style={styles.selectText}>
-						Select Location
+						{this.renderPromptOrNumber('Select Location', 'locations', this.state.locations)}
 					</Text>
 				</TouchableOpacity>
 
