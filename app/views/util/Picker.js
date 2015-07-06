@@ -60,7 +60,6 @@ var Picker = React.createClass({
     },
 
     render() {
-        console.log(this.state);
         return (
             <Overlay isVisible={this.props.isVisible}>
                 <ScrollView
