@@ -11,11 +11,9 @@ var {
 	View,
 	Text,
 	TextInput,
-	PickerIOS,
+	TouchableOpacity,
 	TouchableHighlight,
 } = React;
-
-var PickerItemIOS = PickerIOS.Item;
 
 var styles = StyleSheet.create({
 	container: {
@@ -45,6 +43,12 @@ var styles = StyleSheet.create({
         marginRight: 16,
 	},
 
+	selectText: {
+		marginLeft: 16,
+		marginBottom: 16,
+		color: Colors.brandSecondary,
+	},
+
 	buttonText: {
         fontSize: 24,
         color: 'white',
@@ -65,7 +69,7 @@ var Search = React.createClass({
 			make: '',
 			color: '',
 			year: '',
-			loaded: false,
+			showLocation: false,
 		};
 	},
 
@@ -97,6 +101,14 @@ var Search = React.createClass({
 		this.props.action(queries);
 	},
 
+	showLocationPicker() {
+		this.setState({ showLocation: true });
+	},
+
+	selectLocation() {
+		this.setState({ showLocation: false });
+	},
+
 	render() {
 		var options = this.state.filterStore.options[this.props.category];
 		return (
@@ -114,9 +126,12 @@ var Search = React.createClass({
 				placeholderTextColor={Colors.grey}
 				style={styles.searchBar} />
 
-				<Text>
-					Location
-				</Text>
+				<TouchableOpacity
+				onPress={this.showLocationPicker}>
+					<Text style={styles.selectText}>
+						Select Location
+					</Text>
+				</TouchableOpacity>
 
 				<TouchableHighlight
 				onPress={this.onPress}
@@ -127,7 +142,8 @@ var Search = React.createClass({
 				</TouchableHighlight>
 
 				<Picker 
-				isVisible={true}
+				action={this.selectLocation}
+				isVisible={this.state.showLocation}
 				label={'location'}
 				list={options.location} />
 			</View>

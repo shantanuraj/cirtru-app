@@ -8,7 +8,7 @@ var Furniture = require('../models/Furniture'),
 	_ = require('immutable');
 
 module.exports = {
-	base: 'http://192.168.1.100:3000/',
+	base: 'http://localhost:3000/',
 
 	categories: ['Roommates', 'Sublets', 'Cars', 'Furniture', 'Others'],
 

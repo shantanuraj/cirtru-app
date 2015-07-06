@@ -3,11 +3,14 @@
 var React = require('react-native'),
     Overlay = require('react-native-overlay'),
     Colors = require('../../core/Colors'),
-    window = require('Dimensions').get('window');
+    Icon = require('FAKIconImage');
+
+var window = require('Dimensions').get('window');
 
 var {
     ScrollView,
     Text,
+    View,
     ListView,
     StyleSheet,
     TouchableHighlight,
@@ -39,7 +42,18 @@ var Picker = React.createClass({
         return (
             <Overlay isVisible={this.props.isVisible}>
                 <ScrollView style={styles.container}>
-                    <Text style={styles.leadText}>Choose {this.props.label}</Text>
+                    <View style={styles.leadContainer}>
+                        <Text style={styles.leadText}>Choose {this.props.label}</Text>
+                        <TouchableHighlight
+                        underlayColor={Colors.transparent}
+                        onPress={this.props.action}>
+                            <Icon
+                            color={Colors.white}
+                            name='ion|ios-checkmark-empty'
+                            size={40}
+                            style={styles.checkMark} />
+                        </TouchableHighlight>
+                    </View>
                     <ListView
                     contentContainerStyle={styles.content}
                     dataSource={this.state.dataSource.cloneWithRows(this.props.list)}
@@ -75,11 +89,23 @@ var styles = StyleSheet.create({
         width: window.width,
     },
 
+    leadContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 16,
+    },
+
     leadText: {
-        marginBottom: 20,
         alignSelf: 'center',
         fontSize: 24,
         color: Colors.white,
+    },
+
+    checkMark: {
+        width: 40,
+        height: 40,
     },
 
     rowText: {
