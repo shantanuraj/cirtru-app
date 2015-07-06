@@ -110,9 +110,9 @@ module.exports = {
 	getFilterUrl(type, query) {
 		switch(type) {
 			case 'Roommates': return this.base + 'api/v1/sfbayarea/roommates?' + query;
-			case 'Furniture': return this.base + 'api/v1/sfbayarea/others?category=furniture' + query;
+			case 'Furniture': return this.base + 'api/v1/sfbayarea/others?category=furniture&' + query;
 			case 'Sublets': return this.base + 'api/v1/sfbayarea/rentals?' + query;
-			case 'Others': return this.base + 'api/v1/sfbayarea/others?' + query;
+			case 'Others': return this.base + 'api/v1/sfbayarea/others?category=others&' + query;
 			case 'Cars': return this.base + 'api/v1/sfbayarea/cars?' + query;	
 		}
 	},
