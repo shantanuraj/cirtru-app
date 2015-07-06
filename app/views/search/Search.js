@@ -77,21 +77,21 @@ var Search = React.createClass({
 			showCircle: false,
 			
 			showRoomType: false,
-			type: '',
+			type: null,
 			showMinPrice: false,
-			minPrice: '',
+			minPrice: null,
 			showMaxPrice: false,
-			maxPrice: '',
+			maxPrice: null,
 			showGender: false,
-			gender: '',
+			gender: null,
 			showDiet: false,
-			diet: '',
+			diet: null,
 			showDrinking: false,
-			drinking: '',
+			drinking: null,
 			showSmoking: false,
-			smoking: '',
+			smoking: null,
 			showPets: false,
-			pets: '',
+			pets: null,
 		};
 	},
 
@@ -107,21 +107,40 @@ var Search = React.createClass({
 
 	buildQueryString() {
 		var query = '';
-		if (this.state.searchBox !== '') {
+		if (this.state.searchBox) {
 			query += 'searchBox=' + this.state.searchBox + '&';
 		}
-		if (this.state.make !== '') {
+		if (this.state.make) {
 			query += 'make=' + this.state.make + '&';
 		}
-		if (this.state.color !== '') {
+		if (this.state.color) {
 			query += 'color=' + this.state.color + '&';
 		}
-		if (this.state.year !== '') {
+		if (this.state.year) {
 			query += 'year=' + this.state.year + '&';
 		}
-		if (this.state.type !== '') {
+		if (this.state.type) {
 			query += 'type=' + this.state.type + '&';
 		}
+		if (this.state.minPrice) {
+			query += 'lowerPrice=' + this.state.minPrice + '&';
+		}
+		if (this.state.maxPrice) {
+			query += 'upperPrice=' + this.state.maxPrice + '&';
+		}
+		if (this.state.diet) {
+			query += 'eatPreference=' + this.state.diet + '&';
+		}
+		if (this.state.drinking) {
+			query += 'drinking=' + this.state.drinking + '&';
+		}
+		if (this.state.smoking) {
+			query += 'smoking=' + this.state.smoking + '&';
+		}
+		if (this.state.pets) {
+			query += 'pets=' + this.state.pets + '&';
+		}
+
 
 		query += this.dynamicQuery('primaryLocation', this.state.locations);
 		query += this.dynamicQuery('circle', this.state.circles);
@@ -227,7 +246,7 @@ var Search = React.createClass({
 	},
 
 	renderPromptOrSelection(prompt, item) {
-		return item !== '' ? prompt + ' - ' + item : prompt;
+		return item ? prompt + ' - ' + item : prompt;
 	},
 
 	renderPromptOrNumber(prompt, info, items) {

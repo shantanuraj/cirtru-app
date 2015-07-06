@@ -188,9 +188,6 @@ var Listing = React.createClass({
             info = listing.description,
             circle = listing.circle,
             address = listing.address;
-
-        console.log(this.state);
-
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.scroll}>
