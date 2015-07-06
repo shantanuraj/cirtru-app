@@ -117,11 +117,6 @@ module.exports = {
 		}
 	},
 
-	getQueryUrl(type, queries) {
-		var base = this.getFilterUrl(type);
-		// _.Map(queries).
-	},
-
 	roommatesFilterSet: {
 		propertyTypes: ['Private Room', 'Shared Room'],
 		minPrice: [0, 500, 1000, 1500, 2000, 3000, 4000],
@@ -131,6 +126,12 @@ module.exports = {
 		drinking: ['Doesn\'t drink', 'Drinks occasionally', 'Drinks frequently'],
 		smoking: ['Doesn\'t smoke', 'Smokes', 'Smokes outside only'],
 		pets: ['With no pets', 'With pet dog ok', 'With pet cat ok', 'With any pet ok'],
+	},
+
+	subletsFilterSet: {
+		propertyTypes: ['Apartment', 'House'],
+		minPrice: [0, 500, 1000, 1500, 2000, 3000, 4000],
+		maxPrice: [500, 1000, 1500, 2000, 3000, 4000, 5000],
 	},
 
 	getFilterOptions(type) {

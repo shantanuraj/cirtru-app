@@ -225,13 +225,50 @@ var Search = React.createClass({
 						{this.renderPromptOrSelection('Pets', this.state.pets)}
 					</Text>
 				</TouchableOpacity>
+				{this.renderSinglePicker('type', 'showRoomType', 'property type', Api.roommatesFilterSet.propertyTypes)}				
+				{this.renderSinglePicker('minPrice', 'showMinPrice', 'minimum price', Api.roommatesFilterSet.minPrice)}
+				{this.renderSinglePicker('maxPrice', 'showMaxPrice', 'maximum price', Api.roommatesFilterSet.maxPrice)}
+				{this.renderSinglePicker('gender', 'showGender', 'gender preference', Api.roommatesFilterSet.gender)}
+				{this.renderSinglePicker('diet', 'showDiet', 'diet preference', Api.roommatesFilterSet.diet)}
+				{this.renderSinglePicker('smoking', 'showSmoking', 'smoking preference', Api.roommatesFilterSet.smoking)}
+				{this.renderSinglePicker('drinking', 'showDrinking', 'drinking preference', Api.roommatesFilterSet.drinking)}
+				{this.renderSinglePicker('pets', 'showPets', 'pet preference', Api.roommatesFilterSet.pets)}
+			</View>
+		);
+	},
+
+	renderSubletOptions() {
+		return (
+			<View>
+				<TouchableOpacity
+				onPress={() => this.showPicker('showRoomType')}>
+					<Text style={styles.selectText}>
+						{this.renderPromptOrSelection('Property type', this.state.type)}
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+				onPress={() => this.showPicker('showMinPrice')}>
+					<Text style={styles.selectText}>
+						{this.renderPromptOrSelection('Minimum price', this.state.minPrice)}
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+				onPress={() => this.showPicker('showMaxPrice')}>
+					<Text style={styles.selectText}>
+						{this.renderPromptOrSelection('Maximum price', this.state.maxPrice)}
+					</Text>
+				</TouchableOpacity>
+				{this.renderSinglePicker('type', 'showRoomType', 'property type', Api.roommatesFilterSet.propertyTypes)}				
+				{this.renderSinglePicker('minPrice', 'showMinPrice', 'minimum price', Api.roommatesFilterSet.minPrice)}
+				{this.renderSinglePicker('maxPrice', 'showMaxPrice', 'maximum price', Api.roommatesFilterSet.maxPrice)}
 			</View>
 		);
 	},
 
 	renderNonGenericContent() {
 		switch(this.props.category) {
-			case 'Roommates' : return this.renderRoommateOptions();
+			case 'Roommates': return this.renderRoommateOptions();
+			case 'Sublets': return this.renderSubletOptions();
 		}
 	},
 
@@ -310,15 +347,6 @@ var Search = React.createClass({
 				isVisible={this.state.showCircle}
 				label={'circle'}
 				list={options.circle} />
-
-				{this.renderSinglePicker('type', 'showRoomType', 'property type', Api.roommatesFilterSet.propertyTypes)}				
-				{this.renderSinglePicker('minPrice', 'showMinPrice', 'minimum price', Api.roommatesFilterSet.minPrice)}
-				{this.renderSinglePicker('maxPrice', 'showMaxPrice', 'maximum price', Api.roommatesFilterSet.maxPrice)}
-				{this.renderSinglePicker('gender', 'showGender', 'gender preference', Api.roommatesFilterSet.gender)}
-				{this.renderSinglePicker('diet', 'showDiet', 'diet preference', Api.roommatesFilterSet.diet)}
-				{this.renderSinglePicker('smoking', 'showSmoking', 'smoking preference', Api.roommatesFilterSet.smoking)}
-				{this.renderSinglePicker('drinking', 'showDrinking', 'drinking preference', Api.roommatesFilterSet.drinking)}
-				{this.renderSinglePicker('pets', 'showPets', 'pet preference', Api.roommatesFilterSet.pets)}
 			</View>
 		);
 	},
