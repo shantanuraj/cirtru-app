@@ -4,6 +4,7 @@ var React = require('react-native'),
 	Reflux = require('reflux'),
 	Colors = require('../../core/Colors'),
 	Picker = require('../util/Picker'),
+	SinglePicker = require('../util/SinglePicker'),
 	FilterStore = require('../../store/FilterStore');
 
 var {
@@ -67,6 +68,9 @@ var Search = React.createClass({
 			color: '',
 			year: '',
 			
+			showRoomType: false,
+			type: '',
+
 			locations: [],
 			showLocation: false,
 
@@ -131,6 +135,17 @@ var Search = React.createClass({
 		});
 	},
 
+	selectItem(key, val, visibility) {
+		var state = this.state;
+		state[key] = val;
+		state[visibility] = false;
+		this.setState(state);
+	},
+
+	renderPromptOrSelection(prompt, item) {
+		return item !== '' ? prompt + ' - ' + item : prompt;
+	},
+
 	renderPromptOrNumber(prompt, info, items) {
 		info = ' ' + info;
 		if (items.length === 1) {
@@ -171,6 +186,13 @@ var Search = React.createClass({
 					</Text>
 				</TouchableOpacity>
 
+				<TouchableOpacity
+				onPress={() => this.showPicker('showRoomType')}>
+					<Text style={styles.selectText}>
+						{this.renderPromptOrSelection('Property type', this.state.type)}
+					</Text>
+				</TouchableOpacity>
+
 				<TouchableHighlight
 				onPress={this.onPress}
 				style={styles.searchButton}>
@@ -190,6 +212,12 @@ var Search = React.createClass({
 				isVisible={this.state.showCircle}
 				label={'circle'}
 				list={options.circle} />
+
+				<SinglePicker
+				action={selected => this.selectItem('type', selected, 'showRoomType')}
+				isVisible={this.state.showRoomType}
+				label={'property type'}
+				list={['Private Room', 'Shared Room']} />
 			</View>
 		);
 	},
