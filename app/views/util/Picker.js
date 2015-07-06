@@ -41,7 +41,9 @@ var Picker = React.createClass({
     render() {
         return (
             <Overlay isVisible={this.props.isVisible}>
-                <ScrollView style={styles.container}>
+                <ScrollView
+                stickyHeaderIndices={[0]}
+                style={styles.container}>
                     <View style={styles.leadContainer}>
                         <Text style={styles.leadText}>Choose {this.props.label}</Text>
                         <TouchableHighlight
@@ -66,8 +68,7 @@ var Picker = React.createClass({
 });
 
 var styles = StyleSheet.create({
-    container: {
-        paddingTop: 20,
+    container: {        
         flex: 1,
         backgroundColor: Colors.brandPrimaryDark,
     },
