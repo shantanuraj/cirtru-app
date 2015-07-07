@@ -129,6 +129,7 @@ var Search = React.createClass({
 
 		query += this.staticQuery('drinking', this.state.drinking);
 		query += this.staticQuery('smoking', this.state.smoking);
+		query += this.staticQuery('gender', this.state.gender);
 		query += this.staticQuery('eatPreference', this.state.diet);
 		query += this.staticQuery('pets', this.state.pets);
 
