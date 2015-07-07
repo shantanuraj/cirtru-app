@@ -134,6 +134,14 @@ module.exports = {
 		maxPrice: [500, 1000, 1500, 2000, 3000, 4000, 5000],
 	},
 
+	carsFilterSet: {
+		minPrice: [2000, 3000, 4000, 7000, 10000, 15000, 20000, 25000, 30000],
+		maxPrice: [3000, 4000, 7000, 10000, 15000, 20000, 25000, 30000],
+		minMileage: [0,  10000, 25000, 75000, 100000, 15000],
+		maxMileage: [10000, 25000, 75000, 100000, 150000],
+		titleStatus: ['Clean', 'Lien', 'Salvage', 'Rebuilt', 'Other'],
+	},
+
 	getFilterOptions(type) {
 		var base = this.base + 'filterOptions/';
 		switch(type) {
