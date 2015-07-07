@@ -101,6 +101,10 @@ var Search = React.createClass({
 		};
 	},
 
+	staticQuery(query, option) {
+		return option ? query + '=' + option + '&' : '';
+	}
+
 	dynamicQuery(query, options) {
 		if (options.length === 0) {
 			return '';
@@ -113,41 +117,17 @@ var Search = React.createClass({
 
 	buildQueryString() {
 		var query = '';
-		if (this.state.searchBox) {
-			query += 'searchBox=' + this.state.searchBox + '&';
-		}
-		if (this.state.make) {
-			query += 'make=' + this.state.make + '&';
-		}
-		if (this.state.color) {
-			query += 'color=' + this.state.color + '&';
-		}
-		if (this.state.year) {
-			query += 'year=' + this.state.year + '&';
-		}
-		if (this.state.type) {
-			query += 'type=' + this.state.type + '&';
-		}
-		if (this.state.minPrice) {
-			query += 'lowerPrice=' + this.state.minPrice + '&';
-		}
-		if (this.state.maxPrice) {
-			query += 'upperPrice=' + this.state.maxPrice + '&';
-		}
-		if (this.state.diet) {
-			query += 'eatPreference=' + this.state.diet + '&';
-		}
-		if (this.state.drinking) {
-			query += 'drinking=' + this.state.drinking + '&';
-		}
-		if (this.state.smoking) {
-			query += 'smoking=' + this.state.smoking + '&';
-		}
-		if (this.state.pets) {
-			query += 'pets=' + this.state.pets + '&';
-		}
-
-
+		query += this.staticQuery('searchBox', this.state.searchBox);
+		query += this.staticQuery('make', this.state.make);
+		query += this.staticQuery('color', this.state.color);
+		query += this.staticQuery('year', this.state.year);
+		query += this.staticQuery('type', this.state.type);
+		query += this.staticQuery('lowerPrice', this.state.minPrice);
+		query += this.staticQuery('upperPrice', this.state.maxPrice);
+		query += this.staticQuery('drinking', this.state.drinking);
+		query += this.staticQuery('smoking', this.state.smoking);
+		query += this.staticQuery('eatPreference', this.state.diet);
+		query += this.staticQuery('pets', this.state.pets);
 		query += this.dynamicQuery('primaryLocation', this.state.locations);
 		query += this.dynamicQuery('circle', this.state.circles);
 		return query;
@@ -186,16 +166,6 @@ var Search = React.createClass({
 		this.setState(state);
 	},
 
-	renderSinglePicker(key, visibility, label, list) {
-		return (
-			<SinglePicker
-			action={selected => this.selectItem(key, selected, visibility)}
-			isVisible={this.state[visibility]}
-			label={label}
-			list={list} />
-		);
-	},
-
 	renderPromptOrSelection(prompt, item) {
 		return item ? prompt + ' - ' + item : prompt;
 	},
@@ -207,6 +177,16 @@ var Search = React.createClass({
 		}
 		info += ' selected';
 		return items.length > 0 ? items.length + info: prompt;
+	},
+
+	renderSinglePicker(key, visibility, label, list) {
+		return (
+			<SinglePicker
+			action={selected => this.selectItem(key, selected, visibility)}
+			isVisible={this.state[visibility]}
+			label={label}
+			list={list} />
+		);
 	},
 
 	renderPrompt(label, val, visibility) {
