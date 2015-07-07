@@ -62,8 +62,6 @@ var styles = StyleSheet.create({
 var Search = React.createClass({
 	mixins: [Reflux.connect(FilterStore, 'filterStore')],
 
-	location: null,
-
 	getInitialState() {
 		return {
 			searchBox: '',
@@ -186,6 +184,9 @@ var Search = React.createClass({
 	},
 
 	renderMultiPicker(label, list, visibility) {
+		if (!list) {
+			return;
+		}
 		return (
 			<Picker
 			action={(list)=> {
@@ -281,7 +282,7 @@ var Search = React.createClass({
 				{this.renderSinglePicker('minPrice', 'showMinPrice', 'minimum price', Api.carsFilterSet.minPrice)}
 
 
-				{this.renderPrompt('Maximum mileage', this.state.maxMileage, 'showMaxPrice')}
+				{this.renderPrompt('Maximum mileage', this.state.maxMileage, 'showMaxMileage')}
 				{this.renderSinglePicker('maxMileage', 'showMaxMileage', 'maximum mileage', Api.carsFilterSet.maxMileage)}
 
 				{this.renderPrompt('Minimum mileage', this.state.minMileage, 'showMinMileage')}
