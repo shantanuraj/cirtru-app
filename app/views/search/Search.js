@@ -186,6 +186,29 @@ var Search = React.createClass({
 		this.setState(state);
 	},
 
+	renderSinglePicker(key, visibility, label, list) {
+		return (
+			<SinglePicker
+			action={selected => this.selectItem(key, selected, visibility)}
+			isVisible={this.state[visibility]}
+			label={label}
+			list={list} />
+		);
+	},
+
+	renderPromptOrSelection(prompt, item) {
+		return item ? prompt + ' - ' + item : prompt;
+	},
+
+	renderPromptOrNumber(prompt, info, items) {
+		info = ' ' + info;
+		if (items.length === 1) {
+			info = info.substring(0, info.length - 1);
+		}
+		info += ' selected';
+		return items.length > 0 ? items.length + info: prompt;
+	},
+
 	renderPrompt(label, val, visibility) {
 		return (
 			<TouchableOpacity
@@ -258,29 +281,6 @@ var Search = React.createClass({
 			case 'Sublets': return this.renderSubletOptions();
 			case 'Cars': return this.renderCarOptions();
 		}
-	},
-
-	renderSinglePicker(key, visibility, label, list) {
-		return (
-			<SinglePicker
-			action={selected => this.selectItem(key, selected, visibility)}
-			isVisible={this.state[visibility]}
-			label={label}
-			list={list} />
-		);
-	},
-
-	renderPromptOrSelection(prompt, item) {
-		return item ? prompt + ' - ' + item : prompt;
-	},
-
-	renderPromptOrNumber(prompt, info, items) {
-		info = ' ' + info;
-		if (items.length === 1) {
-			info = info.substring(0, info.length - 1);
-		}
-		info += ' selected';
-		return items.length > 0 ? items.length + info: prompt;
 	},
 
 	render() {
