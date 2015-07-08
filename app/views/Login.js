@@ -6,6 +6,8 @@ var React = require('react-native'),
 	EmailLogin = require('./EmailLogin'),
 	UserActions = require('../actions/UserActions');
 
+var window = require('Dimensions').get('window');
+
 var {
 	StyleSheet,
 	Text,
@@ -58,10 +60,6 @@ var styles = StyleSheet.create({
 	facebookButton: {
 		backgroundColor: Colors.Facebook,
 	},
-
-	emailButton: {
-		backgroundColor: Colors.brandSecondary,
-	},
 });
 
 
@@ -77,17 +75,7 @@ var Login = React.createClass({
 		UserActions.newFacebookSession();
 	},
 
-	startEmailLogin() {
-		this.props.navigator.push({
-			title: this.state.prompt,
-			component: EmailLogin,
-			passProps: {
-				action: this.state.prompt,
-			},
-		});
-	},
-
-    togglePrompt() {
+	togglePrompt() {
         var data = this.state;
 		if (data.prompt === 'Sign in') {
             data.prompt = 'Sign up';
@@ -133,21 +121,7 @@ var Login = React.createClass({
 					</View>
 				</TouchableHighlight>
 
-				<TouchableHighlight
-				onPress={this.startEmailLogin}
-				underlayColor={Colors.white}>
-					<View
-					style={[styles.button, styles.emailButton]}>
-						<Icon
-						color={Colors.white}
-						name='ion|email'
-						size={28}
-						style={styles.brandIcon}/>
-						<Text style={styles.signInText}>
-							{this.state.prompt} with Email
-						</Text>
-					</View>
-				</TouchableHighlight>
+				<EmailLogin action={this.state.prompt} />
 
 				<TouchableHighlight
 				onPress={this.togglePrompt}

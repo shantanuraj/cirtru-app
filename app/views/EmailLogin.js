@@ -2,8 +2,11 @@
 
 var React = require('react-native'),
     t = require('tcomb-form-native'),
+    Icon = require('FAKIconImage'),
     Colors = require('../core/Colors'),
     UserActions = require('../actions/UserActions');
+
+var window = require('Dimensions').get('window');
 
 var {
     View,
@@ -70,12 +73,10 @@ var EmailLogin = React.createClass({
 
     doSignUp(user) {
         UserActions.signup(user);
-        this.props.navigator.pop();
     },
 
     doLogin(user) {
         UserActions.authenticate(user);
-        this.props.navigator.pop();
     },
 
     render() {
@@ -86,8 +87,20 @@ var EmailLogin = React.createClass({
                   type={this.props.action === 'Sign in' ? LoginPerson : RegisterPerson}
                   options={options}
                 />
-                <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor={Colors.brandSecondaryDark}>
-                    <Text style={styles.buttonText}>Submit</Text>
+                <TouchableHighlight
+                onPress={this.onPress}
+                underlayColor={Colors.white}>
+                    <View
+                    style={styles.button}>
+                        <Icon
+                        color={Colors.white}
+                        name='ion|email'
+                        size={28}
+                        style={styles.brandIcon}/>
+                        <Text style={styles.buttonText}>
+                            {this.props.action} with Email
+                        </Text>
+                    </View>
                 </TouchableHighlight>
             </View>
         );
@@ -96,29 +109,34 @@ var EmailLogin = React.createClass({
 
 var styles = StyleSheet.create({
     container: {
-        justifyContent: 'center',
-        padding: 20,
         backgroundColor: Colors.white,
-        flex: 1,
+        width: window.width - 40,
+    },
+
+    brandIcon: {
+        width: 28,
+        height: 28,
+        marginLeft: 5,
     },
 
     button: {
-        height: 36,
         backgroundColor: Colors.brandSecondary,
-        borderColor: Colors.brandSecondary,
-        borderWidth: 1,
-        borderRadius: 4,
-        marginBottom: 10,
-        alignSelf: 'stretch',
-        justifyContent: 'center',
-    },
-    
-    buttonText: {
-        fontSize: 18,
-        color: 'white',
+        flexDirection: 'row',
         alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: 210,
+        padding: 5,
+        borderRadius: 3,
+        marginBottom: 10,
+    },
+
+    buttonText: {
+        color: 'white',
+        marginLeft: 5,
+        fontFamily: 'HelveticaNeue-Medium',
+        fontSize: 15,
     },
 });
-
 
 module.exports = EmailLogin;
