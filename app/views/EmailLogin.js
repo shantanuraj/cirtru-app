@@ -149,7 +149,7 @@ var styles = StyleSheet.create({
         width: 210,
         padding: 5,
         borderRadius: 3,
-        marginTop: 10,
+        marginTop: 30,
         marginBottom: 10,
     },
 
