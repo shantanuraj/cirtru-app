@@ -12,6 +12,7 @@ var {
     View,
     Text,
     TouchableHighlight,
+    TouchableOpacity,
     StyleSheet,
 } = React;
 
@@ -38,6 +39,7 @@ var RegisterPerson = t.struct({
 });
 
 var options = {
+    auto: 'placeholders',
     fields: {
         firstName: {
             error: 'Please enter your first name',
@@ -102,6 +104,11 @@ var EmailLogin = React.createClass({
                         </Text>
                     </View>
                 </TouchableHighlight>
+                <TouchableOpacity onPress={this.resetPassword}>
+                    <Text style={styles.forgotPassword}>
+                        Forgot password? Click here
+                    </Text>
+                </TouchableOpacity>
             </View>
         );
     },
@@ -109,8 +116,9 @@ var EmailLogin = React.createClass({
 
 var styles = StyleSheet.create({
     container: {
+        marginTop: 10,
         backgroundColor: Colors.white,
-        width: window.width - 40,
+        width: window.width - 60,
     },
 
     brandIcon: {
@@ -136,6 +144,11 @@ var styles = StyleSheet.create({
         marginLeft: 5,
         fontFamily: 'HelveticaNeue-Medium',
         fontSize: 15,
+    },
+
+    forgotPassword: {
+        color :Colors.brandSecondary,
+        alignSelf: 'center',
     },
 });
 

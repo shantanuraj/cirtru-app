@@ -37,7 +37,7 @@ var styles = StyleSheet.create({
 		fontSize: 15,
 	},
 
-	signUpText: {
+	greetText: {
 		marginTop: 32,
 		color: Colors.brandSecondary,
 		fontFamily: 'HelveticaNeue-Medium',
@@ -51,6 +51,23 @@ var styles = StyleSheet.create({
 		padding: 5,
 		borderRadius: 3,
 		marginBottom: 10,
+	},
+
+	dividerCircle: {
+		margin: 12,
+		width: 50,
+		height: 50,
+		alignItems: 'center',
+		justifyContent: 'center',
+		borderWidth: 2,
+		borderRadius: 25,
+		borderColor: Colors.brandSecondary,
+	},
+
+	dividerText: {
+		fontSize: 20,
+		fontWeight: 'bold',
+		color: Colors.brandSecondary,
 	},
 
 	googleButton: {
@@ -79,10 +96,10 @@ var Login = React.createClass({
         var data = this.state;
 		if (data.prompt === 'Sign in') {
             data.prompt = 'Sign up';
-            data.greet = 'Already have an account? Click here';
+            data.greet = 'Already a Cirtru member? Please Sign in';
 		} else {
 			data.prompt = 'Sign in';
-			data.greet = 'No account? Click here';
+			data.greet = 'Don\'t have an account? Sign up';
 		}
         this.setState(data);
 	},
@@ -120,13 +137,19 @@ var Login = React.createClass({
 						</Text>
 					</View>
 				</TouchableHighlight>
+				
+				<View style={styles.dividerCircle}>
+					<Text style={styles.dividerText}>
+						Or
+					</Text>
+				</View>
 
-				<EmailLogin action={this.state.prompt} />
+				<EmailLogin action={this.state.prompt}/>
 
 				<TouchableHighlight
 				onPress={this.togglePrompt}
 				underlayColor={Colors.white}>
-					<Text style={styles.signUpText}>
+					<Text style={styles.greetText}>
 						{this.state.greet}
 					</Text>
 				</TouchableHighlight>

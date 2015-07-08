@@ -64,12 +64,6 @@ var ChangePassword = React.createClass({
 	                <Text style={styles.buttonText}>Submit</Text>
 	            </TouchableHighlight>
 
-				<TouchableOpacity onPress={this.resetPassword}>
-					<Text style={styles.forgotPassword}>
-						Forgot password? Click here
-					</Text>
-				</TouchableOpacity>
-
     			<Toast isVisible={this.state.error} mode={'warn'}>
                     <TouchableOpacity>
                         <Text style={styles.toastText}>
@@ -140,10 +134,6 @@ var styles = StyleSheet.create({
 		fontWeight: 'bold',
 		alignSelf: 'center',
     },
-
-	forgotPassword: {
-		color :Colors.brandSecondary,
-	},
 });
 
 module.exports = ChangePassword;
