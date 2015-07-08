@@ -1,7 +1,8 @@
 'use strict';
 
 var React = require('react-native'),
-    Colors = require('../core/Colors');
+    Colors = require('../core/Colors'),
+    Icon = require('FAKIconImage');
 
 var window = require('Dimensions').get('window');
 
@@ -34,19 +35,28 @@ var styles = StyleSheet.create({
         justifyContent: 'center',
     },
 
+    priceContainer: {
+        padding: 6,
+        position: 'absolute',
+        backgroundColor: 'rgba(0,0,0,0.6)',
+        bottom: 60,
+        left: 0,
+    },
+
     infoContainer: {
         padding: 6,
         width: window.width,
         justifyContent: 'space-between',
         position: 'absolute',
-        backgroundColor: 'rgba(0,0,0,0.3)',
+        backgroundColor: 'rgba(0,0,0,0.4)',
         bottom: 0,
         left: 0,
     },
 
-    circle: {
+    rowText: {
         fontSize: 16,
         fontWeight: '300',
+        marginRight: 4,
         color: Colors.white,
     },
 
@@ -65,7 +75,7 @@ var styles = StyleSheet.create({
     row: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         alignItems: 'center',
     },
 
@@ -80,6 +90,12 @@ var styles = StyleSheet.create({
         fontWeight: 'bold',
         padding: 8,
         marginTop: 32,
+    },
+
+    icon: {
+        width: 20,
+        height: 20,
+        marginRight: 4,
     },
 });
 
@@ -121,24 +137,36 @@ var Product = React.createClass({
         var product = this.props.data,
             images = product.images,
             cost = '$' + product.cost,
-            title = product.title.length < 22 ?
+            title = product.title.length < 35 ?
                 product.title :
-                product.title.slice(0, 22).trim() + '...',
+                product.title.slice(0, 35).trim() + '...',
             computedHeight = {
-                height: images.pics.length > 0 ? 250 : 150,
+                height: images.pics.length > 0 ? 250 : 175,
             };
 
         return (
             <TouchableHighlight onPress={this.clicked} underlayColor={Colors.transparent}>
                 <View style={[styles.card, computedHeight]}>
 					{ this.renderImage(images) }
+                    <View style={styles.priceContainer}>
+                        <Text style={styles.cost}>{cost}</Text>
+                    </View>
                     <View style={styles.infoContainer}>
+                        <Text style={styles.title}>{title}</Text>
                         <View style={styles.row}>
-                            <View>
-                                <Text style={styles.circle}>{product.circle}</Text>
-                                <Text style={styles.title}>{title}</Text>
-                            </View>
-                            <Text style={styles.cost}>{cost}</Text>
+                            <Icon
+                            name='fontawesome|map-marker'
+                            size={20}
+                            color={Colors.lightGrey}
+                            style={styles.icon} />
+                            <Text style={styles.rowText}>{product.location}</Text>
+                            
+                            <Icon
+                            name='ion|ios-checkmark'
+                            size={20}
+                            color={Colors.verified}
+                            style={styles.icon} />
+                            <Text style={styles.rowText}>{product.circle}</Text>
                         </View>
                     </View>
                 </View>
