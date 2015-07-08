@@ -129,7 +129,7 @@ var Login = React.createClass({
 		var title;
 		if (this.state.status === 'success') {
 			title = 'Check your email';
-		} else if (this.state.status === 'error') {
+		} else {
 			title = 'Could not reset password';
 		}
 		this.setTimeout(ProfileActions.resetStore, 1500);
@@ -139,7 +139,7 @@ var Login = React.createClass({
     render() {
 		return (
 			<View style={styles.container}>
-				{/*<TouchableHighlight
+				<TouchableHighlight
 				underlayColor={Colors.white}>
 					<View
 					style={[styles.button, styles.googleButton]}>
@@ -152,7 +152,7 @@ var Login = React.createClass({
 							{this.state.prompt} with Google
 						</Text>
 					</View>
-				</TouchableHighlight>*/}
+				</TouchableHighlight>
 
 				<TouchableHighlight
 				onPress={this.loginFB}

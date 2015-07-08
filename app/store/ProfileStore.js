@@ -80,6 +80,16 @@ var ProfileStore = Reflux.createStore({
         }).done();
     },
 
+    onResetSuccess() {
+        this.state = 'success';
+        this.trigger(this.state);
+    },
+
+    onResetFail() {
+        this.state = 'error';
+        this.trigger(this.state);
+    },
+
     onForgotPassword(email) {
         fetch(Api.resetPassword(), {
             method: 'post',
