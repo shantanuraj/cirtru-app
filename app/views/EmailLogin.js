@@ -2,7 +2,6 @@
 
 var React = require('react-native'),
     t = require('tcomb-form-native'),
-    Icon = require('FAKIconImage'),
     Colors = require('../core/Colors'),
     ChangePassword = require('./ChangePassword'),
     UserActions = require('../actions/UserActions');
@@ -92,6 +91,18 @@ var EmailLogin = React.createClass({
         });
     },
 
+    renderForgotOrNot() {
+        if (this.props.action === 'Sign in') {
+            return (
+                <TouchableOpacity onPress={this.forgotPassword}>
+                    <Text style={styles.forgotPassword}>
+                        Forgot password? Click here
+                    </Text>
+                </TouchableOpacity>
+            );
+        }
+    },
+
     render() {
         return (
             <View style={styles.container}>
@@ -100,26 +111,17 @@ var EmailLogin = React.createClass({
                   type={this.props.action === 'Sign in' ? LoginPerson : RegisterPerson}
                   options={options}
                 />
+                {this.renderForgotOrNot()}
                 <TouchableHighlight
                 onPress={this.onPress}
                 underlayColor={Colors.white}>
                     <View
                     style={styles.button}>
-                        <Icon
-                        color={Colors.white}
-                        name='ion|email'
-                        size={28}
-                        style={styles.brandIcon}/>
                         <Text style={styles.buttonText}>
-                            {this.props.action} with Email
+                            {this.props.action}
                         </Text>
                     </View>
                 </TouchableHighlight>
-                <TouchableOpacity onPress={this.forgotPassword}>
-                    <Text style={styles.forgotPassword}>
-                        Forgot password? Click here
-                    </Text>
-                </TouchableOpacity>
             </View>
         );
     },
@@ -143,23 +145,23 @@ var styles = StyleSheet.create({
         flexDirection: 'row',
         alignSelf: 'center',
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         width: 210,
         padding: 5,
         borderRadius: 3,
+        marginTop: 10,
         marginBottom: 10,
     },
 
     buttonText: {
         color: 'white',
-        marginLeft: 5,
         fontFamily: 'HelveticaNeue-Medium',
         fontSize: 15,
+        padding: 7,
     },
 
     forgotPassword: {
         color :Colors.brandSecondary,
-        alignSelf: 'center',
     },
 });
 

@@ -101,7 +101,7 @@ var Login = React.createClass({
     getInitialState() {
         return {
             prompt: 'Sign in',
-            greet: 'No account? Click here',
+            greet: 'Don\'t have an account? Sign up',
         };
     },
 
