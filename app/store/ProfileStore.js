@@ -17,6 +17,11 @@ var ProfileStore = Reflux.createStore({
         return this.state;
     },
 
+    onResetStore() {
+        this.state = 'none';
+        this.trigger(this.state);
+    },
+
     getUser(userDetails) {
         this.user = userDetails;
     },
@@ -72,7 +77,25 @@ var ProfileStore = Reflux.createStore({
             } else {
                 this.onFailure();
             }
+        }).done();
+    },
+
+    onForgotPassword(email) {
+        fetch(Api.resetPassword(), {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email })
         })
+        .then(response => {
+            if (response.status === 200) {
+                this.onSuccess();
+            } else {
+                this.onFailure();
+            }
+        }).done();
     },
 });
 

@@ -4,6 +4,7 @@ var React = require('react-native'),
     t = require('tcomb-form-native'),
     Icon = require('FAKIconImage'),
     Colors = require('../core/Colors'),
+    ChangePassword = require('./ChangePassword'),
     UserActions = require('../actions/UserActions');
 
 var window = require('Dimensions').get('window');
@@ -81,6 +82,16 @@ var EmailLogin = React.createClass({
         UserActions.authenticate(user);
     },
 
+    forgotPassword() {
+        this.props.navigator.push({
+            title: 'Forgot Password',
+            component: ChangePassword,
+            passProps: {
+                action: 'forgot',
+            },
+        });
+    },
+
     render() {
         return (
             <View style={styles.container}>
@@ -104,7 +115,7 @@ var EmailLogin = React.createClass({
                         </Text>
                     </View>
                 </TouchableHighlight>
-                <TouchableOpacity onPress={this.resetPassword}>
+                <TouchableOpacity onPress={this.forgotPassword}>
                     <Text style={styles.forgotPassword}>
                         Forgot password? Click here
                     </Text>

@@ -7,6 +7,8 @@ var profileActions = [
     'resetSuccess',
     'resetFail',
     'resetPassword',
+    'forgotPassword',
+    'resetStore',
 ];
 
 var actions = Reflux.createActions(profileActions);

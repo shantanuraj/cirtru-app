@@ -1,10 +1,15 @@
 'use strict';
 
 var React = require('react-native'),
+	Reflux = require('reflux'),
 	Icon = require('FAKIconImage'),
+	Toast = require('./util/Toast'),
 	Colors = require('../core/Colors'),
 	EmailLogin = require('./EmailLogin'),
-	UserActions = require('../actions/UserActions');
+	TimerMixin = require('react-timer-mixin'),
+	UserActions = require('../actions/UserActions'),
+	ProfileStore = require('../store/ProfileStore'),
+	ProfileActions = require('../actions/ProfileActions');
 
 var window = require('Dimensions').get('window');
 
@@ -13,6 +18,7 @@ var {
 	Text,
 	View,
 	ScrollView,
+	TouchableOpacity,
 	TouchableHighlight,
 } = React;
 
@@ -77,10 +83,21 @@ var styles = StyleSheet.create({
 	facebookButton: {
 		backgroundColor: Colors.Facebook,
 	},
+
+    toastText: {
+		color: Colors.white,
+		padding: 15,
+		backgroundColor: Colors.transparent,
+		fontSize: 16,
+		fontWeight: 'bold',
+		alignSelf: 'center',
+    },
 });
 
 
 var Login = React.createClass({
+	mixins: [Reflux.connect(ProfileStore, 'status'), TimerMixin],
+    
     getInitialState() {
         return {
             prompt: 'Sign in',
@@ -104,9 +121,24 @@ var Login = React.createClass({
         this.setState(data);
 	},
 
+	toastTitle() {
+		if (this.state.status === 'none') {
+			return '';
+		}
+		
+		var title;
+		if (this.state.status === 'success') {
+			title = 'Check your email';
+		} else if (this.state.status === 'error') {
+			title = 'Could not reset password';
+		}
+		this.setTimeout(ProfileActions.resetStore, 1500);
+		return title;
+	},
+
     render() {
 		return (
-			<ScrollView contentContainerStyle={styles.container}>
+			<View style={styles.container}>
 				{/*<TouchableHighlight
 				underlayColor={Colors.white}>
 					<View
@@ -144,7 +176,7 @@ var Login = React.createClass({
 					</Text>
 				</View>
 
-				<EmailLogin action={this.state.prompt}/>
+				<EmailLogin {...this.props} action={this.state.prompt}/>
 
 				<TouchableHighlight
 				onPress={this.togglePrompt}
@@ -153,7 +185,17 @@ var Login = React.createClass({
 						{this.state.greet}
 					</Text>
 				</TouchableHighlight>
-			</ScrollView>
+
+				<Toast
+				isVisible={this.state.status === 'error' || this.state.status === 'success'}
+				mode={this.state.status === 'error' ? 'warn' : 'success'}>
+	                <TouchableOpacity>
+	                    <Text style={styles.toastText}>
+	                        {this.toastTitle()}
+	                    </Text>
+	                </TouchableOpacity>
+	            </Toast>
+			</View>
 		);
     },
 });

@@ -17,6 +17,15 @@ var {
 
 var Form = t.form.Form;
 
+var Email = t.subtype(t.Str, function (email) {
+    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email);
+});
+
+var ForgotForm = t.struct({
+    email: Email,
+});
+
 var typePassword = t.subtype(t.Str, function(e) {
     return e.length >= 8;
 });
@@ -29,6 +38,9 @@ var PasswordForm = t.struct({
 
 var options = {
     fields: {
+        email: {
+            error: 'Please enter a valid email',
+        },
         currentPassword: {
             password: true,
             secureTextEntry: true,
@@ -52,14 +64,13 @@ var ChangePassword = React.createClass({
 		return { error: false };
 	},
 
-	render() {
-	    return (
+	render() {	    
+        return (
 	        <View style={styles.container}>
 	            <Form
-	              ref="form"
-	              type={PasswordForm}
-	              options={options}
-	            />
+                ref="form"
+                type={this.props.action === 'forgot' ? ForgotForm : PasswordForm}
+                options={options} />
 	            <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor={Colors.brandSecondaryDark}>
 	                <Text style={styles.buttonText}>Submit</Text>
 	            </TouchableHighlight>
@@ -76,29 +87,38 @@ var ChangePassword = React.createClass({
 	},
 
 	onPress() {
-		var values = this.refs.form.getValue();
+        if (this.props.action === 'forgot') {
+            this.forgotPassword();
+        } else {
+            this.updatePassword();
+        }
+	},
+
+    forgotPassword(email) {
+        var value = this.refs.form.getValue();
+        ProfileActions.forgotPassword(value.email);
+        this.props.navigator.pop();
+    },
+
+    updatePassword() {
+        var values = this.refs.form.getValue();
         if (!values || values.newPassword !== values.confirmNewPassword) {
             this.setState({ error: true });
             return;
         }
 
-		var passwords = {
-			currentPassword : values.currentPassword,
-			verifyPassword  : values.newPassword,
-			newPassword     : values.newPassword,
-		};
-		UserActions.updatePassword(passwords);
+        var passwords = {
+            currentPassword : values.currentPassword,
+            verifyPassword  : values.newPassword,
+            newPassword     : values.newPassword,
+        };
+        UserActions.updatePassword(passwords);
 
         if (this.state.error) {
-        	this.setState({error: false})
+            this.setState({error: false})
         }
         this.props.navigator.pop();
-	},
-
-	resetPassword() {
-		ProfileActions.resetPassword();
-		this.props.navigator.pop();
-	},
+    },
 });
 
 var styles = StyleSheet.create({
