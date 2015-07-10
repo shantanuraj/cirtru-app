@@ -28,7 +28,7 @@ var styles = StyleSheet.create({
     },
 
     poster: {
-        height: 250,
+        height: 220,
         width: window.width,
         tintColor: Colors.white,
         alignItems: 'center',
@@ -39,7 +39,7 @@ var styles = StyleSheet.create({
         padding: 6,
         backgroundColor: 'rgba(0,0,0,0.6)',
         position: 'absolute',
-        bottom: 120,
+        bottom: 100,
         left: 0,
     },
 
