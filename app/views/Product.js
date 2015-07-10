@@ -37,36 +37,32 @@ var styles = StyleSheet.create({
 
     priceContainer: {
         padding: 6,
-        position: 'absolute',
         backgroundColor: 'rgba(0,0,0,0.6)',
-        bottom: 80,
+        position: 'absolute',
+        bottom: 120,
         left: 0,
     },
 
     infoContainer: {
-        padding: 6,
+        padding: 16,
         width: window.width,
         justifyContent: 'space-between',
-        position: 'absolute',
-        backgroundColor: 'rgba(0,0,0,0.4)',
-        bottom: 0,
-        left: 0,
+        backgroundColor: Colors.white,
     },
 
     rowText: {
         fontSize: 16,
         fontWeight: '400',
         marginRight: 4,
-        color: Colors.white,
     },
 
     title: {
-        color: Colors.white,
         fontSize: 20,
-        fontWeight: '500',
+        fontWeight: '400',
     },
 
     cost: {
+        paddingLeft: 10,
         color: Colors.white,
         fontSize: 24,
         fontWeight: '500',
@@ -77,6 +73,7 @@ var styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
+        marginTop: 4,
     },
 
     noimageContainer: {
@@ -103,7 +100,8 @@ var styles = StyleSheet.create({
         height: 20,
         marginTop: 4,
         marginLeft: 15,
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
+        backgroundColor: Colors.transparent,
     },
 
     nonIcon: {
@@ -152,16 +150,11 @@ var Product = React.createClass({
         var product = this.props.data,
             images = product.images,
             cost = '$' + product.cost,
-            title = product.title.length < 35 ?
-                    product.title :
-                    product.title.slice(0, 35).trim() + '...',
-            computedHeight = {
-                height: images.pics.length > 0 ? 250 : 175,
-            };
+            title = product.title;
 
         return (
             <TouchableHighlight onPress={this.clicked} underlayColor={Colors.transparent}>
-                <View style={[styles.card, computedHeight]}>
+                <View style={[styles.card]}>
 					{ this.renderImage(images) }
                     <View style={styles.priceContainer}>
                         <Text style={styles.cost}>{cost}</Text>
@@ -172,13 +165,13 @@ var Product = React.createClass({
                             <Icon
                             name='fontawesome|map-marker'
                             size={20}
-                            color={Colors.lightGrey}
+                            color={Colors.grey}
                             style={styles.mapIcon} />
                             <Text style={styles.rowText}>{product.location}</Text>
                             <Icon
                             name='fontawesome|user'
                             size={20}
-                            color={Colors.lightGrey}
+                            color={Colors.grey}
                             style={styles.userIcon}>
                                 <Icon
                                 name='fontawesome|check'
