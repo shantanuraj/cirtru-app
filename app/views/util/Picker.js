@@ -55,6 +55,12 @@ var styles = StyleSheet.create({
         color: Colors.white,
     },
 
+    fabContainer: {
+        position: 'absolute',
+        bottom: 8,
+        right: 8,
+    },
+
     checkMark: {
         width: 40,
         height: 40,
@@ -116,16 +122,7 @@ var Picker = React.createClass({
                 <ScrollView
                 style={styles.container}>
                     <View style={styles.leadContainer}>
-                        <Text style={styles.leadText}>Choose {this.props.label}</Text>
-                        <TouchableHighlight
-                        underlayColor={Colors.transparent}
-                        onPress={this.selectComplete}>
-                            <Icon
-                            color={Colors.white}
-                            name='ion|ios-checkmark-empty'
-                            size={40}
-                            style={styles.checkMark} />
-                        </TouchableHighlight>
+                        <Text style={styles.leadText}>Choose {this.props.label}</Text>                        
                     </View>
                     <ListView
                     contentContainerStyle={styles.content}
@@ -133,6 +130,16 @@ var Picker = React.createClass({
                     style={styles.top}
                     renderRow={(row) => this.renderRow(row)} />
                 </ScrollView>
+                <TouchableHighlight
+                style={styles.fabContainer}
+                underlayColor={Colors.transparent}
+                onPress={this.selectComplete}>
+                    <Icon
+                    color={Colors.white}
+                    name='ion|ios-checkmark-empty'
+                    size={40}
+                    style={styles.checkMark} />
+                </TouchableHighlight>
             </Overlay>
         );
     },

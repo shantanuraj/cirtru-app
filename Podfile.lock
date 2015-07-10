@@ -1,4 +1,6 @@
 PODS:
+  - CMDQueryStringSerialization (0.4.1):
+    - ISO8601
   - Google/Core (1.0.7):
     - GoogleNetworkingUtilities (~> 1.0)
     - GoogleSymbolUtilities (~> 1.0)
@@ -22,12 +24,27 @@ PODS:
   - GoogleSymbolUtilities (1.0.0)
   - GoogleUtilities (1.0.1):
     - GoogleSymbolUtilities (~> 1.0)
+  - ISO8601 (0.3.0)
+  - ReactiveCocoa (2.5):
+    - ReactiveCocoa/UI (= 2.5)
+  - ReactiveCocoa/Core (2.5):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.5)
+  - ReactiveCocoa/UI (2.5):
+    - ReactiveCocoa/Core
+  - SimpleAuth/Core (0.3.9):
+    - CMDQueryStringSerialization
+    - ReactiveCocoa
+  - SimpleAuth/GoogleWeb (0.3.9):
+    - SimpleAuth/Core
 
 DEPENDENCIES:
   - Google/SignIn
   - GoogleAnalytics (~> 3.12)
+  - SimpleAuth/GoogleWeb
 
 SPEC CHECKSUMS:
+  CMDQueryStringSerialization: 4bb0a2f5e7d8d8678d911d88072274952cbef4e5
   Google: 875f5a8ade86dd02e36586e4a54814843938c7f6
   GoogleAnalytics: ef2e0b800ef3c1e62688cdfc959e0d3132bc246c
   GoogleAppUtilities: c01c6a5671e9da8b9d690fdaec5959d6c2aac699
@@ -36,5 +53,8 @@ SPEC CHECKSUMS:
   GoogleSignIn: f26abd6d5bccb35f44528cc4f75a9014ddd213d0
   GoogleSymbolUtilities: a7b0feed1fe667c8d5e647177938d0ecd62d6948
   GoogleUtilities: e3475cd4d45134221d2f3f3626095a1c49b62041
+  ISO8601: 8d8a22d5edf0554a1cf75bac028c76c1dc0ffaef
+  ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
+  SimpleAuth: bc7d594f90711a7e6ef7624dce5aa8c8b09770ab
 
 COCOAPODS: 0.38.0.beta.2

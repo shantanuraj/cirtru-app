@@ -10,6 +10,8 @@ module.exports = {
 	backgroundLight: '#EEEEEE',
 	textSecondary: '#333333',
 	verified: '#4CAF50',
+	placeholder: '#D9D9D9',
+	placeholderIcon: '#AEAEAE',
 	danger: '#D32F2F',
 	warn: '#FFA726',
 	success: '#00E676',

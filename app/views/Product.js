@@ -17,7 +17,7 @@ var {
 var styles = StyleSheet.create({
     card: {
         width: window.width,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.placeholder,
         shadowColor: Colors.black,
         shadowOpacity: 0.3,
         shadowRadius: 3,
@@ -39,7 +39,7 @@ var styles = StyleSheet.create({
         padding: 6,
         position: 'absolute',
         backgroundColor: 'rgba(0,0,0,0.6)',
-        bottom: 60,
+        bottom: 80,
         left: 0,
     },
 
@@ -55,7 +55,7 @@ var styles = StyleSheet.create({
 
     rowText: {
         fontSize: 16,
-        fontWeight: '300',
+        fontWeight: '400',
         marginRight: 4,
         color: Colors.white,
     },
@@ -80,23 +80,36 @@ var styles = StyleSheet.create({
     },
 
     noimageContainer: {
+        backgroundColor: Colors.placeholder,
+        paddingTop: 20,
         height: 150,
         alignItems: 'center',
     },
 
-    noimage: {
-        color: Colors.black,
-        fontSize: 18,
-        fontWeight: 'bold',
-        padding: 8,
-        marginTop: 32,
-    },
-
-    icon: {
+    mapIcon: {
         width: 20,
         height: 20,
         marginRight: 4,
     },
+
+    userIcon: {
+        width: 40,
+        height: 20,
+        marginRight: 4,
+    },
+
+    checkIcon: {
+        width: 20,
+        height: 20,
+        marginTop: 4,
+        marginLeft: 15,
+        alignSelf: 'flex-start'
+    },
+
+    nonIcon: {
+        width: 100,
+        height: 100,
+    }
 });
 
 var Product = React.createClass({
@@ -125,9 +138,11 @@ var Product = React.createClass({
         } else {
             return (
                 <View style={styles.noimageContainer}>
-                    <Text style={styles.noimage}>
-                        No image
-                    </Text>
+                    <Icon
+                    name='fontawesome|home'
+                    size={50}
+                    color={Colors.placeholderIcon}
+                    style={styles.nonIcon} />
                 </View>
             );
         }
@@ -138,8 +153,8 @@ var Product = React.createClass({
             images = product.images,
             cost = '$' + product.cost,
             title = product.title.length < 35 ?
-                product.title :
-                product.title.slice(0, 35).trim() + '...',
+                    product.title :
+                    product.title.slice(0, 35).trim() + '...',
             computedHeight = {
                 height: images.pics.length > 0 ? 250 : 175,
             };
@@ -158,14 +173,19 @@ var Product = React.createClass({
                             name='fontawesome|map-marker'
                             size={20}
                             color={Colors.lightGrey}
-                            style={styles.icon} />
+                            style={styles.mapIcon} />
                             <Text style={styles.rowText}>{product.location}</Text>
-                            
                             <Icon
-                            name='ion|ios-checkmark'
+                            name='fontawesome|user'
                             size={20}
-                            color={Colors.verified}
-                            style={styles.icon} />
+                            color={Colors.lightGrey}
+                            style={styles.userIcon}>
+                                <Icon
+                                name='fontawesome|check'
+                                size={18}
+                                color={Colors.verified}
+                                style={styles.checkIcon}/>
+                            </Icon>
                             <Text style={styles.rowText}>{product.circle}</Text>
                         </View>
                     </View>
