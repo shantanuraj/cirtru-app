@@ -10,7 +10,7 @@ var {
     Text,
 } = React;
 
-var ContactButton = React.createClass({
+var FabButton = React.createClass({
     render() {
         return (
             <TouchableHighlight
@@ -18,7 +18,7 @@ var ContactButton = React.createClass({
             style={styles.fab}
             underlayColor={Colors.brandSecondary}>
                 <Icon
-                name='ion|email'
+                name={this.props.icon}
                 size={32}
                 color={Colors.white}
                 style={styles.icon} />
@@ -50,4 +50,4 @@ var styles = StyleSheet.create({
     },
 });
 
-module.exports = ContactButton;
+module.exports = FabButton;

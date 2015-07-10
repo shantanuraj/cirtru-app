@@ -7,7 +7,7 @@ var React = require('react-native'),
     Info = require('./util/Info'),
     Amenities = require('./util/Amenities'),
     LocationBox = require('./util/LocationBox'),
-    ContactButton = require('./util/ContactButton'),
+    FabButton = require('./util/FabButton'),
     Rooms = require('./util/Rooms'),
     SubletInfo = require('./util/SubletInfo'),
     CarInfo = require('./util/CarInfo'),
@@ -154,7 +154,7 @@ var Listing = React.createClass({
         if (!this.props.isOwner) {
             return (
                 <View style={styles.fabContainer}>
-                    <ContactButton action={this.contactOwner} />
+                    <FabButton icon={'ion|email'} action={this.contactOwner} />
                 </View>
             );
         }
@@ -181,17 +181,26 @@ var Listing = React.createClass({
         }
     },
 
+    renderImagesOrNot(images) {
+        if (images.length > 0) {
+            return (
+                <Images images={images} style={styles.images} />
+            );
+        }
+    },
+
     render() {
         var listing = this.props.listing,
             images = listing.images.pics,
             cost = listing.cost,
             info = listing.description,
             circle = listing.circle,
-            address = listing.address;
+            address = listing.address;            
+
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.scroll}>
-                    <Images images={images} style={styles.images} />
+                    {this.renderImagesOrNot(images)}
                     <View style={styles.infoContainer}>
                         <View style={styles.row}>
                             <Text style={styles.circle}>{circle}</Text>

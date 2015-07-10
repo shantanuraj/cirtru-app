@@ -6,6 +6,7 @@ var React = require('react-native'),
 	Colors = require('../../core/Colors'),
 	Picker = require('../util/Picker'),
 	SinglePicker = require('../util/SinglePicker'),
+	FabButton = require('../util/FabButton'),
 	FilterStore = require('../../store/FilterStore');
 
 var {
@@ -35,16 +36,6 @@ var styles = StyleSheet.create({
 		padding: 8,
 	},
 
-	searchButton: {
-		height: 38,
-        margin: 12,
-        backgroundColor: Colors.brandSecondary,
-        borderColor: Colors.brandSecondary,
-        borderWidth: 1,
-        borderRadius: 3,
-        justifyContent: 'center',
-	},
-
 	selectText: {
 		marginLeft: 16,
 		fontSize: 18,
@@ -52,10 +43,11 @@ var styles = StyleSheet.create({
 		color: Colors.brandSecondary,
 	},
 
-	buttonText: {
-        fontSize: 24,
-        color: 'white',
-        alignSelf: 'center',
+    fabContainer: {
+        position: 'absolute',
+        bottom: 16,
+        right: 16,
+        borderRadius: 24,
     },
 });
 
@@ -314,12 +306,6 @@ var Search = React.createClass({
 				placeholderTextColor={Colors.grey}
 				style={styles.searchBar} />
 
-				<TextInput
-				onChangeText={ circle => this.setState({ circle }) }
-				placeholder={'Enter circle'}
-				placeholderTextColor={Colors.grey}
-				style={styles.searchBar} />
-
 				{this.renderMultiPrompt('Location', 'location', 'showLocation')}
 				{this.renderMultiPicker('location', options.location, 'showLocation')}
 				
@@ -332,13 +318,9 @@ var Search = React.createClass({
 
 				{this.renderNonGenericContent()}
 
-				<TouchableHighlight
-				onPress={this.onPress}
-				style={styles.searchButton}>
-					<Text style={styles.buttonText}>
-						Search
-					</Text>
-				</TouchableHighlight>
+				<View style={styles.fabContainer}>
+				    <FabButton icon={'ion|ios-search-strong'} action={this.onPress} />
+				</View>
 			</View>
 		);
 	},

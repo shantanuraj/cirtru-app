@@ -7,7 +7,7 @@ var React = require('react-native'),
     Product = require('./Product'),
     Search = require('./search/Search'),
     Toast = require('./util/Toast'),
-    FilterButton = require('./util/FilterButton'),
+    FabButton = require('./util/FabButton'),
     FilterActions = require('../actions/FilterActions'),
     FilterStore = require('../store/FilterStore'),
     TimerMixin = require('react-timer-mixin');
@@ -122,7 +122,7 @@ var ProductList = React.createClass({
 
     filter() {
         this.props.navigator.push({
-            title: 'Filter',
+            title: 'Search',
             component: Search,
             passProps: {
                 category: this.props.type,
@@ -172,7 +172,7 @@ var ProductList = React.createClass({
         if (!this.props.isOwner) {
             return (
                 <View style={styles.fabContainer}>
-                    <FilterButton action={this.filter} />
+                    <FabButton icon={'fontawesome|filter'} action={this.filter} />
                 </View>
             );
         }
