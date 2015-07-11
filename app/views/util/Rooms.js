@@ -42,7 +42,7 @@ var Rooms = React.createClass({
 var styles = StyleSheet.create({
     wrapper: {
         width: window.width,
-        backgroundColor: Colors.backgroundLight,
+        backgroundColor: Colors.white,
     },
     container: {
         flex: 1,
@@ -50,9 +50,9 @@ var styles = StyleSheet.create({
         alignItems: 'center',
     },
     leadText: {
-        color: Colors.grey,
+        color: Colors.black,
         alignSelf: 'center',
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: 'bold',
     },
 });

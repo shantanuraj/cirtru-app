@@ -15,7 +15,7 @@ var styles = StyleSheet.create({
         marginBottom: 8,
     },
     subText: {
-        color: Colors.grey,
+        color: Colors.black,
         fontSize: 20,
         fontWeight: 'bold',
         marginTop: 8,
@@ -23,11 +23,12 @@ var styles = StyleSheet.create({
     },
     title: {
         color: Colors.black,
-        fontSize: 20,
+        fontSize: 16,
+        fontWeight: 'bold',
     },
     value: {
-        color: Colors.grey,
-        fontSize: 20,
+        color: Colors.black,
+        fontSize: 16,
     },
     row: {
         flex: 1,
@@ -38,31 +39,35 @@ var styles = StyleSheet.create({
 });
 
 var Occupancy = React.createClass({
-    renderRow(title, value) {
-        return (
-            <View style={styles.row}>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.value}>{value}</Text>
-            </View>
-        );
+    renderDetails() {
+    	var occupancy = this.props.occupancy;
+    	return (
+    		<View>
+	    		<Text style={styles.value}>
+	    			{occupancy.occupant + ', '}
+	    			{occupancy.occupation + ', '}
+	    			{occupancy.gender + ' gender, '}
+	    			{occupancy.age + ' years old, '}
+	    			{occupancy.pets + ', '}
+	    			{occupancy.smoking + ', '}
+	    			{occupancy.drinking + ', '}
+	    			{occupancy.diet + ' \n'}
+	    		</Text>
+	    		<Text style={styles.title}>
+	    			{'Deposit: $' + occupancy.deposit + ', '}
+	    			{'Rent: $' + occupancy.rent + ', '}
+	    			{'Available from: ' + occupancy.from + ', '}
+	    			{'Min Stay: ' + occupancy.minStay}
+	    		</Text>
+    		</View>
+    	);
     },
 
     render() {
-    	var occupancy = this.props.occupancy;
         return (
             <View style={styles.occupancy}>
             	<Text style={styles.subText}>Looking for</Text>
-                {this.renderRow('Occupant', occupancy.occupant)}
-                {this.renderRow('Occupation', occupancy.occupation)}
-                {this.renderRow('Gender', occupancy.gender)}
-                {this.renderRow('Age', occupancy.age)}
-                {this.renderRow('Deposit', '$' + occupancy.deposit)}
-                {this.renderRow('Diet', occupancy.diet)}
-                {this.renderRow('Smoking', occupancy.smoking)}
-                {this.renderRow('Drinking', occupancy.drinking)}
-                {this.renderRow('Pets', occupancy.pets)}
-                {this.renderRow('Start', occupancy.from)}
-                {this.renderRow('Minimum stay', occupancy.minStay)}
+                {this.renderDetails()}
             </View>
         );
     },

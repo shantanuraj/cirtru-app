@@ -36,7 +36,10 @@ var styles = StyleSheet.create({
     },
 
     priceContainer: {
-        padding: 6,
+        paddingLeft: 16,
+        paddingTop: 6,
+        paddingBottom: 6,
+        paddingRight: 6, 
         backgroundColor: 'rgba(0,0,0,0.6)',
         position: 'absolute',
         bottom: 100,
@@ -62,7 +65,6 @@ var styles = StyleSheet.create({
     },
 
     cost: {
-        paddingLeft: 10,
         color: Colors.white,
         fontSize: 24,
         fontWeight: '500',

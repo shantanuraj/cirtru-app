@@ -55,11 +55,13 @@ var styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        paddingLeft: 16,
+        paddingRight: 16,
     },
 
     circle: {
-        fontSize: 16,
-        fontWeight: '300',
+        fontSize: 20,
+        fontWeight: '500',
         color: Colors.white,
     },
 
@@ -195,7 +197,7 @@ var Listing = React.createClass({
             cost = listing.cost,
             info = listing.description,
             circle = listing.circle,
-            address = listing.address;            
+            address = listing.address;
 
         return (
             <View style={styles.container}>
@@ -203,8 +205,8 @@ var Listing = React.createClass({
                     {this.renderImagesOrNot(images)}
                     <View style={styles.infoContainer}>
                         <View style={styles.row}>
-                            <Text style={styles.circle}>{circle}</Text>
                             <Text style={styles.cost}>${cost}</Text>
+                            <Text style={styles.circle}>{circle}</Text>
                         </View>
                     </View>
                     <LocationBox location={address} />

@@ -24,7 +24,7 @@ var LocationBox = React.createClass({
 
 var styles = StyleSheet.create({
     container: {
-        padding: 8,
+        padding: 16,
         width: window.width,
         backgroundColor: Colors.brandSecondary,
     },

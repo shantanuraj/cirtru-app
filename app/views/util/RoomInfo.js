@@ -17,13 +17,13 @@ var styles = StyleSheet.create({
         flex: 1,
         width: window.width,
         justifyContent: 'center',
-        backgroundColor: Colors.backgroundLight,
-        padding: 12,
+        backgroundColor: Colors.white,
+        padding: 16,
     },
     leadText: {
-        color: Colors.grey,
+        color: Colors.black,
         alignSelf: 'center',
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: 'bold',
     },
 });
