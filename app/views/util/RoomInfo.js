@@ -10,56 +10,6 @@ var {
     StyleSheet
 } = React;
 
-var RoomInfo = React.createClass({
-    render() {
-        var room = this.props.room,
-            type = room.roomType,
-            occupancy = room.roomOccupancy[0];
-
-        return (
-            <View style={styles.container}>
-                <Text style={styles.leadText}>{type}</Text>
-                <Text style={styles.subText}>{this.bedsAndBaths()}</Text>
-                {this.renderRow('Occupant', occupancy.occupant)}
-                {this.renderRow('Occupation', occupancy.occupation)}
-                {this.renderRow('Gender', occupancy.gender)}
-                {this.renderRow('Age', occupancy.age)}
-                {this.renderRow('Deposit', '$' + occupancy.deposit)}
-                {this.renderRow('Diet', occupancy.diet)}
-                {this.renderRow('Smoking', occupancy.smoking)}
-                {this.renderRow('Drinking', occupancy.drinking)}
-                {this.renderRow('Pets', occupancy.pets)}
-                {this.renderRow('Start', occupancy.from)}
-                {this.renderRow('Minimum stay', occupancy.minStay)}
-            </View>
-        );
-    },
-
-    renderRow(title, value) {
-        return (
-            <View style={styles.row}>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.value}>{value}</Text>
-            </View>
-        );
-    },
-
-    bedsAndBaths() {
-        var beds  = this.props.beds,
-            baths = this.props.baths,
-            bedMessage = 'bed',
-            bathMessage = 'bath';
-
-        if (beds > 1) {
-            bedMessage += 's';
-        }
-        if (baths > 1) {
-            bathMessage += 's';
-        }
-
-        return beds + " " + bedMessage + " & " + baths + " " + bathMessage;
-    }
-});
 
 var styles = StyleSheet.create({
     container: {
@@ -95,6 +45,57 @@ var styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginBottom: 2,
     }
+});
+
+var RoomInfo = React.createClass({
+    bedsAndBaths() {
+        var beds  = this.props.beds,
+            baths = this.props.baths,
+            bedMessage = 'bed',
+            bathMessage = 'bath';
+
+        if (beds > 1) {
+            bedMessage += 's';
+        }
+        if (baths > 1) {
+            bathMessage += 's';
+        }
+
+        return beds + ' ' + bedMessage + ' & ' + baths + ' ' + bathMessage;
+    },
+
+    renderRow(title, value) {
+        return (
+            <View style={styles.row}>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.value}>{value}</Text>
+            </View>
+        );
+    },
+
+    render() {
+        var room = this.props.room,
+            type = room.roomType,
+            occupancy = room.roomOccupancy[0];
+
+        return (
+            <View style={styles.container}>
+                <Text style={styles.leadText}>{type}</Text>
+                <Text style={styles.subText}>{this.bedsAndBaths()}</Text>
+                {this.renderRow('Occupant', occupancy.occupant)}
+                {this.renderRow('Occupation', occupancy.occupation)}
+                {this.renderRow('Gender', occupancy.gender)}
+                {this.renderRow('Age', occupancy.age)}
+                {this.renderRow('Deposit', '$' + occupancy.deposit)}
+                {this.renderRow('Diet', occupancy.diet)}
+                {this.renderRow('Smoking', occupancy.smoking)}
+                {this.renderRow('Drinking', occupancy.drinking)}
+                {this.renderRow('Pets', occupancy.pets)}
+                {this.renderRow('Start', occupancy.from)}
+                {this.renderRow('Minimum stay', occupancy.minStay)}
+            </View>
+        );
+    },
 });
 
 module.exports = RoomInfo;

@@ -13,10 +13,10 @@ var {
 
 var Rooms = React.createClass({
     render() {
-        var rooms = this.props.rooms.filter(room => room.roomOccupancy.length != 0);
+        var rooms = this.props.rooms.filter(room => room.roomOccupancy.length > 0);
         return (
             <ScrollView style={styles.wrapper} contentInset={{top: -65}} horizontal={true}>
-                {rooms.map((room, i) => <RoomInfo {...this.props} key={i} room={room} style={styles.container}/>)}
+                {rooms.map((room, i) => <RoomInfo {...this.props} key={i} room={room} style={styles.container} />)}
             </ScrollView>
         );
     }

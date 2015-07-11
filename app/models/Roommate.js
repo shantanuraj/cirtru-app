@@ -39,23 +39,18 @@ module.exports = {
 			}
 		};
 
-		listing.propertyAmenities.forEach(amenity => {
-			values.data.amenities[amenity] = true;
-		});
+		listing.propertyAmenities.forEach(amenity => values.data.amenities[amenity] = true);
 
-		listing.rooms.forEach(function (room, index) {
-
+		listing.rooms.forEach(room => {
 			room.roomOccupancy.forEach(function (occupant) {
 				if (occupant.roommateStatus === 'Looking') {
 					values.data.rent.push(occupant.rent);
 				}
 			});
-
-			if (index === listing.rooms.length - 1) {
-				values.cost = Math.min.apply(Math, values.data.rent);
-			}
-
 		});
+
+		values.cost = values.data.rent.reduce((x, y) => x < y ? x : y);
+
 		return values;
 	}
 };
