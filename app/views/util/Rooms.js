@@ -2,8 +2,10 @@
 
 var React = require('react-native'),
     Colors = require('../../core/Colors'),
-    window = require('Dimensions').get('window'),
+    Amenities = require('./Amenities'),
     RoomInfo = require('./RoomInfo');
+
+var window = require('Dimensions').get('window');
 
 var {
     StyleSheet,
@@ -59,6 +61,7 @@ var Rooms = React.createClass({
                 <Text key={1337} style={styles.leadText}>Property has</Text>
                 <Text key={1338} style={styles.subText}>{this.bedsAndBaths()}</Text>
                 {rooms.map((room, i) => <RoomInfo {...this.props} total={length} i={i} key={i} room={room} style={styles.container} />)}
+                <Amenities amenities={this.props.data.amenities} />
             </ScrollView>
         );
     }

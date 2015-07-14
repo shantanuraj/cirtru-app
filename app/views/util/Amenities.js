@@ -7,69 +7,60 @@ var React = require('react-native'),
 
 var {
     StyleSheet,
-    ScrollView,
     View,
     Text,
     Image,
 } = React;
 
-var icons = {
-    pool: require('image!pool'),
-    parking: require('image!parking'),
-    laundry: require('image!laundry'),
-    gym: require('image!gym'),
-    ac: require('image!ac'),
-    tv: require('image!tv'),
-    security: require('image!security'),
-    heating: require('image!heating'),
-    elevator: require('image!elevator'),
-    internet: require('image!internet'),
+var titles = {
+    pool: 'Pool',
+    parking: 'Parking',
+    laundry: 'Laundry',
+    gym: 'Gym',
+    ac: 'AC',
+    tv: 'Televison',
+    security: 'Gated security',
+    heating: 'Heating',
+    elevator: 'Elevator',
+    internet: 'Internet',
 };
 
 var Amenities = React.createClass({
-    getInitialState() {
-        var list = _.Map(icons).filter((v, k) => this.props.amenities[k] === true);
-        return {
-            icons: list.toArray()
-        };
-    },
-
     render() {
-        if (this.state.icons.length === 0) {
+        var amenities = _.Map(titles).filter((v, k) => this.props.amenities[k]);
+        if (amenities.size === 0) {
             return (
                 <View />
             );
         }
         return (
-            <ScrollView
-            style={styles.scroll}
-            contentContainerStyle={styles.container}
-            horizontal={true}
-            contentInset={{top: -65}}>
-                <Text style={styles.text}>Amenities </Text>
-                {this.state.icons.map((icon, i) => <Image key={i} style={styles.icon} source={icon} />)}
-            </ScrollView>
+            <View style={styles.container}>
+                <Text style={styles.leadText}>Property Amenities</Text>
+                <View style={styles.subContainer}>
+                    <Text style={styles.subText}>{amenities.valueSeq().join(', ')}</Text>
+                </View>
+            </View>
         );
     },
 });
 
 var styles = StyleSheet.create({
-    scroll: {
-        backgroundColor: Colors.white,
-        width: window.width,
-        padding: 16,
-    },
     container: {
-        justifyContent: 'space-between',
+        paddingLeft: 16,
+        paddingRight: 16,
+        width: window.width,
     },
-    text: {
+    subContainer: {
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingTop: 16,
+    },
+    leadText: {
         fontSize: 20,
-        fontWeight: 'bold',
     },
-    icon: {
-        width: 36,
-        height: 36,
-    }
+    subText: {
+        fontSize: 16,
+    },
 });
 
 module.exports = Amenities;

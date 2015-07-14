@@ -10,6 +10,40 @@ var {
     StyleSheet
 } = React;
 
+var styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        width: window.width,
+        justifyContent: 'center',
+        backgroundColor: Colors.white,
+        padding: 16,
+    },
+    leadText: {
+        color: Colors.black,
+        alignSelf: 'center',
+        fontSize: 20,
+    },
+    subText: {
+        color: Colors.black,
+        alignSelf: 'center',
+        fontSize: 20,
+    },
+    title: {
+        color: Colors.black,
+        fontSize: 20,
+    },
+    value: {
+        color: Colors.black,
+        fontSize: 20,
+    },
+    row: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 2,
+    }
+});
+
 var SubletInfo = React.createClass({
     render() {
         String.prototype.capitalize = function() {
@@ -33,7 +67,6 @@ var SubletInfo = React.createClass({
                 <Text style={styles.subText}>{this.bedsAndBaths(sublet.beds, sublet.baths)}</Text>
                 {this.renderRow('Deposit', deposit)}
                 {this.renderRow('Diet', sublet.diet)}
-                {this.renderRow('Pets', sublet.pets)}
                 {this.renderRow('Start', sublet.start)}
                 {this.renderRow('End', sublet.end)}
             </View>
@@ -72,42 +105,6 @@ var SubletInfo = React.createClass({
         }
 
         return beds + ' ' + bedMessage + sep + baths + ' ' + bathMessage;
-    }
-});
-
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        width: window.width,
-        justifyContent: 'center',
-        backgroundColor: Colors.backgroundLight,
-        padding: 12,
-    },
-    leadText: {
-        color: Colors.grey,
-        alignSelf: 'center',
-        fontSize: 24,
-        fontWeight: 'bold',
-    },
-    subText: {
-        color: Colors.grey,
-        alignSelf: 'center',
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    title: {
-        color: Colors.black,
-        fontSize: 20,
-    },
-    value: {
-        color: Colors.grey,
-        fontSize: 20,
-    },
-    row: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 2,
     }
 });
 
