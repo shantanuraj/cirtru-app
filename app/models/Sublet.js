@@ -20,11 +20,16 @@ module.exports = {
 
 			data: {
 				amenities: {
-					laundry: listing.laundry === 'yes' ? true : false,
-					pool: listing.swimmingPool === 'yes' ? true : false,
-					gym: listing.gym === 'yes' ? true : false,
-					security: listing.security === 'gated' ? true : false,
-					smoking: listing.smoking === 'OK' ? true : false,
+					pool: false,
+					parking: false,
+					laundry: false,
+					gym: false,
+					ac: false,
+					tv: false,
+					security: false,
+					heating: false,
+					elevator: false,
+					internet: false,
 				},
 				type: listing.type,
 				deposit: listing.deposit,
@@ -37,6 +42,7 @@ module.exports = {
 				owner: listing.user,
 			}
 		}
+		listing.propertyAmenities.forEach(amenity => values.data.amenities[amenity] = true);
 		return values;
 	}
 }

@@ -5,9 +5,8 @@ var React = require('react-native'),
     Icon = require('FAKIconImage'),
     Colors = require('../core/Colors'),
     Images = require('./util/Images'),
-    Info = require('./util/Info'),
     Amenities = require('./util/Amenities'),
-    LocationBox = require('./util/LocationBox'),
+    Info = require('./util/Info'),
     FabButton = require('./util/FabButton'),
     FlagButton = require('./util/FlagButton'),
     MapBox = require('./util/MapBox'),
@@ -192,8 +191,8 @@ var Listing = React.createClass({
             );
             case 'sublets': return (
                 <View>
-                    <Amenities amenities={extras.amenities} />
                     <SubletInfo sublet={extras} />
+                    <Amenities amenities={extras.amenities} />
                 </View>
             );
             case 'cars': return (

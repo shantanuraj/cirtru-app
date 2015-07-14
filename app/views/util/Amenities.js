@@ -12,6 +12,25 @@ var {
     Image,
 } = React;
 
+var styles = StyleSheet.create({
+    container: {
+        paddingLeft: 16,
+        paddingRight: 16,
+        width: window.width,
+    },
+    subContainer: {
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingTop: 16,
+    },
+    leadText: {
+        fontSize: 20,
+    },
+    subText: {
+        fontSize: 16,
+    },
+});
+
 var titles = {
     pool: 'Pool',
     parking: 'Parking',
@@ -41,25 +60,6 @@ var Amenities = React.createClass({
                 </View>
             </View>
         );
-    },
-});
-
-var styles = StyleSheet.create({
-    container: {
-        paddingLeft: 16,
-        paddingRight: 16,
-        width: window.width,
-    },
-    subContainer: {
-        paddingLeft: 16,
-        paddingRight: 16,
-        paddingTop: 16,
-    },
-    leadText: {
-        fontSize: 20,
-    },
-    subText: {
-        fontSize: 16,
     },
 });
 

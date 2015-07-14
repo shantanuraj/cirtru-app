@@ -1,8 +1,9 @@
 'use strict';
 
 var React = require('react-native'),
-    Colors = require('../../core/Colors'),
-    window = require('Dimensions').get('window');
+    Colors = require('../../core/Colors');
+
+var window = require('Dimensions').get('window');
 
 var {
     Text,
@@ -14,77 +15,34 @@ var styles = StyleSheet.create({
     container: {
         flex: 1,
         width: window.width,
-        justifyContent: 'center',
         backgroundColor: Colors.white,
-        padding: 16,
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingBottom: 16,
     },
+
     leadText: {
-        color: Colors.black,
-        alignSelf: 'center',
+        paddingTop: 16,
         fontSize: 20,
     },
+
+    boldText: {
+        marginTop: 16,
+        fontSize: 16,
+        fontWeight: 'bold',
+        paddingLeft: 16,
+        paddingRight: 16,
+    },
+
     subText: {
-        color: Colors.black,
-        alignSelf: 'center',
-        fontSize: 20,
+        marginTop: 16,
+        paddingLeft: 16,
+        paddingRight: 16,
+        fontSize: 16,
     },
-    title: {
-        color: Colors.black,
-        fontSize: 20,
-    },
-    value: {
-        color: Colors.black,
-        fontSize: 20,
-    },
-    row: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 2,
-    }
 });
 
 var SubletInfo = React.createClass({
-    render() {
-        String.prototype.capitalize = function() {
-            return this.charAt(0).toUpperCase() + this.slice(1);
-        }
-
-        var sublet = this.props.sublet,
-            type = sublet.type,
-            deposit = sublet.deposit;
-            sublet.diet = sublet.diet.capitalize();
-
-        if (!deposit || deposit === 0) {
-            deposit = 'None';
-        } else {
-            deposit = '$' + deposit;
-        }
-
-        return (
-            <View style={styles.container}>
-                <Text style={styles.leadText}>{type}</Text>
-                <Text style={styles.subText}>{this.bedsAndBaths(sublet.beds, sublet.baths)}</Text>
-                {this.renderRow('Deposit', deposit)}
-                {this.renderRow('Diet', sublet.diet)}
-                {this.renderRow('Start', sublet.start)}
-                {this.renderRow('End', sublet.end)}
-            </View>
-        );
-    },
-
-    renderRow(title, value) {
-        if (!value) {
-            return;
-        }
-        return (
-            <View style={styles.row}>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.value}>{value}</Text>
-            </View>
-        );
-    },
-
     bedsAndBaths(beds, baths) {
         var bedMessage = 'bed',
             bathMessage = 'bath',
@@ -105,7 +63,42 @@ var SubletInfo = React.createClass({
         }
 
         return beds + ' ' + bedMessage + sep + baths + ' ' + bathMessage;
-    }
+    },
+
+    render() {
+        String.prototype.capitalize = function() {
+            return this.charAt(0).toUpperCase() + this.slice(1);
+        }
+
+        var sublet = this.props.sublet,
+            type = sublet.type,
+            deposit = sublet.deposit;
+            sublet.diet = sublet.diet.capitalize();
+
+        if (!deposit || deposit === 0) {
+            deposit = 'None';
+        } else {
+            deposit = '$' + deposit;
+        }
+
+        var values = [
+            'Deposit ' + deposit,
+            'Diet ' + sublet.diet,
+            'Start ' + sublet.start,
+            'End ' + sublet.end,
+        ];
+
+        return (
+            <View style={styles.container}>
+                <Text style={styles.leadText}>Type</Text>
+                <Text style={styles.subText}>{type}</Text>
+
+                <Text style={styles.leadText}>Property has</Text>
+                <Text style={styles.subText}>{this.bedsAndBaths(sublet.beds, sublet.baths)}</Text>
+                <Text style={styles.boldText}>{values.join(', ')}</Text>
+            </View>
+        );
+    },
 });
 
 module.exports = SubletInfo;
