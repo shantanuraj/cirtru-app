@@ -26,7 +26,6 @@ var Images = React.createClass({
 
 var styles = StyleSheet.create({
     container: {
-        backgroundColor: Colors.grey,
         width: window.width,
         height: 300,
     },

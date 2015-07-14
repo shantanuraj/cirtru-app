@@ -18,13 +18,13 @@ var styles = StyleSheet.create({
         width: window.width,
         justifyContent: 'center',
         backgroundColor: Colors.white,
-        padding: 16,
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingTop: 16,
     },
     leadText: {
         color: Colors.black,
-        alignSelf: 'center',
         fontSize: 20,
-        fontWeight: 'bold',
     },
 });
 

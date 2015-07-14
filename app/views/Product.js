@@ -120,7 +120,7 @@ var Product = React.createClass({
 
     clicked() {
         this.props.navigator.push({
-            title: this.props.data.title,
+            title: 'View',
             component: require('./Listing'),
             passProps: {
                 listing: this.props.data,

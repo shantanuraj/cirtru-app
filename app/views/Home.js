@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native'),
+	Modal = require('react-native-modal'),
 	Api = require('../core/Api'),
 	Colors = require('../core/Colors'),
 	Card = require('./Card');
@@ -8,6 +9,7 @@ var React = require('react-native'),
 var {
 	StyleSheet,
 	View,
+	Text,
 	ScrollView,
 } = React;
 
@@ -15,7 +17,6 @@ var Home = React.createClass({
 	render() {
 		var categories = Api.categories;
 		var Cards = categories.map((category, i) => <Card {...this.props} key={i} type={category} />);
-
 		return (
 			<ScrollView style={styles.list}>
 			  <View style={styles.container}>

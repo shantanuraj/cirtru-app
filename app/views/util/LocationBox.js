@@ -14,6 +14,9 @@ var LocationBox = React.createClass({
     render() {
         return (
             <View style={styles.container}>
+                <Text style={styles.leadText}>
+                    Location
+                </Text>
                 <Text style={styles.text}>
                     {this.props.location}
                 </Text>
@@ -24,13 +27,22 @@ var LocationBox = React.createClass({
 
 var styles = StyleSheet.create({
     container: {
-        padding: 16,
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingBottom: 16,
         width: window.width,
-        backgroundColor: Colors.brandSecondary,
+        backgroundColor: Colors.white,
     },
+
+    leadText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+
     text: {
-        color: Colors.white,
-        fontSize: 18,
+        paddingLeft: 16,
+        marginTop: 8,
+        fontSize: 16,
     }
 });
 

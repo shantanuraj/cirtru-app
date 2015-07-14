@@ -11,6 +11,30 @@ var {
     Text,
 } = React;
 
+var styles = StyleSheet.create({
+    wrapper: {
+        paddingTop: 16,
+        width: window.width,
+        backgroundColor: Colors.white,
+    },
+
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    leadText: {
+        paddingLeft: 16,
+        fontSize: 20,
+    },
+
+    subText: {
+        paddingLeft: 32,
+        fontSize: 16,
+        marginTop: 8,
+    },
+});
+
 var Rooms = React.createClass({
     bedsAndBaths() {
         var beds  = this.props.data.beds,
@@ -24,7 +48,7 @@ var Rooms = React.createClass({
         if (baths > 1) {
             bathMessage += 's';
         }
-        return beds + ' ' + bedMessage + ' & ' + baths + ' ' + bathMessage;
+        return beds + ' ' + bedMessage + ', ' + baths + ' ' + bathMessage;
     },
 
     render() {
@@ -32,30 +56,12 @@ var Rooms = React.createClass({
             length = rooms.length;
         return (
             <ScrollView style={styles.wrapper} contentInset={{top: -65}}>
-                <Text key={1338} style={styles.leadText}>Property has {this.bedsAndBaths()}</Text>
+                <Text key={1337} style={styles.leadText}>Property has</Text>
+                <Text key={1338} style={styles.subText}>{this.bedsAndBaths()}</Text>
                 {rooms.map((room, i) => <RoomInfo {...this.props} total={length} i={i} key={i} room={room} style={styles.container} />)}
             </ScrollView>
         );
     }
-});
-
-var styles = StyleSheet.create({
-    wrapper: {
-        paddingTop: 8,
-        width: window.width,
-        backgroundColor: Colors.white,
-    },
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    leadText: {
-        color: Colors.black,
-        alignSelf: 'center',
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
 });
 
 module.exports = Rooms;

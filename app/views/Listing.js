@@ -2,6 +2,7 @@
 
 var React = require('react-native'),
     Reflux = require('reflux'),
+    Icon = require('FAKIconImage'),
     Colors = require('../core/Colors'),
     Images = require('./util/Images'),
     Info = require('./util/Info'),
@@ -23,6 +24,7 @@ var window = require('Dimensions').get('window');
 var {
     Text,
     View,
+    MapView,
     StyleSheet,
     ScrollView,
     TouchableOpacity,
@@ -41,39 +43,51 @@ var styles = StyleSheet.create({
         width: window.width,
     },
 
-    infoContainer: {
-        padding: 6,
-        width: window.width,
-        justifyContent: 'space-between',
-        position: 'absolute',
-        backgroundColor: 'rgba(0,0,0,0.3)',
-        top: 260,
-        left: 0,
-    },
-
     row: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         paddingLeft: 16,
-        paddingRight: 16,
+        paddingTop: 16,
+        backgroundColor: Colors.white,
     },
 
-    circle: {
-        fontSize: 20,
-        fontWeight: '500',
-        color: Colors.white,
+    innerSpacedRow: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: 4,
     },
 
-    cost: {
-        color: Colors.white,
-        fontSize: 24,
-        fontWeight: '500',
+    leadText: {
+        fontSize: 16,
     },
 
     scroll: {
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.white,
+    },
+
+    mapIcon: {
+        width: 20,
+        height: 20,
+        marginRight: 4,
+    },
+
+    userIcon: {
+        width: 20,
+        height: 20,
+        marginRight: 4,
+        alignSelf: 'flex-start',
+    },
+
+    checkIcon: {
+        width: 20,
+        height: 20,
+        marginTop: 4,
+        marginLeft: 2,
+        alignSelf: 'flex-start',
+        backgroundColor: Colors.transparent,
     },
 
     fabContainer: {
@@ -97,6 +111,11 @@ var styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         alignSelf: 'center',
+    },
+
+    mapView: {
+        width: window.width,
+        height: 300,
     },
 });
 
@@ -196,8 +215,28 @@ var Listing = React.createClass({
         }
     },
 
+    renderMapView(listing) {
+        return (
+            <MapView
+            style={styles.mapView}
+            region={{
+                latitude: listing.coordinates.lat,
+                longitude: listing.coordinates.long,
+                latitudeDelta: 0.04,
+                longitudeDelta: 0.04,
+            }}
+            annotations={[{
+                latitude: listing.coordinates.lat,
+                longitude: listing.coordinates.long,
+                title: listing.address,
+                animateDrop: true,
+            }]} />
+        );
+    },
+
     render() {
         var listing = this.props.listing,
+            location = listing.location,
             images = listing.images.pics,
             cost = listing.cost,
             info = listing.description,
@@ -208,16 +247,52 @@ var Listing = React.createClass({
             <View style={styles.container}>
                 <ScrollView style={styles.scroll}>
                     {this.renderImagesOrNot(images)}
-                    <View style={styles.infoContainer}>
-                        <View style={styles.row}>
-                            <Text style={styles.cost}>${cost}</Text>
-                            <Text style={styles.circle}>{circle}</Text>
+                    
+                    <View style={styles.row}>
+                        <Text style={[styles.leadText, {fontWeight: 'bold'}]}>
+                            {listing.title}
+                        </Text>
+                    </View>
+
+                    <View style={styles.row}>
+                        <View style={styles.innerSpacedRow}>
+                            <Icon
+                            name='fontawesome|usd'
+                            size={20}
+                            color={Colors.grey}
+                            style={styles.mapIcon} />
+                            <Text style={styles.leadText}>{cost}</Text>
+                        </View>
+                        <View style={styles.innerSpacedRow}>
+                            <Icon
+                            name='fontawesome|map-marker'
+                            size={20}
+                            color={Colors.grey}
+                            style={styles.mapIcon} />
+                            <Text style={styles.leadText}>{location}</Text>
                         </View>
                     </View>
-                    <LocationBox location={address} />
+                    
+                    <View style={styles.row}>
+                        <Icon
+                        name='fontawesome|user'
+                        size={20}
+                        color={Colors.grey}
+                        style={styles.userIcon}>
+                            <Icon
+                            name='fontawesome|check'
+                            size={18}
+                            color={Colors.verified}
+                            style={styles.checkIcon} />
+                        </Icon>
+                        <Text style={styles.leadText}>
+                            {circle}
+                        </Text>
+                    </View>
+                    
                     {this.optionalContent()}
                     <Info description={info} />
-                    <FlagButton style={styles.button} />
+                    {this.renderMapView(listing)}
                 </ScrollView>
                 {this.fab()}
                 {this.makeToast('Message Sent', this.state.status === 'success', 'success')}
