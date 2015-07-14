@@ -30,43 +30,43 @@ var styles = StyleSheet.create({
         color: Colors.black,
         fontSize: 16,
     },
-    row: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 2,
-    }, 
 });
 
 var Occupancy = React.createClass({
+    renderOptionally(title, value) {
+        if (value !== null && value !== '') {
+            return title + value + ', ';
+        }
+    },
+
     renderDetails() {
-    	var occupancy = this.props.occupancy;
-    	return (
-    		<View>
-	    		<Text style={styles.value}>
-	    			{occupancy.occupant + ', '}
-	    			{occupancy.occupation + ', '}
-	    			{occupancy.gender + ' gender, '}
-	    			{occupancy.age + ' years old, '}
-	    			{occupancy.pets + ', '}
-	    			{occupancy.smoking + ', '}
-	    			{occupancy.drinking + ', '}
-	    			{occupancy.diet + ' \n'}
-	    		</Text>
-	    		<Text style={styles.title}>
-	    			{'Deposit: $' + occupancy.deposit + ', '}
-	    			{'Rent: $' + occupancy.rent + ', '}
-	    			{'Available from: ' + occupancy.from + ', '}
-	    			{'Min Stay: ' + occupancy.minStay}
-	    		</Text>
-    		</View>
-    	);
+        var occupancy = this.props.occupancy;
+        return (
+            <View>
+                <Text style={styles.value}>
+                    {occupancy.occupant + ', '}
+                    {occupancy.occupation + ', '}
+                    {occupancy.gender + ' gender, '}
+                    {occupancy.age + ' years old, '}
+                    {occupancy.pets + ', '}
+                    {occupancy.smoking + ', '}
+                    {occupancy.drinking + ', '}
+                    {occupancy.diet + ' \n'}
+                </Text>
+                <Text style={styles.title}>
+                    {this.renderOptionally('Deposit: $', occupancy.deposit)}
+                    {this.renderOptionally('Rent: $', occupancy.rent)}
+                    {this.renderOptionally('Available from: ', occupancy.from)}
+                    {this.renderOptionally('Min Stay: ', occupancy.minStay)}
+                </Text>
+            </View>
+        );
     },
 
     render() {
         return (
             <View style={styles.occupancy}>
-            	<Text style={styles.subText}>Looking for</Text>
+                <Text style={styles.subText}>Looking for</Text>
                 {this.renderDetails()}
             </View>
         );

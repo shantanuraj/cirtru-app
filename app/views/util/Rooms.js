@@ -32,7 +32,7 @@ var Rooms = React.createClass({
             length = rooms.length;
         return (
             <ScrollView style={styles.wrapper} contentInset={{top: -65}}>
-                <Text key={1338} style={styles.leadText}>{this.bedsAndBaths()}</Text>
+                <Text key={1338} style={styles.leadText}>Property has {this.bedsAndBaths()}</Text>
                 {rooms.map((room, i) => <RoomInfo {...this.props} total={length} i={i} key={i} room={room} style={styles.container} />)}
             </ScrollView>
         );
@@ -41,6 +41,7 @@ var Rooms = React.createClass({
 
 var styles = StyleSheet.create({
     wrapper: {
+        paddingTop: 8,
         width: window.width,
         backgroundColor: Colors.white,
     },
