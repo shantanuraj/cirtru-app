@@ -10,6 +10,7 @@ var React = require('react-native'),
     LocationBox = require('./util/LocationBox'),
     FabButton = require('./util/FabButton'),
     FlagButton = require('./util/FlagButton'),
+    MapBox = require('./util/MapBox'),
     Rooms = require('./util/Rooms'),
     SubletInfo = require('./util/SubletInfo'),
     CarInfo = require('./util/CarInfo'),
@@ -24,7 +25,6 @@ var window = require('Dimensions').get('window');
 var {
     Text,
     View,
-    MapView,
     StyleSheet,
     ScrollView,
     TouchableOpacity,
@@ -111,11 +111,6 @@ var styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         alignSelf: 'center',
-    },
-
-    mapView: {
-        width: window.width,
-        height: 300,
     },
 });
 
@@ -215,25 +210,6 @@ var Listing = React.createClass({
         }
     },
 
-    renderMapView(listing) {
-        return (
-            <MapView
-            style={styles.mapView}
-            region={{
-                latitude: listing.coordinates.lat,
-                longitude: listing.coordinates.long,
-                latitudeDelta: 0.04,
-                longitudeDelta: 0.04,
-            }}
-            annotations={[{
-                latitude: listing.coordinates.lat,
-                longitude: listing.coordinates.long,
-                title: listing.address,
-                animateDrop: true,
-            }]} />
-        );
-    },
-
     render() {
         var listing = this.props.listing,
             location = listing.location,
@@ -292,7 +268,7 @@ var Listing = React.createClass({
                     
                     {this.optionalContent()}
                     <Info description={info} />
-                    {this.renderMapView(listing)}
+                    <MapBox listing={listing} />
                 </ScrollView>
                 {this.fab()}
                 {this.makeToast('Message Sent', this.state.status === 'success', 'success')}
