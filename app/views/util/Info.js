@@ -22,10 +22,10 @@ var styles = StyleSheet.create({
     },
 
     subText: {
-        marginTop: 8,
         fontSize: 16,
         paddingLeft: 16,
         paddingRight: 16,
+        paddingTop: 16,
     },
 });
 
