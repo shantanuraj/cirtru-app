@@ -19,18 +19,27 @@ var styles = StyleSheet.create({
         paddingRight: 16,
         paddingTop: 16,
     },
-    title: {
+
+    subText: {
         fontSize: 16,
     },
-    value: {
+
+    boldText: {
         fontSize: 16,
+        fontWeight: 'bold',
     },
+
     row: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 2,
-    }
+        marginBottom: 16,
+    },
+
+    col: {
+        flex: 1,
+        flexDirection: 'column',
+    },
 });
 
 var CarInfo = React.createClass({
@@ -40,13 +49,13 @@ var CarInfo = React.createClass({
         }
         return (
             <View style={styles.row}>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.value}>{value}</Text>
+                <Text style={styles.subText}>{title}</Text>
+                <Text style={styles.subText}>{value}</Text>
             </View>
         );
     },
 
-    render() {
+    renderAwesome() {
         var car = this.props.car,
             make = car.make,
             model = car.model,
@@ -71,6 +80,55 @@ var CarInfo = React.createClass({
                 {this.renderRow('Mileage', mileage)}
                 {this.renderRow('Transmission', transmission)}
                 {this.renderRow('VIN', vin)}
+            </View>
+        );
+    },
+
+    renderCol(title, value) {
+        if (!value) {
+            return;
+        }
+        return (
+            <View style={styles.col}>
+                <Text style={styles.subText}>{title}</Text>
+                <Text style={styles.boldText}>{value}</Text>
+            </View>
+        );
+    },
+
+    render() {
+        var car = this.props.car,
+            make = car.make,
+            model = car.model,
+            subModel = car.subModel,
+            year = car.year,
+            color = car.color,
+            titleStatus = car.titleStatus,
+            fuel = car.fuel,
+            mileage = car.mileage,
+            transmission = car.transmission,
+            vin = car.vin;
+
+        return (
+            <View style={styles.container}>
+                <View style={styles.row}>
+                    {this.renderCol('Year', year)}
+                    {this.renderCol('Make', make)}
+                    {this.renderCol('Model', model)}
+                </View>
+                <View style={styles.row}>
+                    {this.renderCol('Sub-Model', subModel)}
+                </View>
+                <View style={styles.row}>
+                    {this.renderCol('Color', color)}
+                    {this.renderCol('Fuel', fuel)}
+                    {this.renderCol('Mileage', mileage)}
+                    {this.renderCol('Status', titleStatus)}
+                </View>
+                <View style={styles.row}>
+                    {this.renderCol('Transmission', transmission)}
+                    {this.renderCol('VIN', vin)}
+                </View>
             </View>
         );
     },
