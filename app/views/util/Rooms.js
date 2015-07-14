@@ -13,8 +13,8 @@ var {
 
 var Rooms = React.createClass({
     bedsAndBaths() {
-        var beds  = this.props.beds,
-            baths = this.props.baths,
+        var beds  = this.props.data.beds,
+            baths = this.props.data.baths,
             bedMessage = 'bed',
             bathMessage = 'bath';
 
@@ -28,7 +28,7 @@ var Rooms = React.createClass({
     },
 
     render() {
-        var rooms = this.props.rooms.filter(room => room.roomOccupancy.length > 0),
+        var rooms = this.props.data.rooms.filter(room => room.roomOccupancy.length > 0),
             length = rooms.length;
         return (
             <ScrollView style={styles.wrapper} contentInset={{top: -65}}>

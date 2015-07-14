@@ -1,27 +1,22 @@
 'use strict';
 
 var React = require('react-native'),
-    Icon = require('FAKIconImage'),
     Colors = require('../../core/Colors');
+
+var window = require('Dimensions').get('window');
 
 var {
     StyleSheet,
     TouchableHighlight,
+    Text,
 } = React;
 
 var styles = StyleSheet.create({
-    icon: {
-        width: 32,
-        height: 32,
-    },
-
-    fab: {
+    button: {
         backgroundColor: Colors.brandSecondaryDark,
-        width: 48,
-        height: 48,
-        borderRadius: 24,
         justifyContent: 'center',
         alignItems: 'center',
+        width: window.width,
         shadowColor: Colors.black,
         shadowOpacity: 0.5,
         shadowRadius: 6,
@@ -30,23 +25,25 @@ var styles = StyleSheet.create({
             width: 0,
         },
     },
+    buttonText: {
+        padding: 8,
+        color: Colors.white,
+        alignItems: 'center',
+        fontSize: 22,
+    },
 });
 
-var FabButton = React.createClass({
+var FlagButton = React.createClass({
     render() {
         return (
             <TouchableHighlight
             onPress={this.props.action}
-            style={styles.fab}
+            style={styles.button}
             underlayColor={Colors.brandSecondary}>
-                <Icon
-                name={this.props.icon}
-                size={32}
-                color={Colors.white}
-                style={styles.icon} />
+                <Text style={styles.buttonText}>Report</Text>
             </TouchableHighlight>
         );
     }
 });
 
-module.exports = FabButton;
+module.exports = FlagButton;

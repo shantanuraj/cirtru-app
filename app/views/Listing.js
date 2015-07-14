@@ -8,6 +8,7 @@ var React = require('react-native'),
     Amenities = require('./util/Amenities'),
     LocationBox = require('./util/LocationBox'),
     FabButton = require('./util/FabButton'),
+    FlagButton = require('./util/FlagButton'),
     Rooms = require('./util/Rooms'),
     SubletInfo = require('./util/SubletInfo'),
     CarInfo = require('./util/CarInfo'),
@@ -80,6 +81,13 @@ var styles = StyleSheet.create({
         bottom: 16,
         right: 16,
         borderRadius: 24,
+    },
+
+    button: {
+        backgroundColor: Colors.brandPrimaryDark,
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
     },
 
     toastText: {
@@ -166,10 +174,7 @@ var Listing = React.createClass({
         var extras = this.props.listing.data;
         switch (this.props.listing.category) {
             case 'roommates': return (
-                <View>
-                    <Amenities amenities={extras.amenities} />
-                    <Rooms baths={extras.baths} beds={extras.beds} rooms={extras.rooms} />
-                </View>
+                <Rooms data={extras} />
             );
             case 'sublets': return (
                 <View>
@@ -211,7 +216,8 @@ var Listing = React.createClass({
                     </View>
                     <LocationBox location={address} />
                     {this.optionalContent()}
-                    <Info description={info}/>
+                    <Info description={info} />
+                    <FlagButton style={styles.button} />
                 </ScrollView>
                 {this.fab()}
                 {this.makeToast('Message Sent', this.state.status === 'success', 'success')}
