@@ -36,6 +36,14 @@ var Profile = React.createClass({
 		}
 	},
 
+	renderAddOrVerify() {
+		if (this.state.user.workEmail === '') {
+			return this.makeToast('You need to add your work email', true, 'warn')
+		} else if (!this.state.user.workVerified) {
+			return this.makeToast('You need to verify your work email', true, 'warn');
+		}
+	},
+
 	profilePage() {
 		return (
 			<View style={styles.container}>
@@ -79,7 +87,7 @@ var Profile = React.createClass({
 					</Text>
 				</TouchableHighlight>
 
-				{this.makeToast('You need to verify your work email', !this.state.user.workVerified, 'warn')}
+				{this.renderAddOrVerify()}
 				{this.makeToast('You need to verify your email', !this.state.user.emailVerified, 'warn')}
 				{this.makeToast('Success', this.state.status === 'success', 'success')}
 				{this.makeToast('Could not complete request', this.state.status === 'error', 'warn')}
@@ -151,14 +159,14 @@ var Profile = React.createClass({
 var styles = StyleSheet.create({
 	container: {
 	    flex: 1,
-	    alignItems: 'center',
+		alignItems: 'center',
 	    justifyContent: 'center',
 	},
 
 	buttonText: {
 	    color: 'white',
 	    fontFamily: 'HelveticaNeue-Medium',
-	    fontSize: 18,
+	    fontSize: 16,
 	},
 
 	button: {
@@ -192,7 +200,7 @@ var styles = StyleSheet.create({
 
 	toastText: {
 		color: Colors.white,
-		padding: 15,
+		padding: 16,
 		backgroundColor: Colors.transparent,
 		fontSize: 16,
 		fontWeight: 'bold',
@@ -200,15 +208,16 @@ var styles = StyleSheet.create({
     },
 
     email: {
-    	fontSize: 18,
+    	fontSize: 16,
     	fontWeight: '300',
     	color: Colors.white,
     },
 
     heading: {
-    	fontSize: 18,
+		fontSize: 16,
     	fontWeight: 'bold',
     	color: Colors.white,
+    	alignItems: 'center',
     },
 
     row: {

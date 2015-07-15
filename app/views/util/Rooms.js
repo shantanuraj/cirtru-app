@@ -60,8 +60,8 @@ var Rooms = React.createClass({
             <ScrollView style={styles.wrapper} contentInset={{top: -65}}>
                 <Text key={1337} style={styles.leadText}>Property has</Text>
                 <Text key={1338} style={styles.subText}>{this.bedsAndBaths()}</Text>
-                {rooms.map((room, i) => <RoomInfo {...this.props} total={length} i={i} key={i} room={room} style={styles.container} />)}
                 <Amenities amenities={this.props.data.amenities} />
+                {rooms.map((room, i) => <RoomInfo {...this.props} total={length} i={i} key={i} room={room} style={styles.container} />)}
             </ScrollView>
         );
     }
