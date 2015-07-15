@@ -82,7 +82,9 @@ var UserListings = React.createClass({
 
 	action(category) {
 		if (!this.state.loaded) {
-			return;
+			return () => {
+				console.log('Loading data');
+			};
 		}
 		var self = this;
 		return function() {

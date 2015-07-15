@@ -10,6 +10,7 @@ var React = require('react-native'),
 	Login = require('./Login'),
 	ChangePassword = require('./ChangePassword'),
 	UserListings = require('./UserListings'),
+	UserEditor = require('./UserEditor'),
 	Toast = require('./util/Toast'),
 	TimerMixin = require('react-timer-mixin'),
 	window = require('Dimensions').get('window');
@@ -21,6 +22,80 @@ var {
 	TouchableOpacity,
 	TouchableHighlight,
 } = React;
+
+var styles = StyleSheet.create({
+	container: {
+	    flex: 1,
+		alignItems: 'center',
+	    justifyContent: 'center',
+	},
+
+	buttonText: {
+	    color: 'white',
+	    fontFamily: 'HelveticaNeue-Medium',
+	    fontSize: 16,
+	},
+
+	button: {
+		backgroundColor: Colors.brandPrimary,
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: window.width - 24,
+		margin: 8,
+		padding: 8,
+		borderRadius: 3,
+	},
+
+	logout: {
+		position: 'absolute',
+		backgroundColor: Colors.danger,
+		bottom: 60,
+		left: 0,
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: window.width - 24,
+		margin: 12,
+		padding: 8,
+		borderRadius: 3,
+		marginBottom: 60,
+	},
+
+	name: {
+		fontSize: 42,
+		fontWeight: '300',
+	},
+
+	toastText: {
+		color: Colors.white,
+		padding: 16,
+		backgroundColor: Colors.transparent,
+		fontSize: 16,
+		fontWeight: 'bold',
+		alignSelf: 'center',
+    },
+
+    email: {
+    	fontSize: 16,
+		fontWeight: '300',
+		color: Colors.white,
+    },
+
+    heading: {
+		fontSize: 16,
+		fontWeight: 'bold',
+		color: Colors.white,
+		alignItems: 'center',
+    },
+
+    row: {
+        width: window.width,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: Colors.brandPrimary,
+        padding: 12,
+        margin: 8,
+    },
+});
 
 var Profile = React.createClass({
 	mixins: [Reflux.connect(UserStore, 'user'), Reflux.connect(ProfileStore, 'status'), TimerMixin],
@@ -67,6 +142,15 @@ var Profile = React.createClass({
 				style={styles.button}>
 					<Text style={styles.buttonText}>
 						My Listings
+					</Text>
+				</TouchableHighlight>
+
+				<TouchableHighlight
+				underlayColor={Colors.brandPrimary}
+				onPress={this.showEditor}
+				style={styles.button}>
+					<Text style={styles.buttonText}>
+						Edit Profile
 					</Text>
 				</TouchableHighlight>
 
@@ -154,80 +238,16 @@ var Profile = React.createClass({
 			component: UserListings,
 		});
 	},
-});
 
-var styles = StyleSheet.create({
-	container: {
-	    flex: 1,
-		alignItems: 'center',
-	    justifyContent: 'center',
+	showEditor() {
+		if (!this.state.user.emailVerified) {
+			return;
+		}
+		this.props.navigator.push({
+			title: 'Edit Profile',
+			component: UserEditor,
+		});
 	},
-
-	buttonText: {
-	    color: 'white',
-	    fontFamily: 'HelveticaNeue-Medium',
-	    fontSize: 16,
-	},
-
-	button: {
-		backgroundColor: Colors.brandPrimary,
-		alignItems: 'center',
-		justifyContent: 'center',
-		width: window.width - 24,
-		margin: 8,
-		padding: 8,
-		borderRadius: 3,
-	},
-
-	logout: {
-		position: 'absolute',
-		backgroundColor: Colors.danger,
-		bottom: 60,
-		left: 0,
-		alignItems: 'center',
-		justifyContent: 'center',
-		width: window.width - 24,
-		margin: 12,
-		padding: 8,
-		borderRadius: 3,
-		marginBottom: 60,
-	},
-
-	name: {
-		fontSize: 42,
-		fontWeight: '300',
-	},
-
-	toastText: {
-		color: Colors.white,
-		padding: 16,
-		backgroundColor: Colors.transparent,
-		fontSize: 16,
-		fontWeight: 'bold',
-		alignSelf: 'center',
-    },
-
-    email: {
-    	fontSize: 16,
-    	fontWeight: '300',
-    	color: Colors.white,
-    },
-
-    heading: {
-		fontSize: 16,
-    	fontWeight: 'bold',
-    	color: Colors.white,
-    	alignItems: 'center',
-    },
-
-    row: {
-        width: window.width,
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        backgroundColor: Colors.brandPrimary,
-        padding: 12,
-        margin: 8,
-    },
 });
 
 module.exports = Profile;

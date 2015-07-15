@@ -14,6 +14,7 @@ var {
 
 var styles = StyleSheet.create({
     container: {
+        paddingTop: 16,
         paddingLeft: 16,
         paddingRight: 16,
         width: window.width,

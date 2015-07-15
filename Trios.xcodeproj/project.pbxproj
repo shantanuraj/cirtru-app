@@ -151,6 +151,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNModal;
 		};
+		FFFB50C01B5683730047252E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFFB50BC1B5683720047252E /* RCTAutoComplete.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTAutoComplete;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -209,6 +216,7 @@
 		FFF91CD61B54CA8500FC2B92 /* RNModal.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNModal.xcodeproj; path = "node_modules/react-native-modal/RNModal.xcodeproj"; sourceTree = "<group>"; };
 		FFFB50AC1B5672E30047252E /* GoogleLoginManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleLoginManager.h; sourceTree = "<group>"; };
 		FFFB50BA1B5673030047252E /* GoogleLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleLoginManager.m; sourceTree = "<group>"; };
+		FFFB50BC1B5683720047252E /* RCTAutoComplete.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAutoComplete.xcodeproj; path = "node_modules/react-native-autocomplete/RCTAutoComplete.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -382,6 +390,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				FFFB50BC1B5683720047252E /* RCTAutoComplete.xcodeproj */,
 				FFF91CD61B54CA8500FC2B92 /* RNModal.xcodeproj */,
 				FF133EA91B3C09AF00928DD0 /* RNOverlay.xcodeproj */,
 				FFC89DB41B3056EC00872445 /* ReactNativeIcons.xcodeproj */,
@@ -482,6 +491,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		FFFB50BD1B5683720047252E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FFFB50C11B5683730047252E /* libRCTAutoComplete.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -555,6 +572,10 @@
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
+				},
+				{
+					ProductGroup = FFFB50BD1B5683720047252E /* Products */;
+					ProjectRef = FFFB50BC1B5683720047252E /* RCTAutoComplete.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302B61ABCB90400DB3ED1 /* Products */;
@@ -703,6 +724,13 @@
 			fileType = archive.ar;
 			path = libRNModal.a;
 			remoteRef = FFF91CE51B54CA8500FC2B92 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FFFB50C11B5683730047252E /* libRCTAutoComplete.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTAutoComplete.a;
+			remoteRef = FFFB50C01B5683730047252E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

@@ -199,6 +199,10 @@ module.exports = {
 		return payload;
 	},
 
+	circlesList() {
+		return this.base + 'companiesList';
+	},
+
 	login() {
 		return this.base + 'auth/signin';
 	},
