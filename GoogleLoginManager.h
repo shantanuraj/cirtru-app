@@ -6,8 +6,10 @@
 //  Copyright (c) 2015 Cirtru. All rights reserved.
 //
 
-#ifndef Trios_GoogleLoginManager_h
-#define Trios_GoogleLoginManager_h
+#import <UIKit/UIKit.h>
+#import <GoogleSignIn/GIDSignIn.h>
+#import <GoogleSignIn/GIDSignInButton.h>
 
+@interface GoogleLoginManager : UIViewController <GIDSignInDelegate>
 
-#endif
+@end
