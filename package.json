@@ -13,7 +13,6 @@
     "react-native-icons": "0.0.9",
     "react-native-modal": "^0.3.8",
     "react-native-overlay": "^0.2.8",
-    "react-native-simple-auth": "^0.1.2",
     "react-timer-mixin": "^0.13.1",
     "reflux": "^0.2.8",
     "tcomb": "^1.0.3",

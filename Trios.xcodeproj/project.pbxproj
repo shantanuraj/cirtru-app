@@ -49,6 +49,7 @@
 		FFC89DC81B305D6700872445 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FFC89DC61B305D6700872445 /* ionicons.ttf */; };
 		FFC89DCA1B305F0300872445 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = FFC89DC91B305F0300872445 /* FontAwesome.otf */; };
 		FFF91CE81B54CACE00FC2B92 /* libRNModal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFF91CE61B54CA8500FC2B92 /* libRNModal.a */; };
+		FFFB50BB1B5673030047252E /* GoogleLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FFFB50BA1B5673030047252E /* GoogleLoginManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -206,6 +207,8 @@
 		FFC89DC61B305D6700872445 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = "node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/ionicons.ttf"; sourceTree = "<group>"; };
 		FFC89DC91B305F0300872445 /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.otf; path = "node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/FontAwesome.otf"; sourceTree = "<group>"; };
 		FFF91CD61B54CA8500FC2B92 /* RNModal.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNModal.xcodeproj; path = "node_modules/react-native-modal/RNModal.xcodeproj"; sourceTree = "<group>"; };
+		FFFB50AC1B5672E30047252E /* GoogleLoginManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleLoginManager.h; sourceTree = "<group>"; };
+		FFFB50BA1B5673030047252E /* GoogleLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleLoginManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,6 +348,8 @@
 				FFB446D51B3281E60066D361 /* FacebookLoginManager.m */,
 				FF0288891B4097DC00315FD4 /* InstallationManager.h */,
 				FF0288961B40981A00315FD4 /* InstallationManager.m */,
+				FFFB50AC1B5672E30047252E /* GoogleLoginManager.h */,
+				FFFB50BA1B5673030047252E /* GoogleLoginManager.m */,
 			);
 			name = Trios;
 			sourceTree = "<group>";
@@ -771,6 +776,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFFB50BB1B5673030047252E /* GoogleLoginManager.m in Sources */,
 				FF726C471B44C21F00206A89 /* RNCookieManagerIOS.m in Sources */,
 				FF0288971B40981A00315FD4 /* InstallationManager.m in Sources */,
 				FFB446D61B3281E60066D361 /* FacebookLoginManager.m in Sources */,

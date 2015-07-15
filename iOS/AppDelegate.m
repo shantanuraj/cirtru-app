@@ -76,7 +76,6 @@
   
   [GIDSignIn sharedInstance].delegate = self;
   
-
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];
 }
