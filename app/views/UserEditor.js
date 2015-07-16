@@ -148,10 +148,10 @@ let UserEditor = React.createClass({
     },
 
     editWorkText() {
-        if (this.state.user.emailVerified) {
-            return 'Edit';
-        } else {
+        if (this.state.user.workEmail === '') {
             return 'Add';
+        } else {
+            return 'Edit';
         }
     },
 
