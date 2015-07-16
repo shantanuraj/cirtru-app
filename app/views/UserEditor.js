@@ -133,53 +133,14 @@ let UserEditor = React.createClass({
 
     getInitialState() {
         return {
-            workOptions: { auto: 'placeholders' },
-            personalOptions: { auto: 'placeholders' },
-            personalInfoOptions: { auto: 'placeholders' },
+            editingInfo: false,
+            editingEmail: false,
+            editingWork: false,
         };
     },
 
     componentWillMount() {
         DataActions.getCircles();
-    },
-
-    componentDidMount() {
-        this.updateOptions();
-    },
-
-    updateOptions() {
-        this.setState({
-            workOptions: {
-                auto: 'placeholders',
-                fields: {
-                    email: {
-                        error: 'Please enter a valid email',
-                        editable: this.state.user.workEmail === '',
-                    },
-                },
-            },
-            personalOptions: {
-                auto: 'placeholders',
-                fields: {
-                    email: {
-                        error: 'Please enter a valid email',
-                        editable: false,
-                    },
-                },
-            },
-            personalInfoOptions: {
-                auto: 'placeholders',
-                fields: {
-                    name: {
-                        editable: false,
-                    },
-                    phone: {
-                        editable: false,
-                        error: 'Please enter a valid contact number',
-                    },
-                },
-            },
-        });
     },
 
     workEmailState() {
@@ -190,9 +151,23 @@ let UserEditor = React.createClass({
         }
     },
 
-    renderButton(text) {
+    editUserInfo() {
+        if (!this.state.editingInfo) {
+            this.setState({ editingInfo: true });
+            return;
+        }
+        var {
+            name,
+            phone
+        } = this.refs.personalInfoForm.getValue();
+        console.log(name, phone);
+        // UserActions.updateUserName();
+    },
+
+    renderButton(text, action) {
         return (
             <TouchableHighlight
+            onPress={action}
             underlayColor={Colors.brandPrimary}
             style={styles.button}>
                 <Text style={styles.buttonText}>
@@ -287,6 +262,38 @@ let UserEditor = React.createClass({
             name: this.state.user.name,
             phone: this.state.user.phone,
         };
+        let options = {
+            workOptions: {
+                auto: 'placeholders',
+                fields: {
+                    email: {
+                        error: 'Please enter a valid email',
+                        editable: this.state.user.workEmail === '',
+                    },
+                },
+            },
+            personalOptions: {
+                auto: 'placeholders',
+                fields: {
+                    email: {
+                        error: 'Please enter a valid email',
+                        editable: false,
+                    },
+                },
+            },
+            personalInfoOptions: {
+                auto: 'placeholders',
+                fields: {
+                    name: {
+                        editable: this.state.editingInfo,
+                    },
+                    phone: {
+                        editable: this.state.editingInfo,
+                        error: 'Please enter a valid contact number',
+                    },
+                },
+            },
+        };
         return (
             <ScrollView
             contentContainerStyle={styles.container}
@@ -299,7 +306,7 @@ let UserEditor = React.createClass({
                     <Form
                     ref='workForm'
                     type={Work}
-                    options={this.state.workOptions}
+                    options={options.workOptions}
                     value={workValue} />
                     
                     {this.renderButton(this.workEmailState())}
@@ -313,7 +320,7 @@ let UserEditor = React.createClass({
                     <Form
                     ref='personalForm'
                     type={Personal}
-                    options={this.state.personalOptions}
+                    options={options.personalOptions}
                     value={personalValue} />
 
                     {this.renderButton('Edit')}
@@ -325,16 +332,17 @@ let UserEditor = React.createClass({
                     <Form
                     ref='personalInfoForm'
                     type={PersonalInfo}
-                    options={this.state.personalInfoOptions}
+                    options={options.personalInfoOptions}
                     value={personalInfoValue} />
 
-                    {this.renderButton('Edit')}
+                    {this.renderButton('Edit', this.editUserInfo)}
                 </View>
             </ScrollView>
         );
     },
 
     render() {
+        console.log('The State is', this.state);
         if (!this.state.data || !this.state.data.circles) {
             return this.renderLoadingView();
         } else {
