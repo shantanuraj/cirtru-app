@@ -134,7 +134,6 @@ let UserEditor = React.createClass({
     getInitialState() {
         return {
             editingInfo: false,
-            editingEmail: false,
             editingWork: false,
         };
     },
@@ -144,11 +143,14 @@ let UserEditor = React.createClass({
     },
 
     editWork() {
-        console.log('Edit work is called');
+        let editingWork = this.state.editingWork;
+        this.setState({ editingWork: !editingWork });
     },
 
     editWorkText() {
-        if (this.state.user.workEmail === '') {
+        if (this.state.editingWork) {
+            return 'Save';
+        } else if (this.state.user.workEmail === '') {
             return 'Add';
         } else {
             return 'Edit';
@@ -305,7 +307,7 @@ let UserEditor = React.createClass({
                 fields: {
                     email: {
                         error: 'Please enter a valid email',
-                        editable: this.state.user.workEmail === '',
+                        editable: this.state.editingWork,
                     },
                 },
             },
