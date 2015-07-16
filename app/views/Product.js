@@ -1,9 +1,9 @@
 'use strict';
 
 var React = require('react-native'),
-    Colors = require('../core/Colors'),
-    Icon = require('FAKIconImage');
+    Colors = require('../core/Colors');
 
+var { Icon } = require('react-native-icons');
 var window = require('Dimensions').get('window');
 
 var {

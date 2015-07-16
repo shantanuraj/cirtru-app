@@ -2,7 +2,6 @@
 
 var React = require('react-native'),
     Reflux = require('reflux'),
-    Icon = require('FAKIconImage'),
     Colors = require('../core/Colors'),
     Images = require('./util/Images'),
     Amenities = require('./util/Amenities'),
@@ -19,6 +18,7 @@ var React = require('react-native'),
     TimerMixin = require('react-timer-mixin'),
     ProfileActions = require('../actions/ProfileActions');
 
+var { Icon } = require('react-native-icons');
 var window = require('Dimensions').get('window');
 
 var {

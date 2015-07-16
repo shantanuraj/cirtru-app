@@ -2,7 +2,6 @@
 
 var React = require('react-native'),
 	Reflux = require('reflux'),
-	Icon = require('FAKIconImage'),
 	Colors = require('../core/Colors'),
 	UserActions = require('../actions/UserActions'),
 	UserStore = require('../store/UserStore'),
@@ -14,6 +13,8 @@ var React = require('react-native'),
 	Toast = require('./util/Toast'),
 	TimerMixin = require('react-timer-mixin'),
 	window = require('Dimensions').get('window');
+
+var { Icon } = require('react-native-icons');
 
 var {
 	StyleSheet,

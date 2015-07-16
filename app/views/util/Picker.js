@@ -3,9 +3,9 @@
 var React = require('react-native'),
     Overlay = require('react-native-overlay'),
     Colors = require('../../core/Colors'),
-    Icon = require('FAKIconImage'),
     _ = require('immutable');
 
+var { Icon } = require('react-native-icons');
 var window = require('Dimensions').get('window');
 
 var {

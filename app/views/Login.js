@@ -2,7 +2,6 @@
 
 var React = require('react-native'),
 	Reflux = require('reflux'),
-	Icon = require('FAKIconImage'),
 	Toast = require('./util/Toast'),
 	Colors = require('../core/Colors'),
 	EmailLogin = require('./EmailLogin'),
@@ -11,6 +10,7 @@ var React = require('react-native'),
 	ProfileStore = require('../store/ProfileStore'),
 	ProfileActions = require('../actions/ProfileActions');
 
+var { Icon } = require('react-native-icons');
 var window = require('Dimensions').get('window');
 
 var {

@@ -2,9 +2,9 @@
 
 var React = require('react-native'),
     Colors = require('../../core/Colors'),
-    t = require('tcomb-form-native'),
-    Icon = require('FAKIconImage');
+    t = require('tcomb-form-native');
 
+var { Icon } = require('react-native-icons');
 var Form = t.form.Form;
 
 var {

@@ -1,13 +1,13 @@
 'use strict';
 
 var React = require('react-native'),
-	SMXTabBarIOS = require('SMXTabBarIOS'),
 	Colors = require('../core/Colors'),
 	Home = require('./Home'),
 	New = require('./New'),
 	Profile = require('./Profile');
 
-var	SMXTabBarItemIOS = SMXTabBarIOS.Item;
+var { TabBarIOS } = require('react-native-icons');
+var	TabBarItemIOS = TabBarIOS.Item;
 
 var {
 	StyleSheet,
@@ -25,7 +25,7 @@ var Tabs = React.createClass({
 
 	renderTab(name, icon, view) {
 		return (
-			<SMXTabBarItemIOS
+			<TabBarItemIOS
 			iconName={icon}
 			iconSize={32}
 			key={name}
@@ -40,7 +40,7 @@ var Tabs = React.createClass({
 			selected={this.state.activeTab === name}
 			title={''}>
 				{view}
-			</SMXTabBarItemIOS>
+			</TabBarItemIOS>
 		);
 	},
 
@@ -53,13 +53,13 @@ var Tabs = React.createClass({
 		];
 
 		return (
-			<SMXTabBarIOS
+			<TabBarIOS
 			activeTab={this.state.activeTab}
 			barTintColor="transparent"
 			tintColor={Colors.brandSecondary}
 			translucent={true}>
 				{tabs}
-			</SMXTabBarIOS>
+			</TabBarIOS>
 		);
 	},
 });

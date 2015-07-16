@@ -1,9 +1,9 @@
 'use strict';
 
 var React = require('react-native'),
-    Icon = require('FAKIconImage'),
     Colors = require('../../core/Colors');
 
+var { Icon } = require('react-native-icons');
 var {
     StyleSheet,
     TouchableHighlight,
