@@ -3,6 +3,7 @@
 let React = require('react-native'),
     Reflux = require('reflux'),
     t = require('tcomb-form-native'),
+    AutoComplete = require('react-native-autocomplete'),
     Colors = require('../core/Colors'),
     MiniCard = require('./MiniCard'),
     ProductList = require('./ProductList'),
@@ -20,6 +21,7 @@ let {
     TouchableOpacity,
     ScrollView,
     StyleSheet,
+    AlertIOS,
     View,
     Text,
 } = React;
@@ -135,6 +137,7 @@ let UserEditor = React.createClass({
         return {
             editingInfo: false,
             editingWork: false,
+            autoCompleteData: [],
         };
     },
 
@@ -221,6 +224,17 @@ let UserEditor = React.createClass({
         );
     },
 
+    onTyping: function (text) {
+        var emails = this.state.data.circleEmails.filter(email => email.indexOf(text) !== -1);
+        this.setState({
+            autoCompleteData: emails
+        });
+    },
+
+    onSelect: function(event) {
+        AlertIOS.alert('You chose', event);
+    },
+
     renderEditOrAddWork(options, workValue) {
         if (this.state.user.workEmail !== '') {
             return (
@@ -231,7 +245,11 @@ let UserEditor = React.createClass({
                 value={workValue} />
             );
         } else {
-            console.log(this.state.data.circles);
+            return (
+                <AutoComplete onTyping={this.onTyping}
+                onSelect={this.onSelect}
+                suggestions={this.state.autoCompleteData} />
+            );
         }
     },
 

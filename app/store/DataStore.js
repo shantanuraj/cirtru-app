@@ -23,7 +23,8 @@ var DataStore = Reflux.createStore({
             if (!this.state) {
                 this.state = {};
             }
-            this.state.circles = circles;
+            this.state.circles = circles.map(circle => circle.company);
+            this.state.circleEmails = circles.map(circle => circle.email);
             this.trigger(this.state);
         })
         .done();
