@@ -18,6 +18,7 @@ let {
     ActivityIndicatorIOS,
     TouchableHighlight,
     TouchableOpacity,
+    ScrollView,
     StyleSheet,
     View,
     Text,
@@ -60,20 +61,6 @@ let styles = StyleSheet.create({
     cardHeading: {
         fontSize: 16,
         marginBottom: 16,
-    },
-
-    form: {
-        marginTop: 16,
-        backgroundColor: 'black',
-    },
-
-    toastText: {
-        color: Colors.white,
-        padding: 15,
-        backgroundColor: Colors.transparent,
-        fontSize: 16,
-        fontWeight: 'bold',
-        alignSelf: 'center',
     },
 
     buttonText: {
@@ -195,18 +182,6 @@ let UserEditor = React.createClass({
         });
     },
 
-    makeToast(content, visibility, mode) {
-        return (
-            <Toast isVisible={visibility} mode={mode}>
-                <TouchableOpacity>
-                    <Text style={styles.toastText}>
-                        {content}
-                    </Text>
-                </TouchableOpacity>
-            </Toast>
-        );
-    },
-
     workEmailState() {
         if (this.state.user.emailVerified) {
             return 'Edit';
@@ -313,7 +288,7 @@ let UserEditor = React.createClass({
             phone: this.state.user.phone,
         };
         return (
-            <React.ScrollView
+            <ScrollView
             contentContainerStyle={styles.container}
             contentInset={{top: -65}}>
                 <View style={styles.card}>
@@ -355,7 +330,7 @@ let UserEditor = React.createClass({
 
                     {this.renderButton('Edit')}
                 </View>
-            </React.ScrollView>
+            </ScrollView>
         );
     },
 
