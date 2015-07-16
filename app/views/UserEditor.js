@@ -148,9 +148,15 @@ let UserEditor = React.createClass({
     getInitialState() {
         return {
             editingInfo: false,
-            editingWork: false,
+            editingWork: true,
             autoCompleteData: [],
         };
+    },
+
+    componentDidMount() {
+        if (this.state.user.workEmail === '') {
+            this.setState({ editingWork: true });
+        }
     },
 
     componentWillMount() {
@@ -159,16 +165,15 @@ let UserEditor = React.createClass({
 
     editWork() {
         let editingWork = this.state.editingWork;
-        if (this.state.user.workEmail === '') {
-            let workEmail = this.state.emailUserName + this.state.emailSuffix;
-            console.log(workEmail);
-            UserActions.updateWorkEmail(workEmail);
-        }
         this.setState({ editingWork: !editingWork });
+        if (this.state.user.workEmail === '') {
+            let email = this.state.emailUserName + this.state.emailSuffix;
+            UserActions.updateWorkEmail(email);
+        }
     },
 
     editWorkText() {
-        if (this.state.editingWork || this.state.user.workEmail === '') {
+        if (this.state.user.workEmail === '' || this.state.editingWork) {
             return 'Save';
         } else {
             return 'Edit';
@@ -238,6 +243,7 @@ let UserEditor = React.createClass({
 
     onTyping: function (text) {
         var emails = this.state.data.circleEmails.filter(email => email.indexOf(text) !== -1);
+        emails.push(text);
         this.setState({
             autoCompleteData: emails
         });
@@ -256,11 +262,9 @@ let UserEditor = React.createClass({
             flexDirection: 'row',
             justifyContent: 'flex-start',
             alignItems: 'center',
-        }; 
-        // if (this.state.autoCompleteData.length > 0) {
-        //     customStyle.height = 150;
-        // }
-        if (this.state.user.workEmail !== '') {
+        };
+        console.log(this.state.editingWork);
+        if (this.state.user.workEmail !== '' && !this.state.editingWork) {
             return (
                 <Form
                 ref='workForm'
@@ -362,7 +366,7 @@ let UserEditor = React.createClass({
                 fields: {
                     email: {
                         error: 'Please enter a valid email',
-                        editable: this.state.editingWork,
+                        editable: false,
                     },
                 },
             },

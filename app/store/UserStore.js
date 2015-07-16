@@ -83,12 +83,14 @@ var UserStore = Reflux.createStore({
         console.log('Clicked RES');
     },
 
-    onUpdateInfo() {
-        console.log('Clicked UPI');
+    onUpdateInfo(name, phone) {
+        console.log('Clicked UPI: Args', name, phone);
     },
 
-    onUpdateWorkEmail() {
-        console.log('Clicked UPW');
+    onUpdateWorkEmail(email) {
+        console.log('Clicked UPW: Args', email);
+        this.state.workEmail = email;
+        this.trigger(this.state);
     },
 
     onUpdatePassword(passwords) {
