@@ -125,7 +125,7 @@ let Personal = t.struct({
 
 let PersonalInfo = t.struct({
     name: t.Str,
-    phone: t.Num,
+    phone: t.maybe(t.Num),
 });
 
 let UserEditor = React.createClass({
@@ -151,17 +151,32 @@ let UserEditor = React.createClass({
         }
     },
 
-    editUserInfo() {
+    editInfo() {
         if (!this.state.editingInfo) {
             this.setState({ editingInfo: true });
             return;
         }
-        var {
+        let {
             name,
-            phone
+            phone,
         } = this.refs.personalInfoForm.getValue();
-        console.log(name, phone);
-        // UserActions.updateUserName();
+        this.setState({ editingInfo: false });
+        // UserActions.updateName(name);
+        // if (phone) {
+        //     UserActions.updatePhone(phone);
+        // }
+    },
+
+    editInfoText() {
+        if (this.state.editingInfo) {
+            return 'Update';
+        } else {
+            return 'Edit';
+        }
+    },
+
+    sendVerification() {
+        //UserActions.resendVerificatiom();
     },
 
     renderButton(text, action) {
@@ -175,6 +190,12 @@ let UserEditor = React.createClass({
                 </Text>
             </TouchableHighlight>
         );
+    },
+
+    renderEditButtonOrNot() {
+        if (!this.state.user.emailVerified) {
+            return this.renderButton('Resend Verification', this.sendVerification)
+        }
     },
 
     renderIconWithText(text, color, icon) {
@@ -323,7 +344,7 @@ let UserEditor = React.createClass({
                     options={options.personalOptions}
                     value={personalValue} />
 
-                    {this.renderButton('Edit')}
+                    {this.renderEditButtonOrNot()}
                 </View>
 
                 <View style={styles.card}>
@@ -335,14 +356,13 @@ let UserEditor = React.createClass({
                     options={options.personalInfoOptions}
                     value={personalInfoValue} />
 
-                    {this.renderButton('Edit', this.editUserInfo)}
+                    {this.renderButton(this.editInfoText(), this.editInfo)}
                 </View>
             </ScrollView>
         );
     },
 
     render() {
-        console.log('The State is', this.state);
         if (!this.state.data || !this.state.data.circles) {
             return this.renderLoadingView();
         } else {
