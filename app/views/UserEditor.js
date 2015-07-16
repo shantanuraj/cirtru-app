@@ -1,38 +1,38 @@
 'use strict';
 
 let React = require('react-native'),
-	Reflux = require('reflux'),
-	t = require('tcomb-form-native'),
-	Colors = require('../core/Colors'),
-	MiniCard = require('./MiniCard'),
-	ProductList = require('./ProductList'),
-	Toast = require('./util/Toast'),
-	DataActions = require('../actions/DataActions'),
-	DataStore = require('../store/DataStore'),
-	UserStore = require('../store/UserStore'),
-	TimerMixin = require('react-timer-mixin');
+    Reflux = require('reflux'),
+    t = require('tcomb-form-native'),
+    Colors = require('../core/Colors'),
+    MiniCard = require('./MiniCard'),
+    ProductList = require('./ProductList'),
+    Toast = require('./util/Toast'),
+    DataActions = require('../actions/DataActions'),
+    DataStore = require('../store/DataStore'),
+    UserStore = require('../store/UserStore'),
+    TimerMixin = require('react-timer-mixin');
 
 let window = require('Dimensions').get('window');
 let { Icon } = require('react-native-icons');
 let {
-	ActivityIndicatorIOS,
-	TouchableHighlight,
-	TouchableOpacity,
-	StyleSheet,
-	View,
-	Text,
+    ActivityIndicatorIOS,
+    TouchableHighlight,
+    TouchableOpacity,
+    StyleSheet,
+    View,
+    Text,
 } = React;
 
 let styles = StyleSheet.create({
-	container: {
-		marginTop: 48,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: Colors.white,
-		padding: 16,
-	},
+    container: {
+        marginTop: 48,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colors.white,
+        padding: 16,
+    },
 
-	loadingContainer: {
+    loadingContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -44,59 +44,60 @@ let styles = StyleSheet.create({
     },
 
     card: {
-		width: window.width - 16,
-		backgroundColor: Colors.white,
-		shadowColor: Colors.black,
-		shadowOpacity: 0.3,
-		shadowRadius: 3,
-		shadowOffset: {
-			height: 0,
-			width: 0,
-		},
-		padding: 16,
-		marginTop: 16,
-	},
+        width: window.width - 16,
+        backgroundColor: Colors.white,
+        shadowColor: Colors.black,
+        shadowOpacity: 0.3,
+        shadowRadius: 3,
+        shadowOffset: {
+            height: 0,
+            width: 0,
+        },
+        padding: 16,
+        marginTop: 16,
+    },
 
-	cardHeading: {
-		fontSize: 20,
-		marginBottom: 16,
-	},
+    cardHeading: {
+        fontSize: 16,
+        marginBottom: 16,
+    },
 
-	form: {
-		marginTop: 16,
-		backgroundColor: 'black',
-	},
+    form: {
+        marginTop: 16,
+        backgroundColor: 'black',
+    },
 
-	toastText: {
-		color: Colors.white,
-		padding: 15,
-		backgroundColor: Colors.transparent,
-		fontSize: 16,
-		fontWeight: 'bold',
-		alignSelf: 'center',
+    toastText: {
+        color: Colors.white,
+        padding: 15,
+        backgroundColor: Colors.transparent,
+        fontSize: 16,
+        fontWeight: 'bold',
+        alignSelf: 'center',
     },
 
     buttonText: {
-	    color: 'white',
-	    fontFamily: 'HelveticaNeue-Medium',
-	    fontSize: 16,
-	},
+        color: 'white',
+        fontFamily: 'HelveticaNeue-Medium',
+        fontSize: 16,
+    },
 
     button: {
-		backgroundColor: Colors.brandPrimary,
-		alignItems: 'center',
-		justifyContent: 'center',
-		padding: 8,
-		borderRadius: 3,
-		marginTop: 16,
-	},
+        backgroundColor: Colors.brandPrimary,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 8,
+        borderRadius: 3,
+        marginTop: 16,
+    },
 
-	row: {
+    row: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
         backgroundColor: Colors.white,
+        marginBottom: 16,
     },
 
     leadText: {
@@ -132,82 +133,131 @@ let Work = t.struct({
 });
 
 let Personal = t.struct({
-    email: Email,
+    email: Email,    
+});
+
+let PersonalInfo = t.struct({
     name: t.Str,
     phone: t.Num,
 });
 
-let options = {
-    auto: 'placeholders',
-    fields: {
-        email: {
-            error: 'Please enter a valid email',
-        },
-        phone: {
-        	error: 'Please enter a valid contact number',
-        },
-    },
-};
-
 let UserEditor = React.createClass({
-	mixins: [Reflux.connect(DataStore, 'data'), Reflux.connect(UserStore, 'user'), TimerMixin],
+    mixins: [Reflux.connect(DataStore, 'data'), Reflux.connect(UserStore, 'user'), TimerMixin],
 
-	componentWillMount() {
-		DataActions.getCircles();
-	},
+    getInitialState() {
+        return {
+            workOptions: { auto: 'placeholders' },
+            personalOptions: { auto: 'placeholders' },
+            personalInfoOptions: { auto: 'placeholders' },
+        };
+    },
 
-	makeToast(content, visibility, mode) {
-		return (
-			<Toast isVisible={visibility} mode={mode}>
+    componentWillMount() {
+        DataActions.getCircles();
+    },
+
+    componentDidMount() {
+        this.updateOptions();
+    },
+
+    updateOptions() {
+        this.setState({
+            workOptions: {
+                auto: 'placeholders',
+                fields: {
+                    email: {
+                        error: 'Please enter a valid email',
+                        editable: this.state.user.workEmail === '',
+                    },
+                },
+            },
+            personalOptions: {
+                auto: 'placeholders',
+                fields: {
+                    email: {
+                        error: 'Please enter a valid email',
+                        editable: false,
+                    },
+                },
+            },
+            personalInfoOptions: {
+                auto: 'placeholders',
+                fields: {
+                    name: {
+                        editable: false,
+                    },
+                    phone: {
+                        editable: false,
+                        error: 'Please enter a valid contact number',
+                    },
+                },
+            },
+        });
+    },
+
+    makeToast(content, visibility, mode) {
+        return (
+            <Toast isVisible={visibility} mode={mode}>
                 <TouchableOpacity>
                     <Text style={styles.toastText}>
                         {content}
                     </Text>
                 </TouchableOpacity>
             </Toast>
-		);
-	},
+        );
+    },
 
-	renderWarnIconWithText(text) {
-		return (
-			<View style={styles.row}>
-				<Icon
-				name='ion|android-alert'
-				size={20}
-				color={Colors.warn}
-				style={styles.userIcon} />
-				<Text style={styles.leadText}>
-					{text}
-				</Text>
-			</View>
-		);
-	},
+    workEmailState() {
+        if (this.state.user.emailVerified) {
+            return 'Edit';
+        } else {
+            return 'Add';
+        }
+    },
 
-	renderWorkInfo() {
-		if (this.state.user.workVerified) {
-			return this.renderWorkVerified();
-		} else if (this.state.user.workEmail == '') {
-			return this.renderWarnIconWithText('Work Email is required');
-		} else {
-			return this.renderWarnIconWithText('Verification Pending');
-		}
-	},
+    renderIconWithText(text, color, icon) {
+        let iconName = icon ? icon : 'ion|android-alert';
+        let iconColor = color ? color : Colors.warn;
+        return (
+            <View style={styles.row}>
+                <Icon
+                name={iconName}
+                size={20}
+                color={iconColor}
+                style={styles.userIcon} />
+                <Text style={styles.leadText}>
+                    {text}
+                </Text>
+            </View>
+        );
+    },
 
-	renderPersonalInfo() {
-		if (this.state.user.emailVerified) {
-			return (
-				<Text style={styles.leadText}>
-					Your personal email is verified and you are all set!
-				</Text>
-			);
-		} else {
-			return this.renderWarnIconWithText('Verification Pending');
-		}
-	},
+    renderWorkInfo() {
+        if (this.state.user.workVerified) {
+            return (
+                <View>
+                    {this.renderIconWithText('Done', Colors.success, 'ion|ios-checkmark')}
+                    {this.renderWorkVerified()}
+                </View>
+            );
+        } else if (this.state.user.workEmail == '') {
+            return this.renderIconWithText('Required', Colors.danger);
+        } else {
+            return this.renderIconWithText('Pending');
+        }
+    },
 
-	renderWorkVerified() {
-		return (
-	    	<View style={styles.row}>
+    renderPersonalInfo() {
+        if (this.state.user.emailVerified) {
+            return this.renderIconWithText('Done', Colors.success, 'ion|ios-checkmark');
+        } else {
+            return this.renderIconWithText('Pending');
+        }
+    },
+
+    renderWorkVerified() {
+        return (
+            <View style={styles.row}>
                 <Icon
                 name='fontawesome|user'
                 size={20}
@@ -220,86 +270,108 @@ let UserEditor = React.createClass({
                     style={styles.checkIcon} />
                 </Icon>
                 <Text style={styles.leadText}>
-                	Verified user from {this.state.user.circle}
+                    Verified user from {this.state.user.circle}
                 </Text>
             </View>
-		);
-	},
+        );
+    },
 
-	renderLoadingView() {
-		return (
-			<View style={styles.loadingContainer}>
-			    <ActivityIndicatorIOS
-			    animating={true}
-			    color={'#808080'}
-			    size={'large'}
-			    style={styles.loading} />
-			    <Text>
-			        Hold on a sec...
-			    </Text>
-			</View>
-		);
-	},
+    renderLoadingView() {
+        return (
+            <View style={styles.loadingContainer}>
+                <ActivityIndicatorIOS
+                animating={true}
+                color={'#808080'}
+                size={'large'}
+                style={styles.loading} />
+                <Text>
+                    Hold on a sec...
+                </Text>
+            </View>
+        );
+    },
 
-	renderLoadedView() {
-		let workValue = { email: this.state.user.workEmail };
-		let personalValue = {
-			email: this.state.user.email,
-			name: this.state.user.name,
-			phone: this.state.user.phone,
-		}; 
-		return (
-			<View style={styles.container}>
-			    <View style={styles.card}>
-			    	<Text style={styles.cardHeading}>Work/School Email</Text>
+    renderLoadedView() {
+        let workValue = { email: this.state.user.workEmail };
+        let personalValue = {
+            email: this.state.user.email,
+        };
+        let personalInfoValue = {
+            name: this.state.user.name,
+            phone: this.state.user.phone,
+        };
+        return (
+            <React.ScrollView
+            contentContainerStyle={styles.container}
+            contentInset={{top: -65}}>
+                <View style={styles.card}>
+                    <Text style={styles.cardHeading}>Work/School Email Verification</Text>
 
-			    	<Form
-			    	ref='form'
-			    	type={Work}
-			    	options={options}
-			    	value={workValue} />
+                    {this.renderWorkInfo()}
 
-			    	{this.renderWorkInfo()}
-			    	
-			    	<TouchableHighlight
-			    	underlayColor={Colors.brandPrimary}
-			    	style={styles.button}>
-			    		<Text style={styles.buttonText}>
-			    			Submit
-			    		</Text>
-			    	</TouchableHighlight>
-			    </View>
+                    <Form
+                    ref='workForm'
+                    type={Work}
+                    options={this.state.workOptions}
+                    value={workValue} />
+                    
+                    <TouchableHighlight
+                    underlayColor={Colors.brandPrimary}
+                    style={styles.button}>
+                        <Text style={styles.buttonText}>
+                            {this.workEmailState()}
+                        </Text>
+                    </TouchableHighlight>
+                </View>
 
-			    <View style={styles.card}>
-			    	<Text style={styles.cardHeading}>Personal Email</Text>
+                <View style={styles.card}>
+                    <Text style={styles.cardHeading}>Personal Email Verification</Text>
 
-			    	<Form
-			    	ref='form'
-			    	type={Personal}
-			    	options={options}
-			    	value={personalValue} />
+                    {this.renderPersonalInfo()}
 
-			    	{this.renderPersonalInfo()}
+                    <Form
+                    ref='personalForm'
+                    type={Personal}
+                    options={this.state.personalOptions}
+                    value={personalValue} />
 
-			    	<TouchableHighlight
-			    	underlayColor={Colors.brandPrimary}
-			    	style={styles.button}>
-			    		<Text style={styles.buttonText}>
-			    			Save Profile
-			    		</Text>
-			    	</TouchableHighlight>
-			    </View>
-			</View>
-		);
-	},
+                    <TouchableHighlight
+                    underlayColor={Colors.brandPrimary}
+                    style={styles.button}>
+                        <Text style={styles.buttonText}>
+                            Edit
+                        </Text>
+                    </TouchableHighlight>
+                </View>
 
-	render() {
-		if (!this.state.data || !this.state.data.circles) {
-			return this.renderLoadingView();
-		} else {
-			return this.renderLoadedView();
-		}
-	},
+                <View style={styles.card}>
+                    <Text style={styles.cardHeading}>User Information</Text>
+
+                    <Form
+                    ref='personalInfoForm'
+                    type={PersonalInfo}
+                    options={this.state.personalInfoOptions}
+                    value={personalInfoValue} />
+
+                    <TouchableHighlight
+                    underlayColor={Colors.brandPrimary}
+                    style={styles.button}>
+                        <Text style={styles.buttonText}>
+                            Edit
+                        </Text>
+                    </TouchableHighlight>
+                </View>
+            </React.ScrollView>
+        );
+    },
+
+    render() {
+        if (!this.state.data || !this.state.data.circles) {
+            return this.renderLoadingView();
+        } else {
+            return this.renderLoadedView();
+        }
+    },
 });
 
 module.exports = UserEditor;

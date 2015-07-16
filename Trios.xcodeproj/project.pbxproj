@@ -28,6 +28,8 @@
 		FF24D7CC1B460472008F2E1E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF24D7CB1B460472008F2E1E /* GoogleService-Info.plist */; };
 		FF409E411B576FF4001124C1 /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF409E401B576FC1001124C1 /* libReactNativeIcons.a */; };
 		FF409E421B577005001124C1 /* libRCTAutoComplete.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFFB50C11B5683730047252E /* libRCTAutoComplete.a */; };
+		FF409E451B57B899001124C1 /* RNBlur in Resources */ = {isa = PBXBuildFile; fileRef = FF409E431B57B899001124C1 /* RNBlur */; };
+		FF409E461B57B899001124C1 /* RNVibrancy in Resources */ = {isa = PBXBuildFile; fileRef = FF409E441B57B899001124C1 /* RNVibrancy */; };
 		FF726C471B44C21F00206A89 /* RNCookieManagerIOS.m in Sources */ = {isa = PBXBuildFile; fileRef = FF726C461B44C21F00206A89 /* RNCookieManagerIOS.m */; };
 		FF8E1D141B3E8166001CF0A1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8E1D131B3E8166001CF0A1 /* AudioToolbox.framework */; };
 		FF8E1D161B3E8173001CF0A1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8E1D151B3E8173001CF0A1 /* CFNetwork.framework */; };
@@ -191,6 +193,8 @@
 		FF133EA91B3C09AF00928DD0 /* RNOverlay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNOverlay.xcodeproj; path = "node_modules/react-native-overlay/RNOverlay.xcodeproj"; sourceTree = "<group>"; };
 		FF24D7CB1B460472008F2E1E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Documents/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FF409E3B1B576FC1001124C1 /* ReactNativeIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeIcons.xcodeproj; path = "node_modules/react-native-icons/ios/ReactNativeIcons.xcodeproj"; sourceTree = "<group>"; };
+		FF409E431B57B899001124C1 /* RNBlur */ = {isa = PBXFileReference; lastKnownFileType = folder; name = RNBlur; path = "node_modules/react-native-blur/RNBlur"; sourceTree = "<group>"; };
+		FF409E441B57B899001124C1 /* RNVibrancy */ = {isa = PBXFileReference; lastKnownFileType = folder; name = RNVibrancy; path = "node_modules/react-native-blur/RNVibrancy"; sourceTree = "<group>"; };
 		FF726C451B44C21F00206A89 /* RNCookieManagerIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNCookieManagerIOS.h; sourceTree = "<group>"; };
 		FF726C461B44C21F00206A89 /* RNCookieManagerIOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCookieManagerIOS.m; sourceTree = "<group>"; };
 		FF847B8F1B44047600A72FA1 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../../../../Documents/ParseSDK/Parse.framework; sourceTree = "<group>"; };
@@ -421,6 +425,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				FF409E431B57B899001124C1 /* RNBlur */,
+				FF409E441B57B899001124C1 /* RNVibrancy */,
 				FF24D7CB1B460472008F2E1E /* GoogleService-Info.plist */,
 				FF8E1D431B3E98CF001CF0A1 /* Frameworks */,
 				FFC89DC91B305F0300872445 /* FontAwesome.otf */,
@@ -749,9 +755,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF409E461B57B899001124C1 /* RNVibrancy in Resources */,
 				FFC89DCA1B305F0300872445 /* FontAwesome.otf in Resources */,
 				FFC89DC81B305D6700872445 /* ionicons.ttf in Resources */,
 				008F07F31AC5B25A0029DE68 /* main.jsbundle in Resources */,
+				FF409E451B57B899001124C1 /* RNBlur in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				FF24D7CC1B460472008F2E1E /* GoogleService-Info.plist in Resources */,
