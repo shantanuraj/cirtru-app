@@ -143,7 +143,11 @@ let UserEditor = React.createClass({
         DataActions.getCircles();
     },
 
-    workEmailState() {
+    editWork() {
+        console.log('Edit work is called');
+    },
+
+    editWorkText() {
         if (this.state.user.emailVerified) {
             return 'Edit';
         } else {
@@ -213,6 +217,18 @@ let UserEditor = React.createClass({
                 </Text>
             </View>
         );
+    },
+
+    renderEditOrAddWork(options, workValue) {
+        if (this.state.user.workEmail === '') {
+            return (
+                <Form
+                ref='workForm'
+                type={Work}
+                options={options.workOptions}
+                value={workValue} />
+            );
+        }
     },
 
     renderWorkInfo() {
@@ -324,13 +340,9 @@ let UserEditor = React.createClass({
 
                     {this.renderWorkInfo()}
 
-                    <Form
-                    ref='workForm'
-                    type={Work}
-                    options={options.workOptions}
-                    value={workValue} />
+                    {this.renderEditOrAddWork(options, workValue)}
                     
-                    {this.renderButton(this.workEmailState())}
+                    {this.renderButton(this.editWorkText(), this.editWork)}
                 </View>
 
                 <View style={styles.card}>
