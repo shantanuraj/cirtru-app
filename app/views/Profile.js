@@ -112,14 +112,6 @@ var Profile = React.createClass({
 		}
 	},
 
-	renderAddOrVerify() {
-		if (this.state.user.workEmail === '') {
-			return this.makeToast('You need to add your work email', true, 'warn')
-		} else if (!this.state.user.workVerified) {
-			return this.makeToast('You need to verify your work email', true, 'warn');
-		}
-	},
-
 	profilePage() {
 		return (
 			<View style={styles.container}>
@@ -172,8 +164,6 @@ var Profile = React.createClass({
 					</Text>
 				</TouchableHighlight>
 
-				{this.renderAddOrVerify()}
-				{this.makeToast('You need to verify your email', !this.state.user.emailVerified, 'warn')}
 				{this.makeToast('Success', this.state.status === 'success', 'success')}
 				{this.makeToast('Could not complete request', this.state.status === 'error', 'warn')}
 			</View>
@@ -241,9 +231,6 @@ var Profile = React.createClass({
 	},
 
 	showEditor() {
-		if (!this.state.user.emailVerified) {
-			return;
-		}
 		this.props.navigator.push({
 			title: 'Edit Profile',
 			component: UserEditor,

@@ -68,7 +68,7 @@ var ChangePassword = React.createClass({
         return (
 	        <View style={styles.container}>
 	            <Form
-                ref="form"
+                ref='form'
                 type={this.props.action === 'forgot' ? ForgotForm : PasswordForm}
                 options={options} />
 	            <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor={Colors.brandSecondaryDark}>

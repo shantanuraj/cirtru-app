@@ -10,9 +10,8 @@ var React = require('react-native'),
 	ProfileStore = require('../store/ProfileStore'),
 	ProfileActions = require('../actions/ProfileActions');
 
-var { Icon } = require('react-native-icons');
 var window = require('Dimensions').get('window');
-
+var { Icon } = require('react-native-icons');
 var {
 	StyleSheet,
 	Text,

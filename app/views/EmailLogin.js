@@ -107,10 +107,9 @@ var EmailLogin = React.createClass({
         return (
             <View style={styles.container}>
                 <Form
-                  ref="form"
+                  ref='form'
                   type={this.props.action === 'Sign in' ? LoginPerson : RegisterPerson}
-                  options={options}
-                />
+                  options={options} />
                 {this.renderForgotOrNot()}
                 <TouchableHighlight
                 onPress={this.onPress}

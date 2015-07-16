@@ -5,8 +5,6 @@ var React = require('react-native'),
     t = require('tcomb-form-native');
 
 var { Icon } = require('react-native-icons');
-var Form = t.form.Form;
-
 var {
     SegmentedControlIOS,
     TouchableHighlight,
@@ -15,6 +13,7 @@ var {
     View,
     StyleSheet
 } = React;
+var Form = t.form.Form;
 
 var styles = StyleSheet.create({
     container: {
@@ -132,7 +131,7 @@ var CreateOther = React.createClass({
                 values={this.types} />
                 <Form
                   options={options}
-                  ref="form"
+                  ref='form'
                   type={OtherItem} />
 
                 <View style={styles.promptContainer}>

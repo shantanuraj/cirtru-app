@@ -12,8 +12,9 @@ module.exports = {
         workEmail: '',
         workVerified: false,
         emailVerified: false,
+        phone: null,
         isLoggedIn: false,
-        extra: {'fbid' : ''},
+        extra: {fbid : ''},
     },
 
     toUser(raw) {
@@ -39,7 +40,9 @@ module.exports = {
                 workEmail: '',
                 workVerified: false,
                 emailVerified: false,
+                phone: null,
                 isLoggedIn: true,
+                number: null,
                 extras : {fbid: user.id},
             };
         };
@@ -61,6 +64,7 @@ module.exports = {
             workEmail: raw.workEmail ? raw.workEmail : '',
             workVerified: raw.roles.indexOf('workEmailVerified') != -1,
             emailVerified: raw.roles.indexOf('emailVerified') != -1,
+            phone: raw.contactNumber,
             isLoggedIn: true,
             extras : {roles: raw.roles},
         };
