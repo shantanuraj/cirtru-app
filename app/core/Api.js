@@ -222,4 +222,16 @@ module.exports = {
 	userListings() {
 		return this.base + 'users/ownlistings';
 	},
+
+	updateUser() {
+		return this.base + 'users';
+	},
+
+	reverifyPersonal() {
+		return this.base + 'verify/email/new';
+	},
+
+	updateWorkEmail() {
+		return this.base + '/verify/workEmail/new';
+	},
 };
