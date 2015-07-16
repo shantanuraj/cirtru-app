@@ -267,16 +267,19 @@ let UserEditor = React.createClass({
             );
         } else {
             return (
-                <View style={customStyle}>
-                    <TextInput
-                    autoFocus={true}
-                    onChangeText={ emailUserName => this.setState({ emailUserName }) }
-                    placeholder={'yourname'}
-                    style={styles.searchBar} />
-                    
-                    <AutoComplete onTyping={this.onTyping}
-                    onSelect={this.onSelect}
-                    suggestions={this.state.autoCompleteData} />
+                <View>
+                    <View style={customStyle}>
+                        <TextInput
+                        autoFocus={true}
+                        onChangeText={ emailUserName => this.setState({ emailUserName }) }
+                        placeholder={'yourname'}
+                        style={styles.searchBar} />
+
+                        <AutoComplete onTyping={this.onTyping}
+                        onSelect={this.onSelect}
+                        suggestions={this.state.autoCompleteData} />
+                    </View>
+                    <View style={{marginTop: this.state.autoCompleteData.length ? 120 : 0}} />
                 </View>
             );
         }
