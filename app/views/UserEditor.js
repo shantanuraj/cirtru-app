@@ -220,7 +220,7 @@ let UserEditor = React.createClass({
     },
 
     renderEditOrAddWork(options, workValue) {
-        if (this.state.user.workEmail === '') {
+        if (this.state.user.workEmail !== '') {
             return (
                 <Form
                 ref='workForm'
