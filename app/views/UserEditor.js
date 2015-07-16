@@ -150,10 +150,10 @@ let UserEditor = React.createClass({
     editWorkText() {
         if (this.state.editingWork) {
             return 'Save';
-        } else if (this.state.user.workEmail === '') {
-            return 'Add';
-        } else {
+        } else if (this.refs.workForm && this.refs.workForm.getValue() !== null) {
             return 'Edit';
+        } else {
+            return 'Add';
         }
     },
 
@@ -230,6 +230,8 @@ let UserEditor = React.createClass({
                 options={options.workOptions}
                 value={workValue} />
             );
+        } else {
+            console.log(this.state.data.circles);
         }
     },
 
