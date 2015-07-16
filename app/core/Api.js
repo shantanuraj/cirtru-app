@@ -232,6 +232,6 @@ module.exports = {
 	},
 
 	updateWorkEmail() {
-		return this.base + '/verify/workEmail/new';
+		return this.base + 'verify/workEmail/new';
 	},
 };

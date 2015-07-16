@@ -80,22 +80,75 @@ var UserStore = Reflux.createStore({
     },
 
     onResendVerification() {
-        //TODO API
-        console.log('Clicked RES');
+        fetch(Api.reverifyPersonal(), {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: this.state.email })
+        })
+        .then(response => {
+            if (response.status === 200) {
+                console.log(response);
+            } else {
+                console.log(response);
+            }
+        })
+        .done();
     },
 
     onUpdateInfo(name, phone) {
-        //TODO API
         this.state.name = name;
         if (phone) {
             this.state.phone = phone;
         }
+
+        var user = {
+            name: name,
+            contactNumber: phone,
+        };
+        
+        fetch(Api.updateUser(), {
+            method: 'put',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user),
+        })
+        .then(response => {
+            if (response.status === 200) {
+                console.log(response);
+            } else {
+                console.log(response);
+            }
+        })
+        .done();
+
         this.trigger(this.state);
     },
 
     onUpdateWorkEmail(email) {
-        //TODO API
         this.state.workEmail = email;
+
+        fetch(Api.updateUser(), {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ workEmail: email }),
+        })
+        .then(response => {
+            if (response.status === 200) {
+                console.log(response);
+            } else {
+                console.log(response);
+            }
+        })
+        .done();        
+
         this.trigger(this.state);
     },
 

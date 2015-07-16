@@ -270,7 +270,7 @@ let UserEditor = React.createClass({
             justifyContent: 'flex-start',
             alignItems: 'center',
         };
-        console.log(this.state.editingWork);
+
         if (this.state.user.workEmail !== '' && !this.state.editingWork) {
             return (
                 <Form
