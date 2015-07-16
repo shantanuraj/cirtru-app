@@ -8,8 +8,8 @@ var userActions = [
     'authenticate',
     'newFacebookSession',
     'updatePassword',
-    'updateName',
-    'updatePhone',
+    'updateInfo',
+    'updateWorkEmail',
     'resendVerification',
     'logout',
 ];

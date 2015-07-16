@@ -10,6 +10,7 @@ let React = require('react-native'),
     Toast = require('./util/Toast'),
     DataActions = require('../actions/DataActions'),
     DataStore = require('../store/DataStore'),
+    UserActions = require('../actions/UserActions'),
     UserStore = require('../store/UserStore'),
     TimerMixin = require('react-timer-mixin');
 
@@ -158,6 +159,11 @@ let UserEditor = React.createClass({
 
     editWork() {
         let editingWork = this.state.editingWork;
+        if (this.state.user.workEmail === '') {
+            let workEmail = this.state.emailUserName + this.state.emailSuffix;
+            console.log(workEmail);
+            UserActions.updateWorkEmail(workEmail);
+        }
         this.setState({ editingWork: !editingWork });
     },
 
@@ -179,10 +185,7 @@ let UserEditor = React.createClass({
             phone,
         } = this.refs.personalInfoForm.getValue();
         this.setState({ editingInfo: false });
-        // UserActions.updateName(name);
-        // if (phone) {
-        //     UserActions.updatePhone(phone);
-        // }
+        UserActions.updateInfo(name, phone);
     },
 
     editInfoText() {
@@ -194,7 +197,7 @@ let UserEditor = React.createClass({
     },
 
     sendVerification() {
-        //UserActions.resendVerificatiom();
+        UserActions.resendVerification();
     },
 
     renderButton(text, action) {
@@ -240,9 +243,9 @@ let UserEditor = React.createClass({
         });
     },
 
-    onSelect: function(event) {
-        AlertIOS.alert('You chose', event);
+    onSelect: function(emailSuffix) {
         this.setState({
+            emailSuffix: emailSuffix,
             autoCompleteData: [],
         });
     },

@@ -79,6 +79,18 @@ var UserStore = Reflux.createStore({
 		});
     },
 
+    onResendVerification() {
+        console.log('Clicked RES');
+    },
+
+    onUpdateInfo() {
+        console.log('Clicked UPI');
+    },
+
+    onUpdateWorkEmail() {
+        console.log('Clicked UPW');
+    },
+
     onUpdatePassword(passwords) {
         fetch(Api.changePassword(), {
             method: 'post',
