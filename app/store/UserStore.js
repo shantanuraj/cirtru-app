@@ -80,15 +80,21 @@ var UserStore = Reflux.createStore({
     },
 
     onResendVerification() {
+        //TODO API
         console.log('Clicked RES');
     },
 
     onUpdateInfo(name, phone) {
-        console.log('Clicked UPI: Args', name, phone);
+        //TODO API
+        this.state.name = name;
+        if (phone) {
+            this.state.phone = phone;
+        }
+        this.trigger(this.state);
     },
 
     onUpdateWorkEmail(email) {
-        console.log('Clicked UPW: Args', email);
+        //TODO API
         this.state.workEmail = email;
         this.trigger(this.state);
     },

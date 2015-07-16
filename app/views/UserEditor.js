@@ -129,6 +129,10 @@ let Email = t.subtype(t.Str, function (email) {
     return re.test(email);
 });
 
+let Phone = t.subtype(t.Num, function(e) {
+    return e.toString().length === 10;
+});
+
 let Work = t.struct({
     email: Email,
 });
@@ -139,7 +143,7 @@ let Personal = t.struct({
 
 let PersonalInfo = t.struct({
     name: t.Str,
-    phone: t.maybe(t.Num),
+    phone: t.maybe(Phone),
 });
 
 let UserEditor = React.createClass({
@@ -185,12 +189,15 @@ let UserEditor = React.createClass({
             this.setState({ editingInfo: true });
             return;
         }
-        let {
-            name,
-            phone,
-        } = this.refs.personalInfoForm.getValue();
-        this.setState({ editingInfo: false });
-        UserActions.updateInfo(name, phone);
+        let values = this.refs.personalInfoForm.getValue();
+        if (values) {
+            let {
+                name,
+                phone,
+            } = values;
+            this.setState({ editingInfo: false });
+            UserActions.updateInfo(name, phone);
+        }
     },
 
     editInfoText() {
