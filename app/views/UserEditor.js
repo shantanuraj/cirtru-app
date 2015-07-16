@@ -21,6 +21,7 @@ let {
     TouchableOpacity,
     ScrollView,
     StyleSheet,
+    TextInput,
     AlertIOS,
     View,
     Text,
@@ -108,6 +109,16 @@ let styles = StyleSheet.create({
         alignSelf: 'flex-start',
         backgroundColor: Colors.transparent,
     },
+
+    searchBar: {
+        height: 41,
+        width: 160,
+        borderWidth: 1,
+        borderColor: Colors.lightGrey,
+        borderRadius: 5,
+        marginRight: 2,
+        padding: 8,
+    },
 });
 
 let Form = t.form.Form;
@@ -151,12 +162,10 @@ let UserEditor = React.createClass({
     },
 
     editWorkText() {
-        if (this.state.editingWork) {
+        if (this.state.editingWork || this.state.user.workEmail === '') {
             return 'Save';
-        } else if (this.refs.workForm && this.refs.workForm.getValue() !== null) {
-            return 'Edit';
         } else {
-            return 'Add';
+            return 'Edit';
         }
     },
 
@@ -233,9 +242,21 @@ let UserEditor = React.createClass({
 
     onSelect: function(event) {
         AlertIOS.alert('You chose', event);
+        this.setState({
+            autoCompleteData: [],
+        });
     },
 
     renderEditOrAddWork(options, workValue) {
+        let customStyle = {
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+        }; 
+        // if (this.state.autoCompleteData.length > 0) {
+        //     customStyle.height = 150;
+        // }
         if (this.state.user.workEmail !== '') {
             return (
                 <Form
@@ -246,9 +267,17 @@ let UserEditor = React.createClass({
             );
         } else {
             return (
-                <AutoComplete onTyping={this.onTyping}
-                onSelect={this.onSelect}
-                suggestions={this.state.autoCompleteData} />
+                <View style={customStyle}>
+                    <TextInput
+                    autoFocus={true}
+                    onChangeText={ emailUserName => this.setState({ emailUserName }) }
+                    placeholder={'yourname'}
+                    style={styles.searchBar} />
+                    
+                    <AutoComplete onTyping={this.onTyping}
+                    onSelect={this.onSelect}
+                    suggestions={this.state.autoCompleteData} />
+                </View>
             );
         }
     },
