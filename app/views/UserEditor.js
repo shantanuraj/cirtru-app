@@ -215,6 +215,18 @@ let UserEditor = React.createClass({
         }
     },
 
+    renderButton(text) {
+        return (
+            <TouchableHighlight
+            underlayColor={Colors.brandPrimary}
+            style={styles.button}>
+                <Text style={styles.buttonText}>
+                    {text}
+                </Text>
+            </TouchableHighlight>
+        );
+    },
+
     renderIconWithText(text, color, icon) {
         let iconName = icon ? icon : 'ion|android-alert';
         let iconColor = color ? color : Colors.warn;
@@ -315,13 +327,7 @@ let UserEditor = React.createClass({
                     options={this.state.workOptions}
                     value={workValue} />
                     
-                    <TouchableHighlight
-                    underlayColor={Colors.brandPrimary}
-                    style={styles.button}>
-                        <Text style={styles.buttonText}>
-                            {this.workEmailState()}
-                        </Text>
-                    </TouchableHighlight>
+                    {this.renderButton(this.workEmailState())}
                 </View>
 
                 <View style={styles.card}>
@@ -335,13 +341,7 @@ let UserEditor = React.createClass({
                     options={this.state.personalOptions}
                     value={personalValue} />
 
-                    <TouchableHighlight
-                    underlayColor={Colors.brandPrimary}
-                    style={styles.button}>
-                        <Text style={styles.buttonText}>
-                            Edit
-                        </Text>
-                    </TouchableHighlight>
+                    {this.renderButton('Edit')}
                 </View>
 
                 <View style={styles.card}>
@@ -353,13 +353,7 @@ let UserEditor = React.createClass({
                     options={this.state.personalInfoOptions}
                     value={personalInfoValue} />
 
-                    <TouchableHighlight
-                    underlayColor={Colors.brandPrimary}
-                    style={styles.button}>
-                        <Text style={styles.buttonText}>
-                            Edit
-                        </Text>
-                    </TouchableHighlight>
+                    {this.renderButton('Edit')}
                 </View>
             </React.ScrollView>
         );
