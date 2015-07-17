@@ -122,7 +122,7 @@ var ProductList = React.createClass({
 
     filter() {
         this.props.navigator.push({
-            title: 'Search',
+            title: 'Filter',
             component: Search,
             passProps: {
                 category: this.props.type,
@@ -132,7 +132,7 @@ var ProductList = React.createClass({
     },
 
     searchOrNot(queries) {
-        if (queries !== '') {
+        if (queries && queries !== '') {
             this.setState({
                 loaded: false,
             });
