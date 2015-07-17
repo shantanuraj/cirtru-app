@@ -133,10 +133,6 @@ let UserStore = Reflux.createStore({
         this.state.workEmail = workEmail;
         this.state.circle = circle;
 
-        console.log('DEBUG:', 'POST =>', Api.updateWorkEmail(), 'DATA =>', {
-            workEmail, circle
-        });
-
         fetch(Api.updateWorkEmail(), {
             method: 'post',
             headers: {

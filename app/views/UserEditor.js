@@ -111,13 +111,29 @@ let styles = StyleSheet.create({
         backgroundColor: Colors.transparent,
     },
 
-    searchBar: {
+    workCard: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+
+    workUsername: {
         height: 41,
         width: 160,
         borderWidth: 1,
         borderColor: Colors.lightGrey,
         borderRadius: 5,
         marginRight: 2,
+        padding: 8,
+    },
+
+    newCircle: {
+        height: 41,
+        borderColor: Colors.lightGrey,
+        borderWidth: 1,
+        borderRadius: 5,
+        marginBottom: 16,
         padding: 8,
     },
 });
@@ -172,13 +188,21 @@ let UserEditor = React.createClass({
         this.setState({ editingWork: !editingWork });
         if (this.state.user.workEmail === '' || editingWork) {
             let workEmail = this.state.emailUserName + this.state.emailSuffix;
-            let circle = this.state.data.rawCircles.filter(circle => circle.email === this.state.emailSuffix)[0];
+            let circle;
+            if (this.state.emailSuffix && this.state.data.circleEmails.indexOf(this.state.emailSuffix) === -1) {
+                circle = this.state.newCircle;
+            } else {
+                circle = this.state.data.rawCircles.filter(circle => circle.email === this.state.emailSuffix)[0];
+            }
             UserActions.updateWorkEmail(workEmail, circle);
         }
     },
 
     editWorkText() {
-        if (this.state.user.workEmail === '' || this.state.editingWork) {
+        if (this.state.editingWork &&
+            this.state.emailSuffix && this.state.data.circleEmails.indexOf(this.state.emailSuffix) === -1) {
+            return 'Send';
+        } else if (this.state.user.workEmail === '' || this.state.editingWork) {
             return 'Save';
         } else {
             return 'Edit';
@@ -264,14 +288,29 @@ let UserEditor = React.createClass({
         });
     },
 
-    renderEditOrAddWork(options, workValue) {
-        let customStyle = {
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-        };
+    getInfoTextOrNot() {
+        if (this.state.emailSuffix && this.state.data.circleEmails.indexOf(this.state.emailSuffix) === -1) {
+            return (
+                <View style={{ paddingTop: 16 }}>
+                    <Text style={styles.cardHeading}>
+                        If you could not find your work/school circle, please send us a message and we will add your work/school circle within few hours
+                    </Text>
+                    <TextInput
+                    onChangeText={ newCircle => this.setState({ newCircle }) }
+                    placeholder={'Company name'}
+                    placeholderTextColor={Colors.lightGrey}
+                    style={styles.newCircle} />
+                </View>
+            );
+        }
+    },
 
+    renderEditOrAddWork(options, workValue) {
+        let test = this.state.emailSuffix && this.state.data.circleEmails.indexOf(this.state.emailSuffix) === -1;
+        let customStyle = {
+            marginTop: this.state.autoCompleteData.length ? 120 : 0,
+            height: test ? 150 : 0,
+        };
         if (this.state.user.workEmail !== '' && !this.state.editingWork) {
             return (
                 <Form
@@ -283,18 +322,20 @@ let UserEditor = React.createClass({
         } else {
             return (
                 <View>
-                    <View style={customStyle}>
+                    <View style={styles.workCard}>
                         <TextInput
                         autoFocus={true}
                         onChangeText={ emailUserName => this.setState({ emailUserName }) }
                         placeholder={'yourname'}
-                        style={styles.searchBar} />
+                        style={styles.workUsername} />
 
                         <AutoComplete onTyping={this.onTyping}
                         onSelect={this.onSelect}
                         suggestions={this.state.autoCompleteData} />
                     </View>
-                    <View style={{marginTop: this.state.autoCompleteData.length ? 120 : 0}} />
+                    <View style={customStyle}>
+                        {this.getInfoTextOrNot()}
+                    </View>
                 </View>
             );
         }
