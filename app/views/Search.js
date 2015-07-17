@@ -4,8 +4,10 @@ let React = require('react-native'),
 	Reflux = require('reflux'),
 	Api = require('../core/Api'),
 	Colors = require('../core/Colors'),
+	Constants = require('../core/Constants'),
 	FabButton = require('./util/FabButton'),
-	FilterStore = require('../store/FilterStore');
+	FilterStore = require('../store/FilterStore'),
+	MultiPicker = require('./util/MultiPicker');
 
 let { Icon } = require('react-native-icons');
 let {
@@ -46,7 +48,7 @@ let styles = StyleSheet.create({
 		padding: 8,
 	},
 
-	commonContent: {
+	multiPickers: {
 		position: 'absolute',
 		top: 130,
 		left: 0,
@@ -133,10 +135,33 @@ let styles = StyleSheet.create({
 });
 
 let Search = React.createClass({
-	renderPromptCircle(icon, label) {
+	mixins: [Reflux.connect(FilterStore, 'filter')],
+
+	multiPromptAction(label, key) {
+		let options = this.state.filter.options[this.props.category];
+		let list = null;
+		switch(label) {
+			case Constants.LOCATION_LABEL: list = options.location;
+			case Constants.CIRCLE_LABEL:   list = options.circle;
+		}
+		let self = this;
+		return () => {
+			self.props.navigator.push({
+				title: 'Select ' + label,
+				component: MultiPicker,
+				passProps: {
+					list: list,
+					key: key,
+				},
+			})
+		};
+	},
+
+	renderPromptCircle(icon, label, key) {
 		return (
 			<TouchableHighlight
 			style={styles.fabPicker}
+			onPress={this.multiPromptAction(label, key)}
 			underlayColor={Colors.brandSecondary}>
 				<View style={styles.fabContent}>
 				    <Icon
@@ -152,8 +177,20 @@ let Search = React.createClass({
 		);
 	},
 
+	renderNonGenericMulti() {
+
+	},
+
+	renderSinglePickers() {
+		switch(this.props.category) {
+			case 'Roommates': 
+			case 'Sublets':
+			case 'Cars':
+			default: return;
+		};
+	},
+
 	render() {
-		console.log(this.state);
 		return (
 			<View style={styles.container}>
 				<View style={styles.searchBarContainer}>
@@ -164,12 +201,19 @@ let Search = React.createClass({
 					placeholder={'Enter keywords'}
 					style={styles.searchBar} />
 				</View>
-				<View style={styles.commonContent}>
+				
+				<View style={styles.multiPickers}>
 					<View style={styles.row}>
-						{this.renderPromptCircle('ion|map', 'Location')}
-						{this.renderPromptCircle('ion|ios-circle-filled', 'Circle')}
+						{this.renderPromptCircle('ion|map', Constants.LOCATION_LABEL, 'location')}
+						{this.renderPromptCircle('ion|ios-circle-filled', Constants.CIRCLE_LABEL, 'circle')}
+						{this.renderNonGenericMulti()}
 					</View>
 				</View>
+				
+				<View>
+					{this.renderSinglePickers()}
+				</View>
+				
 				<View style={styles.buttonContainer}>
 					<TouchableHighlight style={styles.button}
 					underlayColor={Colors.brandSecondary}
