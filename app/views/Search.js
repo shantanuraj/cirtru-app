@@ -161,7 +161,7 @@ let Search = React.createClass({
 					autoFocus={true}
 					onChangeText={ searchBox => this.setState({ searchBox }) }
 					placeholderTextColor={Colors.white}
-					placeholder={'Enter search query'}
+					placeholder={'Enter keywords'}
 					style={styles.searchBar} />
 				</View>
 				<View style={styles.commonContent}>
