@@ -76,7 +76,7 @@ let styles = {
 	},
 };
 
-let MultiPicker = React.createClass({
+let MultiSelect = React.createClass({
 	getInitialState() {
 		return {
 			dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
@@ -132,4 +132,4 @@ let MultiPicker = React.createClass({
 	},
 });
 
-module.exports = MultiPicker;
+module.exports = MultiSelect;

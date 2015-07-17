@@ -7,7 +7,7 @@ let React = require('react-native'),
 	Constants = require('../core/Constants'),
 	FabButton = require('./util/FabButton'),
 	FilterStore = require('../store/FilterStore'),
-	MultiPicker = require('./util/MultiPicker');
+	MultiSelect = require('./util/MultiSelect');
 
 let { Icon } = require('react-native-icons');
 let {
@@ -48,7 +48,7 @@ let styles = StyleSheet.create({
 		padding: 8,
 	},
 
-	multiPickers: {
+	multiSelects: {
 		position: 'absolute',
 		top: 130,
 		left: 0,
@@ -148,7 +148,7 @@ let Search = React.createClass({
 		return () => {
 			self.props.navigator.push({
 				title: 'Select ' + label,
-				component: MultiPicker,
+				component: MultiSelect,
 				passProps: {
 					list: list,
 					accessKey: key,
@@ -213,7 +213,7 @@ let Search = React.createClass({
 					style={styles.searchBar} />
 				</View>
 				
-				<View style={styles.multiPickers}>
+				<View style={styles.multiSelects}>
 					<View style={styles.row}>
 						{this.renderPromptCircle('ion|map', Constants.LOCATION_LABEL, 'location')}
 						{this.renderPromptCircle('ion|ios-circle-filled', Constants.CIRCLE_LABEL, 'circle')}
