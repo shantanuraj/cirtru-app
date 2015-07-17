@@ -170,9 +170,10 @@ let UserEditor = React.createClass({
     editWork() {
         let editingWork = this.state.editingWork;
         this.setState({ editingWork: !editingWork });
-        if (this.state.user.workEmail === '') {
-            let email = this.state.emailUserName + this.state.emailSuffix;
-            UserActions.updateWorkEmail(email);
+        if (this.state.user.workEmail === '' || editingWork) {
+            let workEmail = this.state.emailUserName + this.state.emailSuffix;
+            let circle = this.state.data.rawCircles.filter(circle => circle.email === this.state.emailSuffix)[0];
+            UserActions.updateWorkEmail(workEmail, circle);
         }
     },
 

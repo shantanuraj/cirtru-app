@@ -1,6 +1,6 @@
 'use strict';
 
-var Reflux = require('reflux'),
+let Reflux = require('reflux'),
     UserActions = require('../actions/UserActions'),
     ProfileActions = require('../actions/ProfileActions'),
     Api = require('../core/Api'),
@@ -10,7 +10,7 @@ var Reflux = require('reflux'),
     LocalStorage = require('./LocalStorage'),
     AlertIOS = require('react-native').AlertIOS;
 
-var UserStore = Reflux.createStore({
+let UserStore = Reflux.createStore({
     listenables: [UserActions],
 
     init() {
@@ -104,7 +104,7 @@ var UserStore = Reflux.createStore({
             this.state.phone = phone;
         }
 
-        var user = {
+        let user = {
             name: name,
             contactNumber: phone,
         };
@@ -129,16 +129,21 @@ var UserStore = Reflux.createStore({
         this.trigger(this.state);
     },
 
-    onUpdateWorkEmail(email) {
-        this.state.workEmail = email;
+    onUpdateWorkEmail(workEmail, circle) {
+        this.state.workEmail = workEmail;
+        this.state.circle = circle;
 
-        fetch(Api.updateUser(), {
+        console.log('DEBUG:', 'POST =>', Api.updateWorkEmail(), 'DATA =>', {
+            workEmail, circle
+        });
+
+        fetch(Api.updateWorkEmail(), {
             method: 'post',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ workEmail: email }),
+            body: JSON.stringify({ workEmail, circle }),
         })
         .then(response => {
             if (response.status === 200) {
