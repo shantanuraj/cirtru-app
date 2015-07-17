@@ -152,9 +152,19 @@ let Search = React.createClass({
 				passProps: {
 					list: list,
 					accessKey: key,
+					action: this.multiSelectAction
 				},
 			})
 		};
+	},
+
+	multiSelectAction(label, selected) {
+		if (!selected || selected.length === 0) {
+			return;
+		}
+		let state = this.state;
+		state[label] = selected;
+		this.setState(state);
 	},
 
 	renderPromptCircle(icon, label, key) {
@@ -191,6 +201,7 @@ let Search = React.createClass({
 	},
 
 	render() {
+		console.log('State', this.state);
 		return (
 			<View style={styles.container}>
 				<View style={styles.searchBarContainer}>

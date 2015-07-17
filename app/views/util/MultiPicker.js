@@ -90,6 +90,11 @@ let MultiPicker = React.createClass({
 		};
 	},
 
+	onPress() {
+		this.props.action(this.props.accessKey, this.state.selected);
+		this.props.navigator.pop();
+	},
+
 	renderRow(row) {
 		let rowStyle = row.selected ? styles.selectedRow : styles.selectableRow;
 		return (
@@ -102,6 +107,7 @@ let MultiPicker = React.createClass({
 			</TouchableHighlight>
 		);
 	},
+
 	render() {
 		return (
 			<View style={{flex: 1}}>
@@ -115,7 +121,7 @@ let MultiPicker = React.createClass({
 				<View style={styles.buttonContainer}>
 					<TouchableHighlight style={styles.button}
 					underlayColor={Colors.brandSecondary}
-					onPress={this.props.action}>
+					onPress={this.onPress}>
 						<Text style={styles.buttonText}>
 							Done
 						</Text>
