@@ -42,9 +42,9 @@ let MultiPicker = React.createClass({
 		let dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		return (
 			<ListView
-			  style={styles.listContainer}
-			  dataSource={dataSource.cloneWithRows(this.props.list)}
-			  renderRow={row => this.renderRow(row[this.props.accessKey])} />
+			style={styles.listContainer}
+			dataSource={dataSource.cloneWithRows(this.props.list)}
+			renderRow={row => this.renderRow(row[this.props.accessKey])} />
 		);
 	},
 });
