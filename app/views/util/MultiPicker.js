@@ -9,23 +9,42 @@ let {
 	View,
 } = React;
 
+let window = require('Dimensions').get('window');
+
 let styles = {
-	container: {
+	listContainer: {
 		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
 	},
+
+	selectableRow: {
+		width: window.width,
+		padding: 16,
+		margin: 2,
+	},
+
+    leadText: {
+    	fontSize: 16,
+    },
 };
 
 let MultiPicker = React.createClass({
-	render() {
-		console.log(this.props);
+	renderRow(rowText) {
 		return (
-			<View style={styles.container}>
-				<Text>
-					This is Sparta!
+			<View style={styles.selectableRow}>
+				<Text style={styles.leadText}>
+					{rowText}
 				</Text>
 			</View>
+		);
+	},
+	render() {
+		console.log(this.props);
+		let dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+		return (
+			<ListView
+			  style={styles.listContainer}
+			  dataSource={dataSource.cloneWithRows(this.props.list)}
+			  renderRow={row => this.renderRow(row[this.props.accessKey])} />
 		);
 	},
 });

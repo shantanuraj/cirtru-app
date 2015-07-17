@@ -141,8 +141,8 @@ let Search = React.createClass({
 		let options = this.state.filter.options[this.props.category];
 		let list = null;
 		switch(label) {
-			case Constants.LOCATION_LABEL: list = options.location;
-			case Constants.CIRCLE_LABEL:   list = options.circle;
+			case Constants.LOCATION_LABEL: list = options.location; break;
+			case Constants.CIRCLE_LABEL:   list = options.circle; break;
 		}
 		let self = this;
 		return () => {
@@ -151,7 +151,7 @@ let Search = React.createClass({
 				component: MultiPicker,
 				passProps: {
 					list: list,
-					key: key,
+					accessKey: key,
 				},
 			})
 		};
