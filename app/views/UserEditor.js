@@ -229,7 +229,7 @@ let UserEditor = React.createClass({
             return (
                 <View style={{ paddingTop: 16 }}>
                     <Text style={styles.cardHeading}>
-                        If you could not find your work/school circle, please send us a message and we will add your work/school circle within few hours
+                        Seems like we could not find your work/school circle, please send us a message and we will add your work/school circle within few hours
                     </Text>
                     <TextInput
                     onChangeText={ newCircle => this.setState({ newCircle }) }
