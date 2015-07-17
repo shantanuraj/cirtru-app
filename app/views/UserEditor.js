@@ -209,6 +209,38 @@ let UserEditor = React.createClass({
         }
     },
 
+    onTyping: function (text) {
+        var emails = this.state.data.circleEmails.filter(email => email.indexOf(text) !== -1);
+        emails.push(text);
+        this.setState({
+            autoCompleteData: emails
+        });
+    },
+
+    onSelect: function(emailSuffix) {
+        this.setState({
+            emailSuffix: emailSuffix,
+            autoCompleteData: [],
+        });
+    },
+
+    getInfoTextOrNot() {
+        if (this.state.emailSuffix && this.state.data.circleEmails.indexOf(this.state.emailSuffix) === -1) {
+            return (
+                <View style={{ paddingTop: 16 }}>
+                    <Text style={styles.cardHeading}>
+                        If you could not find your work/school circle, please send us a message and we will add your work/school circle within few hours
+                    </Text>
+                    <TextInput
+                    onChangeText={ newCircle => this.setState({ newCircle }) }
+                    placeholder={'Company name'}
+                    placeholderTextColor={Colors.lightGrey}
+                    style={styles.newCircle} />
+                </View>
+            );
+        }
+    },
+
     editInfo() {
         if (!this.state.editingInfo) {
             this.setState({ editingInfo: true });
@@ -271,38 +303,6 @@ let UserEditor = React.createClass({
                 </Text>
             </View>
         );
-    },
-
-    onTyping: function (text) {
-        var emails = this.state.data.circleEmails.filter(email => email.indexOf(text) !== -1);
-        emails.push(text);
-        this.setState({
-            autoCompleteData: emails
-        });
-    },
-
-    onSelect: function(emailSuffix) {
-        this.setState({
-            emailSuffix: emailSuffix,
-            autoCompleteData: [],
-        });
-    },
-
-    getInfoTextOrNot() {
-        if (this.state.emailSuffix && this.state.data.circleEmails.indexOf(this.state.emailSuffix) === -1) {
-            return (
-                <View style={{ paddingTop: 16 }}>
-                    <Text style={styles.cardHeading}>
-                        If you could not find your work/school circle, please send us a message and we will add your work/school circle within few hours
-                    </Text>
-                    <TextInput
-                    onChangeText={ newCircle => this.setState({ newCircle }) }
-                    placeholder={'Company name'}
-                    placeholderTextColor={Colors.lightGrey}
-                    style={styles.newCircle} />
-                </View>
-            );
-        }
     },
 
     renderEditOrAddWork(options, workValue) {
