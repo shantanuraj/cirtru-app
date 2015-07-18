@@ -161,6 +161,17 @@ let Search = React.createClass({
                 };
                 options = Api.roommatesFilterSet;
                 break;
+            case 'price':
+                list = [
+                    'Minimum Rent',
+                    'Maximum Rent',
+                ];
+                choices = {
+                    minPrice: null,
+                    maxPrice: null,
+                };
+                options = Api.roommatesFilterSet;
+                break;
             case 'type':
                 list = [
                     'Property Type'
@@ -280,7 +291,7 @@ let Search = React.createClass({
                     </View>
                     <View style={styles.row}>
                         {this.renderPromptCircle('ion|ios-home', Constants.PROPERTY_TYPE_LABEL, 'type', Constants.SINGLE)}
-                        {this.renderPromptCircle('ion|social-usd', Constants.PRICE_LABEL, 'circle', Constants.SINGLE)}
+                        {this.renderPromptCircle('ion|social-usd', Constants.PRICE_LABEL, 'price', Constants.SINGLE)}
                     </View>
                     <View style={styles.row}>
                         {this.renderPromptCircle('ion|ios-person', Constants.ROOMMATE_LABEL, 'roommate', Constants.SINGLE)}

@@ -117,7 +117,10 @@ let SelectSingle = React.createClass({
             case 'Drinking': accessKey = 'drinking'; break;
             case 'Pets': accessKey = 'pets'; break;
             case 'Property Type': accessKey = 'type'; break;
+            case 'Minimum Rent': accessKey = 'minPrice'; break;
+            case 'Maximum Rent': accessKey = 'maxPrice'; break;
         };
+        console.log('Row', row, 'Access Key', accessKey);
         let list = this.props.options[accessKey];
         return (
             <ScrollView contentInset={{top: -65}}>
