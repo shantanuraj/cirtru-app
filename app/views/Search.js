@@ -7,7 +7,7 @@ let React = require('react-native'),
     Constants = require('../core/Constants'),
     FabButton = require('./util/FabButton'),
     FilterStore = require('../store/FilterStore'),
-    MultiSelect = require('./util/MultiSelect');
+    Select = require('./util/Select');
 
 let { Icon } = require('react-native-icons');
 let {
@@ -156,11 +156,12 @@ let Search = React.createClass({
         return () => {
             self.props.navigator.push({
                 title: 'Select ' + label,
-                component: MultiSelect,
+                component: Select,
                 passProps: {
                     accessKey: accessKey,
                     list: list,
                     action: this.multiSelectAction,
+                    mode: 'multi',
                 },
             })
         };

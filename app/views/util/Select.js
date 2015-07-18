@@ -76,7 +76,7 @@ let styles = {
     },
 };
 
-let MultiSelect = React.createClass({
+let Select = React.createClass({
     getInitialState() {
         return {
             dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
@@ -93,6 +93,12 @@ let MultiSelect = React.createClass({
         let self = this;
         return () => {
             let list = self.state.list;
+            if (this.props.mode !== 'multi') {
+                list = list.map(item => {
+                    item.selected = false;
+                    return item;
+                });
+            }
             let selectedIndex = list.findIndex(item => item === row);
             list[selectedIndex].selected = !list[selectedIndex].selected;
             self.setState({ list });
@@ -137,4 +143,4 @@ let MultiSelect = React.createClass({
     },
 });
 
-module.exports = MultiSelect;
+module.exports = Select;
