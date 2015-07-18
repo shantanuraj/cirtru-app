@@ -167,6 +167,15 @@ let Search = React.createClass({
         };
     },
 
+    selectAction(accessKey, selected) {
+        if (!selected) {
+            return;
+        }
+        let state = this.state;
+        state[accessKey] = selected.label;
+        this.setState(state);
+    },
+
     multiSelectAction(accessKey, selected) {
         if (!selected || selected.length === 0) {
             return;
