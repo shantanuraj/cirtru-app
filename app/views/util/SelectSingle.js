@@ -85,17 +85,11 @@ let styles = {
     },
 };
 
-let SelectRoomType = React.createClass({
+let SelectSingle = React.createClass({
     getInitialState() {
         return {
             dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-            list: [
-                'Property Type',
-            ],
-            choices: {
-                type: null,
-            },
-            options: Api.roommatesFilterSet,
+            choices: this.props.choices,
         };
     },
 
@@ -115,8 +109,16 @@ let SelectRoomType = React.createClass({
     },
 
     renderContent(row) {
-        let accessKey = 'type';
-        let list = this.state.options[accessKey];
+        let accessKey = null;
+        switch(row) {
+            case 'Gender': accessKey = 'gender'; break;
+            case 'Diet': accessKey = 'diet'; break;
+            case 'Smoking': accessKey = 'smoking'; break;
+            case 'Drinking': accessKey = 'drinking'; break;
+            case 'Pets': accessKey = 'pets'; break;
+            case 'Property Type': accessKey = 'type'; break;
+        };
+        let list = this.props.options[accessKey];
         return (
             <ScrollView contentInset={{top: -65}}>
                 {list.map((choice, index) => this.renderOptionsRow(choice, index, accessKey))}
@@ -128,7 +130,7 @@ let SelectRoomType = React.createClass({
         let self = this;
         return () => {
             let state = self.state;
-            state.choices[accessKey] = state.options[accessKey][index];
+            state.choices[accessKey] = self.props.options[accessKey][index];
             self.setState(state);
         }
     },
@@ -170,7 +172,7 @@ let SelectRoomType = React.createClass({
                 style={styles.listContainer}
                 contentContainerStyle={styles.container}
                 initialListSize={15}
-                dataSource={this.state.dataSource.cloneWithRows(this.state.list)}
+                dataSource={this.state.dataSource.cloneWithRows(this.props.list)}
                 renderRow={row => this.renderRow(row)} />
 
                 <View style={styles.buttonContainer}>
@@ -187,4 +189,4 @@ let SelectRoomType = React.createClass({
     },
 });
 
-module.exports = SelectRoomType;
+module.exports = SelectSingle;

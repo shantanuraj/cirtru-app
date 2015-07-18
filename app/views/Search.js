@@ -8,8 +8,7 @@ let React = require('react-native'),
     FabButton = require('./util/FabButton'),
     FilterStore = require('../store/FilterStore'),
     Select = require('./util/Select'),
-    SelectRoommate = require('./util/SelectRoommate'),
-    SelectRoomType = require('./util/SelectRoomType');
+    SelectSingle = require('./util/SelectSingle');
 
 let { Icon } = require('react-native-icons');
 let {
@@ -143,16 +142,44 @@ let Search = React.createClass({
 
     singlePromptAction(label, accessKey) {
         let self = this;
-        let component = null
+        let list, choices, options;
         switch(accessKey) {
-            case 'roommate': component = SelectRoommate; break;
-            case 'type': component = SelectRoomType; break;
-            default: component = SelectRoommate;
+            case 'roommate':
+                list = [
+                    'Gender',
+                    'Diet',
+                    'Smoking',
+                    'Drinking',
+                    'Pets',
+                ];
+                choices = {
+                    gender: null,
+                    diet: null,
+                    drinking: null,
+                    smoking: null,
+                    pets: null,
+                };
+                options = Api.roommatesFilterSet;
+                break;
+            case 'type':
+                list = [
+                    'Property Type'
+                ];
+                choices = {
+                    type: null,
+                };
+                options = Api.roommatesFilterSet;
+                break;
         };
         return () => {
             self.props.navigator.push({
                 title: 'Select ' + label,
-                component: component,
+                component: SelectSingle,
+                passProps: {
+                    list,
+                    choices,
+                    options,
+                },
             })
         };
     },
