@@ -26,7 +26,7 @@ let styles = {
 
 	selectedRow: {
 		backgroundColor: Colors.brandPrimaryDark,
-		width: window.width - 32,
+		width: window.width,
 		padding: 16,
 	},
 
@@ -54,7 +54,7 @@ let styles = {
 	},
 
 	button: {
-		width: window.width - 32,
+		width: window.width,
 		height: 50,
 		padding: 8,
 		justifyContent: 'center',
@@ -90,15 +90,30 @@ let MultiSelect = React.createClass({
 		};
 	},
 
-	onPress() {
+	onDone() {
 		this.props.action(this.props.accessKey, this.state.selected);
 		this.props.navigator.pop();
+	},
+
+	onRow(row) {
+		let self = this;
+		return () => {
+			let list = self.state.list;
+			let selectedIndex = list.findIndex(item => item === row);
+			list[selectedIndex].selected = !list[selectedIndex].selected;
+
+			let selected = self.state.selected;
+			selected.push(list[selectedIndex].label);
+
+			self.setState({ list, selected });
+		};
 	},
 
 	renderRow(row) {
 		let rowStyle = row.selected ? styles.selectedRow : styles.selectableRow;
 		return (
 			<TouchableHighlight
+			onPress={this.onRow(row)}
 			underlayColor={Colors.brandPrimaryDark}
 			style={rowStyle}>
 				<Text style={styles.leadText}>
@@ -121,7 +136,7 @@ let MultiSelect = React.createClass({
 				<View style={styles.buttonContainer}>
 					<TouchableHighlight style={styles.button}
 					underlayColor={Colors.brandSecondary}
-					onPress={this.onPress}>
+					onPress={this.onDone}>
 						<Text style={styles.buttonText}>
 							Done
 						</Text>
