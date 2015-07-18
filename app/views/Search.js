@@ -140,9 +140,19 @@ let styles = StyleSheet.create({
 let Search = React.createClass({
     mixins: [Reflux.connect(FilterStore, 'filter')],
 
+    getOptions() {
+        switch(this.props.category) {
+            case 'Roommates': return Api.roommatesFilterSet;
+            case 'Sublets': return Api.subletsFilterSet;
+            case 'Cars': return Api.carsFilterSet;
+            default: return Api.roommatesFilterSet;
+        };
+    },
+
     singlePromptAction(label, accessKey) {
         let self = this;
-        let list, choices, options;
+        let list, choices;
+        let options = this.getOptions();
         switch(accessKey) {
             case 'roommate':
                 list = [
@@ -159,7 +169,6 @@ let Search = React.createClass({
                     smoking: null,
                     pets: null,
                 };
-                options = Api.roommatesFilterSet;
                 break;
             case 'price':
                 list = [
@@ -170,7 +179,6 @@ let Search = React.createClass({
                     minPrice: null,
                     maxPrice: null,
                 };
-                options = Api.roommatesFilterSet;
                 break;
             case 'type':
                 list = [
@@ -179,7 +187,6 @@ let Search = React.createClass({
                 choices = {
                     type: null,
                 };
-                options = Api.roommatesFilterSet;
                 break;
         };
         return () => {

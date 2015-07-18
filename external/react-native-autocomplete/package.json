@@ -1,0 +1,50 @@
+{
+  "name": "react-native-autocomplete",
+  "author": {
+    "name": "Nicolas Ulrich",
+    "email": "github@ulrich.co",
+    "url": "https://github.com/nulrich"
+  },
+  "description": "React Native Component for MLPAutoCompleteTextField",
+  "version": "0.0.2",
+  "main": "RCTAutoComplete.ios.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nulrich/RCTAutoComplete.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "react-component",
+    "react-native",
+    "ios",
+    "autocomplete"
+  ],
+  "gitHead": "37d2cdba0c8f6f95a5e5986e6c9dfaa1d9550da1",
+  "bugs": {
+    "url": "https://github.com/nulrich/RCTAutoComplete/issues"
+  },
+  "homepage": "https://github.com/nulrich/RCTAutoComplete",
+  "_id": "react-native-autocomplete@0.0.2",
+  "scripts": {},
+  "_shasum": "fe304b386bc256cd35e93a4ca53b0d70d33407b7",
+  "_from": "react-native-autocomplete@*",
+  "_npmVersion": "2.5.1",
+  "_nodeVersion": "0.12.0",
+  "_npmUser": {
+    "name": "nulrich",
+    "email": "github@ulrich.co"
+  },
+  "dist": {
+    "shasum": "fe304b386bc256cd35e93a4ca53b0d70d33407b7",
+    "tarball": "http://registry.npmjs.org/react-native-autocomplete/-/react-native-autocomplete-0.0.2.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "nulrich",
+      "email": "github@ulrich.co"
+    }
+  ],
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/react-native-autocomplete/-/react-native-autocomplete-0.0.2.tgz",
+  "readme": "ERROR: No README data found!"
+}
