@@ -80,18 +80,12 @@ let MultiSelect = React.createClass({
     getInitialState() {
         return {
             dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-            list: this.props.list.map(item => {
-                return {
-                    label: item[this.props.accessKey],
-                    selected: false,
-                }
-            }),
-            selected: [],
+            list: this.props.list,
         };
     },
 
     onDone() {
-        this.props.action(this.props.accessKey, this.state.selected);
+        this.props.action(this.props.accessKey, this.state.list);
         this.props.navigator.pop();
     },
 
@@ -101,11 +95,7 @@ let MultiSelect = React.createClass({
             let list = self.state.list;
             let selectedIndex = list.findIndex(item => item === row);
             list[selectedIndex].selected = !list[selectedIndex].selected;
-
-            let selected = self.state.selected;
-            selected.push(list[selectedIndex].label);
-
-            self.setState({ list, selected });
+            self.setState({ list });
         };
     },
 
