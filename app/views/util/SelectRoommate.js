@@ -2,7 +2,8 @@
 
 let React = require('react-native'),
     Api = require('../../core/Api'),
-    Colors = require('../../core/Colors');
+    Colors = require('../../core/Colors'),
+    Accordion = require('react-native-accordion');
 
 let {
     TouchableHighlight,
@@ -25,8 +26,8 @@ let styles = {
         backgroundColor: Colors.grey,
     },
 
-    selectedRow: {
-        backgroundColor: Colors.brandPrimaryDark,
+    optionsRow: {
+        backgroundColor: Colors.brandSecondary,
         width: window.width,
         padding: 16,
     },
@@ -55,7 +56,7 @@ let styles = {
     },
 
     button: {
-        width: window.width,
+        width: window.width - 32,
         height: 50,
         padding: 8,
         justifyContent: 'center',
@@ -104,15 +105,48 @@ let SelectRoommate = React.createClass({
         this.props.navigator.pop();
     },
 
-    renderRow(row) {
+    renderHeader(row) {
         return (
-            <TouchableHighlight
-            underlayColor={Colors.brandPrimaryDark}
-            style={styles.selectableRow}>
+            <View style={styles.selectableRow}>
                 <Text style={styles.leadText}>
                     {row}
                 </Text>
-            </TouchableHighlight>
+            </View>
+        );
+    },
+
+    renderContent(row) {
+        let list = null;
+        switch(row) {
+            case 'Gender': list = this.state.options.gender; break;
+            case 'Diet': list = this.state.options.diet; break;
+            case 'Smoking': list = this.state.options.smoking; break;
+            case 'Drinking': list = this.state.options.drinking; break;
+            case 'Pets': list = this.state.options.pets; break;
+        };
+        return (
+            <ScrollView contentInset={{top: -65}}>
+                {list.map((choice, key) => this.renderOptionsRow(choice, key))}
+            </ScrollView>
+        );
+    },
+
+    renderOptionsRow(choice, key) {
+        return (
+            <View style={styles.optionsRow} key={key}>
+                <Text style={styles.leadText}>
+                    {choice}
+                </Text>
+            </View>
+        );
+    },
+
+    renderRow(row) {
+        return (
+            <Accordion
+            header={this.renderHeader(row)}
+            content={this.renderContent(row)}
+            easing='easeOutCubic' />
         );
     },
 

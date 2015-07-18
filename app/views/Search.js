@@ -144,10 +144,9 @@ let Search = React.createClass({
         let self = this;
         let component = null
         switch(accessKey) {
-            case 'roommate': 
+            case 'roommate': component = SelectRoommate;
             default: component = SelectRoommate;
         };
-        console.log('SPA', label, accessKey, SelectRoommate);
         return () => {
             self.props.navigator.push({
                 title: 'Select ' + label,
@@ -254,12 +253,11 @@ let Search = React.createClass({
                         {this.renderPromptCircle('ion|ios-circle-filled', Constants.CIRCLE_LABEL, 'circle', Constants.MULTI)}
                     </View>
                     <View style={styles.row}>
-                        {this.renderPromptCircle('ion|ios-home', Constants.PROPERTY_TYPE_LABEL, 'location', Constants.SINGLE)}
-                        {this.renderPromptCircle('ion|social-usd', Constants.PRICE_LABEL, 'circle', Constants.SINGLE)}
+                        {this.renderPromptCircle('ion|ios-person', Constants.ROOMMATE_LABEL, 'roommate', Constants.SINGLE)}
                     </View>
                     <View style={styles.row}>
-                        {this.renderPromptCircle('ion|ios-person', Constants.ROOMMATE_LABEL, 'roommate', Constants.SINGLE)}
-                        {this.renderPromptCircle('ion|ios-paw', Constants.PETS_LABEL, 'circle', Constants.SINGLE)}
+                        {this.renderPromptCircle('ion|ios-home', Constants.PROPERTY_TYPE_LABEL, 'location', Constants.SINGLE)}
+                        {this.renderPromptCircle('ion|social-usd', Constants.PRICE_LABEL, 'circle', Constants.SINGLE)}
                     </View>
                 </ScrollView>
                 
