@@ -81,10 +81,11 @@ var FilterStore = Reflux.createStore({
         })
     },
 
-    onSetRoommate(roommate) {
-        _.Map(roommate)
+    onSetChoices(choices) {
+        _.Map(choices)
         .filter(choice => choice !== null)
-        .entrySeq().forEach(entry => this.state.choices[entry[0]] = entry[1])
+        .entrySeq().forEach(entry => this.state.choices[entry[0]] = entry[1]);
+        this.trigger(this.state);
     },
 });
 

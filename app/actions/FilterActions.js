@@ -7,7 +7,7 @@ var profileActions = [
     'clearStore',
     'hideToast',
     'getOptions',
-    'setRoommate',
+    'setChoices',
 ];
 
 var actions = Reflux.createActions(profileActions);

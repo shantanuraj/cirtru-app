@@ -116,7 +116,7 @@ module.exports = {
 	},
 
 	roommatesFilterSet: {
-		propertyTypes: ['Private Room', 'Shared Room'],
+		type: ['Private Room', 'Shared Room'],
 		minPrice: [0, 500, 1000, 1500, 2000, 3000, 4000],
 		maxPrice: [500, 1000, 1500, 2000, 3000, 4000, 5000],
 		gender: ['Male', 'Female'],
@@ -127,7 +127,7 @@ module.exports = {
 	},
 
 	subletsFilterSet: {
-		propertyTypes: ['Apartment', 'House'],
+		type: ['Apartment', 'House'],
 		minPrice: [0, 500, 1000, 1500, 2000, 3000, 4000],
 		maxPrice: [500, 1000, 1500, 2000, 3000, 4000, 5000],
 	},

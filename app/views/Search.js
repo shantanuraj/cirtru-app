@@ -8,7 +8,8 @@ let React = require('react-native'),
     FabButton = require('./util/FabButton'),
     FilterStore = require('../store/FilterStore'),
     Select = require('./util/Select'),
-    SelectRoommate = require('./util/SelectRoommate');
+    SelectRoommate = require('./util/SelectRoommate'),
+    SelectRoomType = require('./util/SelectRoomType');
 
 let { Icon } = require('react-native-icons');
 let {
@@ -144,7 +145,8 @@ let Search = React.createClass({
         let self = this;
         let component = null
         switch(accessKey) {
-            case 'roommate': component = SelectRoommate;
+            case 'roommate': component = SelectRoommate; break;
+            case 'type': component = SelectRoomType; break;
             default: component = SelectRoommate;
         };
         return () => {
@@ -250,7 +252,7 @@ let Search = React.createClass({
                         {this.renderPromptCircle('ion|ios-circle-filled', Constants.CIRCLE_LABEL, 'circle', Constants.MULTI)}
                     </View>
                     <View style={styles.row}>
-                        {this.renderPromptCircle('ion|ios-home', Constants.PROPERTY_TYPE_LABEL, 'location', Constants.SINGLE)}
+                        {this.renderPromptCircle('ion|ios-home', Constants.PROPERTY_TYPE_LABEL, 'type', Constants.SINGLE)}
                         {this.renderPromptCircle('ion|social-usd', Constants.PRICE_LABEL, 'circle', Constants.SINGLE)}
                     </View>
                     <View style={styles.row}>

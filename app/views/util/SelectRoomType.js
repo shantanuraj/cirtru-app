@@ -85,23 +85,15 @@ let styles = {
     },
 };
 
-let SelectRoommate = React.createClass({
+let SelectRoomType = React.createClass({
     getInitialState() {
         return {
             dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
             list: [
-                'Gender',
-                'Diet',
-                'Smoking',
-                'Drinking',
-                'Pets',
+                'Property Type',
             ],
             choices: {
-                gender: null,
-                diet: null,
-                drinking: null,
-                smoking: null,
-                pets: null,
+                type: null,
             },
             options: Api.roommatesFilterSet,
         };
@@ -123,14 +115,7 @@ let SelectRoommate = React.createClass({
     },
 
     renderContent(row) {
-        let accessKey = null;
-        switch(row) {
-            case 'Gender': accessKey = 'gender'; break;
-            case 'Diet': accessKey = 'diet'; break;
-            case 'Smoking': accessKey = 'smoking'; break;
-            case 'Drinking': accessKey = 'drinking'; break;
-            case 'Pets': accessKey = 'pets'; break;
-        };
+        let accessKey = 'type';
         let list = this.state.options[accessKey];
         return (
             <ScrollView contentInset={{top: -65}}>
@@ -202,4 +187,4 @@ let SelectRoommate = React.createClass({
     },
 });
 
-module.exports = SelectRoommate;
+module.exports = SelectRoomType;

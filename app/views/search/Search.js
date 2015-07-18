@@ -219,7 +219,7 @@ var Search = React.createClass({
 		return (
 			<View>
 				{this.renderPrompt('Property type', this.state.type, 'showRoomType')}
-				{this.renderSinglePicker('type', 'showRoomType', 'property type', Api.roommatesFilterSet.propertyTypes)}				
+				{this.renderSinglePicker('type', 'showRoomType', 'property type', Api.roommatesFilterSet.type)}				
 
 				{this.renderPrompt('Minimum price', this.state.minPrice, 'showMinPrice')}
 				{this.renderSinglePicker('minPrice', 'showMinPrice', 'minimum price', Api.roommatesFilterSet.minPrice)}
@@ -249,7 +249,7 @@ var Search = React.createClass({
 		return (
 			<View>
 				{this.renderPrompt('Property type', this.state.type, 'showRoomType')}
-				{this.renderSinglePicker('type', 'showRoomType', 'property type', Api.subletsFilterSet.propertyTypes)}
+				{this.renderSinglePicker('type', 'showRoomType', 'property type', Api.subletsFilterSet.type)}
 
 				{this.renderPrompt('Maximum price', this.state.maxPrice, 'showMaxPrice')}
 				{this.renderSinglePicker('maxPrice', 'showMaxPrice', 'maximum price', Api.subletsFilterSet.maxPrice)}
