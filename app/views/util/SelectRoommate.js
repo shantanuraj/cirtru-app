@@ -3,7 +3,8 @@
 let React = require('react-native'),
     Api = require('../../core/Api'),
     Colors = require('../../core/Colors'),
-    Accordion = require('react-native-accordion');
+    Accordion = require('react-native-accordion'),
+    FilterActions = require('../../actions/FilterActions');
 
 let {
     TouchableHighlight,
@@ -32,7 +33,13 @@ let styles = {
         padding: 16,
     },
 
-    selectableRow: {
+    selectedOption: {
+        backgroundColor: Colors.brandPrimaryDark,
+        width: window.width,
+        padding: 16,
+    },
+
+    headingRow: {
         width: window.width,
         padding: 16,
         marginBottom: 1,
@@ -101,13 +108,13 @@ let SelectRoommate = React.createClass({
     },
 
     onDone() {
-        this.props.action(this.state);
+        FilterActions.setRoommate(this.state.choices);
         this.props.navigator.pop();
     },
 
     renderHeader(row) {
         return (
-            <View style={styles.selectableRow}>
+            <View style={styles.headingRow}>
                 <Text style={styles.leadText}>
                     {row}
                 </Text>
@@ -116,27 +123,45 @@ let SelectRoommate = React.createClass({
     },
 
     renderContent(row) {
-        let list = null;
+        let accessKey = null;
         switch(row) {
-            case 'Gender': list = this.state.options.gender; break;
-            case 'Diet': list = this.state.options.diet; break;
-            case 'Smoking': list = this.state.options.smoking; break;
-            case 'Drinking': list = this.state.options.drinking; break;
-            case 'Pets': list = this.state.options.pets; break;
+            case 'Gender': accessKey = 'gender'; break;
+            case 'Diet': accessKey = 'diet'; break;
+            case 'Smoking': accessKey = 'smoking'; break;
+            case 'Drinking': accessKey = 'drinking'; break;
+            case 'Pets': accessKey = 'pets'; break;
         };
+        let list = this.state.options[accessKey];
         return (
             <ScrollView contentInset={{top: -65}}>
-                {list.map((choice, key) => this.renderOptionsRow(choice, key))}
+                {list.map((choice, index) => this.renderOptionsRow(choice, index, accessKey))}
             </ScrollView>
         );
     },
 
-    renderOptionsRow(choice, key) {
+    selectOption(index, accessKey) {
+        let self = this;
+        return () => {
+            let state = self.state;
+            state.choices[accessKey] = state.options[accessKey][index];
+            self.setState(state);
+        }
+    },
+
+    renderOptionsRow(choice, index, accessKey) {
+        let customStyle;
+        if (this.state.choices[accessKey] && this.state.choices[accessKey] === choice) {
+            customStyle = styles.selectedOption;
+        } else {
+            customStyle = styles.optionsRow;
+        }
+
         return (
             <TouchableHighlight
-            key={key}
-            style={styles.optionsRow}
-            underlayColor={Colors.brandPrimary}>
+            key={index}
+            onPress={this.selectOption(index, accessKey)}
+            style={customStyle}
+            underlayColor={Colors.brandPrimaryDark}>
                 <Text style={styles.leadText}>
                     {choice}
                 </Text>

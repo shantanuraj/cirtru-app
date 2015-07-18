@@ -13,6 +13,7 @@ var FilterStore = Reflux.createStore({
             action: 'not',
             list: null,
             options: {},
+            choices: {},
         };
     },
 
@@ -78,6 +79,12 @@ var FilterStore = Reflux.createStore({
             })
             .done();
         })
+    },
+
+    onSetRoommate(roommate) {
+        _.Map(roommate)
+        .filter(choice => choice !== null)
+        .entrySeq().forEach(entry => this.state.choices[entry[0]] = entry[1])
     },
 });
 
