@@ -133,11 +133,14 @@ let SelectRoommate = React.createClass({
 
     renderOptionsRow(choice, key) {
         return (
-            <View style={styles.optionsRow} key={key}>
+            <TouchableHighlight
+            key={key}
+            style={styles.optionsRow}
+            underlayColor={Colors.brandPrimary}>
                 <Text style={styles.leadText}>
                     {choice}
                 </Text>
-            </View>
+            </TouchableHighlight>
         );
     },
 
