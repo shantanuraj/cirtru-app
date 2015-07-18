@@ -85,7 +85,7 @@ var SubletInfo = React.createClass({
             'Deposit ' + deposit,
             'Diet ' + sublet.diet,
             'Start ' + sublet.start,
-            'End ' + sublet.end,
+            'End ' + sublet.end ? sublet.end : '-',
         ];
 
         return (
