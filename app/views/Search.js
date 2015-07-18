@@ -7,13 +7,15 @@ let React = require('react-native'),
     Constants = require('../core/Constants'),
     FabButton = require('./util/FabButton'),
     FilterStore = require('../store/FilterStore'),
-    Select = require('./util/Select');
+    Select = require('./util/Select'),
+    SelectRoommate = require('./util/SelectRoommate');
 
 let { Icon } = require('react-native-icons');
 let {
     TouchableHighlight,
     TouchableOpacity,
     StyleSheet,
+    ScrollView,
     TextInput,
     View,
     Text,
@@ -61,6 +63,7 @@ let styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        marginBottom: 16,
     },
 
     fabPicker: {
@@ -137,6 +140,25 @@ let styles = StyleSheet.create({
 let Search = React.createClass({
     mixins: [Reflux.connect(FilterStore, 'filter')],
 
+    singlePromptAction(label, accessKey) {
+        let self = this;
+        let component = null
+        switch(accessKey) {
+            case 'roommate': 
+            default: component = SelectRoommate;
+        };
+        console.log('SPA', label, accessKey, SelectRoommate);
+        return () => {
+            self.props.navigator.push({
+                title: 'Select ' + label,
+                component: component,
+                passProps: {
+                    action: this.selectAction,
+                },
+            })
+        };
+    },
+
     multiPromptAction(label, accessKey) {
         let options = this.state.filter.options[this.props.category];
         let list = null;
@@ -161,7 +183,7 @@ let Search = React.createClass({
                     accessKey: accessKey,
                     list: list,
                     action: this.multiSelectAction,
-                    mode: 'multi',
+                    mode: Constants.MULTI,
                 },
             })
         };
@@ -185,11 +207,17 @@ let Search = React.createClass({
         this.setState(state);
     },
 
-    renderPromptCircle(icon, label, key) {
+    renderPromptCircle(icon, label, key, mode) {
+        let action;
+        if (mode === Constants.MULTI) {
+            action = this.multiPromptAction(label, key);
+        } else {
+            action = this.singlePromptAction(label, key);
+        }
         return (
             <TouchableHighlight
             style={styles.fabPicker}
-            onPress={this.multiPromptAction(label, key)}
+            onPress={action}
             underlayColor={Colors.brandSecondary}>
                 <View style={styles.fabContent}>
                     <Icon
@@ -205,19 +233,6 @@ let Search = React.createClass({
         );
     },
 
-    renderNonGenericMulti() {
-
-    },
-
-    renderSinglePickers() {
-        switch(this.props.category) {
-            case 'Roommates': 
-            case 'Sublets':
-            case 'Cars':
-            default: return;
-        };
-    },
-
     render() {
         console.log('State', this.state);
         return (
@@ -231,17 +246,22 @@ let Search = React.createClass({
                     style={styles.searchBar} />
                 </View>
                 
-                <View style={styles.multiSelects}>
+                <ScrollView
+                contentInset={{top: -65}}
+                style={styles.multiSelects}>
                     <View style={styles.row}>
-                        {this.renderPromptCircle('ion|map', Constants.LOCATION_LABEL, 'location')}
-                        {this.renderPromptCircle('ion|ios-circle-filled', Constants.CIRCLE_LABEL, 'circle')}
-                        {this.renderNonGenericMulti()}
+                        {this.renderPromptCircle('ion|map', Constants.LOCATION_LABEL, 'location', Constants.MULTI)}
+                        {this.renderPromptCircle('ion|ios-circle-filled', Constants.CIRCLE_LABEL, 'circle', Constants.MULTI)}
                     </View>
-                </View>
-                
-                <View>
-                    {this.renderSinglePickers()}
-                </View>
+                    <View style={styles.row}>
+                        {this.renderPromptCircle('ion|ios-home', Constants.PROPERTY_TYPE_LABEL, 'location', Constants.SINGLE)}
+                        {this.renderPromptCircle('ion|social-usd', Constants.PRICE_LABEL, 'circle', Constants.SINGLE)}
+                    </View>
+                    <View style={styles.row}>
+                        {this.renderPromptCircle('ion|ios-person', Constants.ROOMMATE_LABEL, 'roommate', Constants.SINGLE)}
+                        {this.renderPromptCircle('ion|ios-paw', Constants.PETS_LABEL, 'circle', Constants.SINGLE)}
+                    </View>
+                </ScrollView>
                 
                 <View style={styles.buttonContainer}>
                     <TouchableHighlight style={styles.button}

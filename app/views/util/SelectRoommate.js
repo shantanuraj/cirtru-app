@@ -1,7 +1,7 @@
 'use strict';
 
 let React = require('react-native'),
-    Constants = require('../../core/Constants'),
+    Api = require('../../core/Api'),
     Colors = require('../../core/Colors');
 
 let {
@@ -77,44 +77,40 @@ let styles = {
     },
 };
 
-let Select = React.createClass({
+let SelectRoommate = React.createClass({
     getInitialState() {
         return {
             dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-            list: this.props.list,
+            list: [
+                'Gender',
+                'Diet',
+                'Smoking',
+                'Drinking',
+                'Pets',
+            ],
+            choices: {
+                gender: null,
+                diet: null,
+                drinking: null,
+                smoking: null,
+                pets: null,
+            },
+            options: Api.roommatesFilterSet,
         };
     },
 
     onDone() {
-        this.props.action(this.props.accessKey, this.state.list);
+        this.props.action(this.state);
         this.props.navigator.pop();
     },
 
-    onRow(row) {
-        let self = this;
-        return () => {
-            let list = self.state.list;
-            if (this.props.mode !== Constants.MULTI) {
-                list = list.map(item => {
-                    item.selected = false;
-                    return item;
-                });
-            }
-            let selectedIndex = list.findIndex(item => item === row);
-            list[selectedIndex].selected = !list[selectedIndex].selected;
-            self.setState({ list });
-        };
-    },
-
     renderRow(row) {
-        let rowStyle = row.selected ? styles.selectedRow : styles.selectableRow;
         return (
             <TouchableHighlight
-            onPress={this.onRow(row)}
             underlayColor={Colors.brandPrimaryDark}
-            style={rowStyle}>
+            style={styles.selectableRow}>
                 <Text style={styles.leadText}>
-                    {row.label}
+                    {row}
                 </Text>
             </TouchableHighlight>
         );
@@ -144,4 +140,4 @@ let Select = React.createClass({
     },
 });
 
-module.exports = Select;
+module.exports = SelectRoommate;
